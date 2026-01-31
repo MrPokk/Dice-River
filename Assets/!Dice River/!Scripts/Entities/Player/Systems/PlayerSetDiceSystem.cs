@@ -34,9 +34,9 @@ public class PlayerSetDiceSystem : IEcsInitSystem, IEcsFixedRunSystem
             var facingDir = (Vector3)entity.Get<FacingComponent>().direction;
 
             var targetPosition = transform.position + facingDir;
-            var gridPosition = Startup.GridRaft.ConvertingPosition(targetPosition);
+            var gridPosition = Startup.GridWorld.ConvertingPosition(targetPosition);
 
-            _selector.position = Startup.GridRaft.ConvertingPosition(gridPosition);
+            _selector.position = Startup.GridWorld.ConvertingPosition(gridPosition);
         }
     }
 
@@ -49,9 +49,9 @@ public class PlayerSetDiceSystem : IEcsInitSystem, IEcsFixedRunSystem
 
             var targetPosition = transform.position + facingDir;
             var dicePrefab = new Loader<DiceProvider>(DicesPaths.GENERAL_DICE).GetPrefab();
-            var gridPosition = Startup.GridRaft.ConvertingPosition(targetPosition);
+            var gridPosition = Startup.GridWorld.ConvertingPosition(targetPosition);
 
-            Startup.SpawnDiceRaft(gridPosition, dicePrefab, out _);
+            DiceSetterSystem.SpawnDiceRaft(gridPosition, dicePrefab, out _);
         }
     }
 }

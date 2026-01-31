@@ -5,6 +5,8 @@
 
 public static class GridsPaths
 {
+    /// <summary> Component: GenerationWorld </summary>
+    public const string GENERATION_GRID_WORLD = "Grids/GenerationGridWorld";
     /// <summary> ScriptableObject: GridConfig </summary>
     public const string GRID_WORLD = "Grids/GridWorld";
 }
