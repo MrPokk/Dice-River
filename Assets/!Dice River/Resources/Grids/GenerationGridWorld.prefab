@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395dbae804d2d7063b4cdf11ded1f25b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GenerationWorld
-  _minRiverWidth: 12
+  _minRiverWidth: 13
   _noiseScale: 0.12
   _meanderAmount: 4
-  _seed: 0
-  _minX: 0
-  _maxX: 0
+  _seed: 5525.6943
+  _minX: -10
+  _maxX: 10

@@ -6,18 +6,22 @@ using UnityEngine;
 
 public class Startup : EcsUnityRoot
 {
-    private GridConfig _gridConfig;
+    private GridConfig _gridConfigWorld;
+    private GridConfig _gridConfigRaft;
     private GenerationWorld _generationWorld;
-    public static GameObject GridRaftParent;
     public static MonoGridPresenter GridWorld;
+    public static MonoGridPresenter GridRaft;
 
     protected override void Bootstrap()
     {
-        _gridConfig = new Loader<GridConfig>(GridsPaths.GRID_WORLD).GetPrefab();
+        _gridConfigWorld = new Loader<GridConfig>(GridsPaths.GRID_WORLD).GetPrefab();
+        _gridConfigRaft = new Loader<GridConfig>(GridsPaths.GRID_RAFT).GetPrefab();
+
         _generationWorld = new Loader<GenerationWorld>(GridsPaths.GENERATION_GRID_WORLD).GetPrefab();
-        GridWorld = new(_gridConfig);
+        GridWorld = new(_gridConfigWorld);
+        GridRaft = new(_gridConfigRaft);
         _generationWorld.Config(GridWorld);
-        GridRaftParent = new GameObject("GridRaftParent");
+        DiceRaftInitSystem.Config(GridRaft);
 
         var playerPrefab = new Loader<PlayerProvider>(EntitiesPaths.PLAYER).GetInstance();
     }
