@@ -10,7 +10,7 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
     private EcsFilter _ecsFilter =
     Build.For<EntitiesPresenter>()
          .Filter()
-         .WhereProvider<EntitiesProvider>()
+         .WhereProvider<PlayerProvider>()
          .Include<InputComponent>()
          .Include<MovingComponent>();
 
@@ -42,31 +42,34 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
     {
         foreach (var entity in _ecsFilter)
         {
-            var provider = entity.GetProvider<EntitiesProvider>();
+            var provider = entity.GetProvider<PlayerProvider>();
             ref var moving = ref entity.Get<MovingComponent>();
             ref var input = ref entity.Get<InputComponent>();
 
-            var rb = provider.rigidbody;
-            var moveDirection = input.currentInput;
+            var cc = provider.characterController;
+            var rawInput = input.currentInput;
+            var moveDirection = new Vector3(rawInput.x, 0f, rawInput.y);
 
             if (moveDirection.sqrMagnitude > 0.001f)
             {
                 if (moveDirection.sqrMagnitude > 1f) moveDirection.Normalize();
 
                 entity.GetOrAdd<FacingComponent>().direction = moveDirection;
-                FlipSprite(provider, moveDirection);
+                FlipSprite(provider, moveDirection.x);
             }
 
-            rb.linearVelocity = moveDirection * moving.speed;
-            entity.AddOrRemove<IsMovingComponent, Vector2>(new(), moveDirection, i => i != Vector2.zero);
+            var velocity = moveDirection * moving.speed;
+
+            cc.Move(velocity * Time.fixedDeltaTime);
+            entity.AddOrRemove<IsMovingComponent, Vector3>(new(), moveDirection, i => i != Vector3.zero);
         }
     }
 
-    private static void FlipSprite(EntitiesProvider provider, Vector2 moveDirection)
+    private static void FlipSprite(EntitiesProvider provider, float directionX)
     {
-        if (Mathf.Abs(moveDirection.x) < 0.01f) return;
+        if (Mathf.Abs(directionX) < 0.01f) return;
         var scale = provider.transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(moveDirection.x);
+        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(directionX);
         provider.transform.localScale = scale;
     }
 }

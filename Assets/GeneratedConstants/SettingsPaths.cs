@@ -5,6 +5,8 @@
 
 public static class SettingsPaths
 {
+    /// <summary> ScriptableObject: CinemachineLensPalette </summary>
+    public const string CINEMACHINE_LENS_PALETTE = "Settings/CinemachineLensPalette";
     /// <summary> ScriptableObject: VolumeProfile </summary>
     public const string DEFAULT_VOLUME_PROFILE = "Settings/Rendering/DefaultVolumeProfile";
     /// <summary> Component: EventSystem </summary>

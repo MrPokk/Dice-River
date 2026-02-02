@@ -2,5 +2,5 @@
 
 public struct FacingComponent
 {
-    public Vector2 direction;
+    public Vector3 direction;
 }

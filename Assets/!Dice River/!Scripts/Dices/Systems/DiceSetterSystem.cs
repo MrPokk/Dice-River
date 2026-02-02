@@ -7,6 +7,8 @@ public class DiceSetterSystem
     {
         var gridDice = Startup.GridRaft;
 
+        gridDice.AddGridCell(index);
+
         var isSet = gridDice.InitializeGameObject(index, prefab, out instantiateObject, DiceRaftInitSystem.GridRaftParent.transform);
         if (!isSet)
         {

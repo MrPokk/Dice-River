@@ -9,7 +9,7 @@ public class DiceRaftInitSystem
     {
         GridRaftParent = new GameObject("GridRaftParent");
 
-        var dicePrefab = new Loader<DiceProvider>(DicesPaths.GENERAL_DICE).GetPrefab();
+        var dicePrefab = new Loader<DiceProvider>(DicesPaths.TEST_DICE).GetPrefab();
         var nodes = gridRaft.GetGridDictionary().Keys.ToArray();
         foreach (var node in nodes)
         {

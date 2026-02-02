@@ -4,8 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(MovingComponentProvider), typeof(InputComponentProvider))]
 public class PlayerProvider : EntitiesProvider
 {
+    public CharacterController characterController;
     protected override void Awake()
     {
+        characterController = GetComponent<CharacterController>();
         base.Awake();
     }
 }

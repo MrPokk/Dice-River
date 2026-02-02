@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Startup : EcsUnityRoot
 {
+    private CameraObject _cameraObject;
     private GridConfig _gridConfigWorld;
     private GridConfig _gridConfigRaft;
     private GenerationWorld _generationWorld;
@@ -14,6 +15,7 @@ public class Startup : EcsUnityRoot
 
     protected override void Bootstrap()
     {
+        _cameraObject = new Loader<CameraObject>(PrefabObjectsPaths.CAMERA_OBJECT).GetInstance();
         _gridConfigWorld = new Loader<GridConfig>(GridsPaths.GRID_WORLD).GetPrefab();
         _gridConfigRaft = new Loader<GridConfig>(GridsPaths.GRID_RAFT).GetPrefab();
 
@@ -24,5 +26,6 @@ public class Startup : EcsUnityRoot
         DiceRaftInitSystem.Config(GridRaft);
 
         var playerPrefab = new Loader<PlayerProvider>(EntitiesPaths.PLAYER).GetInstance();
+        _cameraObject.SetTarget(playerPrefab.transform);
     }
 }

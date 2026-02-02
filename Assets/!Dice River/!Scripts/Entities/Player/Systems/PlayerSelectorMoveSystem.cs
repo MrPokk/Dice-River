@@ -1,11 +1,9 @@
-﻿using System;
-using BitterECS.Core;
-using UnityEngine.InputSystem;
+﻿using BitterECS.Core;
+using UnityEngine;
 
-public class PlayerSetDiceSystem : IEcsInitSystem
+public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
 {
-    public Priority Priority => Priority.FIRST_TASK;
-
+    public Priority Priority => Priority.Medium;
     private EcsFilter _ecsFilter =
     Build.For<EntitiesPresenter>()
          .Filter()
@@ -13,25 +11,26 @@ public class PlayerSetDiceSystem : IEcsInitSystem
          .Include<InputComponent>()
          .Include<FacingComponent>();
 
+    private Transform _selector;
+
     public void Init()
     {
-        var set = ControllableSystem.Inputs.Playable.BasicAttack;
-        ControllableSystem.SubscribePerformed(set, SetDice);
+        var selectorPrefab = new Loader<GameObject>(DicesPaths.SELECTOR_DICE).GetInstance();
+        _selector = selectorPrefab.transform;
     }
 
-    private void SetDice(InputAction.CallbackContext context)
+    public void FixedRun()
     {
         foreach (var entity in _ecsFilter)
         {
             var transform = entity.GetProvider<EntitiesProvider>().transform;
+
             var facingDir = entity.Get<FacingComponent>().direction;
 
             var targetPosition = transform.position + facingDir;
 
-            var dicePrefab = new Loader<DiceProvider>(DicesPaths.TEST_DICE).GetPrefab();
             var gridPosition = Startup.GridWorld.ConvertingPosition(targetPosition);
-
-            DiceSetterSystem.SpawnDiceRaft(gridPosition, dicePrefab, out _);
+            _selector.position = Startup.GridWorld.ConvertingPosition(gridPosition);
         }
     }
 }

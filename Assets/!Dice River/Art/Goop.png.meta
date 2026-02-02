@@ -1,0 +1,1949 @@
+fileFormatVersion: 2
+guid: a3f379644ba3c879782a56d7b019a83b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4998071738744356794
+    second: Goop_0
+  - first:
+      213: -7665457569584412715
+    second: Goop_1
+  - first:
+      213: 3751703746311195409
+    second: Goop_2
+  - first:
+      213: -2926900461282897536
+    second: Goop_3
+  - first:
+      213: -6566527049099486619
+    second: Goop_4
+  - first:
+      213: -4476118323097365227
+    second: Goop_5
+  - first:
+      213: 1803670107277944053
+    second: Goop_6
+  - first:
+      213: 4829067249901677182
+    second: Goop_7
+  - first:
+      213: -8469438803236187655
+    second: Goop_8
+  - first:
+      213: 7260314298495677985
+    second: Goop_9
+  - first:
+      213: -700391650354169639
+    second: Goop_10
+  - first:
+      213: 8433889655025647051
+    second: Goop_11
+  - first:
+      213: -4504505327661140669
+    second: Goop_12
+  - first:
+      213: -7166441755081671569
+    second: Goop_13
+  - first:
+      213: -2818705783009686312
+    second: Goop_14
+  - first:
+      213: 8291359069312856868
+    second: Goop_15
+  - first:
+      213: 310532632320515618
+    second: Goop_16
+  - first:
+      213: -6383181781892369114
+    second: Goop_17
+  - first:
+      213: 6928732016767378645
+    second: Goop_18
+  - first:
+      213: 7427036507087968526
+    second: Goop_19
+  - first:
+      213: 7237656668962424803
+    second: Goop_20
+  - first:
+      213: 2968115265494077910
+    second: Goop_21
+  - first:
+      213: -4752847821741226488
+    second: Goop_22
+  - first:
+      213: 497231540807453941
+    second: Goop_23
+  - first:
+      213: -523755704029558809
+    second: Goop_24
+  - first:
+      213: 5547388820144158677
+    second: Goop_25
+  - first:
+      213: 1613135843130278611
+    second: Goop_26
+  - first:
+      213: -7105067011777842699
+    second: Goop_27
+  - first:
+      213: 5120189225330591603
+    second: Goop_28
+  - first:
+      213: 6664370900552652357
+    second: Goop_29
+  - first:
+      213: -779903438949982999
+    second: Goop_30
+  - first:
+      213: -7153753094886882705
+    second: Goop_31
+  - first:
+      213: -3318767233068174273
+    second: Goop_32
+  - first:
+      213: -1360288849686018650
+    second: Goop_33
+  - first:
+      213: -2247510315843959504
+    second: Goop_34
+  - first:
+      213: -2640781390054192784
+    second: Goop_35
+  - first:
+      213: -6183089870866035412
+    second: Goop_36
+  - first:
+      213: 7206881212633528028
+    second: Goop_37
+  - first:
+      213: 6925702935369644322
+    second: Goop_38
+  - first:
+      213: 7110168682486412721
+    second: Goop_39
+  - first:
+      213: -742185271874115966
+    second: Goop_40
+  - first:
+      213: -7463626481721276308
+    second: Goop_41
+  - first:
+      213: 1473649508725038285
+    second: Goop_42
+  - first:
+      213: 4348597292049215988
+    second: Goop_43
+  - first:
+      213: -7578421670421954809
+    second: Goop_44
+  - first:
+      213: -3867737064347434176
+    second: Goop_45
+  - first:
+      213: -6781055609607453788
+    second: Goop_46
+  - first:
+      213: -8423852875865643645
+    second: Goop_47
+  - first:
+      213: 104310842981818914
+    second: Goop_48
+  - first:
+      213: 5099059652917584738
+    second: Goop_49
+  - first:
+      213: 4974444835622667109
+    second: Goop_50
+  - first:
+      213: 5706454395020112554
+    second: Goop_51
+  - first:
+      213: -6662249994005562591
+    second: Goop_52
+  - first:
+      213: -1026362027989074516
+    second: Goop_53
+  - first:
+      213: -8816160653754160367
+    second: Goop_54
+  - first:
+      213: 3873874674391555074
+    second: Goop_55
+  - first:
+      213: -1654640904408519387
+    second: Goop_56
+  - first:
+      213: -4777215951348988996
+    second: Goop_57
+  - first:
+      213: 2330078880806401804
+    second: Goop_58
+  - first:
+      213: -1327156349151274846
+    second: Goop_59
+  - first:
+      213: 2972700214300878025
+    second: Goop_60
+  - first:
+      213: -9122294400192835015
+    second: Goop_61
+  - first:
+      213: 4133897621883355454
+    second: Goop_62
+  - first:
+      213: 391567997498963774
+    second: Goop_63
+  - first:
+      213: -1998485290121766570
+    second: Goop_64
+  - first:
+      213: -8454965324897261189
+    second: Goop_65
+  - first:
+      213: -6608500213191014211
+    second: Goop_66
+  - first:
+      213: -2338621753550427020
+    second: Goop_67
+  - first:
+      213: -8347232053430633976
+    second: Goop_68
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Goop_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 640493a0c3843aab0800000000000000
+      internalID: -4998071738744356794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 224
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d7871c24f2de9590800000000000000
+      internalID: -7665457569584412715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_2
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 230
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11b816d0eaab01430800000000000000
+      internalID: 3751703746311195409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_3
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 232
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0815e40b98f8167d0800000000000000
+      internalID: -2926900461282897536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_4
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 232
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56a5e6690720fd4a0800000000000000
+      internalID: -6566527049099486619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_5
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 232
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5151a23c912a1e1c0800000000000000
+      internalID: -4476118323097365227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_6
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 232
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f4ea44086ce70910800000000000000
+      internalID: 1803670107277944053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_7
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 232
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7aacda041b440340800000000000000
+      internalID: 4829067249901677182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_8
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 212
+        width: 20
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f1923e0842867a80800000000000000
+      internalID: -8469438803236187655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_9
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 184
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 126368f3361d1c460800000000000000
+      internalID: 7260314298495677985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_10
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 184
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d87dfc3185b746f0800000000000000
+      internalID: -700391650354169639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_11
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 199
+        width: 65
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcd35a2e4f13b0570800000000000000
+      internalID: 8433889655025647051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_12
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 199
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34537e73548cc71c0800000000000000
+      internalID: -4504505327661140669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_13
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 215
+        width: 5
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6c74d4713fab8c90800000000000000
+      internalID: -7166441755081671569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_14
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 175
+        width: 49
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dc4e554602f1e8d0800000000000000
+      internalID: -2818705783009686312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_15
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 192
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4233b9fd423d01370800000000000000
+      internalID: 8291359069312856868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_16
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 194
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22e91a8a8cb3f4400800000000000000
+      internalID: 310532632320515618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_17
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 144
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6257f892df16a67a0800000000000000
+      internalID: -6383181781892369114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_18
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 144
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d4ab4b2f0dc72060800000000000000
+      internalID: 6928732016767378645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_19
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 157
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0916d26a52221760800000000000000
+      internalID: 7427036507087968526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_20
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 161
+        width: 17
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e70eb7c462517460800000000000000
+      internalID: 7237656668962424803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_21
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 175
+        width: 44
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d15034bb1dd03920800000000000000
+      internalID: 2968115265494077910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_22
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 104
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80600a9761e7a0eb0800000000000000
+      internalID: -4752847821741226488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_23
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 104
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fcc2f0b37586e600800000000000000
+      internalID: 497231540807453941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_24
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 134
+        width: 24
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e7cb3056fe3bb8f0800000000000000
+      internalID: -523755704029558809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_25
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 135
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d77aa79db84cfc40800000000000000
+      internalID: 5547388820144158677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_26
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 119
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d20b38a082036610800000000000000
+      internalID: 1613135843130278611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_27
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 137
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f1b2a1723bb56d90800000000000000
+      internalID: -7105067011777842699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_28
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 137
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 377cc96f8f09e0740800000000000000
+      internalID: 5120189225330591603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_29
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 137
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54614e2560a9c7c50800000000000000
+      internalID: 6664370900552652357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_30
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 137
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ecd74254f93d25f0800000000000000
+      internalID: -779903438949982999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_31
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 137
+        width: 9
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f628a606673c8bc90800000000000000
+      internalID: -7153753094886882705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_32
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 132
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f34f3ccf8ce51f1d0800000000000000
+      internalID: -3318767233068174273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_33
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 125
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a54a829f784f1de0800000000000000
+      internalID: -1360288849686018650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_34
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 104
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 035481b864d3fc0e0800000000000000
+      internalID: -2247510315843959504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_35
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 86
+        width: 50
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0798b54315f0a5bd0800000000000000
+      internalID: -2640781390054192784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_36
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 109
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2dc6b89580413aa0800000000000000
+      internalID: -6183089870866035412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_37
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 108
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd63579774cf30460800000000000000
+      internalID: 7206881212633528028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_38
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 102
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2297692302a0d1060800000000000000
+      internalID: 6925702935369644322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_39
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 101
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b5b5b4deb46ca260800000000000000
+      internalID: 7110168682486412721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_40
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 99
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 286aa607d6a33b5f0800000000000000
+      internalID: -742185271874115966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_41
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 88
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c680ec4424fdb6890800000000000000
+      internalID: -7463626481721276308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_42
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 75
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcc1cf2ab64737410800000000000000
+      internalID: 1473649508725038285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_43
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 91
+        width: 5
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f1b1df7232595c30800000000000000
+      internalID: 4348597292049215988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_44
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 90
+        width: 22
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70f706894a904d690800000000000000
+      internalID: -7578421670421954809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_45
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 82
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04385f2d1a9035ac0800000000000000
+      internalID: -3867737064347434176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_46
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 55
+        width: 47
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a38d23c9d9d4e1a0800000000000000
+      internalID: -6781055609607453788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_47
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 68
+        width: 16
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38520edd076781b80800000000000000
+      internalID: -8423852875865643645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_48
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 70
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2222726b826927100800000000000000
+      internalID: 104310842981818914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_49
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 54
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 263eda40dbf73c640800000000000000
+      internalID: 5099059652917584738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_50
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 52
+        width: 19
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 563c016e837c80540800000000000000
+      internalID: 4974444835622667109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_51
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 52
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa2f326c906613f40800000000000000
+      internalID: 5706454395020112554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_52
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 52
+        width: 24
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12b3376bdeeea83a0800000000000000
+      internalID: -6662249994005562591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_53
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 48
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cadf2c66c21a1c1f0800000000000000
+      internalID: -1026362027989074516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_54
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 56
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11b253e6894b6a580800000000000000
+      internalID: -8816160653754160367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_55
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 48
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20c9d7fdd74c2c530800000000000000
+      internalID: 3873874674391555074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_56
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 46
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52d26e53dd88909e0800000000000000
+      internalID: -1654640904408519387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_57
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 19
+        width: 83
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb3838c276be3bdb0800000000000000
+      internalID: -4777215951348988996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_58
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 38
+        width: 24
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c07fa15956a165020800000000000000
+      internalID: 2330078880806401804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_59
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 10
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a81f6ff45ef49de0800000000000000
+      internalID: -1327156349151274846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_60
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 35
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c4a1294817214920800000000000000
+      internalID: 2972700214300878025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_61
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 6
+        width: 6
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93298f33399176180800000000000000
+      internalID: -9122294400192835015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_62
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 13
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e31803a1cfd8e5930800000000000000
+      internalID: 4133897621883355454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_63
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 13
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e373654e4012f6500800000000000000
+      internalID: 391567997498963774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_64
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 13
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 659d2719734f344e0800000000000000
+      internalID: -1998485290121766570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_65
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 13
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b79e04555dde9aa80800000000000000
+      internalID: -8454965324897261189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_66
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 12
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db808a6c114e944a0800000000000000
+      internalID: -6608500213191014211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_67
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 12
+        width: 7
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47c20abd7eb8b8fd0800000000000000
+      internalID: -2338621753550427020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_68
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 12
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80a33854caca82c80800000000000000
+      internalID: -8347232053430633976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Goop_69
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 200
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5134e2a583732d25b46f6d38cf092fc
+      internalID: -888443219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e92828c7015b351b9af41f2a10569bce
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Goop_0: -4998071738744356794
+      Goop_1: -7665457569584412715
+      Goop_10: -700391650354169639
+      Goop_11: 8433889655025647051
+      Goop_12: -4504505327661140669
+      Goop_13: -7166441755081671569
+      Goop_14: -2818705783009686312
+      Goop_15: 8291359069312856868
+      Goop_16: 310532632320515618
+      Goop_17: -6383181781892369114
+      Goop_18: 6928732016767378645
+      Goop_19: 7427036507087968526
+      Goop_2: 3751703746311195409
+      Goop_20: 7237656668962424803
+      Goop_21: 2968115265494077910
+      Goop_22: -4752847821741226488
+      Goop_23: 497231540807453941
+      Goop_24: -523755704029558809
+      Goop_25: 5547388820144158677
+      Goop_26: 1613135843130278611
+      Goop_27: -7105067011777842699
+      Goop_28: 5120189225330591603
+      Goop_29: 6664370900552652357
+      Goop_3: -2926900461282897536
+      Goop_30: -779903438949982999
+      Goop_31: -7153753094886882705
+      Goop_32: -3318767233068174273
+      Goop_33: -1360288849686018650
+      Goop_34: -2247510315843959504
+      Goop_35: -2640781390054192784
+      Goop_36: -6183089870866035412
+      Goop_37: 7206881212633528028
+      Goop_38: 6925702935369644322
+      Goop_39: 7110168682486412721
+      Goop_4: -6566527049099486619
+      Goop_40: -742185271874115966
+      Goop_41: -7463626481721276308
+      Goop_42: 1473649508725038285
+      Goop_43: 4348597292049215988
+      Goop_44: -7578421670421954809
+      Goop_45: -3867737064347434176
+      Goop_46: -6781055609607453788
+      Goop_47: -8423852875865643645
+      Goop_48: 104310842981818914
+      Goop_49: 5099059652917584738
+      Goop_5: -4476118323097365227
+      Goop_50: 4974444835622667109
+      Goop_51: 5706454395020112554
+      Goop_52: -6662249994005562591
+      Goop_53: -1026362027989074516
+      Goop_54: -8816160653754160367
+      Goop_55: 3873874674391555074
+      Goop_56: -1654640904408519387
+      Goop_57: -4777215951348988996
+      Goop_58: 2330078880806401804
+      Goop_59: -1327156349151274846
+      Goop_6: 1803670107277944053
+      Goop_60: 2972700214300878025
+      Goop_61: -9122294400192835015
+      Goop_62: 4133897621883355454
+      Goop_63: 391567997498963774
+      Goop_64: -1998485290121766570
+      Goop_65: -8454965324897261189
+      Goop_66: -6608500213191014211
+      Goop_67: -2338621753550427020
+      Goop_68: -8347232053430633976
+      Goop_69: -888443219
+      Goop_7: 4829067249901677182
+      Goop_8: -8469438803236187655
+      Goop_9: 7260314298495677985
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
