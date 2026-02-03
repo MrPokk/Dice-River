@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: -4553256082684300076}
   - component: {fileID: 7411409852435515135}
   - component: {fileID: -736192163089186376}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,6 +268,6 @@ MonoBehaviour:
     groundMask:
       serializedVersion: 2
       m_Bits: 1
+    groundCheckOffset: 0
     verticalVelocity: 0
-    groundCheckOffset: -0.5
     isGrounded: 0

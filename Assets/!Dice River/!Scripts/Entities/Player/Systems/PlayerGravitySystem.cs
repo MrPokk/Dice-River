@@ -19,30 +19,26 @@ public class PlayerGravitySystem : IEcsFixedRunSystem
             ref var gravityComp = ref entity.Get<GravityComponent>();
             var cc = provider.characterController;
 
-            gravityComp.isGrounded = (cc.collisionFlags & CollisionFlags.Below) != 0;
+            gravityComp.verticalVelocity -= gravityComp.gravity * Time.fixedDeltaTime;
 
-            if (gravityComp.isGrounded && gravityComp.verticalVelocity < 0)
+            var pos = provider.transform.position;
+            var groundCheckOffset = gravityComp.groundCheckOffset;
+            if (pos.y <= groundCheckOffset)
             {
+                pos.y = groundCheckOffset;
+
                 gravityComp.verticalVelocity = 0f;
-            }
-
-            if (provider.transform.position.y > gravityComp.groundCheckOffset)
-            {
-                gravityComp.verticalVelocity -= gravityComp.gravity * Time.fixedDeltaTime;
+                gravityComp.isGrounded = false;
             }
             else
             {
-                gravityComp.verticalVelocity = 0f;
-
-                var pos = provider.transform.position;
-                if (pos.y < gravityComp.groundCheckOffset)
+                cc.Move(gravityComp.verticalVelocity * Time.fixedDeltaTime * Vector3.up);
+                gravityComp.isGrounded = cc.isGrounded;
+                if (gravityComp.isGrounded && gravityComp.verticalVelocity < 0)
                 {
-                    provider.transform.position = new Vector3(pos.x, gravityComp.groundCheckOffset, pos.z);
+                    gravityComp.verticalVelocity = -2f;
                 }
             }
-
-            var verticalMove = gravityComp.verticalVelocity * Time.fixedDeltaTime * Vector3.up;
-            cc.Move(verticalMove);
         }
     }
 }

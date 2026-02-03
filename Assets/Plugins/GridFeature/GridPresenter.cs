@@ -250,30 +250,48 @@ public class GridPresenter<T>
         return cells;
     }
 
-    public Dictionary<Vector2Int, T> GetCellsInRow(int rowIndex, Func<T, bool> filterCondition = null)
+    public int GetMinRow() => _grid.GridDictionary.Keys.Min(key => key.y);
+    public int GetMaxRow() => _grid.GridDictionary.Keys.Max(key => key.y);
+
+    public int GetMinColumn() => _grid.GridDictionary.Keys.Min(key => key.x);
+    public int GetMaxColumn() => _grid.GridDictionary.Keys.Max(key => key.x);
+
+    public int GetCountRow()
     {
-        var cells = new Dictionary<Vector2Int, T>();
+        if (_grid.GridDictionary.Count == 0) return 0;
+        return GetMaxRow() - GetMinRow() + 1;
+    }
+
+    public int GetCountColumn()
+    {
+        if (_grid.GridDictionary.Count == 0) return 0;
+        return GetMaxColumn() - GetMinColumn() + 1;
+    }
+
+    public List<Vector2Int> GetCellsInRow(int rowIndex, Func<T, bool> filterCondition = null)
+    {
+        var cells = new List<Vector2Int>();
 
         foreach (var kvp in _grid.GridDictionary)
         {
             if (kvp.Key.y == rowIndex && (filterCondition == null || filterCondition(kvp.Value)))
             {
-                cells[kvp.Key] = kvp.Value;
+                cells.Add(kvp.Key);
             }
         }
 
         return cells;
     }
 
-    public Dictionary<Vector2Int, T> GetCellsInColumn(int columnIndex, Func<T, bool> filterCondition = null)
+    public List<Vector2Int> GetCellsInColumn(int columnIndex, Func<T, bool> filterCondition = null)
     {
-        var cells = new Dictionary<Vector2Int, T>();
+        var cells = new List<Vector2Int>();
 
         foreach (var kvp in _grid.GridDictionary)
         {
             if (kvp.Key.x == columnIndex && (filterCondition == null || filterCondition(kvp.Value)))
             {
-                cells[kvp.Key] = kvp.Value;
+                cells.Add(kvp.Key);
             }
         }
 

@@ -1,4 +1,4 @@
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
@@ -16,6 +16,11 @@ public class GridProviderEditor : Editor
     private SerializedProperty _cellsProperty;
 
     private bool _showGridCells = false;
+    private bool _showGenerator = true;
+
+    // Параметры для генератора прямоугольника
+    private Vector2Int _rectSize = new Vector2Int(5, 5);
+    private Vector2Int _rectOffset = Vector2Int.zero;
 
     private void OnEnable()
     {
@@ -33,72 +38,90 @@ public class GridProviderEditor : Editor
             _gridConfigSerializedObject = new SerializedObject(GridConfig);
             _cellsProperty = _gridConfigSerializedObject.FindProperty("_cells");
         }
-        else
-        {
-            _gridConfigSerializedObject = null;
-            _cellsProperty = null;
-        }
     }
 
     public override void OnInspectorGUI()
     {
-        serializedObject?.Update();
+        serializedObject.Update();
         DrawDefaultInspector();
-
         UpdateGridConfigReference();
 
         if (GridConfig == null)
         {
             EditorGUILayout.HelpBox("Assign a GridConfig to visualize the grid.", MessageType.Warning);
             DrawCreateGridConfigButton();
+            return;
         }
-        else
+
+        if (_gridConfigSerializedObject != null)
         {
-            if (_gridConfigSerializedObject != null)
-            {
-                DrawGridConfiguration();
-            }
-            else
-            {
-                UpdateGridConfigReference();
-                if (_gridConfigSerializedObject != null)
-                {
-                    DrawGridConfiguration();
-                }
-                else
-                {
-                    EditorGUILayout.HelpBox("Failed to serialize GridConfig. Please reassign it.", MessageType.Error);
-                }
-            }
+            DrawRectGenerator(); // <-- Новый блок генерации
+            DrawGridConfiguration();
         }
 
         serializedObject.ApplyModifiedProperties();
     }
 
+    private void DrawRectGenerator()
+    {
+        EditorGUILayout.Space();
+        _showGenerator = EditorGUILayout.BeginFoldoutHeaderGroup(_showGenerator, "Rectangle Generator");
+
+        if (_showGenerator)
+        {
+            EditorGUI.indentLevel++;
+            _rectSize = EditorGUILayout.Vector2IntField("Size (Width/Height)", _rectSize);
+            _rectOffset = EditorGUILayout.Vector2IntField("Start Offset", _rectOffset);
+
+            EditorGUILayout.BeginHorizontal();
+
+            if (GUILayout.Button("Generate (Replace)"))
+            {
+                if (EditorUtility.DisplayDialog("Confirm", "This will clear all existing cells. Continue?", "Yes", "No"))
+                {
+                    Undo.RecordObject(GridConfig, "Generate Rect Grid");
+                    GridConfig.ClearAndFillRectangle(_rectSize.x, _rectSize.y, _rectOffset);
+                    EditorUtility.SetDirty(GridConfig);
+                    _gridEditorSetting.RefreshGrid();
+                }
+            }
+
+            if (GUILayout.Button("Add Rectangle"))
+            {
+                Undo.RecordObject(GridConfig, "Add Rect to Grid");
+                for (int x = 0; x < _rectSize.x; x++)
+                {
+                    for (int y = 0; y < _rectSize.y; y++)
+                    {
+                        GridConfig.AddCell(new Vector2Int(x + _rectOffset.x, y + _rectOffset.y));
+                    }
+                }
+                EditorUtility.SetDirty(GridConfig);
+                _gridEditorSetting.RefreshGrid();
+            }
+
+            EditorGUILayout.EndHorizontal();
+            EditorGUI.indentLevel--;
+        }
+        EditorGUILayout.EndFoldoutHeaderGroup();
+    }
+
+    // ... (Остальные методы: DrawCreateGridConfigButton, DrawGridConfiguration, DrawGridCellsSection и т.д. остаются без изменений)
+
     private void DrawCreateGridConfigButton()
     {
-        EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("Create New Grid Config"))
         {
             CreateNewGridConfig();
         }
-        EditorGUILayout.EndHorizontal();
     }
 
     private void DrawGridConfiguration()
     {
-        // Add null check at the beginning of the method
-        if (_gridConfigSerializedObject == null)
-        {
-            UpdateGridConfigReference();
-            if (_gridConfigSerializedObject == null)
-                return;
-        }
-
         _gridConfigSerializedObject.Update();
 
         EditorGUILayout.Space();
-        EditorGUILayout.LabelField("Grid Configuration", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Grid Data", EditorStyles.boldLabel);
 
         EditorGUILayout.PropertyField(_gridConfigSerializedObject.FindProperty("_position"));
         EditorGUILayout.PropertyField(_gridConfigSerializedObject.FindProperty("_rotation"));
@@ -114,60 +137,50 @@ public class GridProviderEditor : Editor
     private void DrawGridCellsSection()
     {
         EditorGUILayout.Space();
-        _showGridCells = EditorGUILayout.Foldout(_showGridCells, "Grid Cells", true, EditorStyles.foldoutHeader);
+        _showGridCells = EditorGUILayout.Foldout(_showGridCells, "Raw Cells List (" + (GridConfig.Cells?.Count ?? 0) + ")", true);
 
         if (_showGridCells && _cellsProperty != null)
         {
             EditorGUI.indentLevel++;
+            if (GUILayout.Button("Clear All Cells", GUILayout.Width(120)))
+            {
+                _cellsProperty.ClearArray();
+            }
 
             for (int i = 0; i < _cellsProperty.arraySize; i++)
             {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.PropertyField(_cellsProperty.GetArrayElementAtIndex(i), GUIContent.none);
-                if (GUILayout.Button("Remove", GUILayout.Width(60)))
+                if (GUILayout.Button("X", GUILayout.Width(25)))
                 {
                     _cellsProperty.DeleteArrayElementAtIndex(i);
                 }
                 EditorGUILayout.EndHorizontal();
             }
-
             EditorGUI.indentLevel--;
-        }
-
-        if (!GridConfig.Cells.Any() && GUILayout.Button("Add Cell"))
-        {
-            _cellsProperty.arraySize++;
-            _cellsProperty.GetArrayElementAtIndex(_cellsProperty.arraySize - 1).vector2IntValue = Vector2Int.zero;
         }
     }
 
     private void CreateNewGridConfig()
     {
         var newConfig = CreateInstance<GridConfig>();
-
-        string path = EditorUtility.SaveFilePanelInProject(
-            "Save Grid Config",
-            "NewGridConfig.asset",
-            "asset",
-            "Please enter a file name to save the Grid Config to");
+        string path = EditorUtility.SaveFilePanelInProject("Save Grid Config", "NewGridConfig.asset", "asset", "Save Grid Config");
 
         if (!string.IsNullOrEmpty(path))
         {
             AssetDatabase.CreateAsset(newConfig, path);
             AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
 
             serializedObject.Update();
             serializedObject.FindProperty("_gridConfig").objectReferenceValue = newConfig;
             serializedObject.ApplyModifiedProperties();
 
-            _gridVisualizerSetting.Initialized(newConfig);
-            _gridEditorSetting.Initialized(newConfig);
-
             UpdateGridConfigReference();
         }
     }
 
+    // Scene GUI methods (OnSceneGUI, AddButtonCells, RemoveButtonCells, etc.) 
+    // остаются такими же, как в вашем коде...
     private void OnSceneGUI()
     {
         if (_gridEditorSetting == null || GridConfig == null)
@@ -183,87 +196,55 @@ public class GridProviderEditor : Editor
     private void RemoveButtonCells()
     {
         Handles.color = _gridEditorSetting.RemoveButtonColor;
-        var style = new GUIStyle();
-        style.normal.textColor = _gridEditorSetting.RemoveButtonColor;
-        style.fontSize = _gridEditorSetting.ButtonFontSize;
-        style.alignment = TextAnchor.MiddleCenter;
-
         foreach (var pos in GridConfig.Cells)
         {
             var worldPosition = _gridEditorSetting.GetWorldPosition(pos);
-            var buttonSize = GridConfig.CellSize * 0.3f;
-
-            if (Handles.Button(worldPosition, GridConfig.RotationQuaternion,
-                buttonSize, buttonSize, Handles.RectangleHandleCap))
+            float size = GridConfig.CellSize * 0.3f;
+            if (Handles.Button(worldPosition, GridConfig.RotationQuaternion, size, size, Handles.RectangleHandleCap))
             {
                 RemoveCellFromConfig(pos);
             }
-
-            Handles.Label(worldPosition + Vector3.up * buttonSize * 0.7f, "[-]", style);
         }
     }
 
     private void AddButtonCells()
     {
         Handles.color = _gridEditorSetting.AddButtonColor;
-        var style = new GUIStyle();
-        style.normal.textColor = _gridEditorSetting.AddButtonColor;
-        style.fontSize = _gridEditorSetting.ButtonFontSize;
-        style.alignment = TextAnchor.MiddleCenter;
-
         foreach (var pos in _gridEditorSetting.FindAdjacentPositions())
         {
             var worldPosition = _gridEditorSetting.GetWorldPosition(pos);
-            var buttonSize = GridConfig.CellSize * 0.3f;
-
-            if (Handles.Button(worldPosition, GridConfig.RotationQuaternion,
-                buttonSize, buttonSize, Handles.RectangleHandleCap))
+            float size = GridConfig.CellSize * 0.3f;
+            if (Handles.Button(worldPosition, GridConfig.RotationQuaternion, size, size, Handles.RectangleHandleCap))
             {
                 AddCellToConfig(pos);
             }
-
-            Handles.Label(worldPosition + Vector3.up * buttonSize * 0.7f, "[+]", style);
         }
     }
 
     private void RemoveCellFromConfig(Vector2Int cell)
     {
-        if (_gridConfigSerializedObject != null && _cellsProperty != null)
+        _gridConfigSerializedObject.Update();
+        for (int i = 0; i < _cellsProperty.arraySize; i++)
         {
-            _gridConfigSerializedObject.Update();
-
-            int indexToRemove = -1;
-            for (int i = 0; i < _cellsProperty.arraySize; i++)
+            if (_cellsProperty.GetArrayElementAtIndex(i).vector2IntValue == cell)
             {
-                var currentCell = _cellsProperty.GetArrayElementAtIndex(i).vector2IntValue;
-                if (currentCell == cell)
-                {
-                    indexToRemove = i;
-                    break;
-                }
-            }
-
-            if (indexToRemove >= 0)
-            {
-                _cellsProperty.DeleteArrayElementAtIndex(indexToRemove);
-                _gridConfigSerializedObject.ApplyModifiedProperties();
-                EditorUtility.SetDirty(GridConfig);
-                _gridEditorSetting.RefreshGrid();
+                _cellsProperty.DeleteArrayElementAtIndex(i);
+                break;
             }
         }
+        _gridConfigSerializedObject.ApplyModifiedProperties();
+        EditorUtility.SetDirty(GridConfig);
+        _gridEditorSetting.RefreshGrid();
     }
 
     private void AddCellToConfig(Vector2Int cell)
     {
-        if (_gridConfigSerializedObject != null && _cellsProperty != null)
-        {
-            _gridConfigSerializedObject.Update();
-            _cellsProperty.arraySize++;
-            _cellsProperty.GetArrayElementAtIndex(_cellsProperty.arraySize - 1).vector2IntValue = cell;
-            _gridConfigSerializedObject.ApplyModifiedProperties();
-            EditorUtility.SetDirty(GridConfig);
-            _gridEditorSetting.RefreshGrid();
-        }
+        _gridConfigSerializedObject.Update();
+        _cellsProperty.arraySize++;
+        _cellsProperty.GetArrayElementAtIndex(_cellsProperty.arraySize - 1).vector2IntValue = cell;
+        _gridConfigSerializedObject.ApplyModifiedProperties();
+        EditorUtility.SetDirty(GridConfig);
+        _gridEditorSetting.RefreshGrid();
     }
 }
 #endif

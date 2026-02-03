@@ -29,9 +29,7 @@ public class PlayerSetDiceSystem : IEcsInitSystem
             var targetPosition = transform.position + facingDir;
 
             var dicePrefab = new Loader<DiceProvider>(DicesPaths.TEST_DICE).GetPrefab();
-            var gridPosition = Startup.GridWorld.ConvertingPosition(targetPosition);
-
-            DiceSetterSystem.SpawnDiceRaft(gridPosition, dicePrefab, out _);
+            DiceSetterSystem.SpawnDiceRaft(targetPosition, dicePrefab, out _);
         }
     }
 }

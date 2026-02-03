@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 65516554900600158}
   - component: {fileID: 143131261347669863}
   - component: {fileID: -3851760989502804164}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: TestDice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4074274230426839}
   - component: {fileID: 212220885460912313}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4360721021429013}
   - component: {fileID: 212664521407015332}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4287193675128126}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4840231029117620}
   - component: {fileID: 212989773226485247}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4935840277987377}
   - component: {fileID: 212685921756627887}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Ripples
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -532,7 +532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4172430995883774}
   - component: {fileID: 212070665459826423}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,7 +623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4575984843118544}
   - component: {fileID: 212825959593784070}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

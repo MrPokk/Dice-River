@@ -10,4 +10,9 @@ public class PlayerProvider : EntitiesProvider
         characterController = GetComponent<CharacterController>();
         base.Awake();
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Entity.Add(new IsColliderHit(hit));
+    }
 }

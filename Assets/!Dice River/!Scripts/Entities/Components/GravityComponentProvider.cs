@@ -8,18 +8,18 @@ public struct GravityComponent
 {
     public float gravity;
     public LayerMask groundMask;
+    public float groundCheckOffset;
 
-    [HideInInspector] public float verticalVelocity;
-    [HideInInspector] public float groundCheckOffset;
-    [HideInInspector] public bool isGrounded;
+    [ReadOnly] public float verticalVelocity;
+    [ReadOnly] public bool isGrounded;
 
     public GravityComponent(float gravity = 80f)
     {
         this.gravity = gravity;
         groundMask = 0;
         verticalVelocity = 0f;
-        groundCheckOffset = -0.55f;
-        isGrounded = false;
+        groundCheckOffset = 0;
+        isGrounded = true;
     }
 }
 

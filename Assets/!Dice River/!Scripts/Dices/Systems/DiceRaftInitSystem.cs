@@ -5,7 +5,7 @@ public class DiceRaftInitSystem
 {
     public static GameObject GridRaftParent;
 
-    public static void Config(MonoGridPresenter gridRaft)
+    public static void Initialize(MonoGridPresenter gridRaft)
     {
         GridRaftParent = new GameObject("GridRaftParent");
 

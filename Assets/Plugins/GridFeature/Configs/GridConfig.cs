@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -64,12 +64,24 @@ public sealed class GridConfig : ScriptableObject
         RemoveDuplicateCells();
     }
 
+    public void ClearAndFillRectangle(int width, int height, Vector2Int offset)
+    {
+        _cells.Clear();
+        for (var x = 0; x < width; x++)
+        {
+            for (var y = 0; y < height; y++)
+            {
+                _cells.Add(new Vector2Int(x + offset.x, y + offset.y));
+            }
+        }
+    }
+
     private void RemoveDuplicateCells()
     {
         if (_cells == null || _cells.Count == 0)
             return;
 
-        int originalCount = _cells.Count;
+        var originalCount = _cells.Count;
         var uniqueCells = new HashSet<Vector2Int>(_cells);
 
         if (uniqueCells.Count != originalCount)

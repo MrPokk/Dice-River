@@ -17,4 +17,9 @@ public class DiceSetterSystem
         instantiateObject.Entity.Add<RoleComponent>(new());
         instantiateObject.Entity.Add<GridComponent>(new(index, gridDice));
     }
+
+    public static void SpawnDiceRaft(Vector3 index, DiceProvider prefab, out ProviderEcs instantiateObject)
+    {
+        SpawnDiceRaft(Startup.GridRaft.ConvertingPosition(index), prefab, out instantiateObject);
+    }
 }
