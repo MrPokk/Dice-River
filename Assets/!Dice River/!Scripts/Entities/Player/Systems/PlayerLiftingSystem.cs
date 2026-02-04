@@ -4,7 +4,7 @@ using BitterECS.Core;
 
 public class PlayerLiftingSystem : IEcsAutoImplement
 {
-    public Priority Priority => Priority.Medium;
+    public Priority Priority => Priority.High;
 
     private EcsEvent _ecsEvent =
         new EcsEvent<EntitiesPresenter>()

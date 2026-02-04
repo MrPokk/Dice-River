@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 88172500}
   - component: {fileID: 88172499}
   m_Layer: 0
-  m_Name: GridRaft
+  m_Name: GridRaftGeneration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -371,6 +371,86 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1672180582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1672180586}
+  - component: {fileID: 1672180585}
+  - component: {fileID: 1672180584}
+  - component: {fileID: 1672180583}
+  m_Layer: 0
+  m_Name: GridRaftInstallable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1672180583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672180582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8745abc900e33deabc0334218badb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::GridProvider
+  _gridConfig: {fileID: 11400000, guid: eb1f55cd7e384c5659ce2ec3894e0366, type: 2}
+--- !u!114 &1672180584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672180582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05bf0025e4382bc339f13f201104c222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::GridEditorSetting
+  _drawAddButtons: 1
+  _drawRemoveButtons: 1
+  _addButtonColor: {r: 0, g: 1, b: 0, a: 1}
+  _removeButtonColor: {r: 1, g: 0, b: 0, a: 1}
+  _buttonFontSize: 12
+--- !u!114 &1672180585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672180582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2882d200961d482fab39f132f7db5d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::GridVisualizerSetting
+  _drawCoordinates: 0
+  _gridColor: {r: 1, g: 0.18396229, b: 0.5948552, a: 1}
+  _fontColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _fontSize: 12
+--- !u!4 &1672180586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672180582}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1887025927
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::GridVisualizerSetting
   _drawCoordinates: 0
-  _gridColor: {r: 1, g: 1, b: 1, a: 1}
+  _gridColor: {r: 1, g: 1, b: 1, a: 0.09803922}
   _fontColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _fontSize: 12
 --- !u!4 &1887025931
@@ -459,4 +539,5 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 1887025931}
   - {fileID: 88172502}
+  - {fileID: 1672180586}
   - {fileID: 1528057708}

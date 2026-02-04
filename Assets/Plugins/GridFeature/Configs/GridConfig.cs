@@ -34,7 +34,22 @@ public sealed class GridConfig : ScriptableObject
     public Vector2 CellOffset => _cellOffset;
     public GameObject NodePrefab => _nodePrefab;
     public IReadOnlyList<Vector2Int> Cells => _cells.AsReadOnly();
+    public IReadOnlyList<Vector3> CellsWorld => GetCellsWorldPositions();
     public Quaternion RotationQuaternion => Quaternion.Euler(_rotation);
+
+    public List<Vector3> GetCellsWorldPositions()
+    {
+        var positionOrigin = Position;
+        var totalCellSize = new Vector2(CellSize, CellSize) + CellOffset;
+
+        var worldPositions = Cells.Select(index =>
+        {
+            var vector3 = RotationQuaternion * new Vector3(index.x * totalCellSize.x, index.y * totalCellSize.y, 0) + positionOrigin;
+            return vector3 + RotationQuaternion * new Vector3(CellSize, CellSize, 0) * 0.5f;
+        }).ToList();
+
+        return worldPositions;
+    }
 
     public void AddCell(Vector2Int cell)
     {

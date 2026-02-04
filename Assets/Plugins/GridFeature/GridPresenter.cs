@@ -113,6 +113,13 @@ public class GridPresenter<T>
         return FindAll(predicate).FirstOrDefault();
     }
 
+    public Vector2Int ConvertFrom<U>(GridPresenter<U> otherGrid, Vector2Int indexInOtherGrid)
+    {
+        var worldPos = otherGrid.ConvertingPosition(indexInOtherGrid);
+        var index = ConvertingPosition(worldPos);
+        return IsWithinGrid(index) ? index : Vector2Int.one * -1;
+    }
+
     public Vector3 ConvertingPosition(Vector2Int index)
     {
         return GetWorldPosition(index) + _grid.Rotation * new Vector3(_grid.CellSize, _grid.CellSize, 0) * 0.5f;

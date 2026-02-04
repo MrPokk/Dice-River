@@ -6,7 +6,9 @@
 public static class GridsPaths
 {
     /// <summary> ScriptableObject: GridConfig </summary>
-    public const string GRID_RAFT = "Grids/GridRaft";
+    public const string GRID_RAFT_GENERATION = "Grids/GridRaftGeneration";
+    /// <summary> ScriptableObject: GridConfig </summary>
+    public const string GRID_RAFT_INSTALLABLE = "Grids/GridRaftInstallable";
     /// <summary> ScriptableObject: GridConfig </summary>
     public const string GRID_WORLD = "Grids/GridWorld";
     /// <summary> Component: RiverGenerator </summary>

@@ -1,19 +1,15 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DiceRaftInitSystem
 {
-    public static GameObject GridRaftParent;
-
-    public static void Initialize(MonoGridPresenter gridRaft)
+    public static void Initialize(GridConfig generationConfig, params DiceProvider[] prefabsDice)
     {
-        GridRaftParent = new GameObject("GridRaftParent");
+        var cellsGeneration = generationConfig.CellsWorld;
 
-        var dicePrefab = new Loader<DiceProvider>(DicesPaths.TEST_DICE).GetPrefab();
-        var nodes = gridRaft.GetGridDictionary().Keys.ToArray();
-        foreach (var node in nodes)
+        foreach (var worldPos in cellsGeneration)
         {
-            DiceSetterSystem.SpawnDiceRaft(node, dicePrefab, out _);
+            var dicePrefab = prefabsDice[Random.Range(0, prefabsDice.Length)];
+            DiceSetterSystem.SpawnDiceRaft(worldPos, dicePrefab, out _);
         }
     }
 }
