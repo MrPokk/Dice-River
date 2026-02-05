@@ -20,23 +20,30 @@ public class PlayerLiftingSystem : IEcsAutoImplement
             var provider = entity.GetProvider<EntitiesProvider>();
             var transform = provider.transform;
 
-            var diceCollider = hitData.collider;
-            var diceTopY = diceCollider.bounds.max.y;
-            var offset = 0.5f;
-
-            if (transform.TryGetComponent<Collider>(out var playerCollider))
+            if (transform.TryGetComponent<CharacterController>(out var controller))
             {
-                offset = transform.position.y - playerCollider.bounds.min.y;
+                var diceCollider = hitData.collider;
+                var diceTopY = diceCollider.bounds.max.y;
+
+                var footOffset = controller.height / 2f;
+                var targetY = diceTopY + footOffset + controller.skinWidth;
+
+                if (targetY > transform.position.y)
+                {
+                    var diceCenter = diceCollider.bounds.center;
+                    Vector3 newPosition = new Vector3(diceCenter.x, targetY, diceCenter.z);
+
+                    controller.enabled = false;
+                    transform.position = newPosition;
+                    controller.enabled = true;
+
+                    if (entity.Has<GravityComponent>())
+                    {
+                        var gravity = entity.Get<GravityComponent>();
+                        gravity.isGrounded = true;
+                    }
+                }
             }
-
-            var diceCenter = diceCollider.bounds.center;
-            var newPosition = transform.position;
-
-            newPosition.x = diceCenter.x;
-            newPosition.z = diceCenter.z;
-            newPosition.y = diceTopY + offset;
-
-            transform.position = newPosition;
         }
         entity.Remove<IsColliderHit>();
     }

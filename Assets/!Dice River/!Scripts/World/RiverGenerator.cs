@@ -4,6 +4,7 @@ using UnityEngine;
 public class RiverGenerator : MonoBehaviour
 {
     [Header("Settings")]
+    [SerializeField] private int _seed;
     [SerializeField] private int _spawnDepth = 40;
     [SerializeField] private int _width = 6;
     [SerializeField] private float _zOffset = 6f;
@@ -26,8 +27,10 @@ public class RiverGenerator : MonoBehaviour
         rowLine.transform.SetParent(parent);
 
         var num = r + _zOffset;
-        var pathShift = Mathf.Floor((Mathf.PerlinNoise(_pathZScale * num, 0.2f) - 0.5f) * _pathNoise);
-        var dynamicWidth = Mathf.Floor(_width + Mathf.PerlinNoise(0.245f, _widthZScale * num) * _widthNoise);
+        var seedOffset = _seed * 100f;
+
+        var pathShift = Mathf.Floor((Mathf.PerlinNoise(_pathZScale * num + seedOffset, 0.2f + seedOffset) - 0.5f) * _pathNoise);
+        var dynamicWidth = Mathf.Floor(_width + Mathf.PerlinNoise(0.245f + seedOffset, _widthZScale * num + seedOffset) * _widthNoise);
 
         var leftBound = gridCenter + pathShift - dynamicWidth;
         var rightBound = gridCenter + pathShift + dynamicWidth;

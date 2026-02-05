@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::GridEditorSetting
   _drawAddButtons: 1
-  _drawRemoveButtons: 1
+  _drawRemoveButtons: 0
   _addButtonColor: {r: 0, g: 1, b: 0, a: 1}
   _removeButtonColor: {r: 1, g: 0, b: 0, a: 1}
   _buttonFontSize: 12
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::GridEditorSetting
   _drawAddButtons: 1
-  _drawRemoveButtons: 1
+  _drawRemoveButtons: 0
   _addButtonColor: {r: 0, g: 1, b: 0, a: 1}
   _removeButtonColor: {r: 1, g: 0, b: 0, a: 1}
   _buttonFontSize: 12

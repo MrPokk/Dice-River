@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1adbbe450eb4563cf8af02f31a9ed08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RiverGenerator
+  _seed: 0
   _spawnDepth: 40
-  _width: 7
+  _width: 6
   _zOffset: 6
   _pathNoise: 6
   _pathZScale: 0.1
