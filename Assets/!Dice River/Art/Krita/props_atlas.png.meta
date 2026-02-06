@@ -52,12 +52,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -131,10 +131,10 @@ TextureImporter:
       name: props_atlas_0
       rect:
         serializedVersion: 2
-        x: 251
-        y: 189
-        width: 340
-        height: 433
+        x: 437
+        y: 254
+        width: 91
+        height: 73
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,10 +153,10 @@ TextureImporter:
       name: props_atlas_1
       rect:
         serializedVersion: 2
-        x: 608
-        y: 208
-        width: 177
-        height: 223
+        x: 562
+        y: 250
+        width: 75
+        height: 63
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,10 +175,10 @@ TextureImporter:
       name: props_atlas_2
       rect:
         serializedVersion: 2
-        x: 813
-        y: 209
-        width: 146
-        height: 268
+        x: 677
+        y: 213
+        width: 105
+        height: 134
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,10 +197,10 @@ TextureImporter:
       name: props_atlas_3
       rect:
         serializedVersion: 2
-        x: 268
-        y: 81
-        width: 91
-        height: 73
+        x: 813
+        y: 209
+        width: 146
+        height: 246
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,10 +219,10 @@ TextureImporter:
       name: props_atlas_4
       rect:
         serializedVersion: 2
-        x: 393
-        y: 77
-        width: 75
-        height: 63
+        x: 455
+        y: 209
+        width: 68
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,20 +241,64 @@ TextureImporter:
       name: props_atlas_5
       rect:
         serializedVersion: 2
-        x: 286
-        y: 36
-        width: 68
-        height: 35
+        x: 613
+        y: 360
+        width: 133
+        height: 123
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c6301e0e53c7aaac0800000000000000
-      internalID: -3843122761159343252
+      spriteID: 2d105ffe9944665edaedc62d98d49b79
+      internalID: -589792517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props_atlas_6
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 486
+        width: 134
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10b2293e99fd9e5f396343b3b5c953eb
+      internalID: 1473008240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props_atlas_7
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 473
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faec3b2d5979286cbbf215b4307eca6a
+      internalID: 1544502914
       vertices: []
       indices: 
       edges: []
@@ -275,12 +319,15 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
+      8: 1544502914
       props_atlas_0: -211980168132702814
       props_atlas_1: -4584547303979669259
       props_atlas_2: -1642456654738109045
       props_atlas_3: 4877805513744629
       props_atlas_4: -4807872316680983589
-      props_atlas_5: -3843122761159343252
+      props_atlas_5: -589792517
+      props_atlas_6: 1473008240
+      props_atlas_7: 1544502914
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

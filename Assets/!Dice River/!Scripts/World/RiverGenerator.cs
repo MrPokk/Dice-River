@@ -1,4 +1,5 @@
-﻿using BitterECS.Integration;
+﻿using System;
+using BitterECS.Integration;
 using UnityEngine;
 
 public class RiverGenerator : MonoBehaviour
@@ -13,20 +14,21 @@ public class RiverGenerator : MonoBehaviour
     [SerializeField] private float _widthNoise = 5f;
     [SerializeField] private float _widthZScale = 0.1f;
 
+    [Header("Assets")]
+    [SerializeField] private RiverSettings _shoreSettings;
+
     public int SpawnDepth => _spawnDepth;
 
-    [SerializeField] private ProviderEcs _shorePrefab;
-
-    public GameObject GenerateRow(MonoGridPresenter presenter, int r, Transform parent)
+    public GameObject GenerateRow(MonoGridPresenter presenter, int row, Transform parent)
     {
         var indexColumnMin = presenter.GetMinColumn();
         var indexColumnMax = presenter.GetMaxColumn();
         var gridCenter = (indexColumnMin + indexColumnMax) / 2f;
 
-        var rowLine = new GameObject($"Line_Row_Y{r}");
+        var rowLine = new GameObject($"Line_Row_Y{row}");
         rowLine.transform.SetParent(parent);
 
-        var num = r + _zOffset;
+        var num = row + _zOffset;
         var seedOffset = _seed * 100f;
 
         var pathShift = Mathf.Floor((Mathf.PerlinNoise(_pathZScale * num + seedOffset, 0.2f + seedOffset) - 0.5f) * _pathNoise);
@@ -35,17 +37,53 @@ public class RiverGenerator : MonoBehaviour
         var leftBound = gridCenter + pathShift - dynamicWidth;
         var rightBound = gridCenter + pathShift + dynamicWidth;
 
-        for (int x = indexColumnMin; x <= indexColumnMax; x++)
-        {
-            var node = new Vector2Int(x, r);
+        var centerLeftShoreNode = new Vector2Int(Mathf.RoundToInt((indexColumnMin + leftBound) / 2f), row);
+        var centerRightShoreNode = new Vector2Int(Mathf.RoundToInt((rightBound + indexColumnMax) / 2f), row);
 
-            if (x <= leftBound || x >= rightBound)
-            {
-                presenter.AddGridCell(node);
-                presenter.InitializeGameObject(node, _shorePrefab, out _, rowLine.transform);
-            }
-        }
+        SpawnDecoration(
+            presenter,
+            row,
+            indexColumnMin,
+            indexColumnMax,
+            rowLine,
+            leftBound,
+            rightBound,
+            centerLeftShoreNode,
+            centerRightShoreNode);
 
         return rowLine;
+    }
+
+    private void SpawnDecoration(
+        MonoGridPresenter presenter,
+        int row,
+        int indexColumnMin,
+        int indexColumnMax,
+        GameObject rowLine,
+        float leftBound,
+        float rightBound,
+        Vector2Int centerLeftShoreNode,
+        Vector2Int centerRightShoreNode)
+    {
+        SpawnDecorationShadow(presenter, centerLeftShoreNode, rowLine.transform);
+        SpawnDecorationShadow(presenter, centerRightShoreNode, rowLine.transform);
+
+        for (int x = indexColumnMin; x <= indexColumnMax; x++)
+        {
+            var node = new Vector2Int(x, row);
+            if (x > leftBound && x < rightBound)
+            {
+                continue;
+            }
+
+            var prefab = _shoreSettings.decorationSettings.GetRandomTree();
+            presenter.OneFrameInitializeGameObject(node, prefab, out _, rowLine.transform);
+        }
+    }
+
+    private void SpawnDecorationShadow(MonoGridPresenter presenter, Vector2Int node, Transform parent)
+    {
+        var decorationPrefab = _shoreSettings.decorationSettings.GetRandomShadow();
+        presenter.OneFrameInitializeGameObject(node, decorationPrefab, out _, parent);
     }
 }

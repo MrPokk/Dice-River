@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.assetstore.alfish.kraster-importer": {
+      "version": "file:com.assetstore.alfish.kraster-importer",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "13.0.2",
       "depth": 0,

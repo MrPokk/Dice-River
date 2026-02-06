@@ -15,7 +15,7 @@ MonoBehaviour:
   _position: {x: -16, y: 0, z: -5}
   _rotation: {x: 90, y: 0, z: 0}
   _cellSize: 1
-  _cellOffset: {x: 0, y: 1}
+  _cellOffset: {x: 0, y: 3}
   _nodePrefab: {fileID: 0}
   _cells:
   - {x: 0, y: 0}
@@ -2064,3 +2064,5 @@ MonoBehaviour:
   - {x: 31, y: 61}
   - {x: 31, y: 62}
   - {x: 31, y: 63}
+  - {x: 9, y: 0}
+  - {x: 7, y: 0}

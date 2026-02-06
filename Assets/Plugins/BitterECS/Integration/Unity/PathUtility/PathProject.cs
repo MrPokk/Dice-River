@@ -8,7 +8,7 @@ namespace BitterECS.Extra
         public static string DataPath { get; set; } = UnityEngine.Application.dataPath;
         public static string ProductName { get; set; } = UnityEngine.Application.productName;
 #else
-        public static string RootPath { get; set; } = "Resources";
+        public static string RootPath { get; set; } = "";
         public static string DataPath { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
         public static string ProductName { get; set; } = "App";
 #endif
@@ -16,8 +16,9 @@ namespace BitterECS.Extra
         public const string DICES = "Dices/";
         public const string ENTITIES = "Entities/";
         public const string GRIDS = "Grids/";
-        public const string ITEMS = "Items/";
-        public const string SETTINGS = "Settings/";
+        public const string SETTINGS = "!Settings/";
+        public const string WORLD = "World/";
         public const string PREFAB_OBJECTS = ENTITIES + "Prefabs/";
+        public const string RIVER_OBJECTS = WORLD + "River/";
     }
 }

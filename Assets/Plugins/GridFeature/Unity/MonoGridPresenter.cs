@@ -7,17 +7,45 @@ public class MonoGridPresenter : GridPresenter<ProviderEcs>
     public MonoGridPresenter(GridConfig gridConfig) : base(gridConfig)
     { }
 
+    public bool ForceInitializeGameObject(Vector2Int index, ProviderEcs prefab, out ProviderEcs instantiateObject, Transform parent = null)
+    {
+        AddGridCell(index);
+        return InitializeGameObject(index, prefab, out instantiateObject, parent);
+    }
+
+    public bool ForceInitializeGameObject(Vector3 worldPosition, ProviderEcs prefab, out ProviderEcs instantiateObject, Transform parent = null)
+    {
+        var index = ConvertingPosition(worldPosition);
+        AddGridCell(index);
+        return InitializeGameObject(worldPosition, prefab, out instantiateObject, parent);
+    }
+
+    public bool OneFrameInitializeGameObject(Vector2Int index, ProviderEcs prefab, out ProviderEcs instantiateObject, Transform parent = null)
+    {
+        var isSpawn = InitializeGameObject(index, prefab, out instantiateObject, parent);
+        SetValueInGrid(index, null);
+        return isSpawn;
+    }
+
+    public bool OneFrameInitializeGameObject(Vector3 worldPosition, ProviderEcs prefab, out ProviderEcs instantiateObject, Transform parent = null)
+    {
+        var isSpawn = InitializeGameObject(worldPosition, prefab, out instantiateObject, parent);
+        SetValueInGrid(ConvertingPosition(worldPosition), null);
+        return isSpawn;
+    }
+
     public bool InitializeGameObject(Vector2Int index, ProviderEcs prefab, out ProviderEcs instantiateObject, Transform parent = null)
     {
         instantiateObject = null;
         if (!IsWithinGrid(index) || prefab == null)
             return false;
 
-        if (GetByIndex(index) != null)
+        if (GetGameObject(index) != null)
             return false;
 
         var worldPosition = ConvertingPosition(index);
-        var gameObject = Object.Instantiate(prefab, worldPosition, GetRotation(), parent);
+        var localRotation = prefab.transform.localRotation;
+        var gameObject = Object.Instantiate(prefab, worldPosition, localRotation, parent);
 
         SetValueInGrid(index, gameObject);
         instantiateObject = gameObject;
@@ -115,7 +143,6 @@ public class MonoGridPresenter : GridPresenter<ProviderEcs>
         RemoveGameObject(index);
 
         gameObject.transform.position = ConvertingPosition(index);
-        gameObject.transform.rotation = GetRotation();
 
         SetValueInGrid(index, gameObject);
         return true;
@@ -183,11 +210,6 @@ public class MonoGridPresenter : GridPresenter<ProviderEcs>
         {
             dictionary.Remove(key);
         }
-    }
-
-    private Quaternion GetRotation()
-    {
-        return Quaternion.identity;
     }
 
     public void FillAreaWithPrefab(Vector2Int pointA, Vector2Int pointB, ProviderEcs prefab, Transform parent = null)

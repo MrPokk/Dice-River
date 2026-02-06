@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class RiverScroll : MonoBehaviour
+public class RiverScrolling : MonoBehaviour
 {
-    [SerializeField] private RiverGenerator _generator;
+    private RiverGenerator _generator;
     [SerializeField] private float _scrollSpeed = 5f;
 
     private MonoGridPresenter _presenter;
@@ -16,16 +16,29 @@ public class RiverScroll : MonoBehaviour
     private float _movedDistance;
     private float _totalOffsetZ = 0f;
 
+    private int _minCol;
+    private int _maxCol;
+
     public void Initialize(RiverGenerator generator, MonoGridPresenter presenter)
     {
         _presenter = presenter;
         _generator = generator;
-
         _riverRoot = new GameObject("RiverRoot").transform;
 
         _cellSizeZ = _presenter.GetTotalCellSize().y;
+
+        _minCol = _presenter.GetMinColumn();
+        _maxCol = _presenter.GetMaxColumn();
         _bottomRowIndex = _presenter.GetMinRow();
         _topRowIndex = _bottomRowIndex + _generator.SpawnDepth;
+
+        for (int r = _bottomRowIndex; r <= _topRowIndex + 5; r++)
+        {
+            for (int x = _minCol; x <= _maxCol; x++)
+            {
+                _presenter.AddGridCell(new Vector2Int(x, r), null);
+            }
+        }
 
         for (int r = _bottomRowIndex; r < _topRowIndex; r++)
         {
@@ -38,16 +51,12 @@ public class RiverScroll : MonoBehaviour
         if (_presenter == null || _riverRoot == null) return;
 
         float moveStep = _scrollSpeed * Time.deltaTime;
-
         _totalOffsetZ += moveStep;
         _movedDistance += moveStep;
 
         foreach (var row in _rowLines)
         {
-            if (row != null)
-            {
-                row.transform.position += Vector3.back * moveStep;
-            }
+            if (row != null) row.transform.position += Vector3.back * moveStep;
         }
 
         if (_movedDistance >= _cellSizeZ)
@@ -59,29 +68,32 @@ public class RiverScroll : MonoBehaviour
 
     private void ScrollProcess()
     {
-        RemoveBottomRow();
+        ClearBottomRow();
         SpawnTopRow();
     }
 
-    private void RemoveBottomRow()
+    private void ClearBottomRow()
     {
         if (_rowLines.Count == 0) return;
 
         var rowObject = _rowLines.Dequeue();
+        Destroy(rowObject);
 
-        for (int x = _presenter.GetMinColumn(); x <= _presenter.GetMaxColumn(); x++)
+        for (int x = _minCol; x <= _maxCol; x++)
         {
-            var node = new Vector2Int(x, _bottomRowIndex);
-            _presenter.RemoveGameObject(node);
-            _presenter.RemoveGridCell(node);
+            _presenter.SetValueInGrid(new Vector2Int(x, _bottomRowIndex), null);
         }
 
-        Destroy(rowObject);
         _bottomRowIndex++;
     }
 
     private void SpawnTopRow()
     {
+        for (int x = _minCol; x <= _maxCol; x++)
+        {
+            _presenter.AddGridCell(new Vector2Int(x, _topRowIndex), null);
+        }
+
         SpawnRowAt(_topRowIndex);
         _topRowIndex++;
     }
@@ -89,9 +101,7 @@ public class RiverScroll : MonoBehaviour
     private void SpawnRowAt(int rowIndex)
     {
         var row = _generator.GenerateRow(_presenter, rowIndex, _riverRoot);
-
         row.transform.position = Vector3.back * _totalOffsetZ;
-
         _rowLines.Enqueue(row);
     }
 }

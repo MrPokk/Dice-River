@@ -29,8 +29,9 @@ public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
 
             var targetPosition = transform.position + facingDir;
 
-            var gridPosition = Startup.GridWorld.ConvertingPosition(targetPosition);
-            _selector.position = Startup.GridWorld.ConvertingPosition(gridPosition);
+            var monoGrid = Startup.GridRaft.monoGrid;
+            var gridPosition = monoGrid.ConvertingPosition(targetPosition);
+            _selector.position = monoGrid.ConvertingPosition(gridPosition);
         }
     }
 }

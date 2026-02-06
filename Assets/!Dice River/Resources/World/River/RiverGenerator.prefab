@@ -52,4 +52,4 @@ MonoBehaviour:
   _pathZScale: 0.1
   _widthNoise: 5
   _widthZScale: 0.1
-  _shorePrefab: {fileID: 7446271439524996497, guid: 1675449263daa0d57bdcb2150d940360, type: 3}
+  _shoreSettings: {fileID: 11400000, guid: 18f61fd1fa0c2644a9bab36be0f28c64, type: 2}

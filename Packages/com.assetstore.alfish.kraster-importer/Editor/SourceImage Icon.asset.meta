@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3539bcd105d3112358017b67772aabb8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 338348
+  packageName: Previewer for Krita and OpenRaster images (.kra, .ora) + extract .png
+  packageVersion: 0.4.1-free.0
+  assetPath: Packages/com.assetstore.alfish.kraster-importer/Editor/SourceImage Icon.asset
+  uploadId: 801578

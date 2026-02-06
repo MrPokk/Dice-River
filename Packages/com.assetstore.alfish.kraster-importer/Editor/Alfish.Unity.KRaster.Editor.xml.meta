@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 302a9a9d6453732aea1f4b737fe5fb6c
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 338348
+  packageName: Previewer for Krita and OpenRaster images (.kra, .ora) + extract .png
+  packageVersion: 0.4.1-free.0
+  assetPath: Packages/com.assetstore.alfish.kraster-importer/Editor/Alfish.Unity.KRaster.Editor.xml
+  uploadId: 801578
