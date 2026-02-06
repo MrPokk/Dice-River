@@ -56,7 +56,9 @@ public class RiverScrolling : MonoBehaviour
 
         foreach (var row in _rowLines)
         {
-            if (row != null) row.transform.position += Vector3.back * moveStep;
+            if (row == null) continue;
+
+            row.transform.position += Vector3.back * moveStep;
         }
 
         if (_movedDistance >= _cellSizeZ)

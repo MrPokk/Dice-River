@@ -23,14 +23,14 @@ public class MonoGridPresenter : GridPresenter<ProviderEcs>
     public bool OneFrameInitializeGameObject(Vector2Int index, ProviderEcs prefab, out ProviderEcs instantiateObject, Transform parent = null)
     {
         var isSpawn = InitializeGameObject(index, prefab, out instantiateObject, parent);
-        SetValueInGrid(index, null);
+        ExtractGameObject(index);
         return isSpawn;
     }
 
     public bool OneFrameInitializeGameObject(Vector3 worldPosition, ProviderEcs prefab, out ProviderEcs instantiateObject, Transform parent = null)
     {
         var isSpawn = InitializeGameObject(worldPosition, prefab, out instantiateObject, parent);
-        SetValueInGrid(ConvertingPosition(worldPosition), null);
+        ExtractGameObject(ConvertingPosition(worldPosition));
         return isSpawn;
     }
 
