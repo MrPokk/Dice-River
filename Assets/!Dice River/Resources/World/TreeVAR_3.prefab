@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 30eeb1a157b1f61cda35ab84e488373d, type: 2}
+  - {fileID: 2100000, guid: b044c7a37dd775802a637db1c063a012, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -149,7 +149,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 30eeb1a157b1f61cda35ab84e488373d, type: 2}
+  - {fileID: 2100000, guid: b044c7a37dd775802a637db1c063a012, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -242,5 +242,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotationComponent
   isRandomRotation: 1
+  isLookAtCamera: 1
+  minRandomX: 0
+  maxRandomX: 0
   minRandomY: -60
   maxRandomY: 60
+  minRandomZ: 0
+  maxRandomZ: 0

@@ -1,0 +1,13 @@
+﻿using System.Collections.Generic;
+using BitterECS.Core;
+using UnityEngine;
+
+public static class DiceUtility
+{
+    public static HashSet<Vector2Int> GetNeighbors(EcsEntity entity)
+    {
+        ref var gridDice = ref entity.Get<GridComponent>();
+        ref var neighbors = ref entity.Get<NeighborsComponent>().neighbors;
+        return gridDice.gridPresenter.GetNeighbors(gridDice.currentPosition, neighbors.ToArray());
+    }
+}

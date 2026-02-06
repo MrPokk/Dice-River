@@ -6,7 +6,7 @@
 public static class DicesPaths
 {
     /// <summary> Provider: DiceProvider </summary>
-    public const string SELECTOR_DICE = "Dices/SelectorDice";
-    /// <summary> Provider: DiceProvider </summary>
-    public const string TEST_DICE = "Dices/TestDice";
+    public const string BASE_DICE = "Entities/Dices/BaseDice";
+    /// <summary> Component: SpriteRollComponent </summary>
+    public const string SPRITE_ROLL = "Entities/Dices/SpriteRoll";
 }

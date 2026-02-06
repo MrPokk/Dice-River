@@ -8,6 +8,4 @@ public struct NeighborsComponent
 }
 
 public class NeighborsComponentProvider : ProviderEcs<NeighborsComponent>
-{
-
-}
+{ }

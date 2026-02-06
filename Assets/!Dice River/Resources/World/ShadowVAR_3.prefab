@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3434671763635246012}
   - component: {fileID: 3038498769046906426}
   - component: {fileID: 307738466307993760}
+  - component: {fileID: 3312059013165365954}
   m_Layer: 0
   m_Name: ShadowVAR_3
   m_TagString: Untagged
@@ -59,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 30214e4ed390d64d885b4512a0aad7ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,3 +105,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed9382c4e54b07b184708465bf6b5ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldElementProvider
+--- !u!114 &3312059013165365954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2459131146173658050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f50cb4e11aaedca58380e3b3406334d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RotationComponent
+  isRandomRotation: 1
+  isLookAtCamera: 0
+  minRandomX: 0
+  maxRandomX: 0
+  minRandomY: 0
+  maxRandomY: 0
+  minRandomZ: -60
+  maxRandomZ: 60

@@ -12,10 +12,11 @@ public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
          .Include<FacingComponent>();
 
     private Transform _selector;
+    private Vector3 _offset = new Vector3(0, 0.55f, 0);
 
     public void Init()
     {
-        var selectorPrefab = new Loader<GameObject>(DicesPaths.SELECTOR_DICE).GetInstance();
+        var selectorPrefab = new Loader<GameObject>(UiPrefabsPaths.SELECTOR).GetInstance();
         _selector = selectorPrefab.transform;
     }
 
@@ -31,7 +32,7 @@ public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
 
             var monoGrid = Startup.GridRaft.monoGrid;
             var gridPosition = monoGrid.ConvertingPosition(targetPosition);
-            _selector.position = monoGrid.ConvertingPosition(gridPosition);
+            _selector.position = monoGrid.ConvertingPosition(gridPosition) + _offset;
         }
     }
 }

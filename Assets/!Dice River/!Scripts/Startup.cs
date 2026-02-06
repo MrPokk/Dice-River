@@ -30,7 +30,7 @@ public class Startup : EcsUnityRoot
         GridWorld = new(_gridConfigWorld);
         GridRaft.monoGrid = new(_gridConfigRaftInstallable);
         _riverScroll.Initialize(_riverGenerator, GridWorld);
-        var prefabsDice = new Loader<DiceProvider>(DicesPaths.TEST_DICE).GetPrefab();
+        var prefabsDice = new Loader<DiceProvider>(DicesPaths.BASE_DICE).GetPrefab();
         DiceRaftInitSystem.Initialize(_gridConfigRaftGeneration, prefabsDice);
 
         var playerPrefab = new Loader<PlayerProvider>(EntitiesPaths.PLAYER).GetInstance();

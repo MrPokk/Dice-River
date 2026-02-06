@@ -10,6 +10,13 @@ namespace BitterECS.Core
         internal void Init(EcsProperty property) => _properties = property;
         protected internal virtual void Registration() { }
 
+        public void AddFrame<T>(in T component, Action action) where T : new()
+        {
+            Add(component);
+            action();
+            Remove<T>();
+        }
+
         public void Add<T>(in T component) where T : new()
         {
             _properties.Presenter.GetPool<T>().Add(_properties.Id, component);

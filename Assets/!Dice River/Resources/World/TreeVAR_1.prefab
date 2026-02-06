@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7991582603837872817}
-  - component: {fileID: 5648566015560431672}
+  - component: {fileID: 8632112481355983618}
   m_Layer: 0
   m_Name: MainSprite
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7628311494960285947}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5648566015560431672
+--- !u!212 &8632112481355983618
 SpriteRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 30214e4ed390d64d885b4512a0aad7ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 2.28125, y: 3.84375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -150,5 +150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotationComponent
   isRandomRotation: 1
+  isLookAtCamera: 1
+  minRandomX: 0
+  maxRandomX: 0
   minRandomY: -60
   maxRandomY: 60
+  minRandomZ: 0
+  maxRandomZ: 0

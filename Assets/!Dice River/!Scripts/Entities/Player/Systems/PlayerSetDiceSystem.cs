@@ -28,7 +28,7 @@ public class PlayerSetDiceSystem : IEcsInitSystem
 
             var targetPosition = transform.position + facingDir;
 
-            var dicePrefab = new Loader<DiceProvider>(DicesPaths.TEST_DICE).GetPrefab();
+            var dicePrefab = new Loader<DiceProvider>(DicesPaths.BASE_DICE).GetPrefab();
             DiceSetterSystem.SpawnDiceRaft(targetPosition, dicePrefab, out _);
         }
     }
