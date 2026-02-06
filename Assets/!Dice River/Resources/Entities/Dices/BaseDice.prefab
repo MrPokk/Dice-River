@@ -34,8 +34,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4360721021429013}
   - {fileID: 7750026510748670468}
+  - {fileID: 4360721021429013}
   - {fileID: 4287193675128126}
   - {fileID: 4935840277987377}
   m_Father: {fileID: 0}
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61e6f6a22da9f7015ad3913d96a6bb23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceProvider
+  _spriteRoll: {fileID: 2178102362946667264}
 --- !u!114 &4245180417535183791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,6 +679,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
+--- !u!114 &2178102362946667264 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3806969785503464016, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
+  m_PrefabInstance: {fileID: 3093760010739792208}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88cefddada801f9cb2b2c1635e72e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteRollComponent
 --- !u!4 &7750026510748670468 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4711502270800126804, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
