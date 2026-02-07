@@ -1,11 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class SpriteRollComponent : MonoBehaviour
 {
+    [SerializeField] private Color _topRollColor;
+    [SerializeField] private SpriteRenderer _topRollSprite;
+
     [SerializeField] private SpriteRollPrefab[] _rollPrefab;
     private SpriteRollPrefab _currentRoll;
+
+    private Dictionary<SpriteRollPrefab, SpriteRenderer[]> _spriteRenderers = new();
+
+    private void Awake()
+    {
+        foreach (var roll in _rollPrefab)
+        {
+            _spriteRenderers.Add(roll, roll.prefab.GetComponentsInChildren<SpriteRenderer>());
+        }
+    }
+
+    private void OnValidate()
+    {
+        SetColorTopRoll();
+    }
+
+    private void SetColorTopRoll()
+    {
+        if (_topRollSprite == null) return;
+        _topRollSprite.color = _topRollColor;
+    }
 
     public void Select(int value)
     {
@@ -27,6 +52,25 @@ public class SpriteRollComponent : MonoBehaviour
     public SpriteRollPrefab GetCurrentRollPrefab()
     {
         return _currentRoll;
+    }
+
+    public void SetAlpha(float alpha)
+    {
+        if (_currentRoll == null || _currentRoll.prefab == null) return;
+
+        SetAlphaValue(alpha, _topRollSprite);
+        var renderers = _spriteRenderers[_currentRoll];
+        foreach (var source in renderers)
+        {
+            SetAlphaValue(alpha, source);
+        }
+    }
+
+    private static void SetAlphaValue(float alpha, SpriteRenderer source)
+    {
+        var color = source.color;
+        color.a = alpha;
+        source.color = color;
     }
 
     public void DisableAllDots()

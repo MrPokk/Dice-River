@@ -12,7 +12,7 @@ public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
          .Include<FacingComponent>();
 
     private Transform _selector;
-    private Vector3 _offset = new Vector3(0, 0.55f, 0);
+    private Vector3 _offset = new(0, 0.55f, 0);
 
     public void Init()
     {
@@ -25,14 +25,13 @@ public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
         foreach (var entity in _ecsFilter)
         {
             var transform = entity.GetProvider<EntitiesProvider>().transform;
-
             var facingDir = entity.Get<FacingComponent>().direction;
-
-            var targetPosition = transform.position + facingDir;
-
             var monoGrid = Startup.GridRaft.monoGrid;
-            var gridPosition = monoGrid.ConvertingPosition(targetPosition);
-            _selector.position = monoGrid.ConvertingPosition(gridPosition) + _offset;
+
+            Vector3 checkPosition = transform.position + (facingDir.normalized * 0.75f);
+            Vector2Int targetGridPos = monoGrid.ConvertingPosition(checkPosition);
+
+            _selector.position = monoGrid.ConvertingPosition(targetGridPos) + _offset;
         }
     }
 }

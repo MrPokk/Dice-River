@@ -5,10 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(RollComponentProvider), typeof(GridComponentProvider))]
 public class DiceProvider : ProviderEcs<DicePresenter>
 {
-    [SerializeField] private SpriteRollComponent _spriteRoll;
+    public SpriteRollComponent spriteRoll;
+    public SpriteSideComponent spriteSide;
     protected override void Awake()
     {
-        _spriteRoll ??= GetComponentInChildren<SpriteRollComponent>();
+        spriteRoll ??= GetComponentInChildren<SpriteRollComponent>();
 
         base.Awake();
         Entity.AddFrame<IsRollingProcess>(new(), () =>
@@ -20,7 +21,7 @@ public class DiceProvider : ProviderEcs<DicePresenter>
     public int ReRolling()
     {
         var randomValue = Random.Range(1, 6);
-        _spriteRoll.Select(randomValue);
+        spriteRoll.Select(randomValue);
         return Entity.Get<RollComponent>().currentRole = randomValue;
     }
 

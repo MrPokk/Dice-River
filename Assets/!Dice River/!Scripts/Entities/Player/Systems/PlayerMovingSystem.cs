@@ -7,6 +7,7 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
 {
     public Priority Priority => Priority.Medium;
 
+    private const float SqrMagnitudeThreshold = 0.001f;
     private EcsFilter _ecsFilter =
     Build.For<EntitiesPresenter>()
          .Filter()
@@ -50,13 +51,7 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
             var rawInput = input.currentInput;
             var moveDirection = new Vector3(rawInput.x, 0f, rawInput.y);
 
-            if (moveDirection.sqrMagnitude > 0.001f)
-            {
-                if (moveDirection.sqrMagnitude > 1f) moveDirection.Normalize();
-
-                entity.GetOrAdd<FacingComponent>().direction = moveDirection;
-                FlipSprite(provider, moveDirection.x);
-            }
+            moveDirection = CheckToUpdateFacingDirection(entity, provider, moveDirection);
 
             var velocity = moveDirection * moving.speed;
 
@@ -65,9 +60,31 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
         }
     }
 
+    private static Vector3 CheckToUpdateFacingDirection(EcsEntity entity, PlayerProvider provider, Vector3 moveDirection)
+    {
+        if (moveDirection.sqrMagnitude <= SqrMagnitudeThreshold)
+        {
+            return moveDirection;
+        }
+
+        if (moveDirection.sqrMagnitude > 1f)
+        {
+            moveDirection.Normalize();
+        }
+
+        entity.GetOrAdd<FacingComponent>().direction = moveDirection;
+        FlipSprite(provider, moveDirection.x);
+
+        return moveDirection;
+    }
+
     private static void FlipSprite(EntitiesProvider provider, float directionX)
     {
-        if (Mathf.Abs(directionX) < 0.01f) return;
+        if (Mathf.Abs(directionX) < 0.01f)
+        {
+            return;
+        }
+
         var scale = provider.transform.localScale;
         scale.x = Mathf.Abs(scale.x) * Mathf.Sign(directionX);
         provider.transform.localScale = scale;

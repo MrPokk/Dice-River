@@ -1,8 +1,9 @@
 ﻿using System;
 using BitterECS.Core;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerSetDiceSystem : IEcsInitSystem
+public class PlayerPlacingSystem : IEcsInitSystem
 {
     public Priority Priority => Priority.FIRST_TASK;
 
@@ -16,20 +17,23 @@ public class PlayerSetDiceSystem : IEcsInitSystem
     public void Init()
     {
         var set = ControllableSystem.Inputs.Playable.BasicAttack;
-        ControllableSystem.SubscribePerformed(set, SetDice);
+        ControllableSystem.SubscribePerformed(set, OnPlacing);
     }
 
-    private void SetDice(InputAction.CallbackContext context)
+    private void OnPlacing(InputAction.CallbackContext context)
     {
         foreach (var entity in _ecsFilter)
         {
             var transform = entity.GetProvider<EntitiesProvider>().transform;
             var facingDir = entity.Get<FacingComponent>().direction;
+            var monoGrid = Startup.GridRaft.monoGrid;
 
-            var targetPosition = transform.position + facingDir;
+            var checkPosition = transform.position + (facingDir.normalized * 0.75f);
+            var targetGridPos = monoGrid.ConvertingPosition(checkPosition);
+            var spawnWorldPos = monoGrid.ConvertingPosition(targetGridPos);
 
             var dicePrefab = new Loader<DiceProvider>(DicesPaths.BASE_DICE).GetPrefab();
-            DiceSetterSystem.SpawnDiceRaft(targetPosition, dicePrefab, out _);
+            DicePlacingSystem.SpawnDiceRaft(spawnWorldPos, dicePrefab, out _);
         }
     }
 }
