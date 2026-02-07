@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using BitterECS.Integration;
+using UIFeture.Core;
 using UnityEngine;
 
 public class Startup : EcsUnityRoot
 {
+    private UIEntryPoint _uiEntryPoint;
     private CameraObject _cameraObject;
     private GridConfig _gridConfigWorld;
     private GridConfig _gridConfigRaftGeneration;
@@ -16,8 +18,11 @@ public class Startup : EcsUnityRoot
     public static (MonoGridPresenter monoGrid, GameObject gridParent) GridRaft;
     public static GameObject GridRaftParent;
 
+
     protected override void Bootstrap()
     {
+        _uiEntryPoint = new();
+        _uiEntryPoint.Start();
         GridRaft.gridParent = new GameObject("GridRaftParent");
 
         _cameraObject = new Loader<CameraObject>(PrefabObjectsPaths.CAMERA_OBJECT).GetInstance();
@@ -35,5 +40,13 @@ public class Startup : EcsUnityRoot
 
         var playerPrefab = new Loader<PlayerProvider>(EntitiesPaths.PLAYER).GetInstance();
         _cameraObject.SetTarget(playerPrefab.transform);
+    }
+
+    protected override void PostBootstrap()
+    {
+        var handDice = FindFirstObjectByType<HandDice>();
+        handDice.Add(new Loader<DiceProvider>(DicesPaths.BASE_DICE).GetInstance());
+        handDice.Add(new Loader<DiceProvider>(DicesPaths.BASE_DICE).GetInstance());
+        handDice.Add(new Loader<DiceProvider>(DicesPaths.BASE_DICE).GetInstance());
     }
 }
