@@ -5,7 +5,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
 {
-    public Priority Priority => Priority.Medium;
+    public Priority Priority => Priority.High;
 
     private const float SqrMagnitudeThreshold = 0.001f;
     private EcsFilter _ecsFilter =

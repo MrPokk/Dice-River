@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerPlacingSystem : IEcsInitSystem
 {
-    public Priority Priority => Priority.FIRST_TASK;
+    public Priority Priority => Priority.High;
 
     private EcsFilter _ecsFilter =
     Build.For<EntitiesPresenter>()
@@ -33,7 +33,7 @@ public class PlayerPlacingSystem : IEcsInitSystem
             var spawnWorldPos = monoGrid.ConvertingPosition(targetGridPos);
 
             var dicePrefab = new Loader<DiceProvider>(DicesPaths.BASE_DICE).GetPrefab();
-            DicePlacingSystem.SpawnDiceRaft(spawnWorldPos, dicePrefab, out _);
+            DiceInteractionSystem.InstantiateObject(spawnWorldPos, dicePrefab, out _);
         }
     }
 }

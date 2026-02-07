@@ -9,7 +9,7 @@ public class DiceRaftInitSystem
         foreach (var worldPos in cellsGeneration)
         {
             var dicePrefab = prefabsDice[Random.Range(0, prefabsDice.Length)];
-            DicePlacingSystem.SpawnDiceRaft(worldPos, dicePrefab, out _);
+            DiceInteractionSystem.InstantiateObject(worldPos, dicePrefab, out _);
         }
     }
 }

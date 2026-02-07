@@ -335,6 +335,13 @@ namespace BitterECS.Core
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public EcsFilter WhereProvider<TComponent>() where TComponent : class, ILinkableProvider
+        {
+            EnsureInitialized();
+            return _filter.Value.WhereProvider<TComponent>();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EcsFilter Or<TComponent>() where TComponent : struct
         {
             EnsureInitialized();

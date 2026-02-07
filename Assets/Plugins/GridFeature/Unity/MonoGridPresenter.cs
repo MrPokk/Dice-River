@@ -115,8 +115,7 @@ public class MonoGridPresenter : GridPresenter<ProviderEcs>
 
     public bool RemoveGameObject(Vector3 worldPosition)
     {
-        var index = GetGridIndex(worldPosition);
-        return RemoveGameObject(index);
+        return RemoveGameObject(ConvertingPosition(worldPosition));
     }
 
     public ProviderEcs ExtractGameObject(Vector2Int index)
@@ -131,8 +130,7 @@ public class MonoGridPresenter : GridPresenter<ProviderEcs>
 
     public ProviderEcs ExtractGameObject(Vector3 worldPosition)
     {
-        var index = GetGridIndex(worldPosition);
-        return ExtractGameObject(index);
+        return ExtractGameObject(ConvertingPosition(worldPosition));
     }
 
     public bool TrySetGameObject(Vector2Int index, ProviderEcs gameObject)
@@ -140,7 +138,8 @@ public class MonoGridPresenter : GridPresenter<ProviderEcs>
         if (!IsWithinGrid(index) || gameObject == null)
             return false;
 
-        RemoveGameObject(index);
+        if (HasGameObject(index))
+            return false;
 
         gameObject.transform.position = ConvertingPosition(index);
 
@@ -150,11 +149,7 @@ public class MonoGridPresenter : GridPresenter<ProviderEcs>
 
     public bool TrySetGameObject(Vector3 worldPosition, ProviderEcs gameObject)
     {
-        var index = GetGridIndex(worldPosition);
-        if (!IsWithinGrid(index))
-            return false;
-
-        return TrySetGameObject(index, gameObject);
+        return TrySetGameObject(ConvertingPosition(worldPosition), gameObject);
     }
 
     public ProviderEcs GetGameObject(Vector2Int index)
@@ -164,8 +159,7 @@ public class MonoGridPresenter : GridPresenter<ProviderEcs>
 
     public ProviderEcs GetGameObject(Vector3 worldPosition)
     {
-        var index = GetGridIndex(worldPosition);
-        return GetGameObject(index);
+        return GetGameObject(ConvertingPosition(worldPosition));
     }
 
     public bool HasGameObject(Vector2Int index)

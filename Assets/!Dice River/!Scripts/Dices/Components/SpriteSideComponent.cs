@@ -6,18 +6,32 @@ public class SpriteSideComponent : MonoBehaviour
     public GameObject leftSidesObject;
     public GameObject rightSidesObject;
 
-    public void ToggleFront()
+    public void SetFrontActive(bool isActive)
     {
-        frontSidesObject.SetActive(!frontSidesObject.activeSelf);
+        if (frontSidesObject.activeSelf != isActive)
+            frontSidesObject.SetActive(isActive);
     }
 
-    public void ToggleLeft()
+    public void SetLeftActive(bool isActive)
     {
-        leftSidesObject.SetActive(!leftSidesObject.activeSelf);
+        if (leftSidesObject.activeSelf != isActive)
+            leftSidesObject.SetActive(isActive);
     }
 
-    public void ToggleRight()
+    public void SetRightActive(bool isActive)
     {
-        rightSidesObject.SetActive(!rightSidesObject.activeSelf);
+        if (rightSidesObject.activeSelf != isActive)
+            rightSidesObject.SetActive(isActive);
     }
+
+    public void ResetSides()
+    {
+        SetFrontActive(true);
+        SetLeftActive(true);
+        SetRightActive(true);
+    }
+
+    public void ToggleFront() => SetFrontActive(!frontSidesObject.activeSelf);
+    public void ToggleLeft() => SetLeftActive(!leftSidesObject.activeSelf);
+    public void ToggleRight() => SetRightActive(!rightSidesObject.activeSelf);
 }
