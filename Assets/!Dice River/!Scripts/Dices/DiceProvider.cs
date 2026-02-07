@@ -3,8 +3,10 @@ using BitterECS.Integration;
 using UnityEngine;
 
 [RequireComponent(typeof(RollComponentProvider), typeof(GridComponentProvider))]
+
 public class DiceProvider : ProviderEcs<DicePresenter>
 {
+    public SpriteIconComponent spriteIcon;
     public SpriteRollComponent spriteRoll;
     public SpriteSideComponent spriteSide;
     protected override void Awake()

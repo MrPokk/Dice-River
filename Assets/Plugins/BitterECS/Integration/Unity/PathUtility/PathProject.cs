@@ -23,6 +23,7 @@ namespace BitterECS.Extra
         public const string UI_POPUPS = UI + "!Popups/";
         public const string UI_PREFABS = UI + "Prefabs/";
         public const string UI_SCREENS = UI + "!Screens/";
+        public const string UI_ICON = UI_PREFABS + "Icon/";
         public const string RIVER_OBJECTS = WORLD + "River/";
     }
 }

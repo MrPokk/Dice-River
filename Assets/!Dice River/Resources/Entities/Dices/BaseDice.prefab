@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61e6f6a22da9f7015ad3913d96a6bb23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceProvider
+  spriteIcon: {fileID: 420210878784677752, guid: 439c9d76e89d0872fb92b4d3e6a7f406, type: 3}
   spriteRoll: {fileID: 2178102362946667264}
   spriteSide: {fileID: 6906592073352646893}
 --- !u!114 &4245180417535183791

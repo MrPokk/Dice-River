@@ -32,7 +32,7 @@ public class PlayerPlacingSystem : IEcsInitSystem
             var targetGridPos = monoGrid.ConvertingPosition(checkPosition);
             var spawnWorldPos = monoGrid.ConvertingPosition(targetGridPos);
 
-            var dicePrefab = new Loader<DiceProvider>(DicesPaths.BASE_DICE).GetPrefab();
+            var dicePrefab = new Loader<DiceProvider>(DicesPaths.BASE_DICE).Prefab();
             DiceInteractionSystem.InstantiateObject(spawnWorldPos, dicePrefab, out _);
         }
     }
