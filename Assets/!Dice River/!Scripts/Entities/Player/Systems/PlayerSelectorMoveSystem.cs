@@ -28,10 +28,19 @@ public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
             var facingDir = entity.Get<FacingComponent>().direction;
             var monoGrid = Startup.GridRaft.monoGrid;
 
-            Vector3 checkPosition = transform.position + (facingDir.normalized * 0.75f);
-            Vector2Int targetGridPos = monoGrid.ConvertingPosition(checkPosition);
+            var checkPosition = transform.position + (facingDir.normalized * 0.75f);
+            var targetGridPos = monoGrid.ConvertingPosition(checkPosition);
 
-            _selector.position = monoGrid.ConvertingPosition(targetGridPos) + _offset;
+            if (!monoGrid.IsWithinGrid(targetGridPos))
+            {
+                _selector.gameObject.SetActive(false);
+                continue;
+            }
+            else
+            {
+                _selector.gameObject.SetActive(true);
+                _selector.position = monoGrid.ConvertingPosition(targetGridPos) + _offset;
+            }
         }
     }
 }

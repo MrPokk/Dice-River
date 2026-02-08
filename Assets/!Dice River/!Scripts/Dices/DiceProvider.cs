@@ -20,6 +20,16 @@ public class DiceProvider : ProviderEcs<DicePresenter>
         });
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Entity.AddOrReplace<IsTriggerColliderEnter>(new(other));
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Entity.Remove<IsTriggerColliderEnter>();
+    }
+
     public int ReRolling()
     {
         var randomValue = Random.Range(1, 6);

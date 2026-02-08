@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BitterECS.Core;
-using BitterECS.Integration;
+﻿using BitterECS.Integration;
 using UINotDependence.Core;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class Startup : EcsUnityRoot
 {
@@ -19,44 +14,68 @@ public class Startup : EcsUnityRoot
     public static (MonoGridPresenter monoGrid, GameObject gridParent) GridRaft;
     public static GameObject GridRaftParent;
     public static HandControllerDice HandControllerDice;
+
     protected override void Bootstrap()
     {
+        InitializeHandController();
+        InitializeCamera();
+        InitializeGrids();
+        InitializeRiver();
+        InitializeDiceSystem();
+        InitializePlayer();
+        UIInitialize();
+    }
+
+    private void InitializeHandController()
+    {
         HandControllerDice = new Loader<HandControllerDice>(PrefabObjectsPaths.HAND_CONTROLLER).New();
+        HandControllerDice.Initialize();
+    }
+
+    private void InitializeCamera()
+    {
+        _cameraObject = new Loader<CameraObject>(PrefabObjectsPaths.CAMERA_OBJECT).New();
+    }
+
+    private void InitializeGrids()
+    {
         GridRaft.gridParent = new GameObject("GridRaftParent");
 
-        _cameraObject = new Loader<CameraObject>(PrefabObjectsPaths.CAMERA_OBJECT).New();
         _gridConfigWorld = new Loader<GridConfig>(GridsPaths.GRID_WORLD).Prefab();
         _gridConfigRaftGeneration = new Loader<GridConfig>(GridsPaths.GRID_RAFT_GENERATION).Prefab();
         _gridConfigRaftInstallable = new Loader<GridConfig>(GridsPaths.GRID_RAFT_INSTALLABLE).Prefab();
 
+        GridWorld = new MonoGridPresenter(_gridConfigWorld);
+        GridRaft.monoGrid = new MonoGridPresenter(_gridConfigRaftInstallable);
+    }
+
+    private void InitializeRiver()
+    {
         _riverGenerator = new Loader<RiverGenerator>(RiverObjectsPaths.RIVER_GENERATOR).New();
         _riverScroll = new Loader<RiverScrolling>(RiverObjectsPaths.RIVER_SCROLLER).New();
-        GridWorld = new(_gridConfigWorld);
-        GridRaft.monoGrid = new(_gridConfigRaftInstallable);
         _riverScroll.Initialize(_riverGenerator, GridWorld);
+    }
+
+    private void InitializeDiceSystem()
+    {
         var prefabsDice = new Loader<DiceProvider>(DicesPaths.BASE_DICE).Prefab();
         DiceRaftInitSystem.Initialize(_gridConfigRaftGeneration, prefabsDice);
+    }
 
+    private void InitializePlayer()
+    {
         var playerPrefab = new Loader<PlayerProvider>(EntitiesPaths.PLAYER).New();
         _cameraObject.SetTarget(playerPrefab.transform);
     }
 
-    protected override void PostBootstrap()
+    private void UIInitialize()
     {
-        UIInit();
-    }
-
-    private void UIInit()
-    {
-        new UIInit().Initialize();
+        UIInit.Initialize();
 
         UIController.OpenScreen<UIHandScreen>();
-        var handScreen = UIController.GetCurrentScreen as UIHandScreen;
-        handScreen.Bind(HandControllerDice);
-        var prefabDice = new Loader<DiceProvider>(DicesPaths.BASE_DICE).Prefab();
-
-        HandControllerDice.Add(prefabDice.NewEntity(), prefabDice.spriteIcon.Prefab());
-        HandControllerDice.Add(prefabDice.NewEntity(), prefabDice.spriteIcon.Prefab());
-        HandControllerDice.Add(prefabDice.NewEntity(), prefabDice.spriteIcon.Prefab());
+        if (UIController.GetCurrentScreen is UIHandScreen handScreen)
+        {
+            handScreen.Bind(HandControllerDice);
+        }
     }
 }

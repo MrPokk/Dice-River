@@ -39,7 +39,6 @@ public class PlayerPlacingSystem : IEcsInitSystem
                 var diceProviderPrefab = entityToHand.GetProvider<DiceProvider>();
                 DiceInteractionSystem.InstantiateObject(spawnWorldPos, diceProviderPrefab, out _);
                 entityToHand.Dispose();
-                Debug.Log(EcsWorld.Get<DicePresenter>().CountEntity);
             }
         }
     }

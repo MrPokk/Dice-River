@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7570355057749839947}
   - component: {fileID: 1923530893231394131}
   - component: {fileID: 420210878784677752}
-  - component: {fileID: -2243409691078785122}
   m_Layer: 5
   m_Name: IconBaseDice
   m_TagString: Untagged
@@ -118,17 +117,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c32ea64aa4bbbbb9298229aaa00700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteIconComponent
---- !u!114 &-2243409691078785122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9002233875499726941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72efd4f8a91f3a4b9b8edf087643a004, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UILinkingPrefabComponentProvider
-  _value:
-    linkingPrefab: {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}

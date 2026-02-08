@@ -6,12 +6,12 @@ namespace UINotDependence.Core
 {
     public class UIInit
     {
-        private readonly string _uiPrefabsPath = "UI";
+        private static readonly string s_uiPrefabsPath = "UI";
 
-        public void Initialize()
+        public static void Initialize()
         {
             var allBinders = new Dictionary<Type, WindowBinder>();
-            var allPrefabs = Resources.LoadAll<GameObject>(_uiPrefabsPath);
+            var allPrefabs = Resources.LoadAll<GameObject>(s_uiPrefabsPath);
 
             foreach (var prefab in allPrefabs)
             {

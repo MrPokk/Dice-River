@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class UIHandScreen : UIScreen
 {
-    public Transform handPoint;
+    public Transform handContainer;
     public void Bind(HandControllerDice handController)
     {
-        handController.transform.position = handPoint.position;
-        handController.transform.SetParent(transform);
+        handController.SetContainer(handContainer);
     }
 }

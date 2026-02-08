@@ -22,7 +22,26 @@ public class HandController<TData, TView> : MonoBehaviour where TView : MonoBeha
 
     private void Awake()
     {
-        _containerRect = GetComponent<RectTransform>();
+        if (_containerRect == null)
+        {
+            _containerRect = GetComponent<RectTransform>();
+        }
+    }
+
+    public void SetContainer(Transform container)
+    {
+        var newRect = container.GetComponent<RectTransform>();
+
+        if (_containerRect == newRect) return;
+
+        _containerRect = newRect;
+
+        foreach (var view in _viewMap.Values)
+        {
+            view?.transform.SetParent(_containerRect, false);
+        }
+
+        UpdateLayout();
     }
 
     private void Update()
@@ -30,9 +49,9 @@ public class HandController<TData, TView> : MonoBehaviour where TView : MonoBeha
         UpdateLayout();
     }
 
-    public void Add(TData data, TView viewPrefab)
+    public virtual bool Add(TData data, TView viewPrefab)
     {
-        if (data == null || _viewMap.ContainsKey(data)) return;
+        if (data == null || _viewMap.ContainsKey(data)) return false;
 
         var viewInstance = Instantiate(viewPrefab, _containerRect);
 
@@ -40,6 +59,7 @@ public class HandController<TData, TView> : MonoBehaviour where TView : MonoBeha
         _viewMap.Add(data, viewInstance);
 
         UpdateLayout();
+        return true;
     }
 
     public TData First()
@@ -47,7 +67,7 @@ public class HandController<TData, TView> : MonoBehaviour where TView : MonoBeha
         return Items.First();
     }
 
-    public bool ExtractToFirst(out TData value)
+    public virtual bool ExtractToFirst(out TData value)
     {
         if (!_dataItems.Any())
         {
@@ -67,15 +87,18 @@ public class HandController<TData, TView> : MonoBehaviour where TView : MonoBeha
         return true;
     }
 
-    public void Remove(TData data)
+    public virtual bool Remove(TData data)
     {
-        if (_viewMap.TryGetValue(data, out var view))
+        if (!_viewMap.TryGetValue(data, out var view))
         {
-            Destroy(view.gameObject);
-            _viewMap.Remove(data);
-            _dataItems.Remove(data);
-            UpdateLayout();
+            return false;
         }
+
+        Destroy(view.gameObject);
+        _viewMap.Remove(data);
+        _dataItems.Remove(data);
+        UpdateLayout();
+        return true;
     }
 
     private void UpdateLayout()

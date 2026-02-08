@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecbab056a221d46728c5d78b2de6ec86, type: 3}
   m_Name: RiverSettings
   m_EditorClassIdentifier: Assembly-CSharp::RiverShoreSettings
-  shoreBasePrefabs: []
   decorationSettings: {fileID: 11400000, guid: 747555ce07c531639aec59bdedaa7b00, type: 2}
-  hazardSpawns: []
+  hazardSettings: {fileID: 11400000, guid: 4e76cc4d3836c5775a81cecc89030846, type: 2}
   pickupSpawns: []

@@ -1,6 +1,4 @@
-﻿using System;
-using BitterECS.Integration;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RiverGenerator : MonoBehaviour
 {
@@ -51,9 +49,37 @@ public class RiverGenerator : MonoBehaviour
             centerLeftShoreNode,
             centerRightShoreNode);
 
+        SpawnHazard(
+            presenter,
+            row,
+            leftBound,
+            rightBound,
+            rowLine.transform);
+
         return rowLine;
     }
 
+    private void SpawnHazard(MonoGridPresenter presenter, int row, float leftBound, float rightBound, Transform parent)
+    {
+        var waterStart = Mathf.CeilToInt(leftBound);
+        var waterEnd = Mathf.FloorToInt(rightBound);
+        var hazardSettings = _shoreSettings.hazardSettings;
+        var hazardChance = _shoreSettings.hazardSettings.hazardChance;
+
+        for (var x = waterStart; x <= waterEnd; x++)
+        {
+            if (Random.value < hazardChance)
+            {
+                var node = new Vector2Int(x, row);
+                var hazardPrefab = hazardSettings.GetRandomHazard();
+
+                if (hazardPrefab != null)
+                {
+                    presenter.OneFrameInitializeGameObject(node, hazardPrefab, out _, parent);
+                }
+            }
+        }
+    }
     private void SpawnDecoration(
         MonoGridPresenter presenter,
         int row,
@@ -68,7 +94,7 @@ public class RiverGenerator : MonoBehaviour
         SpawnDecorationShadow(presenter, centerLeftShoreNode, rowLine.transform);
         SpawnDecorationShadow(presenter, centerRightShoreNode, rowLine.transform);
 
-        for (int x = indexColumnMin; x <= indexColumnMax; x++)
+        for (var x = indexColumnMin; x <= indexColumnMax; x++)
         {
             var node = new Vector2Int(x, row);
             if (x > leftBound && x < rightBound)

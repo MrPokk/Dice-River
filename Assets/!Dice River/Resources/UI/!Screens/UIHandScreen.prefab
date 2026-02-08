@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378a7f168f46cf17eaf144044705c220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandDiceScreen
-  handPoint: {fileID: 4727165478387878876}
+  handContainer: {fileID: 4727165478387878876}
 --- !u!1 &5957950427960577061
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4727165478387878876}
   m_Layer: 5
-  m_Name: HantPoint
+  m_Name: HantContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
