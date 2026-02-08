@@ -15,7 +15,10 @@ namespace BitterECS.Integration
     {
         public abstract bool IsPresenter { get; }
         public abstract EcsEntity Entity { get; }
-        public virtual EcsProperty Properties => Entity?.Properties;
+
+        internal abstract EcsEntity GetEntitySilently();
+
+        public virtual EcsProperty Properties => GetEntitySilently()?.Properties;
 
         public abstract void Sync(EcsEntity entity);
         public void Dispose() => DisposeInternal();
@@ -63,17 +66,48 @@ namespace BitterECS.Integration
 
         public override bool IsPresenter => s_isPresenterType;
 
-        public override EcsProperty Properties => s_isPresenterType ? _properties : base.Properties;
+        public override EcsEntity Entity
+        {
+            get
+            {
+                var entity = GetEntitySilently() ?? throw new Exception(
+                    $"[ProviderEcs<{typeof(T).Name}>] Entity is not linked on '{name}'. Use NewEntity() for prefabs.");
+                return entity;
+            }
+        }
 
         public ref T Value => ref SyncInspectorValue(ref Entity.Get<T>());
 
-        public override EcsEntity Entity => s_isPresenterType ? EnsureEntityCreated() : GetParentEntity();
+        internal override EcsEntity GetEntitySilently()
+        {
+            if (s_isPresenterType)
+            {
+                if (_properties?.Presenter != null)
+                {
+                    return _properties.Presenter.Get(_properties.Id);
+                }
+                return null;
+            }
+            return GetParentEntitySilently();
+        }
+
+        public EcsEntity NewEntity()
+        {
+            try
+            {
+                return CreateEntity();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"[ProviderEcs<{typeof(T).Name}>] Factory error: {ex.Message}");
+            }
+        }
 
         protected virtual void Awake()
         {
             if (s_isPresenterType)
             {
-                EnsureEntityCreated();
+                InitializeAsPresenter();
             }
             else
             {
@@ -84,16 +118,20 @@ namespace BitterECS.Integration
                 }
             }
         }
+
 #if UNITY_EDITOR
         private void Update()
         {
-            if (Entity.TryGet<T>(out var component))
+            if (!Application.isPlaying) return;
+            var entity = GetEntitySilently();
+            if (entity != null && entity.TryGet<T>(out var component))
             {
                 if (component.Equals(_value)) return;
                 SyncInspectorValue(ref component);
             }
         }
 #endif
+
         private void OnDestroy() => Dispose();
 
         public override void Sync(EcsEntity entity)
@@ -104,7 +142,7 @@ namespace BitterECS.Integration
 
         protected override void InitInternal(EcsProperty property)
         {
-            if (s_isPresenterType) _properties ??= property;
+            if (s_isPresenterType) _properties = property;
         }
 
         protected override void DisposeInternal()
@@ -112,84 +150,73 @@ namespace BitterECS.Integration
             if (_isDestroying) return;
             _isDestroying = true;
 
-            if (s_isPresenterType) HandlePresenterDispose();
-            else Entity?.Dispose();
+            var isSceneObject = gameObject != null && gameObject.scene.IsValid();
 
-            if (gameObject != null) Destroy(gameObject);
+            if (isSceneObject)
+            {
+                if (s_isPresenterType)
+                {
+                    HandlePresenterDispose();
+                }
+                else
+                {
+                    GetEntitySilently()?.Dispose();
+                }
+
+                Destroy(gameObject);
+            }
+            else
+            {
+                _properties = null;
+                _cachedRootProvider = null;
+            }
         }
 
-        private EcsEntity EnsureEntityCreated()
+        private void InitializeAsPresenter()
         {
-            if (_isDestroying) return null;
+            if (_isDestroying) return;
+            if (_properties?.Presenter != null) return;
 
-            if (_properties?.Presenter != null)
-            {
-                var existing = _properties.Presenter.Get(_properties.Id);
-                if (existing != null) return existing;
-            }
+            CreateEntity();
+        }
 
-            try
-            {
-                return Build.For(typeof(T))
-                    .Add<EcsEntity>()
-                    .WithPost(ProcessComponents)
-                    .WithLink(this)
-                    .Create();
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"[ProviderEcs<{typeof(T).Name}>] Creation error: {ex.Message}");
-                return null;
-            }
+        private EcsEntity CreateEntity()
+        {
+            return Build.For(typeof(T))
+                     .Add<EcsEntity>()
+                     .WithPost(ProcessComponents)
+                     .WithLink(this)
+                     .Create();
         }
 
         private void ProcessComponents(EcsEntity entityToSync = null)
         {
+            if (_isDestroying) return;
             var isSyncMode = entityToSync != null;
 
-            if (_isDestroying) return;
-            if (!isSyncMode && _cachedRootProvider != null) return;
-
             GetComponents(s_sharedComponentCache);
-
             foreach (var provider in s_sharedComponentCache)
             {
                 if (ReferenceEquals(provider, this)) continue;
-
-                if (isSyncMode)
+                if (isSyncMode) provider.Sync(entityToSync);
+                else if (provider is ProviderEcs { IsPresenter: true } root)
                 {
-                    provider.Sync(entityToSync);
-                }
-                else
-                {
-                    if (provider is ProviderEcs { IsPresenter: true } root)
-                    {
-                        _cachedRootProvider = root;
-                        break;
-                    }
+                    _cachedRootProvider = root;
+                    break;
                 }
             }
-
             s_sharedComponentCache.Clear();
         }
 
         private void HandlePresenterDispose()
         {
             if (_properties == null) return;
-
             var presenter = _properties.Presenter;
-            var id = _properties.Id;
-
-            if (presenter != null && presenter.Has(id))
+            if (presenter != null && presenter.Has(_properties.Id))
             {
-                var entity = presenter.Get(id);
-                _properties = null;
-                presenter.Remove(entity);
+                presenter.Remove(presenter.Get(_properties.Id));
             }
-            else
-            {
-                _properties = null;
-            }
+            _properties = null;
         }
 
         private ref T SyncInspectorValue(ref T v)
@@ -198,58 +225,10 @@ namespace BitterECS.Integration
             return ref v;
         }
 
-        private EcsEntity GetParentEntity()
+        private EcsEntity GetParentEntitySilently()
         {
-            ProcessComponents();
-            return _cachedRootProvider?.Entity;
+            if (_cachedRootProvider == null) ProcessComponents();
+            return _cachedRootProvider?.GetEntitySilently();
         }
-
-#if UNITY_EDITOR
-        private void Reset()
-        {
-            if (!s_isPresenterType) ValidateHasPresenter();
-        }
-
-        private void OnValidate()
-        {
-            if (s_isPresenterType) return;
-
-            if (!Application.isPlaying)
-            {
-                ValidateHasPresenter();
-            }
-            else if (_cachedRootProvider != null || Entity != null)
-            {
-                var entity = Entity;
-                if (entity != null) Sync(entity);
-            }
-        }
-
-        private void ValidateHasPresenter()
-        {
-            var components = GetComponents<Component>();
-            var hasPresenter = false;
-
-            foreach (var c in components)
-            {
-                if (c is ProviderEcs { IsPresenter: true })
-                {
-                    hasPresenter = true;
-                    break;
-                }
-
-                if (c is ILinkableProvider && !ReferenceEquals(c, this) && c is not ProviderEcs)
-                {
-                    hasPresenter = true;
-                    break;
-                }
-            }
-
-            if (!hasPresenter)
-            {
-                Debug.LogError($"[ProviderEcs] Configuration Error on '{name}': Provider <{typeof(T).Name}> requires a Presenter/Root Provider!", this);
-            }
-        }
-#endif
     }
 }

@@ -1,4 +1,6 @@
-﻿public class HandControllerDice : HandController<DiceProvider, UIProvider>
+﻿using BitterECS.Core;
+
+public class HandControllerDice : HandController<EcsEntity, UIProvider>
 {
 
 }

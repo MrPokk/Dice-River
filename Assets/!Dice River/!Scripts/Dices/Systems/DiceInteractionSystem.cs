@@ -60,6 +60,16 @@ public class DiceInteractionSystem
         return Placing(GridDice.ConvertingPosition(indexWorld), diceObject);
     }
 
+    public static bool IsPlacing(Vector2Int index)
+    {
+        return !GridDice.HasGameObject(index);
+    }
+
+    public static bool IsPlacing(Vector3 indexWorld)
+    {
+        return !GridDice.HasGameObject(GridDice.ConvertingPosition(indexWorld));
+    }
+
     public static void InstantiateObject(Vector2Int index, DiceProvider prefab, out ProviderEcs instantiateObject)
     {
         var isSet = GridDice.InitializeGameObject(index, prefab, out instantiateObject, GridDiceGameObject.transform);

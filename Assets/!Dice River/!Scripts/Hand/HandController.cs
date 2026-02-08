@@ -42,6 +42,31 @@ public class HandController<TData, TView> : MonoBehaviour where TView : MonoBeha
         UpdateLayout();
     }
 
+    public TData First()
+    {
+        return Items.First();
+    }
+
+    public bool ExtractToFirst(out TData value)
+    {
+        if (!_dataItems.Any())
+        {
+            value = default;
+            return false;
+        }
+
+        var first = _dataItems.First();
+        if (first == null)
+        {
+            value = default;
+            return false;
+        }
+
+        Remove(first);
+        value = first;
+        return true;
+    }
+
     public void Remove(TData data)
     {
         if (_viewMap.TryGetValue(data, out var view))

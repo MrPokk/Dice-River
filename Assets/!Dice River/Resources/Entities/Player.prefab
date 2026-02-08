@@ -103,7 +103,6 @@ GameObject:
   - component: {fileID: 5931919878062488204}
   - component: {fileID: 3970930688320794487}
   - component: {fileID: 5823157704474257880}
-  - component: {fileID: 382386624837884472}
   - component: {fileID: 7723210913357833443}
   - component: {fileID: -4553256082684300076}
   - component: {fileID: 7411409852435515135}
@@ -174,27 +173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputComponentProvider
   _value:
     currentInput: {x: 0, y: 0}
---- !u!114 &382386624837884472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7892323701490823663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8717810f07c22687aa07bc1ce8d45b15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DashComponentProvider
-  _value:
-    maxCharges: 2
-    currentCharges: 2
-    rechargeDelay: 2
-    rechargeDuration: 1.5
-    dashDuration: 0.1
-    dashSpeedMultiplier: 5
-    delayTimer: 0
-    rechargeTimer: 0
 --- !u!114 &7723210913357833443
 MonoBehaviour:
   m_ObjectHideFlags: 0

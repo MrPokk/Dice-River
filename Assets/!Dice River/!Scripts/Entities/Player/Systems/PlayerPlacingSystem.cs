@@ -32,8 +32,15 @@ public class PlayerPlacingSystem : IEcsInitSystem
             var targetGridPos = monoGrid.ConvertingPosition(checkPosition);
             var spawnWorldPos = monoGrid.ConvertingPosition(targetGridPos);
 
-            // Startup.Hand.ge
-            //  DiceInteractionSystem.InstantiateObject(spawnWorldPos, dicePrefab, out _);
+            if (DiceInteractionSystem.IsPlacing(spawnWorldPos))
+            {
+                var isExtract = Startup.HandControllerDice.ExtractToFirst(out var entityToHand);
+                if (!isExtract) continue;
+                var diceProviderPrefab = entityToHand.GetProvider<DiceProvider>();
+                DiceInteractionSystem.InstantiateObject(spawnWorldPos, diceProviderPrefab, out _);
+                entityToHand.Dispose();
+                Debug.Log(EcsWorld.Get<DicePresenter>().CountEntity);
+            }
         }
     }
 }

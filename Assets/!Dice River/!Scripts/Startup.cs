@@ -43,28 +43,20 @@ public class Startup : EcsUnityRoot
 
     protected override void PostBootstrap()
     {
-        //var find = FindFirstObjectByType<UIh>();
-        //find.Add(new Loader<DiceProvider>(DicesPaths.BASE_DICE).GetInstance());
-        //find.Add(new Loader<DiceProvider>(DicesPaths.BASE_DICE).GetInstance());
-        //find.Add(new Loader<DiceProvider>(DicesPaths.BASE_DICE).GetInstance());
+        UIInit();
     }
-}
 
-public class UIStartupSystem : IEcsInitSystem
-{
-    public Priority Priority => Priority.FIRST_TASK;
-
-    public void Init()
+    private void UIInit()
     {
         new UIInit().Initialize();
 
         UIController.OpenScreen<UIHandScreen>();
         var handScreen = UIController.GetCurrentScreen as UIHandScreen;
-        var test = new Loader<DiceProvider>(DicesPaths.BASE_DICE).Prefab();
-        var icon = test.spriteIcon;
+        handScreen.Bind(HandControllerDice);
+        var prefabDice = new Loader<DiceProvider>(DicesPaths.BASE_DICE).Prefab();
 
-        handScreen.handDice.Add(icon.New());
-        handScreen.handDice.Add(icon.New());
-        handScreen.handDice.Add(icon.New());
+        HandControllerDice.Add(prefabDice.NewEntity(), prefabDice.spriteIcon.Prefab());
+        HandControllerDice.Add(prefabDice.NewEntity(), prefabDice.spriteIcon.Prefab());
+        HandControllerDice.Add(prefabDice.NewEntity(), prefabDice.spriteIcon.Prefab());
     }
 }
