@@ -73,16 +73,7 @@ namespace BitterECS.Core
 
             var index = _idToIndex[id];
             if (index == -1) return;
-
-            var lastId = _aliveIds[_aliveCount - 1];
-            _aliveIds[index] = lastId;
-            _idToIndex[lastId] = index;
-
             _idToIndex[id] = -1;
-            _aliveCount--;
-
-            _componentCounts[id] = 0;
-            _freeEntityIds.Push(id);
 
             foreach (var pool in _pools.Values)
             {
@@ -93,6 +84,17 @@ namespace BitterECS.Core
             {
                 provider.Dispose();
             }
+
+            _aliveCount--;
+            if (_aliveCount > 0 && index != _aliveCount)
+            {
+                var lastId = _aliveIds[_aliveCount];
+                _aliveIds[index] = lastId;
+                _idToIndex[lastId] = index;
+            }
+
+            _componentCounts[id] = 0;
+            _freeEntityIds.Push(id);
 
             EcsWorld.IncreaseVersion();
         }
@@ -150,7 +152,7 @@ namespace BitterECS.Core
             }
         }
 
-        public EcsEntity Get(int id) => new(id, this);
+        public EcsEntity Get(int id) => Has(id) ? new EcsEntity(id, this) : default;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void IncrementCount(int id) => _componentCounts[id]++;
@@ -167,17 +169,28 @@ namespace BitterECS.Core
             {
                 if (pool is IDisposable disposable) disposable.Dispose();
             }
+            _pools.Clear();
 
-            foreach (var provider in _linkedProviders.Values)
+            if (_linkedProviders.Count > 0)
             {
-                provider.Dispose();
+                var providers = new ILinkableProvider[_linkedProviders.Count];
+                _linkedProviders.Values.CopyTo(providers, 0);
+
+                for (var i = 0; i < providers.Length; i++)
+                {
+                    providers[i]?.Dispose();
+                }
             }
 
-            _pools.Clear();
             _linkedProviders.Clear();
             _freeEntityIds.Clear();
+            _poolFactories.Clear();
             _aliveCount = 0;
             _entitiesCount = 0;
+
+            _aliveIds = Array.Empty<int>();
+            _idToIndex = Array.Empty<int>();
+            _componentCounts = Array.Empty<int>();
         }
     }
 }

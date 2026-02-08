@@ -7,6 +7,7 @@ namespace BitterECS.Core
     {
         public readonly int Id;
         public readonly EcsPresenter Presenter;
+        public bool IsNull => Presenter == null;
 
         public EcsEntity(int id, EcsPresenter presenter)
         {
@@ -34,7 +35,7 @@ namespace BitterECS.Core
         public ref T GetOrAdd<T>() where T : new() { if (!Has<T>()) Add(new T()); return ref Get<T>(); }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Has<T>() where T : new() => Presenter.GetPool<T>().Has(Id);
+        public bool Has<T>() where T : new() => !IsNull && Presenter.GetPool<T>().Has(Id);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Remove<T>() where T : new() { if (Has<T>()) { Presenter.GetPool<T>().Remove(Id); Presenter.DecrementCount(Id); } }

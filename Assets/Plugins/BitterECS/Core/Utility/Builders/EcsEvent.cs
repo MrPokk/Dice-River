@@ -194,7 +194,9 @@ namespace BitterECS.Core
 
         private void CheckEntity(EcsEntity entity)
         {
-            if (entity == null) return;
+            if (entity.Presenter == null || !entity.Presenter.Has(entity.Id))
+                return;
+
             var id = entity.GetID();
             var satisfied = _condition(entity);
             var wasActive = _activeEntities.Contains(id);
