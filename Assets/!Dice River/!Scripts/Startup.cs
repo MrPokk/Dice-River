@@ -9,7 +9,6 @@ using UnityEngine.XR;
 
 public class Startup : EcsUnityRoot
 {
-    private UIInit _uiEntryPoint;
     private CameraObject _cameraObject;
     private GridConfig _gridConfigWorld;
     private GridConfig _gridConfigRaftGeneration;
@@ -19,11 +18,10 @@ public class Startup : EcsUnityRoot
     public static MonoGridPresenter GridWorld;
     public static (MonoGridPresenter monoGrid, GameObject gridParent) GridRaft;
     public static GameObject GridRaftParent;
-
+    public static HandControllerDice HandControllerDice;
     protected override void Bootstrap()
     {
-        _uiEntryPoint = new();
-        _uiEntryPoint.Initialize();
+        HandControllerDice = new Loader<HandControllerDice>(PrefabObjectsPaths.HAND_CONTROLLER).New();
         GridRaft.gridParent = new GameObject("GridRaftParent");
 
         _cameraObject = new Loader<CameraObject>(PrefabObjectsPaths.CAMERA_OBJECT).New();
@@ -65,9 +63,7 @@ public class UIStartupSystem : IEcsInitSystem
         var test = new Loader<DiceProvider>(DicesPaths.BASE_DICE).Prefab();
         var icon = test.spriteIcon;
 
-        var card = icon.New();
-
-        handScreen.handDice.Add(card);
+        handScreen.handDice.Add(icon.New());
         handScreen.handDice.Add(icon.New());
         handScreen.handDice.Add(icon.New());
     }

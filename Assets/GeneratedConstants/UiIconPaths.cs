@@ -5,6 +5,6 @@
 
 public static class UiIconPaths
 {
-    /// <summary> Provider: UIDiceProvider </summary>
+    /// <summary> Provider: UIProvider </summary>
     public const string ICON_BASE_DICE = "UI/Prefabs/Icon/IconBaseDice";
 }
