@@ -1,5 +1,7 @@
-﻿using BitterECS.Integration;
+﻿using System;
+using BitterECS.Integration;
 
+[Serializable]
 public struct TagProtectiveDice
 {
     public int region;

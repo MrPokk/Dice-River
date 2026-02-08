@@ -1,0 +1,29 @@
+﻿using BitterECS.Core;
+using BitterECS.Integration;
+using UnityEngine;
+
+public class TagRockHazardColliderSystem : IEcsAutoImplement
+{
+    public Priority Priority => Priority.High;
+
+    private EcsEvent _ecsEvent =
+    new EcsEvent<DicePresenter>()
+        .SubscribeWhere<IsTriggerColliderEnter>(c => c.entity.Has<TagRockHazard>(), added: OnDiceCollider);
+
+    private static void OnDiceCollider(EcsEntity entity)
+    {
+        ref var rollComponent = ref entity.Get<RollComponent>();
+        ref var collisionComponent = ref entity.Get<IsTriggerColliderEnter>();
+        collisionComponent.entity.Dispose();
+        rollComponent.value--;
+
+        if (rollComponent.value <= 0)
+        {
+            entity.AddFrame<IsDestroy>(new());
+            return;
+        }
+
+
+        entity.GetProvider<DiceProvider>().spriteRoll.Select(rollComponent.value);
+    }
+}

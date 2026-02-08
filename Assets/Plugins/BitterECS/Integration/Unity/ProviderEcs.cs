@@ -119,18 +119,16 @@ namespace BitterECS.Integration
             }
         }
 
-#if UNITY_EDITOR
-        private void Update()
-        {
-            if (!Application.isPlaying) return;
-            var entity = GetEntitySilently();
-            if (entity != null && entity.TryGet<T>(out var component))
-            {
-                if (component.Equals(_value)) return;
-                SyncInspectorValue(ref component);
-            }
-        }
-#endif
+        //#if UNITY_EDITOR
+        //        private void Update()
+        //        {
+        //            var entity = GetEntitySilently();
+        //            if (entity != null && entity.TryGet<T>(out var component))
+        //            {
+        //                SyncInspectorValue(ref component);
+        //            }
+        //        }
+        //#endif
 
         private void OnDestroy() => Dispose();
 

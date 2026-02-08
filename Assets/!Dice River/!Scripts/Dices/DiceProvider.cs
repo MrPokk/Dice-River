@@ -22,19 +22,15 @@ public class DiceProvider : ProviderEcs<DicePresenter>
 
     private void OnTriggerEnter(Collider other)
     {
-        Entity.AddOrReplace<IsTriggerColliderEnter>(new(other));
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Entity.Remove<IsTriggerColliderEnter>();
+        var entity = other.GetComponent<ProviderEcs>().Entity;
+        Entity.AddFrame<IsTriggerColliderEnter>(new(other, entity));
     }
 
     public int ReRolling()
     {
         var randomValue = Random.Range(1, 6);
         spriteRoll.Select(randomValue);
-        return Entity.Get<RollComponent>().currentRole = randomValue;
+        return Entity.Get<RollComponent>().value = randomValue;
     }
 
 }

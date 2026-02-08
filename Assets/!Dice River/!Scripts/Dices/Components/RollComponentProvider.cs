@@ -4,7 +4,7 @@ using BitterECS.Integration;
 [Serializable]
 public struct RollComponent
 {
-    [ReadOnly] public int currentRole;
+    [ReadOnly] public int value;
 }
 
 public class RollComponentProvider : ProviderEcs<RollComponent>

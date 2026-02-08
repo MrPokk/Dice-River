@@ -94,7 +94,7 @@ public class SpriteRollPrefab
     public RollIndex index;
 }
 
-public enum RollIndex
+public enum RollIndex : int
 {
     One = 1,
     Two = 2,

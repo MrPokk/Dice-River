@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5835721969328694836}
   - component: {fileID: 4417796489883080885}
   - component: {fileID: 3199252909954570966}
+  - component: {fileID: 6002320840822252825}
   m_Layer: 0
   m_Name: RockHazard
   m_TagString: Untagged
@@ -66,7 +67,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.7, y: 0.7, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3199252909954570966
 Rigidbody:
@@ -95,6 +96,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6002320840822252825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851880030500791345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b873cbdc3db20c62684d04683342dc4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TagRockHazardProvider
 --- !u!1 &4669240937691049697
 GameObject:
   m_ObjectHideFlags: 0

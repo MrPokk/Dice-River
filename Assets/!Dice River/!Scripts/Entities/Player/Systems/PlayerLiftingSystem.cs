@@ -14,7 +14,7 @@ public class PlayerLiftingSystem : IEcsAutoImplement
 
     private static void OnLifting(EcsEntity entity)
     {
-        var hitData = entity.Get<IsColliderHit>().hit;
+        ref var hitData = ref entity.Get<IsColliderHit>().hit;
         if (hitData.collider.gameObject.TryGetComponent<DiceProvider>(out _))
         {
             var provider = entity.GetProvider<EntitiesProvider>();

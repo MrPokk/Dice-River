@@ -19,7 +19,7 @@ public class DiceTagAddingSystem : IEcsAutoImplement
         {
             var entityToGrid = gridDice.gridPresenter.GetByIndex(entityIndex).Entity;
             ref var roleComponent = ref entityToGrid.Get<RollComponent>();
-            roleComponent.currentRole += modification;
+            roleComponent.value += modification;
         }
     }
 }

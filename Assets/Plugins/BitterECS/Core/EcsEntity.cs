@@ -17,6 +17,12 @@ namespace BitterECS.Core
             Remove<T>();
         }
 
+        public void AddFrame<T>(in T component) where T : new()
+        {
+            Add(component);
+            Remove<T>();
+        }
+
         public void Add<T>(in T component) where T : new()
         {
             _properties.Presenter.GetPool<T>().Add(_properties.Id, component);
