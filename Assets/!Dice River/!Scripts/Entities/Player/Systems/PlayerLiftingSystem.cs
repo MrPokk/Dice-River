@@ -45,6 +45,5 @@ public class PlayerLiftingSystem : IEcsAutoImplement
                 }
             }
         }
-        entity.Remove<IsColliderHit>();
     }
 }

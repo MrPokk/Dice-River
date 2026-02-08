@@ -1,126 +1,67 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace BitterECS.Core
 {
-    public class EcsEntity : IInitialize<EcsProperty>, IDisposable
+    public readonly struct EcsEntity : IEquatable<EcsEntity>
     {
-        private EcsProperty _properties;
-        public EcsProperty Properties => _properties;
+        public readonly int Id;
+        public readonly EcsPresenter Presenter;
 
-        internal void Init(EcsProperty property) => _properties = property;
-        protected internal virtual void Registration() { }
-
-        public void AddFrame<T>(in T component, Action action) where T : new()
+        public EcsEntity(int id, EcsPresenter presenter)
         {
-            Add(component);
-            action();
-            Remove<T>();
+            Id = id;
+            Presenter = presenter;
         }
 
-        public void AddFrame<T>(in T component) where T : new()
-        {
-            Add(component);
-            Remove<T>();
-        }
+        public bool IsAlive() => Presenter != null && Presenter.Has(Id);
 
-        public void Add<T>(in T component) where T : new()
-        {
-            _properties.Presenter.GetPool<T>().Add(_properties.Id, component);
-            _properties.CountComponents++;
-        }
+        public void AddFrame<T>(in T component) where T : new() { Add(component); Remove<T>(); }
+        public void AddFrame<T>(in T component, Action action) where T : new() { Add(component); action(); Remove<T>(); }
+        public void AddPredicate<T>(T value, Predicate<T> predicate) where T : new() { if (predicate(value)) Add(value); }
+        public void AddPredicate<T, P>(T value, P predicateValue, Predicate<P> predicate) where T : new() { if (predicate(predicateValue)) Add(value); }
+        public void AddOrRemove<T, P>(T value, P predicateValue, Predicate<P> predicate) where T : new() { if (predicate(predicateValue)) Add(value); else Remove<T>(); }
 
-        public void AddOrReplace<T>(in T component) where T : new()
-        {
-            if (!Has<T>())
-                Add(component);
-            else
-                Get<T>() = component;
-        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Add<T>(in T component = default) where T : new() { if (Has<T>()) Get<T>() = component; else { Presenter.GetPool<T>().Add(Id, component); Presenter.IncrementCount(Id); } }
+        public void Set<T>(RefAction<T> modifier) where T : new()
+             => modifier(ref Get<T>());
+        public delegate void RefAction<T>(ref T component) where T : new();
 
-        public void AddPredicate<T>(T value, Predicate<T> predicate) where T : new()
-        {
-            if (!predicate(value)) return;
-            AddOrReplace(value);
-        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ref T Get<T>() where T : new() => ref Presenter.GetPool<T>().Get(Id);
+        public bool TryGet<T>(out T component) where T : new() => Has<T>() ? (component = Get<T>()) is var _ : (component = default) is null;
+        public ref T GetOrAdd<T>() where T : new() { if (!Has<T>()) Add(new T()); return ref Get<T>(); }
 
-        public void AddPredicate<T, P>(T value, P predicateValue, Predicate<P> predicate) where T : new()
-        {
-            if (!predicate(predicateValue)) return;
-            AddOrReplace(value);
-        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Has<T>() where T : new() => Presenter.GetPool<T>().Has(Id);
 
-        public void AddOrRemove<T, P>(T value, P predicateValue, Predicate<P> predicate) where T : new()
-        {
-            if (!predicate(predicateValue))
-            {
-                Remove<T>();
-                return;
-            }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Remove<T>() where T : new() { if (Has<T>()) { Presenter.GetPool<T>().Remove(Id); Presenter.DecrementCount(Id); } }
 
-            AddOrReplace(value);
-        }
+        public void Destroy() => Presenter.Remove(this);
 
-        public int GetID() => _properties.Id;
-
-        public ref T Get<T>() where T : new()
-            => ref _properties.Presenter.GetPool<T>().Get(GetID());
-
-        public ref T GetOrAdd<T>() where T : new()
-        {
-            if (!Has<T>())
-                Add(new T());
-            return ref Get<T>();
-        }
-
-        public bool TryGet<T>(out T component) where T : new()
-        {
-            if (!Has<T>())
-            {
-                component = default;
-                return false;
-            }
-
-            component = Get<T>();
-            return true;
-        }
-
-        public int GetCountComponents()
-            => _properties.CountComponents;
-
-        public EcsPresenter GetPresenter()
-            => _properties.Presenter;
+        public int GetID() => Id;
+        public EcsPresenter GetPresenter() => Presenter;
+        public int GetCountComponents() => Presenter.GetComponentCount(Id);
 
         public T GetProvider<T>() where T : class, ILinkableProvider
-            => _properties.Presenter.GetProvider(this) as T;
+            => Presenter.GetProvider(this) as T;
 
-        public bool TryGetProvider<T>(out T provider) where T : class, ILinkableProvider
-           => (provider = GetProvider<T>()) is not null and T;
-
-        public void Set<T>(RefAction<T> modifier) where T : new()
-            => modifier(ref Get<T>());
-
-        public void Remove<T>() where T : new()
-        {
-            _properties.Presenter.GetPool<T>().Remove(GetID());
-            _properties.CountComponents--;
-        }
-
-        public bool Has<T>() where T : new()
-            => _properties.Presenter.GetPool<T>().Has(GetID());
+        public bool HasProvider<T>() where T : ILinkableProvider
+            => Presenter.GetProvider(this) is not null and T;
 
         public bool Has<T>(Predicate<T> predicate) where T : new()
             => Has<T>() && predicate(Get<T>());
 
-        public bool HasProvider<T>()
-            => _properties.Presenter.GetProvider(this) is not null and T;
+        public bool TryGetProvider<T>(out T provider) where T : class, ILinkableProvider
+            => (provider = GetProvider<T>()) != null;
 
-        public void Dispose() => _properties.Presenter.Remove(this);
+        public bool Equals(EcsEntity other) => Id == other.Id && Presenter == other.Presenter;
+        public override bool Equals(object obj) => obj is EcsEntity other && Equals(other);
+        public override int GetHashCode() => HashCode.Combine(Id, Presenter);
 
-        void IInitialize<EcsProperty>.Init(EcsProperty property)
-        {
-            Init(property);
-        }
-
-        public delegate void RefAction<T>(ref T component) where T : new();
+        public static bool operator ==(EcsEntity left, EcsEntity right) => left.Equals(right);
+        public static bool operator !=(EcsEntity left, EcsEntity right) => !left.Equals(right);
     }
 }

@@ -48,7 +48,7 @@ public class DiceInteractionSystem
 
         diceObject.spriteSide.ResetSides();
 
-        diceObject.Entity.AddOrReplace<GridComponent>(new(index, GridDice));
+        diceObject.Entity.Add<GridComponent>(new(index, GridDice));
 
         UpdateNeighbors(index, diceObject, true);
 
@@ -75,7 +75,7 @@ public class DiceInteractionSystem
         var isSet = GridDice.InitializeGameObject(index, prefab, out instantiateObject, GridDiceGameObject.transform);
         if (!isSet) return;
 
-        instantiateObject.Entity.AddOrReplace<GridComponent>(new(index, GridDice));
+        instantiateObject.Entity.Add<GridComponent>(new(index, GridDice));
 
         if (instantiateObject is DiceProvider dice)
         {

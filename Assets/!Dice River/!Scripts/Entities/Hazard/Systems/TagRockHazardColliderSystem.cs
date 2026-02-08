@@ -14,7 +14,7 @@ public class TagRockHazardColliderSystem : IEcsAutoImplement
     {
         ref var rollComponent = ref entity.Get<RollComponent>();
         ref var collisionComponent = ref entity.Get<IsTriggerColliderEnter>();
-        collisionComponent.entity.Dispose();
+        collisionComponent.entity.Destroy();
         rollComponent.value--;
 
         if (rollComponent.value <= 0)

@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RollComponentProvider
   _value:
-    currentRole: 0
+    value: 0
 --- !u!114 &870553833768372383
 MonoBehaviour:
   m_ObjectHideFlags: 0

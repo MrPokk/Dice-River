@@ -38,7 +38,7 @@ public class PlayerPlacingSystem : IEcsInitSystem
                 if (!isExtract) continue;
                 var diceProviderPrefab = entityToHand.GetProvider<DiceProvider>();
                 DiceInteractionSystem.InstantiateObject(spawnWorldPos, diceProviderPrefab, out _);
-                entityToHand.Dispose();
+                entityToHand.Destroy();
             }
         }
     }

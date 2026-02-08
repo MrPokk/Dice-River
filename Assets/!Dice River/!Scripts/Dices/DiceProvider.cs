@@ -37,4 +37,6 @@ public class DiceProvider : ProviderEcs<DicePresenter>
 
 public class DicePresenter : EcsPresenter
 {
+    protected override void Registration()
+    { }
 }

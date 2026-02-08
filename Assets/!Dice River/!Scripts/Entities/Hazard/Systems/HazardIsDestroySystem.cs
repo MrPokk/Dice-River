@@ -10,6 +10,6 @@ public class HazardIsDestroySystem : IEcsAutoImplement
 
     private static void OnDestroy(EcsEntity entity)
     {
-        entity.Dispose();
+        entity.Destroy();
     }
 }

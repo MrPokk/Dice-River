@@ -184,7 +184,10 @@ namespace BitterECS.Core
                 _subscriptions[i] = (IEcsEvent)Activator.CreateInstance(subType, priority, presenter, (Action<EcsEntity>)OnComponentChanged);
             }
 
-            foreach (var entity in presenter.GetAliveEntities()) CheckEntity(entity);
+            foreach (var entity in presenter.GetAliveIds())
+            {
+                CheckEntity(presenter.Get(entity));
+            }
         }
 
         private void OnComponentChanged(EcsEntity entity) => CheckEntity(entity);
