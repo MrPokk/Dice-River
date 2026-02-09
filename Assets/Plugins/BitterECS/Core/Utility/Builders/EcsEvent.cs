@@ -197,7 +197,7 @@ namespace BitterECS.Core
             if (entity.Presenter == null || !entity.Presenter.Has(entity.Id))
                 return;
 
-            var id = entity.GetID();
+            var id = entity.Id;
             var satisfied = _condition(entity);
             var wasActive = _activeEntities.Contains(id);
 

@@ -6,6 +6,7 @@ using BitterECS.Integration;
 public struct DamageComponent
 {
     public int damage;
+    public float damageIntervalSecond;
 }
 
 public class DamageComponentProvider : ProviderEcs<DamageComponent>

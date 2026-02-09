@@ -6,7 +6,8 @@ using UnityEngine;
 public struct MovingComponent
 {
     public int baseSpeed;
-    [HideInInspector] public int speed;
+    [ReadOnly] public int speed;
+    public void Reset() => speed = baseSpeed;
 }
 
 public class MovingComponentProvider : ProviderEcs<MovingComponent>

@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 7411409852435515135}
   - component: {fileID: -736192163089186376}
   - component: {fileID: -6986582136062775450}
+  - component: {fileID: 3283195717042659127}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -204,6 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageComponentProvider
   _value:
     damage: 3
+    damageIntervalSecond: 3
 --- !u!143 &7411409852435515135
 CharacterController:
   m_ObjectHideFlags: 0
@@ -265,3 +267,18 @@ MonoBehaviour:
     spriteRenderer: {fileID: 6173590747896806433}
     cameraTransform: {fileID: 0}
     lastCameraRotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3283195717042659127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7892323701490823663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1edeaed77accdf3c3a0f990febfcae6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JumpComponentProvider
+  _value:
+    jumpHeight: 1.5
+    jumpLength: 2

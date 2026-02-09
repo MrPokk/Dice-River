@@ -19,7 +19,7 @@ public class TagRockHazardColliderSystem : IEcsAutoImplement
 
         if (rollComponent.value <= 0)
         {
-            entity.AddFrame<IsDestroy>(new());
+            entity.AddFrameToEvent<IsDestroy>(new());
             return;
         }
 

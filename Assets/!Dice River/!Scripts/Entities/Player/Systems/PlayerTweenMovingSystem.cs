@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using BitterECS.Core;
 using DG.Tweening;
 using UnityEngine;
@@ -39,7 +39,7 @@ public class PlayerTweenMovingSystem : IEcsFixedRunSystem
         {
             var transform = entity.GetProvider<EntitiesProvider>().transform;
             var speed = entity.Get<MovingComponent>().speed;
-            float speedMultiplier = speed / ReferenceSpeed;
+            var speedMultiplier = speed / ReferenceSpeed;
 
             var tweens = DOTween.TweensByTarget(transform);
 
@@ -52,7 +52,7 @@ public class PlayerTweenMovingSystem : IEcsFixedRunSystem
             }
             else
             {
-                for (int i = 0; i < tweens.Count; i++)
+                for (var i = 0; i < tweens.Count; i++)
                 {
                     tweens[i].timeScale = speedMultiplier > 0 ? speedMultiplier : 0.1f;
                 }

@@ -25,8 +25,8 @@ public struct HealthComponent
 
     public void SetTimeImmunity(float time) => timeImmunity = time;
 
-    public float timeImmunity;
-    public int lastDamage;
+    [ReadOnly] public float timeImmunity;
+    [ReadOnly] public int lastDamage;
 }
 
 public class HealthComponentProvider : ProviderEcs<HealthComponent> { }

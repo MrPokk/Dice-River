@@ -52,3 +52,4 @@ MonoBehaviour:
   _space: 100
   _parabolaParameter: 2000
   _rotateItemsToArc: 1
+  timeRefreshSecond: 5

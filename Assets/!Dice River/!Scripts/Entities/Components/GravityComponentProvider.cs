@@ -7,7 +7,6 @@ using UnityEngine;
 public struct GravityComponent
 {
     public float gravity;
-    public LayerMask groundMask;
     public float groundCheckOffset;
 
     [ReadOnly] public float verticalVelocity;
@@ -16,7 +15,6 @@ public struct GravityComponent
     public GravityComponent(float gravity = 80f)
     {
         this.gravity = gravity;
-        groundMask = 0;
         verticalVelocity = 0f;
         groundCheckOffset = 0;
         isGrounded = true;

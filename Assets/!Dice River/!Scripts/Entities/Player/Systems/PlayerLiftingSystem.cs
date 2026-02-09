@@ -31,7 +31,7 @@ public class PlayerLiftingSystem : IEcsAutoImplement
                 if (targetY > transform.position.y)
                 {
                     var diceCenter = diceCollider.bounds.center;
-                    Vector3 newPosition = new Vector3(diceCenter.x, targetY, diceCenter.z);
+                    var newPosition = new Vector3(diceCenter.x, targetY, diceCenter.z);
 
                     controller.enabled = false;
                     transform.position = newPosition;

@@ -8,6 +8,7 @@ namespace BitterECS.Core
         public readonly int Id;
         public readonly EcsPresenter Presenter;
         public bool IsNull => Presenter == null;
+        public bool IsAlive => !IsNull && Presenter.Has(Id);
 
         public EcsEntity(int id, EcsPresenter presenter)
         {
@@ -15,10 +16,8 @@ namespace BitterECS.Core
             Presenter = presenter;
         }
 
-        public bool IsAlive() => Presenter != null && Presenter.Has(Id);
-
-        public void AddFrame<T>(in T component) where T : new() { Add(component); Remove<T>(); }
-        public void AddFrame<T>(in T component, Action action) where T : new() { Add(component); action(); Remove<T>(); }
+        public void AddFrameToEvent<T>(in T component) where T : new() { Add(component); Remove<T>(); }
+        public void AddFrameToEvent<T>(in T component, Action action) where T : new() { Add(component); action(); Remove<T>(); }
         public void AddPredicate<T>(T value, Predicate<T> predicate) where T : new() { if (predicate(value)) Add(value); }
         public void AddPredicate<T, P>(T value, P predicateValue, Predicate<P> predicate) where T : new() { if (predicate(predicateValue)) Add(value); }
         public void AddOrRemove<T, P>(T value, P predicateValue, Predicate<P> predicate) where T : new() { if (predicate(predicateValue)) Add(value); else Remove<T>(); }
@@ -42,8 +41,6 @@ namespace BitterECS.Core
 
         public void Destroy() => Presenter.Remove(this);
 
-        public int GetID() => Id;
-        public EcsPresenter GetPresenter() => Presenter;
         public int GetCountComponents() => Presenter.GetComponentCount(Id);
 
         public T GetProvider<T>() where T : class, ILinkableProvider

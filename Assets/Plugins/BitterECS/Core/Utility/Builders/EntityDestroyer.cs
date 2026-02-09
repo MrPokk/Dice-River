@@ -44,7 +44,7 @@ namespace BitterECS.Core
 
         public void Destroy()
         {
-            if (!_entity.IsAlive()) return;
+            if (!_entity.IsAlive) return;
 
             _preDestroyCallback?.Invoke(_entity);
             _componentRemoveOps.Execute(_entity.Id);

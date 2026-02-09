@@ -2,32 +2,42 @@
 using BitterECS.Core;
 using Cysharp.Threading.Tasks;
 
-public interface IHandSucceedRemove : IEcsSystem
+public interface IHandSucceedRemove : IEcsAutoImplement
 {
-    public UniTask ResultSucceedRemove();
+    public UniTask ResultSucceedRemove(HandControllerDice hand);
 }
 
-public interface IHandFailRemove : IEcsSystem
+public interface IHandFailRemove : IEcsAutoImplement
 {
-    public UniTask ResultFailRemove();
+    public UniTask ResultFailRemove(HandControllerDice hand);
 }
 
-public interface IHandSucceedAdd : IEcsSystem
+public interface IHandSucceedAdd : IEcsAutoImplement
 {
-    public UniTask ResultSucceedAdd();
+    public UniTask ResultSucceedAdd(HandControllerDice hand);
 }
 
-public interface IHandFailAdd : IEcsSystem
+public interface IHandFailAdd : IEcsAutoImplement
 {
-    public UniTask ResultFailAdd();
+    public UniTask ResultFailAdd(HandControllerDice hand);
 }
 
-public interface IHandSucceedExtraction : IEcsSystem
+public interface IHandSucceedExtraction : IEcsAutoImplement
 {
-    public UniTask ResultSucceedExtraction();
+    public UniTask ResultSucceedExtraction(HandControllerDice hand);
 }
 
-public interface IHandFailExtraction : IEcsSystem
+public interface IHandFailExtraction : IEcsAutoImplement
 {
-    public UniTask ResultFailExtraction();
+    public UniTask ResultFailExtraction(HandControllerDice hand);
+}
+
+public interface IHandResultInExtractEnded : IEcsAutoImplement
+{
+    public UniTask ResultInExtractEnded(HandControllerDice hand);
+}
+
+public interface IHandResultInRemoveEnded : IEcsAutoImplement
+{
+    public UniTask ResultInRemoveEnded(HandControllerDice hand);
 }

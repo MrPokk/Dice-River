@@ -1,55 +1,43 @@
-﻿using BitterECS.Core;
+﻿using System.Linq;
+using BitterECS.Core;
+using UnityEngine;
 
 public class HandControllerDice : HandController<EcsEntity, UIProvider>
 {
+    [Header("Setting Controller Dice")]
+    public float timeRefreshSecond;
 
     public void Initialize()
     {
-        var prefabDice = new Loader<DiceProvider>(DicesPaths.BASE_DICE).Prefab();
-        Add(prefabDice.NewEntity(), prefabDice.spriteIcon.Prefab());
-        Add(prefabDice.NewEntity(), prefabDice.spriteIcon.Prefab());
-        Add(prefabDice.NewEntity(), prefabDice.spriteIcon.Prefab());
+        var p = new Loader<DiceProvider>(DicesPaths.BASE_DICE).Prefab();
+        for (int i = 0; i < 3; i++) Add(p.NewEntity(), p.spriteIcon.Prefab());
     }
 
-    public override bool ExtractToFirst(out EcsEntity value)
+    public override bool ExtractToFirst(out EcsEntity val)
     {
-        var isExtract = base.ExtractToFirst(out value);
-        if (isExtract)
-        {
-            EcsSystems.Run<IHandSucceedExtraction>(s => s.ResultSucceedExtraction());
-        }
-        else
-        {
-            EcsSystems.Run<IHandFailExtraction>(s => s.ResultFailExtraction());
-        }
-        return isExtract;
+        var result = base.ExtractToFirst(out val);
+        if (result) EcsSystems.Run<IHandSucceedExtraction>(s => s.ResultSucceedExtraction(this));
+        else EcsSystems.Run<IHandFailExtraction>(s => s.ResultFailExtraction(this));
+
+        if (Items.Count == 0) EcsSystems.Run<IHandResultInExtractEnded>(s => s.ResultInExtractEnded(this));
+        return result;
     }
 
-    public override bool Add(EcsEntity data, UIProvider viewPrefab)
+    public override bool Add(EcsEntity data, UIProvider view)
     {
-        var isAdding = base.Add(data, viewPrefab);
-        if (isAdding)
-        {
-            EcsSystems.Run<IHandSucceedAdd>(s => s.ResultSucceedAdd());
-        }
-        else
-        {
-            EcsSystems.Run<IHandFailAdd>(s => s.ResultFailAdd());
-        }
-        return isAdding;
+        var result = base.Add(data, view);
+        if (result) EcsSystems.Run<IHandSucceedAdd>(s => s.ResultSucceedAdd(this));
+        else EcsSystems.Run<IHandFailAdd>(s => s.ResultFailAdd(this));
+        return result;
     }
 
     public override bool Remove(EcsEntity data)
     {
-        var isRemoved = base.Remove(data);
-        if (isRemoved)
-        {
-            EcsSystems.Run<IHandSucceedRemove>(s => s.ResultSucceedRemove());
-        }
-        else
-        {
-            EcsSystems.Run<IHandFailRemove>(s => s.ResultFailRemove());
-        }
-        return isRemoved;
+        var result = base.Remove(data);
+        if (result) EcsSystems.Run<IHandSucceedRemove>(s => s.ResultSucceedRemove(this));
+        else EcsSystems.Run<IHandFailRemove>(s => s.ResultFailRemove(this));
+
+        if (Items.Count == 0) EcsSystems.Run<IHandResultInRemoveEnded>(s => s.ResultInRemoveEnded(this));
+        return result;
     }
 }

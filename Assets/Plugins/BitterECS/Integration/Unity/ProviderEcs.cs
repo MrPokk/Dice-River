@@ -173,5 +173,32 @@ namespace BitterECS.Integration
             var entity = GetEntitySilently();
             if (entity.Presenter != null) _value = entity.Get<T>();
         }
+
+#if UNITY_EDITOR
+        private T _lastFrameValue;
+
+        private void Update()
+        {
+            if (!Application.isPlaying || _isDestroying) return;
+
+            var entity = GetEntitySilently();
+            if (entity.Presenter != null && entity.Has<T>())
+            {
+                _value = entity.Get<T>();
+                _lastFrameValue = _value;
+            }
+        }
+
+        private void OnValidate()
+        {
+            if (!Application.isPlaying || _isDestroying) return;
+
+            var entity = GetEntitySilently();
+            if (entity.Presenter != null && entity.Has<T>())
+            {
+                entity.Get<T>() = _value;
+            }
+        }
+#endif
     }
 }
