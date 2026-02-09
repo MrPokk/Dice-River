@@ -38,7 +38,7 @@ public class PlayerTweenMovingSystem : IEcsFixedRunSystem
         foreach (var entity in MovingEntities)
         {
             var transform = entity.GetProvider<EntitiesProvider>().transform;
-            var speed = entity.Get<MovingComponent>().speed;
+            var speed = entity.Get<MovingComponent>().velocity;
             var speedMultiplier = speed / ReferenceSpeed;
 
             var tweens = DOTween.TweensByTarget(transform);

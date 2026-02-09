@@ -63,7 +63,7 @@ namespace BitterECS.Core
             _aliveCount++;
 
             EcsWorld.IncreaseVersion();
-            return new EcsEntity(id, this);
+            return new EcsEntity(this, id);
         }
 
         public void Remove(EcsEntity entity)
@@ -73,7 +73,6 @@ namespace BitterECS.Core
 
             var index = _idToIndex[id];
             if (index == -1) return;
-            _idToIndex[id] = -1;
 
             foreach (var pool in _pools.Values)
             {
@@ -84,6 +83,9 @@ namespace BitterECS.Core
             {
                 provider.Dispose();
             }
+
+            if (_idToIndex[id] == -1) return;
+            _idToIndex[id] = -1;
 
             _aliveCount--;
             if (_aliveCount > 0 && index != _aliveCount)
@@ -152,7 +154,7 @@ namespace BitterECS.Core
             }
         }
 
-        public EcsEntity Get(int id) => Has(id) ? new EcsEntity(id, this) : default;
+        public EcsEntity Get(int id) => Has(id) ? new EcsEntity(this, id) : throw new("Entity not created");
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void IncrementCount(int id) => _componentCounts[id]++;

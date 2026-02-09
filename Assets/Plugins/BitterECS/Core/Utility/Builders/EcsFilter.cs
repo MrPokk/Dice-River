@@ -200,7 +200,7 @@ namespace BitterECS.Core
             for (var i = 0; i < aliveIds.Length; i++)
             {
                 var id = aliveIds[i];
-                var entity = new EcsEntity(id, _presenter);
+                var entity = new EcsEntity(_presenter, id);
 
                 if (!MatchesAllConditions(entity)) continue;
 

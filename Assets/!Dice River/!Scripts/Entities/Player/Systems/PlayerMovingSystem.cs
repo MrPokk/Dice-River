@@ -1,5 +1,4 @@
-﻿using System;
-using BitterECS.Core;
+﻿using BitterECS.Core;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -13,7 +12,9 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
          .Filter()
          .WhereProvider<PlayerProvider>()
          .Include<InputComponent>()
-         .Include<MovingComponent>();
+         .Include<MovingComponent>()
+         .Include<GravityComponent>()
+         .Include<FacingComponent>();
 
     public void Init()
     {
@@ -46,17 +47,26 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
             var provider = entity.GetProvider<PlayerProvider>();
             ref var moving = ref entity.Get<MovingComponent>();
             ref var input = ref entity.Get<InputComponent>();
+            ref var gravity = ref entity.Get<GravityComponent>();
+            ref var facing = ref entity.Get<FacingComponent>();
 
             var cc = provider.characterController;
-            var rawInput = input.currentInput;
-            var moveDirection = new Vector3(rawInput.x, 0f, rawInput.y);
+            Vector3 horizontalVelocity;
+            if (gravity.isGrounded)
+            {
+                var rawInput = input.currentInput;
+                var moveDirection = new Vector3(rawInput.x, 0f, rawInput.y);
+                moveDirection = CheckToUpdateFacingDirection(entity, provider, moveDirection);
+                horizontalVelocity = moveDirection * moving.velocity;
+            }
+            else
+            {
+                horizontalVelocity = facing.direction.normalized * moving.jumpVelocityX;
+            }
 
-            moveDirection = CheckToUpdateFacingDirection(entity, provider, moveDirection);
+            cc.Move(horizontalVelocity * Time.fixedDeltaTime);
 
-            var velocity = moveDirection * moving.speed;
-
-            cc.Move(velocity * Time.fixedDeltaTime);
-            entity.AddOrRemove<IsMovingComponent, Vector3>(new(), moveDirection, i => i != Vector3.zero);
+            entity.AddOrRemove<IsMovingComponent, Vector3>(new(), horizontalVelocity, i => i.sqrMagnitude > SqrMagnitudeThreshold);
         }
     }
 
@@ -80,10 +90,7 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
 
     private static void FlipSprite(EntitiesProvider provider, float directionX)
     {
-        if (Mathf.Abs(directionX) < 0.01f)
-        {
-            return;
-        }
+        if (Mathf.Abs(directionX) < 0.01f) return;
 
         var scale = provider.transform.localScale;
         scale.x = Mathf.Abs(scale.x) * Mathf.Sign(directionX);

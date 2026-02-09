@@ -10,7 +10,7 @@ namespace BitterECS.Core
         public bool IsNull => Presenter == null;
         public bool IsAlive => !IsNull && Presenter.Has(Id);
 
-        public EcsEntity(int id, EcsPresenter presenter)
+        public EcsEntity(EcsPresenter presenter, int id = -1)
         {
             Id = id;
             Presenter = presenter;

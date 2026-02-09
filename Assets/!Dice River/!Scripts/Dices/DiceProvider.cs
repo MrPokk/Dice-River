@@ -22,7 +22,9 @@ public class DiceProvider : ProviderEcs<DicePresenter>
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("ds");
         var entity = other.GetComponent<ProviderEcs>().Entity;
+        Debug.Log(entity.Has<TagRockHazard>());
         Entity.AddFrameToEvent<IsTriggerColliderEnter>(new(other, entity));
     }
 

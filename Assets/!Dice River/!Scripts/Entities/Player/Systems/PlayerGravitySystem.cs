@@ -22,18 +22,19 @@ public class PlayerGravitySystem : IEcsFixedRunSystem
             gravityComp.verticalVelocity -= gravityComp.gravity * Time.fixedDeltaTime;
 
             var pos = provider.transform.position;
-            var groundCheckOffset = gravityComp.groundCheckOffset;
-            if (pos.y <= groundCheckOffset)
-            {
-                pos.y = groundCheckOffset;
 
+            if (pos.y <= gravityComp.groundCheckOffset && gravityComp.verticalVelocity <= 0)
+            {
+                pos.y = gravityComp.groundCheckOffset;
+                provider.transform.position = pos;
                 gravityComp.verticalVelocity = 0f;
-                gravityComp.isGrounded = false;
+                gravityComp.isGrounded = true;
             }
             else
             {
                 cc.Move(gravityComp.verticalVelocity * Time.fixedDeltaTime * Vector3.up);
                 gravityComp.isGrounded = cc.isGrounded;
+
                 if (gravityComp.isGrounded && gravityComp.verticalVelocity < 0)
                 {
                     gravityComp.verticalVelocity = -2f;

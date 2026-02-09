@@ -96,7 +96,7 @@ namespace BitterECS.Integration
 
         protected override void InitInternal(EcsProperty property)
         {
-            _linkedEntity = new EcsEntity(property.Id, property.Presenter);
+            _linkedEntity = new EcsEntity(property.Presenter, property.Id);
         }
 
         protected override void DisposeInternal()

@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: -736192163089186376}
   - component: {fileID: -6986582136062775450}
   - component: {fileID: 3283195717042659127}
+  - component: {fileID: 4401214584888907026}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -158,8 +159,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovingComponentProvider
   _value:
-    baseSpeed: 3
-    speed: 10
+    originalVelocity: 3
+    velocity: 0
+    jumpVelocityX: 0
 --- !u!114 &5823157704474257880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,9 +247,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GravityComponentProvider
   _value:
     gravity: 98
-    groundMask:
-      serializedVersion: 2
-      m_Bits: 1
     groundCheckOffset: 0
     verticalVelocity: 0
     isGrounded: 0
@@ -282,3 +281,17 @@ MonoBehaviour:
   _value:
     jumpHeight: 1.5
     jumpLength: 2
+--- !u!114 &4401214584888907026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7892323701490823663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f80786244b2c2d49695d84754215b24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FacingComponentProvider
+  _value:
+    direction: {x: 0, y: 0, z: 0}

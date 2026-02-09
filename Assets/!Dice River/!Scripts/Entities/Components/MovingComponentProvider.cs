@@ -5,16 +5,16 @@ using UnityEngine;
 [Serializable]
 public struct MovingComponent
 {
-    public int baseSpeed;
-    [ReadOnly] public int speed;
-    public void Reset() => speed = baseSpeed;
+    public int originalVelocity;
+    [ReadOnly] public int velocity;
+    [ReadOnly] public float jumpVelocityX;
+    public void Reset() => velocity = originalVelocity;
 }
 
 public class MovingComponentProvider : ProviderEcs<MovingComponent>
 {
-    protected override void Awake()
+    private void Start()
     {
-        Value.speed = Value.baseSpeed;
-        base.Awake();
+        Value.Reset();
     }
 }

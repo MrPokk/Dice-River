@@ -25,10 +25,6 @@ public class Startup : EcsUnityRoot
         InitializeDiceSystem();
         InitializePlayer();
         UIInitialize();
-
-        var dsds = EcsWorld.Get<DicePresenter>().CountEntity;
-        var dsds2 = EcsWorld.Get<EntitiesPresenter>().CountEntity;
-        Debug.Log(dsds);
     }
 
     private void InitializeHandController()

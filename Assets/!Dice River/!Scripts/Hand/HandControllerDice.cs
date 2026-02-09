@@ -16,10 +16,13 @@ public class HandControllerDice : HandController<EcsEntity, UIProvider>
     public override bool ExtractToFirst(out EcsEntity val)
     {
         var result = base.ExtractToFirst(out val);
-        if (result) EcsSystems.Run<IHandSucceedExtraction>(s => s.ResultSucceedExtraction(this));
+        if (result)
+        {
+            EcsSystems.Run<IHandSucceedExtraction>(s => s.ResultSucceedExtraction(this));
+            if (Items.Count == 0) EcsSystems.Run<IHandResultInExtractEnded>(s => s.ResultInExtractEnded(this));
+        }
         else EcsSystems.Run<IHandFailExtraction>(s => s.ResultFailExtraction(this));
 
-        if (Items.Count == 0) EcsSystems.Run<IHandResultInExtractEnded>(s => s.ResultInExtractEnded(this));
         return result;
     }
 
@@ -34,10 +37,13 @@ public class HandControllerDice : HandController<EcsEntity, UIProvider>
     public override bool Remove(EcsEntity data)
     {
         var result = base.Remove(data);
-        if (result) EcsSystems.Run<IHandSucceedRemove>(s => s.ResultSucceedRemove(this));
+        if (result)
+        {
+            EcsSystems.Run<IHandSucceedRemove>(s => s.ResultSucceedRemove(this));
+            if (Items.Count == 0) EcsSystems.Run<IHandResultInRemoveEnded>(s => s.ResultInRemoveEnded(this));
+        }
         else EcsSystems.Run<IHandFailRemove>(s => s.ResultFailRemove(this));
 
-        if (Items.Count == 0) EcsSystems.Run<IHandResultInRemoveEnded>(s => s.ResultInRemoveEnded(this));
         return result;
     }
 }
