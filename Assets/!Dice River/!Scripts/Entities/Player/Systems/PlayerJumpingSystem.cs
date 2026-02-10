@@ -19,7 +19,9 @@ public class PlayerJumpingSystem : IEcsInitSystem
     {
         foreach (var entity in _ecsEntities)
         {
-            entity.AddFrameToEvent(new JumpEvent());
+            var gravityComponent = entity.Get<GravityComponent>();
+            if (gravityComponent.verticalVelocity != 0)
+                entity.AddFrameToEvent(new JumpEvent());
         }
     }
 }

@@ -16,11 +16,11 @@ namespace BitterECS.Core
             Presenter = presenter;
         }
 
-        public void AddFrameToEvent<T>(in T component) where T : new() { Add(component); Remove<T>(); }
-        public void AddFrameToEvent<T>(in T component, Action action) where T : new() { Add(component); action(); Remove<T>(); }
+        public void AddFrameToEvent<T>(in T component = default) where T : new() { Add(component); Remove<T>(); }
+        public void AddFrameToEvent<T>(Action action, in T component = default) where T : new() { Add(component); action(); Remove<T>(); }
         public void AddPredicate<T>(T value, Predicate<T> predicate) where T : new() { if (predicate(value)) Add(value); }
-        public void AddPredicate<T, P>(T value, P predicateValue, Predicate<P> predicate) where T : new() { if (predicate(predicateValue)) Add(value); }
-        public void AddOrRemove<T, P>(T value, P predicateValue, Predicate<P> predicate) where T : new() { if (predicate(predicateValue)) Add(value); else Remove<T>(); }
+        public void AddPredicate<T, P>(in T value, P predicateValue, Predicate<P> predicate) where T : new() { if (predicate(predicateValue)) Add(value); }
+        public void AddOrRemove<T, P>(in T value, P predicateValue, Predicate<P> predicate) where T : new() { if (predicate(predicateValue)) Add(value); else Remove<T>(); }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Add<T>(in T component = default) where T : new() { if (Has<T>()) Get<T>() = component; else { Presenter.GetPool<T>().Add(Id, component); Presenter.IncrementCount(Id); } }

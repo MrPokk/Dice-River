@@ -8,7 +8,7 @@ public class PlayerDamagingSystem : IEcsFixedRunSystem
     private EcsFilter _ecsEvent = new EcsFilter<EntitiesPresenter>()
         .Include<HealthComponent>()
         .Include<DamageComponent>()
-        .Include<GravityComponent>(c => !c.isGrounded && c.verticalVelocity == 0);
+        .Include<GravityComponent>(c => c.isGrounded && c.verticalVelocity == 0);
 
     public void FixedRun()
     {
@@ -25,10 +25,17 @@ public class PlayerDamagingSystem : IEcsFixedRunSystem
             {
                 var newHealth = health.currentHealth - damageComp.damage;
                 health.SetHealth(newHealth);
+                entity.AddFrameToEvent<IsHealthChanging>(new());
 
                 health.lastDamage = damageComp.damage;
                 health.timeImmunity = damageComp.damageIntervalSecond;
             }
         }
     }
+}
+
+
+public struct IsHealthChanging
+{
+
 }

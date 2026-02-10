@@ -1,12 +1,12 @@
-﻿using System;
-using BitterECS.Core;
-using BitterECS.Integration;
+﻿using BitterECS.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerGrabbingSystem : IEcsInitSystem, IEcsFixedRunSystem
 {
     public Priority Priority => Priority.Medium;
+
+    private const int GrabLayerOffset = 10;
 
     private EcsFilter _ecsFilter =
     new EcsFilter<EntitiesPresenter>()
@@ -42,7 +42,7 @@ public class PlayerGrabbingSystem : IEcsInitSystem, IEcsFixedRunSystem
             ref var grabbingComponent = ref entity.Get<IsGrabbingComponent>();
             var diceEntity = grabbingComponent.grabbingEntity;
 
-            if (diceEntity == null)
+            if (diceEntity == null || !diceEntity.IsAlive)
             {
                 entity.Remove<IsGrabbingComponent>();
                 continue;
@@ -55,6 +55,9 @@ public class PlayerGrabbingSystem : IEcsInitSystem, IEcsFixedRunSystem
             if (!isPlacing) continue;
 
             diceProvider.GetComponent<Collider>().enabled = true;
+
+            ChangeSortingOrder(diceProvider, -GrabLayerOffset);
+
             entity.Remove<IsGrabbingComponent>();
             return true;
         }
@@ -65,14 +68,18 @@ public class PlayerGrabbingSystem : IEcsInitSystem, IEcsFixedRunSystem
     {
         foreach (var entity in _ecsFilter)
         {
-            if (entity.Has<IsGrabbingComponent>()) continue;
-
             var entertainPos = GetPositionTo(entity);
             var dice = DiceInteractionSystem.Extraction(entertainPos);
 
             if (dice == null) continue;
 
             entity.Add(new IsGrabbingComponent(dice.Entity));
+            var transform = entity.GetProvider<EntitiesProvider>().transform;
+
+            dice.GetComponent<Collider>().enabled = false;
+            dice.transform.position = transform.position + Vector3.up;
+
+            ChangeSortingOrder(dice, GrabLayerOffset);
         }
     }
 
@@ -80,14 +87,26 @@ public class PlayerGrabbingSystem : IEcsInitSystem, IEcsFixedRunSystem
     {
         foreach (var entity in _entityGrab)
         {
-            ref var grabbingEntity = ref entity.Get<IsGrabbingComponent>().grabbingEntity;
-            if (grabbingEntity == null) continue;
+            ref var grabbingComponent = ref entity.Get<IsGrabbingComponent>();
+            var grabbingEntity = grabbingComponent.grabbingEntity;
+
+            if (!grabbingEntity.IsAlive) continue;
 
             var diceProvider = grabbingEntity.GetProvider<DiceProvider>();
             var transform = entity.GetProvider<EntitiesProvider>().transform;
 
             diceProvider.transform.position = transform.position + Vector3.up;
-            diceProvider.GetComponent<Collider>().enabled = false;
+        }
+    }
+
+    private void ChangeSortingOrder(MonoBehaviour provider, int offset)
+    {
+        if (provider == null) return;
+        var renderers = provider.GetComponentsInChildren<SpriteRenderer>(true);
+
+        foreach (var spriteRenderer in renderers)
+        {
+            spriteRenderer.sortingOrder += offset;
         }
     }
 
@@ -101,16 +120,5 @@ public class PlayerGrabbingSystem : IEcsInitSystem, IEcsFixedRunSystem
         var targetGridPos = monoGrid.ConvertingPosition(checkPosition);
         var entertainPos = monoGrid.ConvertingPosition(targetGridPos);
         return entertainPos;
-    }
-
-}
-
-public struct IsGrabbingComponent
-{
-    public EcsEntity grabbingEntity;
-
-    public IsGrabbingComponent(EcsEntity grabbingEntity)
-    {
-        this.grabbingEntity = grabbingEntity;
     }
 }

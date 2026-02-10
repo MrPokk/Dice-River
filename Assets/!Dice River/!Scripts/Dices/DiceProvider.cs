@@ -14,7 +14,7 @@ public class DiceProvider : ProviderEcs<DicePresenter>
         spriteRoll ??= GetComponentInChildren<SpriteRollComponent>();
 
         base.Awake();
-        Entity.AddFrameToEvent<IsRollingProcess>(new(), () =>
+        Entity.AddFrameToEvent<IsRollingProcess>(() =>
         {
             ReRolling();
         });
@@ -22,9 +22,7 @@ public class DiceProvider : ProviderEcs<DicePresenter>
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("ds");
         var entity = other.GetComponent<ProviderEcs>().Entity;
-        Debug.Log(entity.Has<TagRockHazard>());
         Entity.AddFrameToEvent<IsTriggerColliderEnter>(new(other, entity));
     }
 

@@ -226,7 +226,7 @@ namespace BitterECS.Core
         public ReadOnlySpan<EcsEntity>.Enumerator GetEnumerator() => ValidationCacheOnFilter().GetEnumerator();
         public int Count() => ValidationCacheOnFilter().Length;
 
-        public ref struct Filter
+        public struct Filter
         {
             private EcsFilter _filter;
             public Filter(in EcsFilter filter) => _filter = filter;
@@ -234,7 +234,7 @@ namespace BitterECS.Core
             public readonly int Count() => _filter.ValidationCacheOnFilter().Length;
         }
 
-        public ref struct Filter<T> where T : class, ILinkableProvider
+        public struct Filter<T> where T : class, ILinkableProvider
         {
             private EcsFilter _filter;
 

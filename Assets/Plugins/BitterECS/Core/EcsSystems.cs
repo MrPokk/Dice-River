@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace BitterECS.Core
@@ -22,12 +22,6 @@ namespace BitterECS.Core
             var systemTypes = ReflectionUtility.FindAllAssignments<IEcsAutoImplement>();
             foreach (var type in systemTypes)
             {
-#if UNITY_2020_1_OR_NEWER
-                if (type.IsSubclassOf(typeof(UnityEngine.Object)))
-                {
-                    continue;
-                }
-#endif
                 if (Activator.CreateInstance(type) is IEcsAutoImplement system)
                 {
                     AddToSystemInternal(system);

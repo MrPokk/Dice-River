@@ -1,5 +1,4 @@
 ﻿using BitterECS.Core;
-using UnityEngine;
 
 public class TagRockHazardColliderSystem : IEcsAutoImplement
 {
@@ -11,7 +10,6 @@ public class TagRockHazardColliderSystem : IEcsAutoImplement
 
     private static void OnDiceCollider(EcsEntity entity)
     {
-        Debug.Log(entity);
         ref var rollComponent = ref entity.Get<RollComponent>();
         ref var collisionComponent = ref entity.Get<IsTriggerColliderEnter>();
         collisionComponent.entity.Destroy();
@@ -22,7 +20,6 @@ public class TagRockHazardColliderSystem : IEcsAutoImplement
             entity.AddFrameToEvent<IsDestroy>(new());
             return;
         }
-
 
         entity.GetProvider<DiceProvider>().spriteRoll.Select(rollComponent.value);
     }

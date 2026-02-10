@@ -73,10 +73,9 @@ public class Startup : EcsUnityRoot
     {
         UIInit.Initialize();
 
-        UIController.OpenScreen<UIHandScreen>();
-        if (UIController.GetCurrentScreen is UIHandScreen handScreen)
-        {
-            handScreen.Bind(HandControllerDice);
-        }
+        UIController.OpenScreen<UIPlayerScreen>();
+        var playerScreen = (UIPlayerScreen)UIController.GetCurrentScreen;
+
+        playerScreen.Bind(HandControllerDice);
     }
 }
