@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace BitterECS.Core
 {
-    public class EcsPool<T> : IDisposable, IPoolDestroy where T : new()
+    public class EcsPool<T> : IDisposable, IHasPool where T : new()
     {
         private T[] _components;
         private int[] _entityToDataIndex;

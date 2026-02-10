@@ -6,8 +6,8 @@ namespace BitterECS.Core
     public struct EcsFilter
     {
         private readonly EcsPresenter _presenter;
-        private IPoolDestroy[] _includePools;
-        private IPoolDestroy[] _excludePools;
+        private IHasPool[] _includePools;
+        private IHasPool[] _excludePools;
         private Predicate<EcsEntity>[] _predicates;
         private int _includeCount;
         private int _excludeCount;
@@ -20,8 +20,8 @@ namespace BitterECS.Core
         public EcsFilter(EcsPresenter presenter)
         {
             _presenter = presenter ?? throw new ArgumentNullException(nameof(presenter));
-            _includePools = new IPoolDestroy[EcsConfig.FilterConditionInclude];
-            _excludePools = new IPoolDestroy[EcsConfig.FilterConditionExclude];
+            _includePools = new IHasPool[EcsConfig.FilterConditionInclude];
+            _excludePools = new IHasPool[EcsConfig.FilterConditionExclude];
             _predicates = new Predicate<EcsEntity>[EcsConfig.FilterPredicate];
             _includeCount = 0;
             _excludeCount = 0;
@@ -74,7 +74,7 @@ namespace BitterECS.Core
             return this;
         }
 
-        private void AddPool(ref IPoolDestroy[] pools, ref int count, IPoolDestroy pool)
+        private void AddPool(ref IHasPool[] pools, ref int count, IHasPool pool)
         {
             if (count >= pools.Length) Array.Resize(ref pools, pools.Length * 2);
             pools[count++] = pool;

@@ -94,7 +94,11 @@ public class HandController<TData, TView> : MonoBehaviour where TView : MonoBeha
             return false;
         }
 
-        Destroy(view.gameObject);
+        if (view != null && view.gameObject)
+        {
+            Destroy(view.gameObject);
+        }
+
         _viewMap.Remove(data);
         _dataItems.Remove(data);
         UpdateLayout();

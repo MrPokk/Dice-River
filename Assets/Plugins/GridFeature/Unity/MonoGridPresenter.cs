@@ -164,7 +164,12 @@ public class MonoGridPresenter : GridPresenter<ProviderEcs>
 
     public bool HasGameObject(Vector2Int index)
     {
-        return IsWithinGrid(index) && GetByIndex(index) != null;
+        return GetByIndex(index) != null;
+    }
+
+    public bool HasNotGameObject(Vector2Int index)
+    {
+        return GetByIndex(index) == null;
     }
 
     public IEnumerable<ProviderEcs> GetAllGameObjects()

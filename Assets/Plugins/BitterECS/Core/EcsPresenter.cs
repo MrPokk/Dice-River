@@ -4,59 +4,47 @@ using System.Runtime.CompilerServices;
 
 namespace BitterECS.Core
 {
-    public abstract class EcsPresenter : IDisposable
+    public abstract partial class EcsPresenter : IDisposable
     {
         private int[] _aliveIds;
         private int[] _idToIndex;
+        private int _entitiesCount;
         private int _aliveCount;
-        private int _nextId;
 
         private readonly Stack<int> _freeEntityIds;
-        internal IPoolDestroy[] _poolsById;
+        private readonly Dictionary<Type, Func<object>> _poolFactories;
+        private readonly Dictionary<Type, object> _pools;
         private readonly Dictionary<int, ILinkableProvider> _linkedProviders;
+
         private int[] _componentCounts;
 
         public int CountEntity => _aliveCount;
 
-        public EcsPresenter()
+        protected EcsPresenter()
         {
             var capacity = EcsConfig.InitialEntitiesCapacity;
             _aliveIds = new int[capacity];
             _idToIndex = new int[capacity];
             Array.Fill(_idToIndex, -1);
-            _componentCounts = new int[capacity];
+            _componentCounts = new int[EcsConfig.InitialEntitiesCapacity];
 
             _freeEntityIds = new Stack<int>(capacity);
-            _poolsById = new IPoolDestroy[EcsConfig.InitialPoolsCapacity];
+            _pools = new Dictionary<Type, object>(EcsConfig.InitialPoolCapacity);
+            _poolFactories = new Dictionary<Type, Func<object>>();
             _linkedProviders = new Dictionary<int, ILinkableProvider>(EcsConfig.InitialLinkedEntitiesCapacity);
             _aliveCount = 0;
-            _nextId = 0;
+            _entitiesCount = 0;
 
             Registration();
         }
 
         protected virtual void Registration() { }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void AddPoolFactory<T>(Func<EcsPool<T>> factory) where T : new()
-        {
-            var id = ComponentTypeMap<T>.Id;
-            if (id >= _poolsById.Length) Array.Resize(ref _poolsById, Math.Max(id + 1, _poolsById.Length * 2));
-            _poolsById[id] = factory();
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void AddCheckEvent<T>() where T : new()
-        {
-            var id = ComponentTypeMap<T>.Id;
-            if (id >= _poolsById.Length) Array.Resize(ref _poolsById, Math.Max(id + 1, _poolsById.Length * 2));
-            if (_poolsById[id] == null) _poolsById[id] = new EcsEventPool<T>();
-        }
+        public void AddPoolFactory<T>(Func<EcsPool<T>> factory) where T : new() => _poolFactories[typeof(T)] = factory;
+        public void AddCheckEvent<T>() where T : new() => AddPoolFactory(() => new EcsEventPool<T>());
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ReadOnlySpan<int> GetAliveIds() => _aliveIds.AsSpan(0, _aliveCount);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EcsEntity CreateEntity()
         {
             int id;
@@ -66,18 +54,18 @@ namespace BitterECS.Core
             }
             else
             {
-                id = _nextId++;
+                id = _entitiesCount++;
                 if (id >= _idToIndex.Length) ResizeIdArrays(id * 2);
             }
 
             _idToIndex[id] = _aliveCount;
-            _aliveIds[_aliveCount++] = id;
+            _aliveIds[_aliveCount] = id;
+            _aliveCount++;
 
             EcsWorld.IncreaseVersion();
             return new EcsEntity(this, id);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Remove(EcsEntity entity)
         {
             var id = entity.Id;
@@ -86,20 +74,20 @@ namespace BitterECS.Core
             var index = _idToIndex[id];
             if (index == -1) return;
 
-            var len = _poolsById.Length;
-            for (var i = 0; i < len; i++)
+            foreach (var pool in _pools.Values)
             {
-                _poolsById[i]?.Remove(id);
+                ((IHasPool)pool).Remove(id);
             }
 
-            if (_linkedProviders.Count > 0 && _linkedProviders.Remove(id, out var provider))
+            if (_linkedProviders.Remove(id, out var provider))
             {
                 provider.Dispose();
             }
 
+            if (_idToIndex[id] == -1) return;
             _idToIndex[id] = -1;
-            _aliveCount--;
 
+            _aliveCount--;
             if (_aliveCount > 0 && index != _aliveCount)
             {
                 var lastId = _aliveIds[_aliveCount];
@@ -119,21 +107,31 @@ namespace BitterECS.Core
             Array.Resize(ref _componentCounts, newSize);
             var oldSize = _idToIndex.Length;
             Array.Resize(ref _idToIndex, newSize);
-            for (var i = oldSize; i < newSize; i++) _idToIndex[i] = -1;
+            for (var i = oldSize; i < newSize; i++)
+            {
+                _idToIndex[i] = -1;
+            }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EcsPool<T> GetPool<T>() where T : new()
         {
-            var id = ComponentTypeMap<T>.Id;
-            if (id >= _poolsById.Length) Array.Resize(ref _poolsById, Math.Max(id + 1, _poolsById.Length * 2));
+            var poolType = typeof(T);
+            if (_pools.TryGetValue(poolType, out var pool))
+            {
+                return (EcsPool<T>)pool;
+            }
 
-            var pool = _poolsById[id];
-            if (pool != null) return (EcsPool<T>)pool;
+            pool = CreatePool<T>();
+            _pools[poolType] = pool;
+            return (EcsPool<T>)pool;
+        }
 
-            var newPool = new EcsPool<T>();
-            _poolsById[id] = newPool;
-            return newPool;
+        internal object CreatePool<T>() where T : new()
+        {
+            var poolType = typeof(T);
+            return _poolFactories.TryGetValue(poolType, out var factory)
+                ? factory()
+                : new EcsPool<T>();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -156,7 +154,6 @@ namespace BitterECS.Core
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EcsEntity Get(int id) => Has(id) ? new EcsEntity(this, id) : throw new("Entity not created");
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -170,21 +167,29 @@ namespace BitterECS.Core
 
         public void Dispose()
         {
-            for (int i = 0; i < _poolsById.Length; i++)
+            foreach (var pool in _pools.Values)
             {
-                if (_poolsById[i] is IDisposable d) d.Dispose();
+                if (pool is IDisposable disposable) disposable.Dispose();
             }
-            _poolsById = Array.Empty<IPoolDestroy>();
+            _pools.Clear();
 
             if (_linkedProviders.Count > 0)
             {
-                foreach (var p in _linkedProviders.Values) p?.Dispose();
-                _linkedProviders.Clear();
+                var providers = new ILinkableProvider[_linkedProviders.Count];
+                _linkedProviders.Values.CopyTo(providers, 0);
+
+                for (var i = 0; i < providers.Length; i++)
+                {
+                    providers[i]?.Dispose();
+                }
             }
 
+            _linkedProviders.Clear();
             _freeEntityIds.Clear();
+            _poolFactories.Clear();
             _aliveCount = 0;
-            _nextId = 0;
+            _entitiesCount = 0;
+
             _aliveIds = Array.Empty<int>();
             _idToIndex = Array.Empty<int>();
             _componentCounts = Array.Empty<int>();

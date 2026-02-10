@@ -10,7 +10,7 @@ public class PlayerTweenMovingSystem : IEcsFixedRunSystem
     private const float Duration = 0.2f;
     private const float ReferenceSpeed = 5f;
 
-    private readonly EcsEvent ecsEvent =
+    private readonly EcsEvent _ecsEvent =
         new EcsEvent<EntitiesPresenter>()
         .SubscribeWhereEntity<IsMovingComponent>(e => e.HasProvider<EntitiesProvider>(), removed: OnRemoved);
 

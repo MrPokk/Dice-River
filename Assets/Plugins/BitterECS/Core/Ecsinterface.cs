@@ -12,7 +12,7 @@ namespace BitterECS.Core
     public interface IEcsDestroySystem : IEcsAutoImplement { void Destroy(); }
     public interface IEcsPostDestroySystem : IEcsAutoImplement { void PostDestroy(); }
 
-    public interface IPoolDestroy
+    internal interface IHasPool
     {
         bool Has(int entityId);
         void Remove(int entityId);

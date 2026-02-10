@@ -62,12 +62,12 @@ public class DiceInteractionSystem
 
     public static bool IsPlacing(Vector2Int index)
     {
-        return !GridDice.HasGameObject(index);
+        return GridDice.HasNotGameObject(index) && GridDice.IsWithinGrid(index);
     }
 
     public static bool IsPlacing(Vector3 indexWorld)
     {
-        return !GridDice.HasGameObject(GridDice.ConvertingPosition(indexWorld));
+        return IsPlacing(GridDice.ConvertingPosition(indexWorld));
     }
 
     public static void InstantiateObject(Vector2Int index, DiceProvider prefab, out ProviderEcs instantiateObject)

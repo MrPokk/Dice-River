@@ -54,13 +54,13 @@ namespace BitterECS.Core
 
         private struct ComponentRemoveOperations
         {
-            private IPoolDestroy[] _pools;
+            private IHasPool[] _pools;
             private int _count;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public void Add(IPoolDestroy pool)
+            public void Add(IHasPool pool)
             {
-                if (_pools == null) _pools = new IPoolDestroy[EcsConfig.EntityCallbackFactor];
+                if (_pools == null) _pools = new IHasPool[EcsConfig.EntityCallbackFactor];
                 if (_count == _pools.Length) Array.Resize(ref _pools, _count * 2);
                 _pools[_count++] = pool;
             }

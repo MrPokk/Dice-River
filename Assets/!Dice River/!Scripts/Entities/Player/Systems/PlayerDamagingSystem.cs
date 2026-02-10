@@ -1,4 +1,5 @@
 ﻿using BitterECS.Core;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerDamagingSystem : IEcsFixedRunSystem
@@ -25,7 +26,7 @@ public class PlayerDamagingSystem : IEcsFixedRunSystem
             {
                 var newHealth = health.currentHealth - damageComp.damage;
                 health.SetHealth(newHealth);
-                entity.AddFrameToEvent<IsHealthChanging>(new());
+                entity.AddFrameToEvent<IsHealthChanging>();
 
                 health.lastDamage = damageComp.damage;
                 health.timeImmunity = damageComp.damageIntervalSecond;
