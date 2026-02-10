@@ -6,258 +6,164 @@ namespace BitterECS.Core
     public struct EcsFilter
     {
         private readonly EcsPresenter _presenter;
-        private ICondition[] _includeConditions;
-        private ICondition[] _excludeConditions;
-        private ICondition[] _orConditions;
+        private IPoolDestroy[] _includePools;
+        private IPoolDestroy[] _excludePools;
+        private Predicate<EcsEntity>[] _predicates;
         private int _includeCount;
         private int _excludeCount;
-        private int _orCount;
+        private int _predicateCount;
 
         private RefWorldVersion _refWorld;
-        private EcsEntity[] _filteredCache;
+        private int[] _filteredCache;
         private int _filteredLength;
-
-        public readonly ReadOnlySpan<ICondition> IncludeSpan => new(_includeConditions, 0, _includeCount);
-        public readonly ReadOnlySpan<ICondition> ExcludeSpan => new(_excludeConditions, 0, _excludeCount);
-        public readonly ReadOnlySpan<ICondition> OrSpan => new(_orConditions, 0, _orCount);
 
         public EcsFilter(EcsPresenter presenter)
         {
             _presenter = presenter ?? throw new ArgumentNullException(nameof(presenter));
-            _includeConditions = new ICondition[EcsConfig.FilterConditionInclude];
-            _excludeConditions = new ICondition[EcsConfig.FilterConditionExclude];
-            _orConditions = new ICondition[EcsConfig.FilterConditionInclude];
+            _includePools = new IPoolDestroy[EcsConfig.FilterConditionInclude];
+            _excludePools = new IPoolDestroy[EcsConfig.FilterConditionExclude];
+            _predicates = new Predicate<EcsEntity>[EcsConfig.FilterPredicate];
             _includeCount = 0;
             _excludeCount = 0;
-            _orCount = 0;
-
+            _predicateCount = 0;
             _refWorld = new();
-
-            _filteredCache = new EcsEntity[GetRequiredCapacity(presenter)];
+            _filteredCache = new int[presenter.CountEntity + 32];
             _filteredLength = 0;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter Include<T>() where T : struct
+        public EcsFilter Include<T>() where T : new()
         {
-            AddCondition(ref _includeConditions, new HasComponentCondition<T>(), ref _includeCount);
+            AddPool(ref _includePools, ref _includeCount, _presenter.GetPool<T>());
             return this;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter Include<T>(Predicate<T> predicate) where T : struct
+        public EcsFilter Include<T>(Predicate<T> predicate) where T : new()
         {
-            AddCondition(ref _includeConditions, new ComponentPredicateCondition<T>(predicate), ref _includeCount);
+            Include<T>();
+            AddPredicate(e => predicate(e.Get<T>()));
+            return this;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public EcsFilter Exclude<T>() where T : new()
+        {
+            AddPool(ref _excludePools, ref _excludeCount, _presenter.GetPool<T>());
             return this;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EcsFilter Where(Predicate<EcsEntity> predicate)
         {
-            AddCondition(ref _includeConditions, new EntityPredicateCondition(predicate), ref _includeCount);
+            AddPredicate(predicate);
             return this;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EcsFilter WhereProvider<T>(Predicate<T> predicate) where T : class, ILinkableProvider
         {
-            AddCondition(ref _includeConditions, new TypeProviderPredicateCondition<T>(predicate), ref _includeCount);
+            AddPredicate(e => e.TryGetProvider<T>(out var p) && predicate(p));
             return this;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EcsFilter WhereProvider<T>() where T : class, ILinkableProvider
         {
-            AddCondition(ref _includeConditions, new TypeProviderPredicateCondition<T>(static _ => true), ref _includeCount);
+            AddPredicate(e => e.HasProvider<T>());
             return this;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter Exclude<T>() where T : struct
+        private void AddPool(ref IPoolDestroy[] pools, ref int count, IPoolDestroy pool)
         {
-            AddCondition(ref _excludeConditions, new NotHasComponentCondition<T>(), ref _excludeCount);
-            return this;
+            if (count >= pools.Length) Array.Resize(ref pools, pools.Length * 2);
+            pools[count++] = pool;
+        }
+
+        private void AddPredicate(Predicate<EcsEntity> predicate)
+        {
+            if (_predicateCount >= _predicates.Length) Array.Resize(ref _predicates, _predicates.Length * 2);
+            _predicates[_predicateCount++] = predicate;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter Or<T>() where T : struct
-        {
-            AddCondition(ref _orConditions, new HasComponentCondition<T>(), ref _orCount);
-            return this;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter Or<T>(Predicate<T> predicate) where T : struct
-        {
-            AddCondition(ref _orConditions, new ComponentPredicateCondition<T>(predicate), ref _orCount);
-            return this;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter Or(Predicate<EcsEntity> predicate)
-        {
-            AddCondition(ref _orConditions, new EntityPredicateCondition(predicate), ref _orCount);
-            return this;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter OrProvider<T>(Predicate<T> predicate) where T : class, ILinkableProvider
-        {
-            AddCondition(ref _orConditions, new TypeProviderPredicateCondition<T>(predicate), ref _orCount);
-            return this;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter OrProvider<T>() where T : class, ILinkableProvider
-        {
-            AddCondition(ref _orConditions, new TypeProviderPredicateCondition<T>(static _ => true), ref _orCount);
-            return this;
-        }
-
-        private void AddCondition(ref ICondition[] conditions, ICondition newCondition, ref int count)
-        {
-            if (count >= conditions.Length)
-            {
-                Array.Resize(ref conditions, conditions.Length * 2);
-            }
-
-            conditions[count] = newCondition;
-            count++;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private readonly bool MatchesAllConditions(EcsEntity entity)
-        {
-            for (var i = 0; i < IncludeSpan.Length; i++)
-            {
-                if (!IncludeSpan[i].Check(entity))
-                {
-                    return false;
-                }
-            }
-
-            for (var i = 0; i < ExcludeSpan.Length; i++)
-            {
-                if (!ExcludeSpan[i].Check(entity))
-                {
-                    return false;
-                }
-            }
-
-            if (OrSpan.Length <= 0)
-            {
-                return true;
-            }
-
-            for (var i = 0; i < OrSpan.Length; i++)
-            {
-                if (!OrSpan[i].Check(entity))
-                {
-                    continue;
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        private static int GetRequiredCapacity(EcsPresenter presenter) => presenter.CountEntity + (presenter.CountEntity / 4);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void EnsureCacheCapacity()
-        {
-            var requiredCapacity = GetRequiredCapacity(_presenter);
-            var requiredCapacityMax = requiredCapacity + (requiredCapacity / 2);
-            if (_filteredCache.Length >= requiredCapacity && _filteredCache.Length < requiredCapacityMax)
-            {
-                return;
-            }
-
-            Array.Resize(ref _filteredCache, requiredCapacity);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private ReadOnlySpan<EcsEntity> ValidationCacheOnFilter()
-        {
-            EnsureCacheCapacity();
-
-            if (_refWorld != EcsWorld.GetRefWorld())
-            {
-                RebuildCache();
-                _refWorld = EcsWorld.GetRefWorld();
-            }
-
-            var filteringSpan = new ReadOnlySpan<EcsEntity>(_filteredCache, 0, _filteredLength);
-            return filteringSpan;
-        }
-
         private void RebuildCache()
         {
             var aliveIds = _presenter.GetAliveIds();
+            if (aliveIds.Length > _filteredCache.Length) Array.Resize(ref _filteredCache, aliveIds.Length + 32);
+
             _filteredLength = 0;
+            var inc = _includePools;
+            var exc = _excludePools;
+            var preds = _predicates;
+            var iCnt = _includeCount;
+            var eCnt = _excludeCount;
+            var pCnt = _predicateCount;
+            var pres = _presenter;
 
-            for (var i = 0; i < aliveIds.Length; i++)
+            foreach (var id in aliveIds)
             {
-                var id = aliveIds[i];
-                var entity = new EcsEntity(_presenter, id);
+                bool match = true;
 
-                if (!MatchesAllConditions(entity)) continue;
-
-                if (_filteredLength >= _filteredCache.Length)
+                for (int i = 0; i < iCnt; i++)
                 {
-                    Array.Resize(ref _filteredCache, _filteredCache.Length * 2);
+                    if (!inc[i].Has(id)) { match = false; break; }
                 }
+                if (!match) continue;
 
-                _filteredCache[_filteredLength] = entity;
-                _filteredLength++;
+                for (int i = 0; i < eCnt; i++)
+                {
+                    if (exc[i].Has(id)) { match = false; break; }
+                }
+                if (!match) continue;
+
+                if (pCnt > 0)
+                {
+                    var entity = new EcsEntity(pres, id);
+                    for (int i = 0; i < pCnt; i++)
+                    {
+                        if (!preds[i](entity)) { match = false; break; }
+                    }
+                }
+                if (!match) continue;
+
+                _filteredCache[_filteredLength++] = id;
             }
+            _refWorld = EcsWorld.GetRefWorld();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly Filter Entities() => new(this);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly Filter<T> Providers<T>() where T : class, ILinkableProvider => new(this);
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly Filter<ILinkableProvider> Providers() => Providers<ILinkableProvider>();
-
-        public ReadOnlySpan<EcsEntity>.Enumerator GetEnumerator() => ValidationCacheOnFilter().GetEnumerator();
-        public int Count() => ValidationCacheOnFilter().Length;
-
-        public struct Filter
+        private Enumerator GetFastEnumerator()
         {
-            private EcsFilter _filter;
-            public Filter(in EcsFilter filter) => _filter = filter;
-            public ReadOnlySpan<EcsEntity>.Enumerator GetEnumerator() => _filter.ValidationCacheOnFilter().GetEnumerator();
-            public readonly int Count() => _filter.ValidationCacheOnFilter().Length;
+            if (_refWorld != EcsWorld.GetRefWorld()) RebuildCache();
+            return new Enumerator(_presenter, _filteredCache, _filteredLength);
         }
 
-        public struct Filter<T> where T : class, ILinkableProvider
-        {
-            private EcsFilter _filter;
+        public Enumerator GetEnumerator() => GetFastEnumerator();
 
-            public Filter(in EcsFilter filter) => _filter = filter;
+        public ref struct Enumerator
+        {
+            private readonly EcsPresenter _presenter;
+            private readonly int[] _entities;
+            private readonly int _count;
+            private int _index;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public Enumerator GetEnumerator() => new(_filter.ValidationCacheOnFilter());
-
-            public ref struct Enumerator
+            public Enumerator(EcsPresenter p, int[] entities, int count)
             {
-                private ReadOnlySpan<EcsEntity>.Enumerator _entityEnumerator;
+                _presenter = p;
+                _entities = entities;
+                _count = count;
+                _index = -1;
+            }
 
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public bool MoveNext() => ++_index < _count;
+
+            public EcsEntity Current
+            {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                public Enumerator(ReadOnlySpan<EcsEntity> entities) => _entityEnumerator = entities.GetEnumerator();
-
-                [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                public bool MoveNext() => _entityEnumerator.MoveNext();
-
-                public T Current
-                {
-                    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                    get => _entityEnumerator.Current.GetProvider<T>();
-                }
+                get => new EcsEntity(_presenter, _entities[_index]);
             }
         }
     }
@@ -274,21 +180,21 @@ namespace BitterECS.Core
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter Include<TComponent>() where TComponent : struct
+        public EcsFilter Include<TComponent>() where TComponent : new()
         {
             EnsureInitialized();
             return _filter.Value.Include<TComponent>();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter Include<TComponent>(Predicate<TComponent> predicate) where TComponent : struct
+        public EcsFilter Include<TComponent>(Predicate<TComponent> predicate) where TComponent : new()
         {
             EnsureInitialized();
             return _filter.Value.Include(predicate);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter Exclude<TComponent>() where TComponent : struct
+        public EcsFilter Exclude<TComponent>() where TComponent : new()
         {
             EnsureInitialized();
             return _filter.Value.Exclude<TComponent>();
@@ -315,80 +221,10 @@ namespace BitterECS.Core
             return _filter.Value.WhereProvider<TComponent>();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter Or<TComponent>() where TComponent : struct
+        public EcsFilter.Enumerator GetEnumerator()
         {
             EnsureInitialized();
-            return _filter.Value.Or<TComponent>();
+            return _filter.Value.GetEnumerator();
         }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter Or<TComponent>(Predicate<TComponent> predicate) where TComponent : struct
-        {
-            EnsureInitialized();
-            return _filter.Value.Or(predicate);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter.Filter Entities()
-        {
-            EnsureInitialized();
-            return _filter.Value.Entities();
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public EcsFilter.Filter<TProvider> Providers<TProvider>() where TProvider : class, ILinkableProvider
-        {
-            EnsureInitialized();
-            return _filter.Value.Providers<TProvider>();
-        }
-    }
-
-    public interface ICondition
-    {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        bool Check(EcsEntity entity);
-    }
-
-    public readonly struct HasComponentCondition<T> : ICondition where T : struct
-    {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Check(EcsEntity entity) => entity.Has<T>();
-    }
-
-    public readonly struct EntityPredicateCondition : ICondition
-    {
-        private readonly Predicate<EcsEntity> _predicate;
-
-        public EntityPredicateCondition(Predicate<EcsEntity> predicate) => _predicate = predicate;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Check(EcsEntity entity) => _predicate(entity);
-    }
-
-    public readonly struct TypeProviderPredicateCondition<T> : ICondition where T : class, ILinkableProvider
-    {
-        private readonly Predicate<T> _predicate;
-
-        public TypeProviderPredicateCondition(Predicate<T> predicate) => _predicate = predicate;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Check(EcsEntity entity) => entity.TryGetProvider<T>(out var provider) && _predicate(provider);
-    }
-
-    public readonly struct NotHasComponentCondition<T> : ICondition where T : struct
-    {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Check(EcsEntity entity) => !entity.Has<T>();
-    }
-
-    public readonly struct ComponentPredicateCondition<T> : ICondition where T : struct
-    {
-        private readonly Predicate<T> _predicate;
-
-        public ComponentPredicateCondition(Predicate<T> predicate) => _predicate = predicate;
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Check(EcsEntity entity) => entity.Has<T>() && _predicate(entity.Get<T>());
     }
 }

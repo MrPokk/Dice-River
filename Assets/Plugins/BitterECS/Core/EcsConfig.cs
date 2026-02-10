@@ -1,4 +1,4 @@
-namespace BitterECS.Core
+﻿namespace BitterECS.Core
 {
     public static class EcsConfig
     {
@@ -9,15 +9,16 @@ namespace BitterECS.Core
         // Filter settings
         public const ushort FilterConditionInclude = 6;
         public const ushort FilterConditionExclude = 2;
+        public const ushort FilterPredicate = 2;
 
         // EntityBuilder and EntityDestroyer settings
         public const ushort EntityCallbackFactor = 4;
 
         // EcsPresenter settings
-        public const ushort InitialPresentersCapacity = 16;
+        public const ushort InitialPoolsCapacity = 128;
         public const ushort InitialEntitiesCapacity = 128;
+        public const ushort InitialPresentersCapacity = 16;
         public const ushort InitialLinkedEntitiesCapacity = 64;
-        public const ushort AllowedTypesCapacity = 4;
 
         // EcsSystems settings
         public const ushort InitialSystemsCapacity = 64;

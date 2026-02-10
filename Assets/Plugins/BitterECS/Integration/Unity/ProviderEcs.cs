@@ -175,7 +175,6 @@ namespace BitterECS.Integration
         }
 
 #if UNITY_EDITOR
-        private T _lastFrameValue;
 
         private void Update()
         {
@@ -185,7 +184,6 @@ namespace BitterECS.Integration
             if (entity.Presenter != null && entity.Has<T>())
             {
                 _value = entity.Get<T>();
-                _lastFrameValue = _value;
             }
         }
 

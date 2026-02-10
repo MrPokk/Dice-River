@@ -184,19 +184,14 @@ namespace BitterECS.Core
                 _subscriptions[i] = (IEcsEvent)Activator.CreateInstance(subType, priority, presenter, (Action<EcsEntity>)OnComponentChanged);
             }
 
-            foreach (var entity in presenter.GetAliveIds())
-            {
-                CheckEntity(presenter.Get(entity));
-            }
+            foreach (var entityId in presenter.GetAliveIds()) CheckEntity(presenter.Get(entityId));
         }
 
         private void OnComponentChanged(EcsEntity entity) => CheckEntity(entity);
 
         private void CheckEntity(EcsEntity entity)
         {
-            if (entity.Presenter == null || !entity.Presenter.Has(entity.Id))
-                return;
-
+            if (entity.Presenter == null || !entity.Presenter.Has(entity.Id)) return;
             var id = entity.Id;
             var satisfied = _condition(entity);
             var wasActive = _activeEntities.Contains(id);
@@ -223,7 +218,6 @@ namespace BitterECS.Core
     internal class ComponentSubscription<T> : IEcsEvent where T : new()
     {
         private readonly EcsEventPool<T> _pool;
-
         public Priority Priority { get; set; }
         public EcsPresenter Presenter { get; }
         public Action<EcsEntity> Added { get; }
@@ -235,7 +229,6 @@ namespace BitterECS.Core
             Presenter = presenter;
             Added = onChanged;
             Removed = onChanged;
-
             presenter.AddCheckEvent<T>();
             _pool = presenter.GetPool<T>() as EcsEventPool<T>
                 ?? throw new InvalidOperationException($"Pool for {typeof(T)} is not an event pool");
@@ -244,27 +237,5 @@ namespace BitterECS.Core
 
         public void Dispose() => _pool.Unsubscribe(this);
 
-    }
-
-    public static class EcsConditions
-    {
-        public static Predicate<T> GreaterThan<T>(T value) where T : IComparable<T> => c => c.CompareTo(value) > 0;
-        public static Predicate<T> LessThan<T>(T value) where T : IComparable<T> => c => c.CompareTo(value) < 0;
-        public static Predicate<T> EqualTo<T>(T value) where T : IEquatable<T> => c => c.Equals(value);
-        public static Predicate<T> NotNull<T>() where T : class => c => c != null;
-
-        public static bool HasProvider<T>(EcsEntity e) where T : ILinkableProvider => e.HasProvider<T>();
-
-        public static bool Has<T1>(EcsEntity e) where T1 : new() => e.Has<T1>();
-        public static bool Has<T1, T2>(EcsEntity e) where T1 : new() where T2 : new() => Has<T1>(e) && e.Has<T2>();
-        public static bool Has<T1, T2, T3>(EcsEntity e) where T1 : new() where T2 : new() where T3 : new() => Has<T1, T2>(e) && e.Has<T3>();
-        public static bool Has<T1, T2, T3, T4>(EcsEntity e) where T1 : new() where T2 : new() where T3 : new() where T4 : new() => Has<T1, T2, T3>(e) && e.Has<T4>();
-        public static bool Has<T1, T2, T3, T4, T5>(EcsEntity e) where T1 : new() where T2 : new() where T3 : new() where T4 : new() where T5 : new() => Has<T1, T2, T3, T4>(e) && e.Has<T5>();
-
-        public static bool Not<T1>(EcsEntity e) where T1 : new() => !Has<T1>(e);
-        public static bool Not<T1, T2>(EcsEntity e) where T1 : new() where T2 : new() => !Has<T1, T2>(e);
-        public static bool Not<T1, T2, T3>(EcsEntity e) where T1 : new() where T2 : new() where T3 : new() => !Has<T1, T2, T3>(e);
-        public static bool Not<T1, T2, T3, T4>(EcsEntity e) where T1 : new() where T2 : new() where T3 : new() where T4 : new() => !Has<T1, T2, T3, T4>(e);
-        public static bool Not<T1, T2, T3, T4, T5>(EcsEntity e) where T1 : new() where T2 : new() where T3 : new() where T4 : new() where T5 : new() => !Has<T1, T2, T3, T4, T5>(e);
     }
 }

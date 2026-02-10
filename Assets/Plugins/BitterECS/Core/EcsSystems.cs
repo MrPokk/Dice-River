@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace BitterECS.Core
 {
-
     public sealed class EcsSystems : IDisposable
     {
         private static EcsSystems s_instance;
@@ -18,7 +17,6 @@ namespace BitterECS.Core
         {
             _systems.Clear();
             _cachedInstanceSystems.Clear();
-
             var systemTypes = ReflectionUtility.FindAllAssignments<IEcsAutoImplement>();
             foreach (var type in systemTypes)
             {
@@ -31,83 +29,55 @@ namespace BitterECS.Core
 
         internal void AddSystemInternal(IEcsSystem system)
         {
-            if (system == null)
-            {
-                throw new ArgumentNullException(nameof(system));
-            }
-
+            if (system == null) throw new ArgumentNullException(nameof(system));
             AddToSystemInternal(system);
             _cachedInstanceSystems.Clear();
         }
 
         internal void AddSystemsInternal(params IEcsSystem[] systems)
         {
-            if (systems == null)
-            {
-                throw new ArgumentNullException(nameof(systems));
-            }
-
-            foreach (var system in systems)
-            {
-                AddToSystemInternal(system);
-            }
-
+            if (systems == null) throw new ArgumentNullException(nameof(systems));
+            foreach (var system in systems) AddToSystemInternal(system);
             _cachedInstanceSystems.Clear();
         }
 
         private void AddToSystemInternal(IEcsSystem system)
         {
-            if (_systems.Contains(system))
-            {
-                return;
-            }
-
+            if (_systems.Contains(system)) return;
             _systems.Add(system);
         }
 
         internal void RunInternal<T>(Action<T> action) where T : class, IEcsSystem
         {
             var systems = GetSystemsInternal<T>();
-            foreach (var system in systems)
+            for (int i = 0; i < systems.Length; i++)
             {
-                action(system);
+                action(systems[i]);
             }
         }
 
-        internal IReadOnlyCollection<T> GetSystemsInternal<T>() where T : class, IEcsSystem
+        internal T[] GetSystemsInternal<T>() where T : class, IEcsSystem
         {
             var type = typeof(T);
+            if (_cachedInstanceSystems.TryGetValue(type, out var cached)) return (T[])cached;
 
-            if (_cachedInstanceSystems.TryGetValue(type, out var cached))
-            {
-                return (T[])cached;
-            }
-
-            var result = new List<T>();
+            var list = new Stack<T>();
             foreach (var system in _systems)
             {
-                if (system is T typedSystem)
-                {
-                    result.Add(typedSystem);
-                }
+                if (system is T typedSystem) list.Push(typedSystem);
             }
 
-            var cachedResult = result.ToArray();
-            _cachedInstanceSystems[type] = cachedResult;
-
-            return cachedResult;
+            var result = list.ToArray();
+            _cachedInstanceSystems[type] = result;
+            return result;
         }
 
         public void Dispose()
         {
             foreach (var system in _systems)
             {
-                if (system is IDisposable disposableSystem)
-                {
-                    disposableSystem.Dispose();
-                }
+                if (system is IDisposable disposableSystem) disposableSystem.Dispose();
             }
-
             _systems.Clear();
             _cachedInstanceSystems.Clear();
             s_instance = null;

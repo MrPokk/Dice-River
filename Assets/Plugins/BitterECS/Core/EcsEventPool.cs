@@ -7,15 +7,8 @@ namespace BitterECS.Core
     {
         private readonly SortedSet<IEcsEvent> _subscriptions = new(PriorityUtility.Sort());
 
-        public void Subscribe(IEcsEvent eventTo)
-        {
-            _subscriptions.Add(eventTo);
-        }
-
-        public void Unsubscribe(IEcsEvent eventTo)
-        {
-            _subscriptions.Remove(eventTo);
-        }
+        public void Subscribe(IEcsEvent eventTo) => _subscriptions.Add(eventTo);
+        public void Unsubscribe(IEcsEvent eventTo) => _subscriptions.Remove(eventTo);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override void Add(int entityId, in T component)

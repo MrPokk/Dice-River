@@ -1,8 +1,6 @@
-﻿using System;
-using BitterECS.Core;
+﻿using BitterECS.Core;
 using DG.Tweening;
 using UnityEngine;
-using static BitterECS.Core.EcsFilter;
 
 public class PlayerTweenMovingSystem : IEcsFixedRunSystem
 {
@@ -12,16 +10,15 @@ public class PlayerTweenMovingSystem : IEcsFixedRunSystem
     private const float Duration = 0.2f;
     private const float ReferenceSpeed = 5f;
 
-    private Filter MovingEntities =>
-        new EcsFilter<EntitiesPresenter>()
-            .Include<IsMovingComponent>()
-            .Include<MovingComponent>()
-            .WhereProvider<EntitiesProvider>()
-            .Entities();
-
     private readonly EcsEvent ecsEvent =
         new EcsEvent<EntitiesPresenter>()
         .SubscribeWhereEntity<IsMovingComponent>(e => e.HasProvider<EntitiesProvider>(), removed: OnRemoved);
+
+    private EcsFilter _movingEntities =
+        new EcsFilter<EntitiesPresenter>()
+            .Include<IsMovingComponent>()
+            .Include<MovingComponent>()
+            .WhereProvider<EntitiesProvider>();
 
     private static void OnRemoved(EcsEntity entity)
     {
@@ -35,7 +32,7 @@ public class PlayerTweenMovingSystem : IEcsFixedRunSystem
 
     public void FixedRun()
     {
-        foreach (var entity in MovingEntities)
+        foreach (var entity in _movingEntities)
         {
             var transform = entity.GetProvider<EntitiesProvider>().transform;
             var speed = entity.Get<MovingComponent>().velocity;
