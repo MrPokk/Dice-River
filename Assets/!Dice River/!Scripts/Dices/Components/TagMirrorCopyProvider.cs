@@ -3,10 +3,7 @@ using BitterECS.Integration;
 using UnityEngine;
 
 [Serializable]
-public struct TagProtectiveDice
-{
-    public int region;
-}
+public struct TagMirrorCopy { }
 
 [RequireComponent(typeof(NeighborsComponentProvider))]
-public class TagProtectiveDiceProvider : ProviderEcs<TagProtectiveDice> { }
+public class TagMirrorCopyProvider : ProviderEcs<TagMirrorCopy> { }

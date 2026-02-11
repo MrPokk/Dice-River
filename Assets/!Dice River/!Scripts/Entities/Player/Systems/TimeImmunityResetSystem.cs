@@ -1,6 +1,6 @@
-using BitterECS.Core;
+﻿using BitterECS.Core;
 
-public class TimeImmunityResetSystem : IEcsAutoImplement
+public class TimeImmunityResetSystem : IEcsInitSystem
 {
     public Priority Priority => Priority.High;
 
@@ -10,6 +10,18 @@ public class TimeImmunityResetSystem : IEcsAutoImplement
         DamageToIntervalComponent>(e),
         added: OnReset);
 
+    private EcsFilter _ecsEntities = new EcsFilter<EntitiesPresenter>()
+    .Include<HealthComponent>()
+    .Include<DamageToIntervalComponent>();
+
+    public void Init()
+    {
+        foreach (var entity in _ecsEntities)
+        {
+            entity.Get<HealthComponent>().timeImmunity = entity.Get<DamageToIntervalComponent>().damageIntervalSecond;
+        }
+    }
+
     private static void OnReset(EcsEntity entity)
     {
         ref var healthComp = ref entity.Get<HealthComponent>();
@@ -17,4 +29,5 @@ public class TimeImmunityResetSystem : IEcsAutoImplement
 
         healthComp.timeImmunity = damageComp.damageIntervalSecond;
     }
+
 }

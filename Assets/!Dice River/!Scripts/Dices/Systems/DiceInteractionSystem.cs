@@ -30,6 +30,7 @@ public class DiceInteractionSystem
         GridDice.ExtractGameObject(index);
 
         objectExtract.spriteSide.ResetSides();
+        objectExtract.Entity.AddFrameToEvent<IsExtractionEvent>();
 
         return objectExtract;
     }
@@ -49,6 +50,7 @@ public class DiceInteractionSystem
         diceObject.spriteSide.ResetSides();
 
         diceObject.Entity.Add<GridComponent>(new(index, GridDice));
+        diceObject.Entity.AddFrameToEvent<IsPlacingEvent>();
 
         UpdateNeighbors(index, diceObject, true);
 
@@ -81,6 +83,7 @@ public class DiceInteractionSystem
         {
             dice.spriteSide.ResetSides();
             UpdateNeighbors(index, dice, true);
+            instantiateObject.Entity.AddFrameToEvent<IsInstantiateEvent>();
         }
     }
 

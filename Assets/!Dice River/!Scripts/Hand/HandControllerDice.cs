@@ -9,7 +9,7 @@ public class HandControllerDice : HandController<EcsEntity, UIProvider>
 
     public void Initialize()
     {
-        var p = new Loader<DiceProvider>(DicesPaths.BASE_DICE).Prefab();
+        var p = new Loader<DiceProvider>(DicesPaths.PLUS_FORWARD_DICE).Prefab();
         for (int i = 0; i < 3; i++) Add(p.NewEntity(), p.spriteIcon.Prefab());
     }
 

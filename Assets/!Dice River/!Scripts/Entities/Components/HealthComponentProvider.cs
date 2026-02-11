@@ -29,4 +29,5 @@ public struct HealthComponent
     [ReadOnly] public int lastDamage;
 }
 
-public class HealthComponentProvider : ProviderEcs<HealthComponent> { }
+public class HealthComponentProvider : ProviderEcs<HealthComponent>
+{ }

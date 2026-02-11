@@ -5,6 +5,10 @@
 
 public static class UiPrefabsPaths
 {
-    /// <summary> Provider: DiceProvider </summary>
-    public const string SELECTOR = "UI/Prefabs/Selector";
+    /// <summary> Component: UIHandElement </summary>
+    public const string UIHAND_ELEMENT = "UI/Prefabs/UIHandElement";
+    /// <summary> Component: UIHealthElement </summary>
+    public const string UIHEALTH_ELEMENT = "UI/Prefabs/UIHealthElement";
+    /// <summary> Component: UISelectorElement </summary>
+    public const string UISELECTOR = "UI/Prefabs/UISelector";
 }

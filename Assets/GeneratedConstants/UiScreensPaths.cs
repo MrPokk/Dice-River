@@ -5,6 +5,8 @@
 
 public static class UiScreensPaths
 {
-    /// <summary> Component: UIHandScreen </summary>
-    public const string UIHAND_SCREEN = "UI/!Screens/UIHandScreen";
+    /// <summary> Component: UIDefeatScreen </summary>
+    public const string UIDEFEAT_SCREEN = "UI/!Screens/UIDefeatScreen";
+    /// <summary> Component: UIPlayerScreen </summary>
+    public const string UIPLAYER_SCREEN = "UI/!Screens/UIPlayerScreen";
 }

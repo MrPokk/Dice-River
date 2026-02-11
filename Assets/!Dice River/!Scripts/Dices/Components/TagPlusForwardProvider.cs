@@ -3,10 +3,10 @@ using BitterECS.Integration;
 using UnityEngine;
 
 [Serializable]
-public struct TagProtectiveDice
+public struct TagPlusForward
 {
-    public int region;
+    public int amount;
 }
 
 [RequireComponent(typeof(NeighborsComponentProvider))]
-public class TagProtectiveDiceProvider : ProviderEcs<TagProtectiveDice> { }
+public class TagPlusForwardProvider : ProviderEcs<TagPlusForward> { }

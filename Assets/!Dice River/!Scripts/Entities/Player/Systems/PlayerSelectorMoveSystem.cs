@@ -16,7 +16,7 @@ public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
 
     public void Init()
     {
-        var selectorPrefab = new Loader<GameObject>(UiPrefabsPaths.SELECTOR).New();
+        var selectorPrefab = new Loader<GameObject>(UiPrefabsPaths.UISELECTOR).New();
         _selector = selectorPrefab.transform;
     }
 
