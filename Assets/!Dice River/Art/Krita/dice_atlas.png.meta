@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -161,9 +161,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 34
-        y: 664
+        y: 663
         width: 97
-        height: 91
+        height: 94
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,6 +200,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: dice_atlas_5
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 663
+        width: 97
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 609e71938ca853fd798e6f7474ae193d
+      internalID: -223435966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -220,6 +242,8 @@ TextureImporter:
       dice_atlas_1: 938655898
       dice_atlas_2: -1409523287
       dice_atlas_3: -1240215664
+      dice_atlas_4: 95402345
+      dice_atlas_5: -223435966
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

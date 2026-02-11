@@ -100,12 +100,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2537004601126083646}
+  - component: {fileID: 7411409852435515135}
   - component: {fileID: 5931919878062488204}
   - component: {fileID: 3970930688320794487}
   - component: {fileID: 5823157704474257880}
   - component: {fileID: 7723210913357833443}
   - component: {fileID: -4553256082684300076}
-  - component: {fileID: 7411409852435515135}
   - component: {fileID: -736192163089186376}
   - component: {fileID: -6986582136062775450}
   - component: {fileID: 3283195717042659127}
@@ -133,6 +133,31 @@ Transform:
   - {fileID: 4611179171066279233}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &7411409852435515135
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7892323701490823663}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 0.7
+  m_Radius: 0.25
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5931919878062488204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,32 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageComponentProvider
   _value:
     damage: 3
-    damageIntervalSecond: 3
---- !u!143 &7411409852435515135
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7892323701490823663}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 0.7
-  m_Radius: 0.25
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+    damageIntervalSecond: 0.5
 --- !u!114 &-736192163089186376
 MonoBehaviour:
   m_ObjectHideFlags: 0

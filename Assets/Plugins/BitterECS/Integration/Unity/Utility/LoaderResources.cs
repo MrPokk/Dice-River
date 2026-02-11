@@ -14,5 +14,8 @@ public readonly ref struct Loader<T> where T : Object
 
     public T Prefab() => Asset;
     public T New() => Object.Instantiate(Prefab());
+    public T New(Transform parent) => Object.Instantiate(Prefab(), parent);
+    public T New(Vector3 position, Quaternion rotation) => Object.Instantiate(Prefab(), position, rotation);
+    public T New(Vector3 position, Quaternion rotation, Transform parent) => Object.Instantiate(Prefab(), position, rotation, parent);
     public static implicit operator T(Loader<T> loader) => Object.Instantiate(loader.Asset);
 }

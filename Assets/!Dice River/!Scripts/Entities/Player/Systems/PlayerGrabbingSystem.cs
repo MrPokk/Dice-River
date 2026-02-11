@@ -56,6 +56,8 @@ public class PlayerGrabbingSystem : IEcsInitSystem, IEcsFixedRunSystem
 
             diceProvider.GetComponent<Collider>().enabled = true;
 
+            diceProvider.spriteSide.SetState(DiceVisualState.Default);
+            diceProvider.spriteSide.ToggleRipple();
             ChangeSortingOrder(diceProvider, -GrabLayerOffset);
 
             entity.Remove<IsGrabbingComponent>();
@@ -69,17 +71,19 @@ public class PlayerGrabbingSystem : IEcsInitSystem, IEcsFixedRunSystem
         foreach (var entity in _ecsFilter)
         {
             var entertainPos = GetPositionTo(entity);
-            var dice = DiceInteractionSystem.Extraction(entertainPos);
+            var diceProvider = DiceInteractionSystem.Extraction(entertainPos);
 
-            if (dice == null) continue;
+            if (diceProvider == null) continue;
 
-            entity.Add(new IsGrabbingComponent(dice.Entity));
+            diceProvider.spriteSide.SetState(DiceVisualState.Lifted);
+            diceProvider.spriteSide.ToggleRipple();
+            entity.Add(new IsGrabbingComponent(diceProvider.Entity));
             var transform = entity.GetProvider<EntitiesProvider>().transform;
 
-            dice.GetComponent<Collider>().enabled = false;
-            dice.transform.position = transform.position + Vector3.up;
+            diceProvider.GetComponent<Collider>().enabled = false;
+            diceProvider.transform.position = transform.position + Vector3.up;
 
-            ChangeSortingOrder(dice, GrabLayerOffset);
+            ChangeSortingOrder(diceProvider, GrabLayerOffset);
         }
     }
 

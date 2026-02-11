@@ -16,3 +16,5 @@ MonoBehaviour:
   hazard:
   - prefab: {fileID: 5835721969328694836, guid: bf770942b1d775a19813a5b0ba025856, type: 3}
     weight: 0.5
+  - prefab: {fileID: 5835721969328694836, guid: c23534e071161a75597c8ca8eebcdaac, type: 3}
+    weight: 0.3

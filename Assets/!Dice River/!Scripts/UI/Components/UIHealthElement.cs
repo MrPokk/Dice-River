@@ -20,7 +20,9 @@ public class UIHealthElement : UIPopup
 
         foreach (var entity in _ecsEntities)
         {
-            health.maxValue = entity.Get<HealthComponent>().maxHealth;
+            var healthComp = entity.Get<HealthComponent>();
+            health.maxValue = healthComp.maxHealth;
+            health.value = healthComp.currentHealth;
         }
         base.Open();
     }

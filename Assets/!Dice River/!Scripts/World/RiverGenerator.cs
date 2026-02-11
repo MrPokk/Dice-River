@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RiverGenerator : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class RiverGenerator : MonoBehaviour
 
     public GameObject GenerateRow(MonoGridPresenter presenter, int row, Transform parent)
     {
+        var previousState = Random.state;
+        var rowSeed = (_seed * 73856093) ^ (row * 19349663);
+        Random.InitState(rowSeed);
+
         var indexColumnMin = presenter.GetMinColumn();
         var indexColumnMax = presenter.GetMaxColumn();
         var gridCenter = (indexColumnMin + indexColumnMax) / 2f;
@@ -55,6 +60,8 @@ public class RiverGenerator : MonoBehaviour
             leftBound,
             rightBound,
             rowLine.transform);
+
+        Random.state = previousState;
 
         return rowLine;
     }

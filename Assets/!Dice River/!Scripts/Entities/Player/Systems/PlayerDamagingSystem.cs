@@ -1,4 +1,5 @@
-﻿using BitterECS.Core;
+﻿using System;
+using BitterECS.Core;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -6,19 +7,19 @@ public class PlayerDamagingSystem : IEcsFixedRunSystem
 {
     public Priority Priority => Priority.High;
 
-    private EcsFilter _ecsEvent = new EcsFilter<EntitiesPresenter>()
+    private EcsFilter _ecsEntities = new EcsFilter<EntitiesPresenter>()
         .Include<HealthComponent>()
-        .Include<DamageComponent>()
+        .Include<DamageToIntervalComponent>()
         .Include<GravityComponent>(c => c.isGrounded && c.verticalVelocity == 0);
 
     public void FixedRun()
     {
         var deltaTime = Time.fixedDeltaTime;
 
-        foreach (var entity in _ecsEvent)
+        foreach (var entity in _ecsEntities)
         {
             ref var health = ref entity.Get<HealthComponent>();
-            var damageComp = entity.Get<DamageComponent>();
+            var damageComp = entity.Get<DamageToIntervalComponent>();
 
             health.timeImmunity -= deltaTime;
 
@@ -33,10 +34,4 @@ public class PlayerDamagingSystem : IEcsFixedRunSystem
             }
         }
     }
-}
-
-
-public struct IsHealthChanging
-{
-
 }

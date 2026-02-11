@@ -154,7 +154,7 @@ namespace BitterECS.Core
             }
         }
 
-        public EcsEntity Get(int id) => Has(id) ? new EcsEntity(this, id) : throw new("Entity not created");
+        public EcsEntity Get(int id) => Has(id) ? new EcsEntity(this, id) : new EcsEntity(null, -1);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void IncrementCount(int id) => _componentCounts[id]++;

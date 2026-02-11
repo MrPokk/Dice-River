@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Startup : EcsUnityRoot
 {
+    public SpawnerPoint playerSpawner;
+
     private CameraObject _cameraObject;
     private GridConfig _gridConfigWorld;
     private GridConfig _gridConfigRaftGeneration;
@@ -65,7 +67,7 @@ public class Startup : EcsUnityRoot
 
     private void InitializePlayer()
     {
-        var playerPrefab = new Loader<PlayerProvider>(EntitiesPaths.PLAYER).New();
+        var playerPrefab = new Loader<PlayerProvider>(EntitiesPaths.PLAYER).New(playerSpawner.transform.position, Quaternion.identity);
         _cameraObject.SetTarget(playerPrefab.transform);
     }
 
