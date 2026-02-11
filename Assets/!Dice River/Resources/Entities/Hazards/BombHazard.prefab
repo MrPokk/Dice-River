@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageConstComponentProvider
   _value:
-    damage: 3
+    damage: 10
 --- !u!1 &4669240937691049697
 GameObject:
   m_ObjectHideFlags: 0

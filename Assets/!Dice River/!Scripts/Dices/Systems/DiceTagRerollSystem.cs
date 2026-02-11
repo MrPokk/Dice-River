@@ -13,8 +13,7 @@ public class DiceTagRerollSystem : IEcsAutoImplement
     private static void OnReroll(EcsEntity entity)
     {
         var neighbors = DiceUtility.GetNeighbors(entity);
-
-        ref var gridDice = ref entity.Get<GridComponent>();
+        var gridDice = entity.Get<GridComponent>();
 
         foreach (var entityIndex in neighbors)
         {

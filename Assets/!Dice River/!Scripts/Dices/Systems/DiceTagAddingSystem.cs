@@ -13,7 +13,7 @@ public class DiceTagAddingSystem : IEcsAutoImplement
     {
         var neighbors = DiceUtility.GetNeighbors(entity);
         var modification = entity.Get<TagAddingDice>().addingModification;
-        ref var gridDice = ref entity.Get<GridComponent>();
+        var gridDice = entity.Get<GridComponent>();
 
         foreach (var entityIndex in neighbors)
         {

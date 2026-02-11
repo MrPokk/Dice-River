@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2882d200961d482fab39f132f7db5d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::GridVisualizerSetting
-  _drawCoordinates: 1
+  _drawCoordinates: 0
   _gridColor: {r: 0, g: 0.18165064, b: 1, a: 1}
   _fontColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _fontSize: 12
@@ -592,7 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2882d200961d482fab39f132f7db5d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::GridVisualizerSetting
-  _drawCoordinates: 0
+  _drawCoordinates: 1
   _gridColor: {r: 1, g: 0.18396229, b: 0.5948552, a: 1}
   _fontColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _fontSize: 12

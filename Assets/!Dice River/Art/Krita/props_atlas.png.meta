@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -90,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -347,72 +347,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: props_atlas_10
-      rect:
-        serializedVersion: 2
-        x: 268
-        y: 475
-        width: 135
-        height: 132
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 59e73a53675152aab92a0c61b9e1fcb6
-      internalID: -798688197
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: props_atlas_11
-      rect:
-        serializedVersion: 2
-        x: 271
-        y: 349
-        width: 132
-        height: 124
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1a296b544c1bab7c2950f74d042e757c
-      internalID: 30687579
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: props_atlas_12
-      rect:
-        serializedVersion: 2
-        x: 116
-        y: 462
-        width: 140
-        height: 141
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 19345863410e3a427822cd80e3481e07
-      internalID: 1569135028
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -435,6 +369,9 @@ TextureImporter:
       props_atlas_10: -798688197
       props_atlas_11: 30687579
       props_atlas_12: 1569135028
+      props_atlas_13: 520690448
+      props_atlas_14: 693828974
+      props_atlas_15: 1226626513
       props_atlas_2: -1642456654738109045
       props_atlas_3: 4877805513744629
       props_atlas_4: -4807872316680983589

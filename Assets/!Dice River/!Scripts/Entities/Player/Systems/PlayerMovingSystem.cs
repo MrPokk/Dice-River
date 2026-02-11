@@ -1,12 +1,14 @@
 ﻿using BitterECS.Core;
 using UnityEngine;
-using static UnityEngine.InputSystem.InputAction;
+using UnityEngine.InputSystem;
 
 public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
 {
     public Priority Priority => Priority.High;
 
     private const float SqrMagnitudeThreshold = 0.001f;
+    private InputAction _moveAction;
+
     private EcsFilter _ecsFilter =
     Build.For<EntitiesPresenter>()
          .Filter()
@@ -18,30 +20,13 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
 
     public void Init()
     {
-        var move = ControllableSystem.Inputs.Playable.Move;
-        ControllableSystem.SubscribePerformed(move, MovePressingSystem);
-        ControllableSystem.SubscribeCanceled(move, MoveUnPressingSystem);
-    }
-
-    private void MovePressingSystem(CallbackContext context)
-    {
-        var direction = context.ReadValue<Vector2>();
-        foreach (var entity in _ecsFilter)
-        {
-            entity.Get<InputComponent>().currentInput = direction;
-        }
-    }
-
-    private void MoveUnPressingSystem(CallbackContext context)
-    {
-        foreach (var entity in _ecsFilter)
-        {
-            entity.Get<InputComponent>().currentInput = Vector2.zero;
-        }
+        _moveAction = ControllableSystem.Inputs.Playable.Move;
     }
 
     public void FixedRun()
     {
+        var currentDirection = _moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
+
         foreach (var entity in _ecsFilter)
         {
             var provider = entity.GetProvider<PlayerProvider>();
@@ -50,8 +35,11 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
             ref var gravity = ref entity.Get<GravityComponent>();
             ref var facing = ref entity.Get<FacingComponent>();
 
+            input.currentInput = currentDirection;
+
             var cc = provider.characterController;
             Vector3 horizontalVelocity;
+
             if (gravity.isGrounded)
             {
                 var rawInput = input.currentInput;
