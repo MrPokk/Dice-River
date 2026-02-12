@@ -11,4 +11,6 @@ public static class UiPrefabsPaths
     public const string UIHEALTH_ELEMENT = "UI/Prefabs/UIHealthElement";
     /// <summary> Component: UISelectorElement </summary>
     public const string UISELECTOR = "UI/Prefabs/UISelector";
+    /// <summary> Component: UIHandElement </summary>
+    public const string UISTACK_HAND_ELEMENT = "UI/Prefabs/UIStackHandElement";
 }

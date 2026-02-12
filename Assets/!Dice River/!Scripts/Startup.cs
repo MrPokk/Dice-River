@@ -1,4 +1,4 @@
-﻿using BitterECS.Core;
+﻿using System;
 using BitterECS.Integration;
 using UINotDependence.Core;
 using UnityEngine;
@@ -17,6 +17,7 @@ public class Startup : EcsUnityRoot
     public static (MonoGridPresenter monoGrid, GameObject gridParent) GridRaft;
     public static GameObject GridRaftParent;
     public static HandControllerDice HandControllerDice;
+    public static HandStackControllerDice HandStackControllerDice;
 
     protected override void Bootstrap()
     {
@@ -32,7 +33,9 @@ public class Startup : EcsUnityRoot
     private void InitializeHandController()
     {
         HandControllerDice = new Loader<HandControllerDice>(PrefabObjectsPaths.HAND_CONTROLLER).New();
-        HandControllerDice.Initialize();
+        HandStackControllerDice = new Loader<HandStackControllerDice>(PrefabObjectsPaths.HAND_STACK_CONTROLLER).New();
+        HandStackControllerDice.Initialize(HandControllerDice);
+        HandControllerDice.Initialize(HandStackControllerDice);
     }
 
     private void InitializeCamera()
@@ -78,6 +81,6 @@ public class Startup : EcsUnityRoot
         UIController.OpenScreen<UIPlayerScreen>();
         var playerScreen = (UIPlayerScreen)UIController.GetCurrentScreen;
 
-        playerScreen.Bind(HandControllerDice);
+        playerScreen.Bind(HandControllerDice, HandStackControllerDice);
     }
 }

@@ -4,16 +4,19 @@ public class UIPlayerScreen : UIScreen
 {
     public UIHealthElement healthElement;
     public UIHandElement handElement;
+    public UIStackHandElement stackHandElement;
 
-    public void Bind(HandControllerDice handController)
+    public void Bind(HandControllerDice handController, HandStackControllerDice stackController)
     {
         handElement.Bind(handController);
+        stackHandElement.Bind(stackController);
     }
 
     public override void Open()
     {
         healthElement.Open();
         handElement.Open();
+        stackHandElement.Open();
         base.Open();
     }
 
@@ -21,6 +24,7 @@ public class UIPlayerScreen : UIScreen
     {
         healthElement.Close();
         handElement.Close();
+        stackHandElement.Close();
         base.Close();
     }
 }

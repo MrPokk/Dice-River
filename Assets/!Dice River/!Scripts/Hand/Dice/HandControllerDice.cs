@@ -7,10 +7,10 @@ public class HandControllerDice : HandController<EcsEntity, UIProvider>
     [Header("Setting Controller Dice")]
     public float timeRefreshSecond;
 
-    public void Initialize()
+    public override void Initialize(HandStackController<EcsEntity, UIProvider> handStackController)
     {
-        var p = new Loader<DiceProvider>(DicesPaths.PLUS_FORWARD_DICE).Prefab();
-        for (int i = 0; i < 3; i++) Add(p.NewEntity(), p.spriteIcon.Prefab());
+        base.Initialize(handStackController);
+        _handStackController.DrawToHand();
     }
 
     public override bool ExtractToFirst(out EcsEntity val)

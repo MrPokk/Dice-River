@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(RectTransform))]
 public class HandController<TData, TView> : MonoBehaviour where TView : MonoBehaviour
 {
+    protected HandStackController<TData, TView> _handStackController;
+
     [Header("Layout Settings")]
     [SerializeField] private bool _isVerticalLayout;
     [SerializeField] private float _space = 100f;
@@ -19,6 +21,12 @@ public class HandController<TData, TView> : MonoBehaviour where TView : MonoBeha
     private RectTransform _containerRect;
 
     public IReadOnlyCollection<TData> Items => _dataItems;
+
+
+    public virtual void Initialize(HandStackController<TData, TView> handStackController)
+    {
+        _handStackController = handStackController;
+    }
 
     private void Awake()
     {

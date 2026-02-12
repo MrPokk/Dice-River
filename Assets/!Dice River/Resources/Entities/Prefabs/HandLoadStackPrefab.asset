@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95796fc341bd5e56488c2fc17da0fe69, type: 3}
+  m_Name: HandLoadStackPrefab
+  m_EditorClassIdentifier: Assembly-CSharp::HandLoadStackPrefab
+  _diceProviders:
+  - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
+  - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
+  - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
+  - {fileID: 453393326418446785, guid: 80a1d489460193a8599c0aec63ed520c, type: 3}
+  - {fileID: 453393326418446785, guid: 80a1d489460193a8599c0aec63ed520c, type: 3}
+  - {fileID: 453393326418446785, guid: 96067f4d37603d569a30469568a69dbf, type: 3}
+  - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
