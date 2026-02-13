@@ -49,9 +49,9 @@ namespace BitterECS.Integration
             get
             {
                 var entity = GetEntitySilently();
-                if (!entity.IsAlive)
+                if (!entity.IsAlive && !_isDestroying)
                 {
-                    throw new Exception($"[ProviderEcs<{typeof(T).Name}>] Entity is not linked on '{name}'.");
+                    throw new Exception($"[ProviderEcs<{typeof(T).Name}>] Entity is not linked on '{typeof(T).Name}'.");
                 }
                 return entity;
             }

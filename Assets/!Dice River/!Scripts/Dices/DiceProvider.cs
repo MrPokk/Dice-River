@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class DiceProvider : ProviderEcs<DicePresenter>
 {
+    private const int MaxExclusive = 7;
+    private const int MinInclusive = 1;
     public SpriteIconComponent spriteIcon;
     public SpriteRollComponent spriteRoll;
     public SpriteSideComponent spriteSide;
@@ -27,7 +29,7 @@ public class DiceProvider : ProviderEcs<DicePresenter>
 
     public int ReRolling()
     {
-        var randomValue = Random.Range(1, 6);
+        var randomValue = Random.Range(MinInclusive, MaxExclusive);
         spriteRoll.Select(randomValue);
         return Entity.Get<RollComponent>().value = randomValue;
     }

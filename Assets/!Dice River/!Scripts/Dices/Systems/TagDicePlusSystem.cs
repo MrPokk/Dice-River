@@ -24,7 +24,10 @@ public class TagDicePlusSystem : IEcsAutoImplement
             var entityToGrid = providerEcs.Entity;
             ref var roleComponent = ref entityToGrid.Get<RollComponent>();
 
-            roleComponent.value += modification;
+            var newValue = roleComponent.value + modification;
+            roleComponent.value = ((newValue - 1) % 6 + 6) % 6 + 1;
+
+            entityToGrid.AddFrameToEvent<IsInstantiateEvent>();
             providerEcs.spriteRoll.Select(roleComponent.value);
         }
     }

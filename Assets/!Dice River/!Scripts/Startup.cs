@@ -1,4 +1,5 @@
 ﻿using System;
+using BitterECS.Core;
 using BitterECS.Integration;
 using UINotDependence.Core;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class Startup : EcsUnityRoot
     private GridConfig _gridConfigWorld;
     private GridConfig _gridConfigRaftGeneration;
     private GridConfig _gridConfigRaftInstallable;
+    private ComplicationSettings _complicationSettings;
+    private ComplicationGameplaySystem _complicationGameplaySystem;
     private RiverGenerator _riverGenerator;
     private RiverScrolling _riverScroll;
     public static MonoGridPresenter GridWorld;
@@ -18,6 +21,7 @@ public class Startup : EcsUnityRoot
     public static GameObject GridRaftParent;
     public static HandControllerDice HandControllerDice;
     public static HandStackControllerDice HandStackControllerDice;
+
 
     protected override void Bootstrap()
     {
@@ -57,9 +61,13 @@ public class Startup : EcsUnityRoot
 
     private void InitializeRiver()
     {
+        _complicationSettings = new Loader<ComplicationSettings>(RiverObjectsPaths.COMPLICATION_SETTINGS).Prefab();
         _riverGenerator = new Loader<RiverGenerator>(RiverObjectsPaths.RIVER_GENERATOR).New();
         _riverScroll = new Loader<RiverScrolling>(RiverObjectsPaths.RIVER_SCROLLER).New();
-        _riverScroll.Initialize(_riverGenerator, GridWorld);
+        _riverScroll.Initialize(_riverGenerator, _complicationSettings, GridWorld);
+
+        _complicationGameplaySystem = new(_riverScroll, _complicationSettings);
+        EcsSystems.AddSystem(_complicationGameplaySystem);
     }
 
     private void InitializeDiceSystem()
@@ -81,6 +89,6 @@ public class Startup : EcsUnityRoot
         UIController.OpenScreen<UIPlayerScreen>();
         var playerScreen = (UIPlayerScreen)UIController.GetCurrentScreen;
 
-        playerScreen.Bind(HandControllerDice, HandStackControllerDice);
+        playerScreen.Bind(HandControllerDice, HandStackControllerDice, _riverScroll);
     }
 }

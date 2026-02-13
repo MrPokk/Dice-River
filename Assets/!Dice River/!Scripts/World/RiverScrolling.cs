@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RiverScrolling : MonoBehaviour
 {
+    private ComplicationSettings _complicationSettings;
     private RiverGenerator _generator;
-    [SerializeField] private float _scrollSpeed = 5f;
-
     private MonoGridPresenter _presenter;
     private Transform _riverRoot;
     private Queue<GameObject> _rowLines = new();
+
+    public event Action<float> OnDistanceChanged;
 
     private int _topRowIndex;
     private int _bottomRowIndex;
@@ -19,12 +21,17 @@ public class RiverScrolling : MonoBehaviour
     private int _minCol;
     private int _maxCol;
 
-    public void Initialize(RiverGenerator generator, MonoGridPresenter presenter)
+    [ReadOnly] public float scrollSpeed = 1f;
+    public float TotalOffsetZ => _totalOffsetZ;
+
+    public void Initialize(RiverGenerator generator, ComplicationSettings complication, MonoGridPresenter presenter)
     {
+        _complicationSettings = complication;
         _presenter = presenter;
         _generator = generator;
         _riverRoot = new GameObject("RiverRoot").transform;
 
+        scrollSpeed = complication.minSpeed;
         _cellSizeZ = _presenter.GetTotalCellSize().y;
 
         _minCol = _presenter.GetMinColumn();
@@ -50,8 +57,9 @@ public class RiverScrolling : MonoBehaviour
     {
         if (_presenter == null || _riverRoot == null) return;
 
-        float moveStep = _scrollSpeed * Time.deltaTime;
+        float moveStep = scrollSpeed * Time.deltaTime;
         _totalOffsetZ += moveStep;
+        OnDistanceChanged?.Invoke(_totalOffsetZ);
         _movedDistance += moveStep;
 
         foreach (var row in _rowLines)
@@ -60,6 +68,7 @@ public class RiverScrolling : MonoBehaviour
 
             row.transform.position += Vector3.back * moveStep;
         }
+
 
         if (_movedDistance >= _cellSizeZ)
         {

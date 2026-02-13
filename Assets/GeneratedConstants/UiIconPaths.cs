@@ -7,4 +7,8 @@ public static class UiIconPaths
 {
     /// <summary> Provider: UIProvider </summary>
     public const string ICON_BASE_DICE = "UI/Prefabs/Icon/IconBaseDice";
+    /// <summary> Provider: UIProvider </summary>
+    public const string ICON_MINUS_FORWARD_DICE = "UI/Prefabs/Icon/IconMinusForwardDice";
+    /// <summary> Provider: UIProvider </summary>
+    public const string ICON_PLUS_FORWARD_DICE = "UI/Prefabs/Icon/IconPlusForwardDice";
 }
