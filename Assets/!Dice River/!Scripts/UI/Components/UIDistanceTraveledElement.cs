@@ -8,7 +8,7 @@ public class UIDistanceTraveledElement : UIPopup
 
     public void UpdateDistance(float distance)
     {
-        text.text = Mathf.FloorToInt(distance).ToString();
+        text.text = $"{Mathf.FloorToInt(distance)} m";
     }
 
 }

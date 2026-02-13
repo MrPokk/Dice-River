@@ -43,9 +43,9 @@ namespace UINotDependence.Core
         public static IReadOnlyList<IWindowBinder> GetCurrentPopups => Instance._uiContainer.OpenedBinders.Values.ToList();
 
         public static bool TryGetOpenedPopup<T>(out T popup) where T : UIPopup => Instance.TryGetOpenedPopupInstance(out popup);
-        public static void OpenScreen<T>() where T : UIScreen => Instance.OpenScreenInstance<T>();
+        public static T OpenScreen<T>() where T : UIScreen => Instance.OpenScreenInstance<T>();
         public static void CloseScreen() => Instance.CloseScreenInstance();
-        public static void OpenPopup<T>() where T : UIPopup => Instance.OpenPopupInstance<T>();
+        public static T OpenPopup<T>() where T : UIPopup => Instance.OpenPopupInstance<T>();
         public static void ChangePopup<T>() where T : UIPopup => Instance.ChangePopupInstance<T>();
         public static void ClosePopup<T>() where T : UIPopup => Instance.ClosePopupInstance<T>();
         public static void CloseAllPopups() => Instance.CloseAllPopupsInstance();
@@ -61,18 +61,17 @@ namespace UINotDependence.Core
             return false;
         }
 
-        private void OpenScreenInstance<T>() where T : UIScreen
+        private T OpenScreenInstance<T>() where T : UIScreen
         {
             if (_uiContainer.OpenedScreenBinder != null && _uiContainer.OpenedScreenBinder.GetType() == typeof(T))
-                return;
+                return _uiContainer.OpenedScreenBinder as T;
 
             CloseScreenInstance();
 
-            var binder = CreateAndBindWindow<T>(isScreen: true);
-            if (binder == null) return;
-
+            var binder = CreateAndBindWindow<T>(isScreen: true) ?? throw new Exception($"Can't open screen {typeof(T)}");
             _uiContainer.OpenedScreenBinder = binder;
             binder.Open();
+            return binder as T;
         }
 
         private void CloseScreenInstance()
@@ -81,12 +80,15 @@ namespace UINotDependence.Core
             if (_uiContainer != null) _uiContainer.OpenedScreenBinder = null;
         }
 
-        private void OpenPopupInstance<T>() where T : UIPopup
+        private T OpenPopupInstance<T>() where T : UIPopup
         {
             CloseExistingPopup<T>();
             var binder = CreateAndBindWindow<T>(isScreen: false);
-            _uiContainer.TryAddOpenedBinder(typeof(T), binder);
-            binder?.Open();
+            var isOpened = _uiContainer.TryAddOpenedBinder(typeof(T), binder);
+            if (isOpened == false) throw new Exception($"Can't open popup {typeof(T)}");
+            if (binder == null) throw new Exception($"Can't open popup {typeof(T)}");
+            binder.Open();
+            return binder as T;
         }
 
         private void ClosePopupInstance<T>() where T : UIPopup

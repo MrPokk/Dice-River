@@ -1,4 +1,4 @@
-using BitterECS.Core;
+﻿using BitterECS.Core;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +22,7 @@ public class ControllableSystem : IEcsPreInitSystem, IEcsDestroySystem
         s_inputs.Enable();
         s_subscriptions.Clear();
 
-        SubscribePerformed(Inputs.Playable.Look, OnPointerPositionChanged);
+        SubscribePerformed(Inputs.UI.Point, OnPointerPositionChanged);
     }
 
     private void OnPointerPositionChanged(InputAction.CallbackContext context)

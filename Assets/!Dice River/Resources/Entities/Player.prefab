@@ -254,7 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageComponentProvider
   _value:
     damage: 3
-    damageIntervalSecond: 0.5
+    damageIntervalSecond: 0.3
 --- !u!114 &-736192163089186376
 MonoBehaviour:
   m_ObjectHideFlags: 0

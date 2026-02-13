@@ -3,6 +3,7 @@ using BitterECS.Core;
 using BitterECS.Integration;
 using UINotDependence.Core;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Startup : EcsUnityRoot
 {
@@ -85,6 +86,7 @@ public class Startup : EcsUnityRoot
     private void UIInitialize()
     {
         UIInit.Initialize();
+        new Loader<EventSystem>(SettingsPaths.EVENT_SYSTEM).New();
 
         UIController.OpenScreen<UIPlayerScreen>();
         var playerScreen = (UIPlayerScreen)UIController.GetCurrentScreen;

@@ -22,6 +22,7 @@ public class RiverScrolling : MonoBehaviour
     private int _maxCol;
 
     [ReadOnly] public float scrollSpeed = 1f;
+    [SerializeField] private float _distanceMultiplier = 0.01f;
     public float TotalOffsetZ => _totalOffsetZ;
 
     public void Initialize(RiverGenerator generator, ComplicationSettings complication, MonoGridPresenter presenter)
@@ -39,15 +40,15 @@ public class RiverScrolling : MonoBehaviour
         _bottomRowIndex = _presenter.GetMinRow();
         _topRowIndex = _bottomRowIndex + _generator.SpawnDepth;
 
-        for (int r = _bottomRowIndex; r <= _topRowIndex + 5; r++)
+        for (var r = _bottomRowIndex; r <= _topRowIndex + 5; r++)
         {
-            for (int x = _minCol; x <= _maxCol; x++)
+            for (var x = _minCol; x <= _maxCol; x++)
             {
                 _presenter.AddGridCell(new Vector2Int(x, r), null);
             }
         }
 
-        for (int r = _bottomRowIndex; r < _topRowIndex; r++)
+        for (var r = _bottomRowIndex; r < _topRowIndex; r++)
         {
             SpawnRowAt(r);
         }
@@ -57,18 +58,18 @@ public class RiverScrolling : MonoBehaviour
     {
         if (_presenter == null || _riverRoot == null) return;
 
-        float moveStep = scrollSpeed * Time.deltaTime;
+        var moveStep = scrollSpeed * Time.deltaTime;
         _totalOffsetZ += moveStep;
-        OnDistanceChanged?.Invoke(_totalOffsetZ);
+
+        OnDistanceChanged?.Invoke(_totalOffsetZ * _distanceMultiplier);
+
         _movedDistance += moveStep;
 
         foreach (var row in _rowLines)
         {
             if (row == null) continue;
-
             row.transform.position += Vector3.back * moveStep;
         }
-
 
         if (_movedDistance >= _cellSizeZ)
         {
@@ -90,7 +91,7 @@ public class RiverScrolling : MonoBehaviour
         var rowObject = _rowLines.Dequeue();
         Destroy(rowObject);
 
-        for (int x = _minCol; x <= _maxCol; x++)
+        for (var x = _minCol; x <= _maxCol; x++)
         {
             _presenter.SetValueInGrid(new Vector2Int(x, _bottomRowIndex), null);
         }
@@ -100,7 +101,7 @@ public class RiverScrolling : MonoBehaviour
 
     private void SpawnTopRow()
     {
-        for (int x = _minCol; x <= _maxCol; x++)
+        for (var x = _minCol; x <= _maxCol; x++)
         {
             _presenter.AddGridCell(new Vector2Int(x, _topRowIndex), null);
         }

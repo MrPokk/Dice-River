@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f29d189625527e4a1c077192f06a3c, type: 3}
   m_Name: ComplicationSettings
   m_EditorClassIdentifier: Assembly-CSharp::ComplicationSettings
-  distanceStep: 100
-  speedStep: 0.5
+  distanceStep: 50
+  speedStep: 0.3
+  minSpeed: 2
+  maxSpeed: 5

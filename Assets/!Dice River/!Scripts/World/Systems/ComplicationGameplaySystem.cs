@@ -28,15 +28,22 @@ public class ComplicationGameplaySystem : IEcsRunSystem
 
         if (_riverScrolling.TotalOffsetZ >= _nextThreshold)
         {
-            _riverScrolling.scrollSpeed += _settings.speedStep;
-            Mathf.Clamp(_riverScrolling.scrollSpeed, _settings.minSpeed, _settings.maxSpeed);
+            var targetSpeed = _riverScrolling.scrollSpeed + _settings.speedStep;
 
+            _riverScrolling.scrollSpeed = Mathf.Clamp(targetSpeed, _settings.minSpeed, _settings.maxSpeed);
             while (_riverScrolling.TotalOffsetZ >= _nextThreshold)
             {
                 _nextThreshold += _settings.distanceStep;
             }
 
-            Debug.Log($"[Complication] Speed increased! New speed: {_riverScrolling.scrollSpeed}. Next boost at: {_nextThreshold}m");
+            if (_riverScrolling.scrollSpeed >= _settings.maxSpeed)
+            {
+                Debug.Log($"[Complication] Max speed reached: {_riverScrolling.scrollSpeed}. Next threshold: {_nextThreshold}m");
+            }
+            else
+            {
+                Debug.Log($"[Complication] Speed increased: {_riverScrolling.scrollSpeed}. Next boost at: {_nextThreshold}m");
+            }
         }
     }
 }
