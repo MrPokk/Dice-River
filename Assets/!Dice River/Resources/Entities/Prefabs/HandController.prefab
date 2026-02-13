@@ -48,10 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7597801df663bfaa581824a0bc1894fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandControllerDice
-  _isVerticalLayout: 0
-  _space: 100
-  _parabolaParameter: 2000
-  _rotateItemsToArc: 1
-  handStackController: {fileID: 0}
+  handStackController: {fileID: 1182434484712484373, guid: 43528470ca6d04c519dac4b5002950c5, type: 3}
   timeRefreshSecond: 1
   maxCountDice: 3

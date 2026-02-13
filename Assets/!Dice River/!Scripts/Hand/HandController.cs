@@ -11,7 +11,7 @@ public class HandController<TData, TView> : MonoBehaviour where TView : MonoBeha
     private RectTransform _containerRect;
 
     public IReadOnlyCollection<TData> Items => _dataItems;
-    public HandStackController<TData, TView> handStackController;
+    [ReadOnly] public HandStackController<TData, TView> handStackController;
     public event Action OnChanged;
 
     public virtual void Initialize(HandStackController<TData, TView> handStackController)
@@ -58,12 +58,6 @@ public class HandController<TData, TView> : MonoBehaviour where TView : MonoBeha
         }
 
         var first = _dataItems.First();
-        if (first == null)
-        {
-            value = default;
-            return false;
-        }
-
         Remove(first);
         value = first;
         return true;

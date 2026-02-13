@@ -33,11 +33,16 @@ public class PlayerPlacingSystem : IEcsInitSystem
 
             if (DiceInteractionSystem.IsPlacing(targetGridPos))
             {
-                var isExtract = Startup.HandControllerDice.ExtractToFirst(out var entityToHand);
-                if (!isExtract) continue;
-                var diceProviderPrefab = entityToHand.GetProvider<DiceProvider>();
-                DiceInteractionSystem.InstantiateObject(targetGridPos, diceProviderPrefab, out _);
-                entityToHand.Destroy();
+                if (Startup.HandControllerDice.ExtractToFirst(out var entityToHand))
+                {
+                    if (entityToHand != null)
+                    {
+                        var diceProviderPrefab = entityToHand.GetProvider<DiceProvider>();
+                        DiceInteractionSystem.InstantiateObject(targetGridPos, diceProviderPrefab, out _);
+
+                        entityToHand.Destroy();
+                    }
+                }
             }
         }
     }

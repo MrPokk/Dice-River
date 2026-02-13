@@ -1,35 +1,38 @@
-﻿using System;
-using System.Linq;
-using BitterECS.Core;
+﻿using BitterECS.Core;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
-public class HandUpdateSystem : IHandResultInExtractEnded, IHandSucceedAdd
+public class HandUpdateSystem : IHandSucceedRemove, IHandSucceedExtraction, IHandStackSucceedAdd
 {
     public Priority Priority => Priority.High;
 
-    public async UniTask ResultInExtractEnded(HandControllerDice hand)
+    public async UniTask ResultStackSucceedAdd(HandStackControllerDice stack)
     {
-        //    await UniTask.Delay(TimeSpan.FromSeconds(hand.timeRefreshSecond));
-
-        var max = hand.maxCountDice;
-        for (var i = 0; i < max; i++)
-        {
-            hand.handStackController.DrawToHand();
-        }
+        OnAddHand((HandControllerDice)stack.hand);
     }
 
-    public async UniTask ResultSucceedAdd(HandControllerDice hand)
+    public async UniTask ResultSucceedExtraction(HandControllerDice hand)
     {
-        if (!hand.Items.Any())
-        {
-            return;
-        }
+        OnAddHand(hand);
+    }
 
+    public async UniTask ResultSucceedRemove(HandControllerDice hand)
+    {
+        OnAddHand(hand);
+    }
+
+    private static void OnAddHand(HandControllerDice hand)
+    {
+        var currentCount = hand.Items.Count;
         var max = hand.maxCountDice;
-        for (var i = 0; i < max; i++)
+
+        var countToDraw = max - currentCount;
+
+        for (var i = 0; i < countToDraw; i++)
         {
-            hand.handStackController.DrawToHand();
+            if (!hand.handStackController.DrawToHand())
+            {
+                break;
+            }
         }
     }
 }

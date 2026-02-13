@@ -11,8 +11,7 @@ public class HandControllerDice : HandController<EcsEntity, UIProvider>
     public override void Initialize(HandStackController<EcsEntity, UIProvider> handStackController)
     {
         base.Initialize(handStackController);
-        var countToDraw = Mathf.Min(maxCountDice, (uint)handStackController.Count);
-        for (var i = 0; i < countToDraw; i++)
+        for (var i = 0; i < maxCountDice; i++)
         {
             handStackController.DrawToHand();
         }

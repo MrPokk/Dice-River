@@ -8,7 +8,7 @@ public class HandStackController<TData, TView> : MonoBehaviour where TView : Mon
 {
     protected struct Entry { public TData data; public TView prefab; }
 
-    private HandController<TData, TView> _hand;
+    [ReadOnly] public HandController<TData, TView> hand;
     private RectTransform _rect;
     private readonly Stack<Entry> _stack = new();
     private readonly Dictionary<TData, TView> _views = new();
@@ -18,21 +18,21 @@ public class HandStackController<TData, TView> : MonoBehaviour where TView : Mon
 
     private void Awake() => _rect = GetComponent<RectTransform>();
 
-    public virtual void Initialize(HandController<TData, TView> hand) => _hand = hand;
+    public virtual void Initialize(HandController<TData, TView> hand) => this.hand = hand;
 
-    public void Add(TData item, TView prefab)
+    public virtual void Add(TData item, TView prefab)
     {
         _stack.Push(new Entry { data = item, prefab = prefab });
         if (prefab != null) _views[item] = Instantiate(prefab, _rect);
         OnChanged?.Invoke();
     }
 
-    public bool DrawToHand()
+    public virtual bool DrawToHand()
     {
-        if (_stack.Count == 0 || _hand == null) return false;
+        if (_stack.Count == 0 || hand == null) return false;
 
         var entry = _stack.Pop();
-        var isAdded = _hand.Add(entry.data, entry.prefab);
+        var isAdded = hand.Add(entry.data, entry.prefab);
         if (!isAdded)
         {
             _stack.Push(entry);

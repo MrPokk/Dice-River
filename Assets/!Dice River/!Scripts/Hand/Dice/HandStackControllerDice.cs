@@ -1,15 +1,44 @@
 ﻿using BitterECS.Core;
-using UnityEngine;
 
 public class HandStackControllerDice : HandStackController<EcsEntity, UIProvider>
 {
     public override void Initialize(HandController<EcsEntity, UIProvider> hand)
     {
         base.Initialize(hand);
+
         var diceHands = new Loader<HandLoadStackPrefab>(PrefabObjectsPaths.HAND_LOAD_STACK_PREFAB).Prefab().DiceProviders;
         foreach (var dice in diceHands)
         {
             Add(dice.NewEntity(), dice.spriteIcon.Prefab());
         }
+    }
+
+    public override void Add(EcsEntity item, UIProvider prefab)
+    {
+        if (item == null)
+        {
+            EcsSystems.Run<IHandStackFailAdd>(s => s.ResultStackFailAdd(this));
+            return;
+        }
+
+        base.Add(item, prefab);
+        EcsSystems.Run<IHandStackSucceedAdd>(s => s.ResultStackSucceedAdd(this));
+    }
+
+    public override bool DrawToHand()
+    {
+        var success = base.DrawToHand();
+
+        if (success)
+        {
+            EcsSystems.Run<IHandStackSucceedExtraction>(s => s.ResultStackSucceedExtraction(this));
+            EcsSystems.Run<IHandStackResultInExtractEnded>(s => s.ResultStackInExtractEnded(this));
+        }
+        else
+        {
+            EcsSystems.Run<IHandStackFailExtraction>(s => s.ResultStackFailExtraction(this));
+        }
+
+        return success;
     }
 }

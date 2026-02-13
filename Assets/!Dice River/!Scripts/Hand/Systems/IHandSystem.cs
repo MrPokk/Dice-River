@@ -41,3 +41,28 @@ public interface IHandResultInRemoveEnded : IEcsAutoImplement
 {
     public UniTask ResultInRemoveEnded(HandControllerDice hand);
 }
+
+public interface IHandStackSucceedAdd : IEcsAutoImplement
+{
+    public UniTask ResultStackSucceedAdd(HandStackControllerDice stack);
+}
+
+public interface IHandStackFailAdd : IEcsAutoImplement
+{
+    public UniTask ResultStackFailAdd(HandStackControllerDice stack);
+}
+
+public interface IHandStackSucceedExtraction : IEcsAutoImplement
+{
+    public UniTask ResultStackSucceedExtraction(HandStackControllerDice stack);
+}
+
+public interface IHandStackFailExtraction : IEcsAutoImplement
+{
+    public UniTask ResultStackFailExtraction(HandStackControllerDice stack);
+}
+
+public interface IHandStackResultInExtractEnded : IEcsAutoImplement
+{
+    public UniTask ResultStackInExtractEnded(HandStackControllerDice stack);
+}
