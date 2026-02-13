@@ -52,4 +52,6 @@ MonoBehaviour:
   _space: 100
   _parabolaParameter: 2000
   _rotateItemsToArc: 1
-  timeRefreshSecond: 5
+  handStackController: {fileID: 0}
+  timeRefreshSecond: 1
+  maxCountDice: 3

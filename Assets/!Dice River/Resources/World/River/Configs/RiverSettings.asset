@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RiverShoreSettings
   decorationSettings: {fileID: 11400000, guid: 747555ce07c531639aec59bdedaa7b00, type: 2}
   hazardSettings: {fileID: 11400000, guid: 4e76cc4d3836c5775a81cecc89030846, type: 2}
-  pickupSpawns: []
+  pickupSettings: {fileID: 11400000, guid: 2ecdaaae3886456e4afcaeb3c013be56, type: 2}

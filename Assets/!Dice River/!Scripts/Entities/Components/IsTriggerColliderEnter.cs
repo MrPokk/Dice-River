@@ -4,11 +4,11 @@ using UnityEngine;
 
 public struct IsTriggerColliderEnter
 {
-    public EcsEntity entity;
+    public EcsEntity entityHit;
     public Collider collision;
     public IsTriggerColliderEnter(Collider collision, EcsEntity entity)
     {
         this.collision = collision;
-        this.entity = entity;
+        this.entityHit = entity;
     }
 }

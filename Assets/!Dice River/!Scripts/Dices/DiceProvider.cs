@@ -22,8 +22,7 @@ public class DiceProvider : ProviderEcs<DicePresenter>
 
     private void OnTriggerEnter(Collider other)
     {
-        var entity = other.GetComponent<ProviderEcs>().Entity;
-        Entity.AddFrameToEvent<IsTriggerColliderEnter>(new(other, entity));
+        Entity.AddFrameToEvent<IsTriggerColliderEnter>(new(other, other.GetComponent<ProviderEcs>().Entity));
     }
 
     public int ReRolling()

@@ -143,16 +143,23 @@ MonoBehaviour:
   frontSidesObject: {fileID: 872961112075393190}
   leftSidesObject: {fileID: 871464881254634839}
   rightSidesObject: {fileID: 871596413274514201}
+  topSidesObject: {fileID: 872278677098938884}
   ripplesObject: {fileID: 5668246259190640450}
   stateConfigs:
   - state: 0
+    useSingleSprite: 1
+    allSidesSprite: {fileID: -1409523287, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     frontSprite: {fileID: -1409523287, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     leftSprite: {fileID: -1409523287, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     rightSprite: {fileID: -1409523287, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    topSprite: {fileID: 938655898, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
   - state: 1
+    useSingleSprite: 1
+    allSidesSprite: {fileID: -223435966, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     frontSprite: {fileID: -223435966, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     leftSprite: {fileID: -223435966, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     rightSprite: {fileID: -223435966, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    topSprite: {fileID: 938655898, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
 --- !u!1 &1075760224673954778
 GameObject:
   m_ObjectHideFlags: 0

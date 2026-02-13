@@ -6,14 +6,14 @@ public class TagRockHazardColliderSystem : IEcsAutoImplement
 
     private EcsEvent _ecsEvent =
     new EcsEvent<DicePresenter>()
-        .SubscribeWhere<IsTriggerColliderEnter>(c => c.entity.Has<TagRockHazard>(), added: OnDiceCollider);
+        .SubscribeWhere<IsTriggerColliderEnter>(c => c.entityHit.Has<TagRockHazard>(), added: OnDiceCollider);
 
     private static void OnDiceCollider(EcsEntity entity)
     {
         ref var rollComponent = ref entity.Get<RollComponent>();
         ref var collisionComponent = ref entity.Get<IsTriggerColliderEnter>();
-        var damagingComponent = collisionComponent.entity.Get<DamageConstComponent>();
-        collisionComponent.entity.Destroy();
+        var damagingComponent = collisionComponent.entityHit.Get<DamageConstComponent>();
+        collisionComponent.entityHit.Destroy();
         rollComponent.value -= damagingComponent.damage;
 
         if (rollComponent.value <= 0)

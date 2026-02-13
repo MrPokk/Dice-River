@@ -18,14 +18,14 @@ public class TagBombHazardColliderSystem : IEcsAutoImplement
 
     private EcsEvent _ecsEvent =
         new EcsEvent<DicePresenter>()
-            .SubscribeWhere<IsTriggerColliderEnter>(c => c.entity.Has<TagBombHazard>(), added: OnDiceCollider);
+            .SubscribeWhere<IsTriggerColliderEnter>(c => c.entityHit.Has<TagBombHazard>(), added: OnDiceCollider);
 
     private static void OnDiceCollider(EcsEntity entity)
     {
         var collision = entity.Get<IsTriggerColliderEnter>();
-        var damage = collision.entity.Get<DamageConstComponent>().damage;
+        var damage = collision.entityHit.Get<DamageConstComponent>().damage;
 
-        collision.entity.Destroy();
+        collision.entityHit.Destroy();
 
         var gridComponent = entity.Get<GridComponent>();
         ref var mainRoll = ref entity.Get<RollComponent>();

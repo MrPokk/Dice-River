@@ -36,7 +36,7 @@ public class SpriteRollComponent : MonoBehaviour
     {
         if (value < 1 || value > 6)
         {
-            throw new Exception("Invalid value");
+            throw new Exception($"Invalid value: {value}. Value must be between 1 and 6. ");
         }
 
         Select((RollIndex)value);

@@ -13,6 +13,11 @@ public class PlayerProvider : EntitiesProvider
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        Entity.AddFrameToEvent(new IsColliderHit(hit));
+        Entity.AddFrameToEvent<IsColliderHit>(new(hit));
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Entity.AddFrameToEvent<IsTriggerColliderEnter>(new(other, other.GetComponent<ProviderEcs>().Entity));
     }
 }

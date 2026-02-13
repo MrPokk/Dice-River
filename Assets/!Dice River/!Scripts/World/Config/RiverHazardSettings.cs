@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BitterECS.Integration;
 using UnityEngine;
 
@@ -9,5 +9,5 @@ public class RiverHazardSettings : ScriptableObject
     public float hazardChance = 0.1f;
     public List<WeightedPrefab> hazard;
 
-    public ProviderEcs GetRandomHazard() => WeightedRandomUtility.GetWeighted(hazard);
+    public ProviderEcs GetRandom() => WeightedRandomUtility.GetWeighted(hazard);
 }

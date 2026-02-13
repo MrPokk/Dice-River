@@ -1,21 +1,35 @@
 ﻿using System;
+using System.Linq;
 using BitterECS.Core;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class HandUpdateSystem : IHandResultInExtractEnded
+public class HandUpdateSystem : IHandResultInExtractEnded, IHandSucceedAdd
 {
     public Priority Priority => Priority.High;
 
     public async UniTask ResultInExtractEnded(HandControllerDice hand)
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(hand.timeRefreshSecond));
+        //    await UniTask.Delay(TimeSpan.FromSeconds(hand.timeRefreshSecond));
 
-        var prefabDice = new Loader<DiceProvider>(DicesPaths.BASE_DICE).Prefab();
-
-        for (var i = 0; i < 3; i++)
+        var max = hand.maxCountDice;
+        for (var i = 0; i < max; i++)
         {
-            hand.Add(prefabDice.NewEntity(), prefabDice.spriteIcon.Prefab());
+            hand.handStackController.DrawToHand();
+        }
+    }
+
+    public async UniTask ResultSucceedAdd(HandControllerDice hand)
+    {
+        if (!hand.Items.Any())
+        {
+            return;
+        }
+
+        var max = hand.maxCountDice;
+        for (var i = 0; i < max; i++)
+        {
+            hand.handStackController.DrawToHand();
         }
     }
 }

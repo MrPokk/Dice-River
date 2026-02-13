@@ -20,6 +20,7 @@ namespace BitterECS.Extra
         public const string WORLD = "World/";
         public const string DICES = ENTITIES + "Dices/";
         public const string HAZARD = ENTITIES + "Hazards/";
+        public const string PICKUPS = ENTITIES + "Pickups/";
         public const string PREFAB_OBJECTS = ENTITIES + "Prefabs/";
         public const string UI_POPUPS = UI + "!Popups/";
         public const string UI_PREFABS = UI + "Prefabs/";

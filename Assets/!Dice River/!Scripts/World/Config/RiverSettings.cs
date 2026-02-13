@@ -7,7 +7,5 @@ public class RiverSettings : ScriptableObject
 {
     public RiverDecorationSettings decorationSettings;
     public RiverHazardSettings hazardSettings;
-    public List<WeightedPrefab> pickupSpawns;
-
-    public ProviderEcs GetRandomPickup() => WeightedRandomUtility.GetWeighted(pickupSpawns);
+    public RiverPickupSettings pickupSettings;
 }

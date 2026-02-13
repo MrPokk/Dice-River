@@ -222,6 +222,72 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: dice_atlas_4
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 327
+        width: 100
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29ce7ce5ac0ae3ea9bbc75ce5cc5accb
+      internalID: 95402345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dice_atlas_6
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 228
+        width: 100
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48571796e92a89111a60cb824611c2f6
+      internalID: 1902601283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dice_atlas_7
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 228
+        width: 100
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 054931d8e3b5b4958b7da019cc352ae9
+      internalID: 1096990170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -244,6 +310,8 @@ TextureImporter:
       dice_atlas_3: -1240215664
       dice_atlas_4: 95402345
       dice_atlas_5: -223435966
+      dice_atlas_6: 1902601283
+      dice_atlas_7: 1096990170
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

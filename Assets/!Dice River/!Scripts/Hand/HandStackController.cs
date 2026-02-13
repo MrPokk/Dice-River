@@ -1,23 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
 public class HandStackController<TData, TView> : MonoBehaviour where TView : MonoBehaviour
 {
-    private struct Entry { public TData data; public TView prefab; }
-
-    [Header("Settings")]
-    [SerializeField] private bool _isVertical;
-    [SerializeField] private float _space = 5f;
-    [SerializeField] private float _parabola = 2000f;
-    [SerializeField] private bool _rotate;
+    protected struct Entry { public TData data; public TView prefab; }
 
     private HandController<TData, TView> _hand;
     private RectTransform _rect;
     private readonly Stack<Entry> _stack = new();
     private readonly Dictionary<TData, TView> _views = new();
 
+    public event Action OnChanged;
     public int Count => _stack.Count;
 
     private void Awake() => _rect = GetComponent<RectTransform>();
@@ -28,7 +24,7 @@ public class HandStackController<TData, TView> : MonoBehaviour where TView : Mon
     {
         _stack.Push(new Entry { data = item, prefab = prefab });
         if (prefab != null) _views[item] = Instantiate(prefab, _rect);
-        UpdateLayout();
+        OnChanged?.Invoke();
     }
 
     public bool DrawToHand()
@@ -36,15 +32,16 @@ public class HandStackController<TData, TView> : MonoBehaviour where TView : Mon
         if (_stack.Count == 0 || _hand == null) return false;
 
         var entry = _stack.Pop();
-        if (_views.Remove(entry.data, out var view)) Destroy(view.gameObject);
-
-        if (!_hand.Add(entry.data, entry.prefab))
+        var isAdded = _hand.Add(entry.data, entry.prefab);
+        if (!isAdded)
         {
-            Add(entry.data, entry.prefab);
+            _stack.Push(entry);
             return false;
         }
 
-        UpdateLayout();
+        if (_views.Remove(entry.data, out var view)) Destroy(view.gameObject);
+
+        OnChanged?.Invoke();
         return true;
     }
 
@@ -52,34 +49,24 @@ public class HandStackController<TData, TView> : MonoBehaviour where TView : Mon
     {
         var list = _stack.ToList();
         _stack.Clear();
-        foreach (var e in list.OrderBy(_ => Random.value)) _stack.Push(e);
-        UpdateLayout();
+        foreach (var e in list.OrderBy(_ => UnityEngine.Random.value)) _stack.Push(e);
+        OnChanged?.Invoke();
     }
 
     public void SetContainer(Transform container)
     {
         _rect = container.GetComponent<RectTransform>();
         foreach (var v in _views.Values) v.transform.SetParent(_rect, false);
-        UpdateLayout();
+        OnChanged?.Invoke();
     }
 
-    private void UpdateLayout()
+    public IEnumerable<TView> GetOrderedViews()
     {
         var items = _stack.ToArray();
-        System.Array.Reverse(items);
-        var offset = (items.Length - 1) / 2f;
-
-        for (int i = 0; i < items.Length; i++)
+        Array.Reverse(items);
+        foreach (var item in items)
         {
-            if (!_views.TryGetValue(items[i].data, out var view)) continue;
-
-            var rt = view.transform as RectTransform;
-            var x = (i - offset) * _space;
-            var y = -(x * x) / _parabola;
-
-            rt.anchoredPosition = _isVertical ? new Vector2(y, -x) : new Vector2(x, y);
-            rt.localRotation = _rotate ? Quaternion.Euler(0, 0, Mathf.Atan(-2 * x / _parabola) * Mathf.Rad2Deg) : Quaternion.identity;
-            rt.SetSiblingIndex(i);
+            if (_views.TryGetValue(item.data, out var view)) yield return view;
         }
     }
 }

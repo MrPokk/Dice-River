@@ -6,11 +6,16 @@ public class HandControllerDice : HandController<EcsEntity, UIProvider>
 {
     [Header("Setting Controller Dice")]
     public float timeRefreshSecond;
+    public uint maxCountDice;
 
     public override void Initialize(HandStackController<EcsEntity, UIProvider> handStackController)
     {
         base.Initialize(handStackController);
-        _handStackController.DrawToHand();
+        var countToDraw = Mathf.Min(maxCountDice, (uint)handStackController.Count);
+        for (var i = 0; i < countToDraw; i++)
+        {
+            handStackController.DrawToHand();
+        }
     }
 
     public override bool ExtractToFirst(out EcsEntity val)
@@ -28,6 +33,12 @@ public class HandControllerDice : HandController<EcsEntity, UIProvider>
 
     public override bool Add(EcsEntity data, UIProvider view)
     {
+        if (Items.Count >= maxCountDice)
+        {
+            EcsSystems.Run<IHandFailAdd>(s => s.ResultFailAdd(this));
+            return false;
+        }
+
         var result = base.Add(data, view);
         if (result) EcsSystems.Run<IHandSucceedAdd>(s => s.ResultSucceedAdd(this));
         else EcsSystems.Run<IHandFailAdd>(s => s.ResultFailAdd(this));

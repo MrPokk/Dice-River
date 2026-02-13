@@ -54,6 +54,13 @@ public class RiverGenerator : MonoBehaviour
             centerLeftShoreNode,
             centerRightShoreNode);
 
+        SpawnPickup(
+            presenter,
+            row,
+            leftBound,
+            rightBound,
+            rowLine.transform);
+
         SpawnHazard(
             presenter,
             row,
@@ -78,7 +85,7 @@ public class RiverGenerator : MonoBehaviour
             if (Random.value < hazardChance)
             {
                 var node = new Vector2Int(x, row);
-                var hazardPrefab = hazardSettings.GetRandomHazard();
+                var hazardPrefab = hazardSettings.GetRandom();
 
                 if (hazardPrefab != null)
                 {
@@ -87,6 +94,29 @@ public class RiverGenerator : MonoBehaviour
             }
         }
     }
+
+    private void SpawnPickup(MonoGridPresenter presenter, int row, float leftBound, float rightBound, Transform parent)
+    {
+        var waterStart = Mathf.CeilToInt(leftBound);
+        var waterEnd = Mathf.FloorToInt(rightBound);
+        var pickupSettings = _shoreSettings.pickupSettings;
+        var pickupChance = _shoreSettings.pickupSettings.pickupChance;
+
+        for (var x = waterStart; x <= waterEnd; x++)
+        {
+            if (Random.value < pickupChance)
+            {
+                var node = new Vector2Int(x, row);
+                var hazardPrefab = pickupSettings.GetRandom();
+
+                if (hazardPrefab != null)
+                {
+                    presenter.OneFrameInitializeGameObject(node, hazardPrefab, out _, parent);
+                }
+            }
+        }
+    }
+
     private void SpawnDecoration(
         MonoGridPresenter presenter,
         int row,
