@@ -22,7 +22,7 @@ public class RiverScrolling : MonoBehaviour
     private int _maxCol;
 
     [ReadOnly] public float scrollSpeed = 1f;
-    [SerializeField] private float _distanceMultiplier = 0.01f;
+    [SerializeField] private float _distanceMultiplier = 0.2f;
     public float TotalOffsetZ => _totalOffsetZ;
 
     public void Initialize(RiverGenerator generator, ComplicationSettings complication, MonoGridPresenter presenter)
