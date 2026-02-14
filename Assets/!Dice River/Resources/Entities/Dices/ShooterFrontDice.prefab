@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4245180417535183791}
   - component: {fileID: 870553833768372383}
   - component: {fileID: 884321165818646454}
+  - component: {fileID: 4921517849277323310}
   m_Layer: 0
   m_Name: ShooterFrontDice
   m_TagString: Untagged
@@ -145,6 +146,18 @@ MonoBehaviour:
   _value:
     fireRate: 0
     damage: 0
+--- !u!114 &4921517849277323310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064394609975083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5fa5830ee873bb8a1d8233d702f5b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveComponentProvider
 --- !u!1001 &1074528063723301792
 PrefabInstance:
   m_ObjectHideFlags: 0

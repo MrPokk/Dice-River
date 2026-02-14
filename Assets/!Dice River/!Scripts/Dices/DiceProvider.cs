@@ -2,7 +2,7 @@
 using BitterECS.Integration;
 using UnityEngine;
 
-[RequireComponent(typeof(RollComponentProvider), typeof(GridComponentProvider))]
+[RequireComponent(typeof(RollComponentProvider), typeof(GridComponentProvider), typeof(WaveComponentProvider))]
 
 public class DiceProvider : ProviderEcs<DicePresenter>
 {
