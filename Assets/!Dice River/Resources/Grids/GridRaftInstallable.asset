@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51919544095551e6c9328399ad1d0710, type: 3}
   m_Name: GridRaftInstallable
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::GridConfig
-  _position: {x: -7, y: 0, z: 5}
+  _position: {x: -8, y: 0, z: 5}
   _rotation: {x: 90, y: 0, z: 0}
   _cellSize: 1
   _cellOffset: {x: 0, y: 0}

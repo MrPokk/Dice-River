@@ -6,11 +6,11 @@ public struct ComplicationGameplaySystem : IEcsRunSystem
 {
     public readonly Priority Priority => Priority.High;
 
-    private readonly RiverScrolling _riverScrolling;
+    private readonly RiverScrollingSystem _riverScrolling;
     private readonly ComplicationSettings _settings;
     private float _nextThreshold;
 
-    public ComplicationGameplaySystem(RiverScrolling riverScrolling, ComplicationSettings settings)
+    public ComplicationGameplaySystem(RiverScrollingSystem riverScrolling, ComplicationSettings settings)
     {
         _riverScrolling = riverScrolling;
         _settings = settings;

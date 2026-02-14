@@ -145,6 +145,7 @@ MonoBehaviour:
   rightSidesObject: {fileID: 871596413274514201}
   topSidesObject: {fileID: 872278677098938884}
   ripplesObject: {fileID: 5668246259190640450}
+  previewState: 0
   stateConfigs:
   - state: 0
     useSingleSprite: 1
@@ -491,7 +492,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b044c7a37dd775802a637db1c063a012, type: 2}
+  - {fileID: 2100000, guid: 462e5d5756c92944aaee151550846222, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

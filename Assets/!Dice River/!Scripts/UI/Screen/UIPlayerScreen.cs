@@ -7,7 +7,7 @@ public class UIPlayerScreen : UIScreen
     public UIStackHandElement stackHandElement;
     public UIDistanceTraveledElement distanceTraveledElement;
 
-    public void Bind(HandControllerDice handController, HandStackControllerDice stackController, RiverScrolling scrolling)
+    public void Bind(HandControllerDice handController, HandStackControllerDice stackController, RiverScrollingSystem scrolling)
     {
         handElement.Bind(handController);
         stackHandElement.Bind(stackController);

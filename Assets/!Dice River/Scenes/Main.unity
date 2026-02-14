@@ -574,7 +574,7 @@ GameObject:
   - component: {fileID: 119604892}
   - component: {fileID: 119604893}
   m_Layer: 0
-  m_Name: Top (3)
+  m_Name: SpriteRipple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1211,7 +1211,7 @@ GameObject:
   - component: {fileID: 537343797}
   - component: {fileID: 537343798}
   m_Layer: 0
-  m_Name: Top (3)
+  m_Name: SpriteRipple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1566,8 +1566,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 678439000}
+  - component: {fileID: 678439002}
+  - component: {fileID: 678439001}
   m_Layer: 0
-  m_Name: GameObject (6)
+  m_Name: BridgeGirder_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1591,6 +1593,32 @@ Transform:
   - {fileID: 537343797}
   m_Father: {fileID: 1749417771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &678439001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678438999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc5b0229181280be841de4b034bb64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponent
+  ripplesObject: {fileID: 537343798}
+--- !u!114 &678439002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678438999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed9382c4e54b07b184708465bf6b5ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnvironmentProvider
+  spriteRipple: {fileID: 0}
 --- !u!1 &715047463
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,6 +1663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec000348025d7fb28afcc060db6ec9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Startup
+  mainCamera: {fileID: 0}
   playerSpawner: {fileID: 1647738965}
   environmentToDestroy:
   - {fileID: 1733180852}
@@ -1791,8 +1820,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 820503293}
+  - component: {fileID: 820503295}
+  - component: {fileID: 820503294}
   m_Layer: 0
-  m_Name: GameObject (4)
+  m_Name: BridgeGirder_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1816,6 +1847,32 @@ Transform:
   - {fileID: 1815059448}
   m_Father: {fileID: 1749417771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &820503294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820503292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc5b0229181280be841de4b034bb64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponent
+  ripplesObject: {fileID: 1815059449}
+--- !u!114 &820503295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820503292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed9382c4e54b07b184708465bf6b5ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnvironmentProvider
+  spriteRipple: {fileID: 0}
 --- !u!1 &836179194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,8 +2064,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 888410682}
+  - component: {fileID: 888410684}
+  - component: {fileID: 888410683}
   m_Layer: 0
-  m_Name: GameObject (5)
+  m_Name: BridgeGirder_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2032,6 +2091,32 @@ Transform:
   - {fileID: 836179195}
   m_Father: {fileID: 1749417771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &888410683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888410681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc5b0229181280be841de4b034bb64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponent
+  ripplesObject: {fileID: 836179196}
+--- !u!114 &888410684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888410681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed9382c4e54b07b184708465bf6b5ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnvironmentProvider
+  spriteRipple: {fileID: 0}
 --- !u!1 &898222890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2196,7 +2281,7 @@ GameObject:
   - component: {fileID: 1032695962}
   - component: {fileID: 1032695963}
   m_Layer: 0
-  m_Name: Top (3)
+  m_Name: SpriteRipple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2560,7 +2645,7 @@ GameObject:
   - component: {fileID: 1154386876}
   - component: {fileID: 1154386877}
   m_Layer: 0
-  m_Name: Top (3)
+  m_Name: SpriteRipple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2923,7 +3008,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1303070842}
   m_Layer: 0
-  m_Name: GameObject (5)
+  m_Name: BridgeFloor_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3046,8 +3131,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1454396925}
+  - component: {fileID: 1454396927}
+  - component: {fileID: 1454396926}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: BridgeGirder_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3071,6 +3158,32 @@ Transform:
   - {fileID: 1154386876}
   m_Father: {fileID: 1749417771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1454396926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454396924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc5b0229181280be841de4b034bb64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponent
+  ripplesObject: {fileID: 1154386877}
+--- !u!114 &1454396927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454396924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed9382c4e54b07b184708465bf6b5ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnvironmentProvider
+  spriteRipple: {fileID: 0}
 --- !u!1 &1475902853
 GameObject:
   m_ObjectHideFlags: 0
@@ -3080,8 +3193,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1475902854}
+  - component: {fileID: 1475902856}
+  - component: {fileID: 1475902855}
   m_Layer: 0
-  m_Name: GameObject (3)
+  m_Name: BridgeGirder_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3105,6 +3220,32 @@ Transform:
   - {fileID: 1032695962}
   m_Father: {fileID: 1749417771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1475902855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475902853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc5b0229181280be841de4b034bb64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponent
+  ripplesObject: {fileID: 1032695963}
+--- !u!114 &1475902856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475902853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed9382c4e54b07b184708465bf6b5ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnvironmentProvider
+  spriteRipple: {fileID: 0}
 --- !u!1 &1495963036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3114,8 +3255,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1495963037}
+  - component: {fileID: 1495963039}
+  - component: {fileID: 1495963038}
   m_Layer: 0
-  m_Name: GameObject (2)
+  m_Name: BridgeGirder_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3139,6 +3282,32 @@ Transform:
   - {fileID: 119604892}
   m_Father: {fileID: 1749417771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1495963038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495963036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc5b0229181280be841de4b034bb64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponent
+  ripplesObject: {fileID: 119604893}
+--- !u!114 &1495963039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495963036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed9382c4e54b07b184708465bf6b5ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnvironmentProvider
+  spriteRipple: {fileID: 0}
 --- !u!1 &1528057706
 GameObject:
   m_ObjectHideFlags: 0
@@ -3551,7 +3720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1764093132}
   m_Layer: 0
-  m_Name: GameObject (4)
+  m_Name: BridgeFloor_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3584,7 +3753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1800207946}
   m_Layer: 0
-  m_Name: GameObject (2)
+  m_Name: BridgeFloor_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3618,7 +3787,7 @@ GameObject:
   - component: {fileID: 1815059448}
   - component: {fileID: 1815059449}
   m_Layer: 0
-  m_Name: Top (3)
+  m_Name: SpriteRipple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3788,7 +3957,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1897357777}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: BridgeFloor_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3821,7 +3990,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1950465451}
   m_Layer: 0
-  m_Name: GameObject (3)
+  m_Name: BridgeFloor_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3854,7 +4023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2107991708}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: BridgeFloor_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

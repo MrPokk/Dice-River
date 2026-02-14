@@ -14,8 +14,8 @@ public class Startup : EcsUnityRoot
 
     private ComplicationSettings _complicationSettings;
 
-    public static RiverGenerator RiverGenerator;
-    public static RiverScrolling RiverScroll;
+    public static RiverGeneratorSystem RiverGenerator;
+    public static RiverScrollingSystem RiverScroll;
     public static MonoGridPresenter GridWorld;
     public static (MonoGridPresenter monoGrid, GameObject gridParent) GridRaft;
     public static HandControllerDice HandControllerDice;
@@ -53,8 +53,8 @@ public class Startup : EcsUnityRoot
 
     private void InitializeRiver()
     {
-        RiverGenerator = new Loader<RiverGenerator>(RiverObjectsPaths.RIVER_GENERATOR).New();
-        RiverScroll = new Loader<RiverScrolling>(RiverObjectsPaths.RIVER_SCROLLER).New();
+        RiverGenerator = new Loader<RiverGeneratorSystem>(RiverObjectsPaths.RIVER_GENERATOR).New();
+        RiverScroll = new Loader<RiverScrollingSystem>(RiverObjectsPaths.RIVER_SCROLLER).New();
         RiverScroll.Initialize(RiverGenerator, _complicationSettings, GridWorld, environmentToDestroy);
     }
 
