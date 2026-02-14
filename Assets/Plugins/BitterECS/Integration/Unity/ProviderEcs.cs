@@ -49,10 +49,10 @@ namespace BitterECS.Integration
             get
             {
                 var entity = GetEntitySilently();
-                if (!entity.IsAlive && !_isDestroying)
-                {
-                    throw new Exception($"[ProviderEcs<{typeof(T).Name}>] Entity is not linked on '{typeof(T).Name}'.");
-                }
+                //if (!entity.IsAlive && !_isDestroying)
+                //{
+                //    throw new Exception($"[ProviderEcs<{typeof(T).Name}>] Entity is not linked on '{typeof(T).Name}'.");
+                //}
                 return entity;
             }
         }
@@ -159,7 +159,7 @@ namespace BitterECS.Integration
         private EcsEntity GetParentEntitySilently()
         {
             if (_cachedRootProvider == null) ProcessComponents();
-            return _cachedRootProvider != null ? _cachedRootProvider.GetEntitySilently() : default;
+            return _cachedRootProvider != null ? _cachedRootProvider.GetEntitySilently() : new(null);
         }
 
         public void PushToEcs()

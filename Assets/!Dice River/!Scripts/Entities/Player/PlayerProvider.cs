@@ -1,4 +1,5 @@
-﻿using BitterECS.Integration;
+﻿using BitterECS.Core;
+using BitterECS.Integration;
 using UnityEngine;
 
 [RequireComponent(typeof(MovingComponentProvider), typeof(InputComponentProvider))]
@@ -18,6 +19,34 @@ public class PlayerProvider : EntitiesProvider
 
     private void OnTriggerEnter(Collider other)
     {
-        Entity.AddFrameToEvent<IsTriggerColliderEnter>(new(other, other.GetComponent<ProviderEcs>().Entity));
+        if (other.TryGetComponent<ProviderEcs>(out var providerEcs))
+            Entity.AddFrameToEvent<IsTriggerColliderEnter>(new(other, providerEcs.Entity));
+    }
+
+    public static bool IsPlayerContact(
+        EcsEntity entity,
+        out ControllerColliderHit hitData,
+        out Transform transform,
+        out CharacterController controller)
+    {
+        ref var hitComponent = ref entity.Get<IsColliderHit>();
+        hitData = hitComponent.hit;
+
+        if (!hitData.collider.gameObject.TryGetComponent<DiceProvider>(out _))
+        {
+            transform = null;
+            controller = null;
+            return false;
+        }
+
+        var provider = entity.GetProvider<EntitiesProvider>();
+        transform = provider.transform;
+
+        if (!transform.TryGetComponent(out controller))
+        {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -23,8 +23,6 @@ public struct HealthComponent
 
     public void ResetHealth() => currentHealth = maxHealth;
 
-    public void SetTimeImmunity(float time) => timeImmunity = time;
-
     [ReadOnly] public float timeImmunity;
     [ReadOnly] public int lastDamage;
 }

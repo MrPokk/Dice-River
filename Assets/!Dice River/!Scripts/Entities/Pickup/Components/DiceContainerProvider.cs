@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BitterECS.Integration;
+using UnityEngine;
 
 [Serializable]
 public struct DiceContainer
@@ -11,6 +12,9 @@ public struct DiceContainer
 [Serializable]
 public struct DiceGroup
 {
+    [Tooltip("Level at which this group of dice will be available")]
+    public DifficultyTier level;
+
     public List<DiceProvider> dice;
 }
 

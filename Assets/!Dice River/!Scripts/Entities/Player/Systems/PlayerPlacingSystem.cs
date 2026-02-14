@@ -33,6 +33,11 @@ public class PlayerPlacingSystem : IEcsInitSystem
 
             if (DiceInteractionSystem.IsPlacing(targetGridPos))
             {
+                if (Startup.HandControllerDice == null)
+                {
+                    return;
+                }
+
                 if (Startup.HandControllerDice.ExtractToFirst(out var entityToHand))
                 {
                     if (entityToHand != null)

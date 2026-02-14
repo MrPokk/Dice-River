@@ -13,15 +13,7 @@ public class PlayerLiftingSystem : IEcsAutoImplement
 
     private static void OnLifting(EcsEntity entity)
     {
-        ref var hitData = ref entity.Get<IsColliderHit>().hit;
-        if (!hitData.collider.gameObject.TryGetComponent<DiceProvider>(out _))
-        {
-            return;
-        }
-        var provider = entity.GetProvider<EntitiesProvider>();
-        var transform = provider.transform;
-
-        if (!transform.TryGetComponent<CharacterController>(out var controller))
+        if (!PlayerProvider.IsPlayerContact(entity, out var hitData, out var transform, out var controller))
         {
             return;
         }
@@ -35,6 +27,7 @@ public class PlayerLiftingSystem : IEcsAutoImplement
         if (targetY > transform.position.y)
         {
             var diceCenter = diceCollider.bounds.center;
+
             var newPosition = new Vector3(diceCenter.x, targetY, diceCenter.z);
 
             controller.enabled = false;

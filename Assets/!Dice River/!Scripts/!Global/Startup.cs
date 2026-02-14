@@ -1,0 +1,106 @@
+﻿using System;
+using System.Collections.Generic;
+using BitterECS.Core;
+using BitterECS.Integration;
+using UINotDependence.Core;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class Startup : EcsUnityRoot
+{
+    [ReadOnly] public CameraObject mainCamera;
+    public SpawnerPoint playerSpawner;
+    public List<EnvironmentToDestroy> environmentToDestroy;
+
+    private ComplicationSettings _complicationSettings;
+
+    public static RiverGenerator RiverGenerator;
+    public static RiverScrolling RiverScroll;
+    public static MonoGridPresenter GridWorld;
+    public static (MonoGridPresenter monoGrid, GameObject gridParent) GridRaft;
+    public static HandControllerDice HandControllerDice;
+    public static HandStackControllerDice HandStackControllerDice;
+
+    protected override void Bootstrap()
+    {
+        LoadConfigs();
+        InitializeCamera();
+        InitializeGrids();
+        InitializeRiver();
+        InitializeGameplaySystems();
+        InitializeDiceSystem();
+        InitializePlayer();
+        UIInitialize();
+    }
+
+    private void LoadConfigs()
+    {
+        _complicationSettings = new Loader<ComplicationSettings>(RiverObjectsPaths.COMPLICATION_SETTINGS).Prefab();
+    }
+
+    private void InitializeCamera()
+    {
+        mainCamera = new Loader<CameraObject>(PrefabObjectsPaths.CAMERA_OBJECT).New();
+    }
+
+    private void InitializeGrids()
+    {
+        GridRaft.gridParent = new GameObject("GridRaftParent");
+
+        GridWorld = new MonoGridPresenter(new Loader<GridConfig>(GridsPaths.GRID_WORLD).Prefab());
+        GridRaft.monoGrid = new MonoGridPresenter(new Loader<GridConfig>(GridsPaths.GRID_RAFT_INSTALLABLE).Prefab());
+    }
+
+    private void InitializeRiver()
+    {
+        RiverGenerator = new Loader<RiverGenerator>(RiverObjectsPaths.RIVER_GENERATOR).New();
+        RiverScroll = new Loader<RiverScrolling>(RiverObjectsPaths.RIVER_SCROLLER).New();
+        RiverScroll.Initialize(RiverGenerator, _complicationSettings, GridWorld, environmentToDestroy);
+    }
+
+    private void InitializeGameplaySystems()
+    {
+        var flowSystem = new StartupGameplay();
+        flowSystem.Initialize(_complicationSettings);
+        EcsSystems.AddSystem(flowSystem);
+
+        var complicationSystem = new ComplicationGameplaySystem(RiverScroll, _complicationSettings);
+        EcsSystems.AddSystem(complicationSystem);
+    }
+
+    private void InitializeDiceSystem()
+    {
+        var prefabsDice = new Loader<DiceProvider>(DicesPaths.BASE_DICE).Prefab();
+        var raftGenCfg = new Loader<GridConfig>(GridsPaths.GRID_RAFT_GENERATION).Prefab();
+        DiceRaftInitSystem.Initialize(raftGenCfg, prefabsDice);
+    }
+
+    private void InitializePlayer()
+    {
+        var playerPrefab = new Loader<PlayerProvider>(EntitiesPaths.PLAYER).New(playerSpawner.transform.position, Quaternion.identity);
+        mainCamera.SetTarget(playerPrefab.transform);
+    }
+
+    private void UIInitialize()
+    {
+        UIInit.Initialize();
+        new Loader<EventSystem>(SettingsPaths.EVENT_SYSTEM).New();
+        UIController.OpenScreen<UIPlayerScreen>();
+    }
+
+    public static void StartGameplay()
+    {
+        HandControllerDice = new Loader<HandControllerDice>(PrefabObjectsPaths.HAND_CONTROLLER).New();
+        HandStackControllerDice = new Loader<HandStackControllerDice>(PrefabObjectsPaths.HAND_STACK_CONTROLLER).New();
+
+        HandStackControllerDice.Initialize(HandControllerDice);
+        HandControllerDice.Initialize(HandStackControllerDice);
+
+        RiverScroll.StartScrolling();
+
+        if (UIController.GetCurrentScreen is UIPlayerScreen playerScreen)
+        {
+            playerScreen.Bind(HandControllerDice, HandStackControllerDice, RiverScroll);
+        }
+    }
+}

@@ -148,8 +148,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0417721, y: 1.7142622, z: 0.7}
-  m_Center: {x: -0.021360755, y: 0.35048544, z: 0}
+  m_Size: {x: 0.7, y: 1.4323974, z: 0.7}
+  m_Center: {x: 0, y: 0.36619866, z: 0}
 --- !u!54 &3199252909954570966
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -211,8 +211,6 @@ MonoBehaviour:
       - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
       - {fileID: 453393326418446785, guid: 80a1d489460193a8599c0aec63ed520c, type: 3}
       - {fileID: 453393326418446785, guid: 80a1d489460193a8599c0aec63ed520c, type: 3}
-      - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-      - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
 --- !u!114 &7038312131274780195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +305,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2481068211524993482, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+  m_Sprite: {fileID: 4478878329863010782, guid: 2fd2f61289cd297a9a298164121034ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

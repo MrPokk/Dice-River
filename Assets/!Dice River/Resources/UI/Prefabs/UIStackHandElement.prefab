@@ -32,8 +32,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0.001564, y: 0}
+  m_SizeDelta: {x: 123.93, y: 116.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8184707657837859378
 GameObject:
@@ -61,8 +61,8 @@ RectTransform:
   m_GameObject: {fileID: 8184707657837859378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5796474533532611237}
   m_Father: {fileID: 0}
@@ -87,3 +87,13 @@ MonoBehaviour:
   _btnCloseObject: {fileID: 0}
   _btnAlternativeCloseObject: {fileID: 0}
   handStackContainer: {fileID: 5796474533532611237}
+  _isVertical: 1
+  _space: 80
+  _parabola: 6000
+  _rotate: 0
+  _useFade: 1
+  _reverseFade: 1
+  _minAlpha: 0.5
+  _useSway: 1
+  _swayAngle: 20
+  _swayDuration: 0.7

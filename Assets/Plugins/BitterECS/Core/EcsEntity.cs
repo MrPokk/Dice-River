@@ -16,8 +16,8 @@ namespace BitterECS.Core
             Presenter = presenter;
         }
 
-        public void AddFrameToEvent<T>(in T component = default) where T : new() { Add(component); Remove<T>(); }
-        public void AddFrameToEvent<T>(Action action, in T component = default) where T : new() { Add(component); action(); Remove<T>(); }
+        public void AddFrameToEvent<T>(in T component = default) where T : new() { if (!IsAlive) return; Add(component); Remove<T>(); }
+        public void AddFrameToEvent<T>(Action action, in T component = default) where T : new() { if (!IsAlive) return; Add(component); action(); Remove<T>(); }
         public void AddPredicate<T>(T value, Predicate<T> predicate) where T : new() { if (predicate(value)) Add(value); }
         public void AddPredicate<T, P>(in T value, P predicateValue, Predicate<P> predicate) where T : new() { if (predicate(predicateValue)) Add(value); }
         public void AddOrRemove<T, P>(in T value, P predicateValue, Predicate<P> predicate) where T : new() { if (predicate(predicateValue)) Add(value); else Remove<T>(); }
@@ -34,7 +34,7 @@ namespace BitterECS.Core
         public ref T GetOrAdd<T>() where T : new() { if (!Has<T>()) Add(new T()); return ref Get<T>(); }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Has<T>() where T : new() => !IsNull && Presenter.GetPool<T>().Has(Id);
+        public bool Has<T>() where T : new() => IsAlive && Presenter.GetPool<T>().Has(Id);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Remove<T>() where T : new() { if (Has<T>()) { Presenter.GetPool<T>().Remove(Id); Presenter.DecrementCount(Id); } }

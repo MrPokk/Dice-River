@@ -18,14 +18,13 @@ public class PlayerTimeImmunityResetSystem : IEcsInitSystem
     {
         foreach (var entity in _ecsEntities)
         {
-            entity.Get<HealthComponent>().timeImmunity = entity.Get<DamageToIntervalComponent>().damageIntervalSecond;
+            entity.Get<HealthComponent>().timeImmunity = 0;
         }
     }
 
     private static void OnReset(EcsEntity entity)
     {
         ref var healthComp = ref entity.Get<HealthComponent>();
-        var damageComp = entity.Get<DamageToIntervalComponent>();
 
         healthComp.timeImmunity = 0;
     }
