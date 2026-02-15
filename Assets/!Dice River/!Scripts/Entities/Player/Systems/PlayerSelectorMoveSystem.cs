@@ -4,20 +4,22 @@ using UnityEngine;
 public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
 {
     public Priority Priority => Priority.Medium;
-    private EcsFilter _ecsFilter =
-    Build.For<EntitiesPresenter>()
+
+    private EcsFilter _ecsFilter = Build.For<EntitiesPresenter>()
          .Filter()
          .WhereProvider<EntitiesProvider>()
          .Include<InputComponent>()
          .Include<FacingComponent>();
 
     private Transform _selector;
-    private Vector3 _offset = new(0, 0.55f, 0);
+    private readonly Vector3 _offset = new(0, 0.55f, 0);
+    private readonly Vector2Int[] _neighborOffsets = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
 
     public void Init()
     {
         var selectorPrefab = new Loader<GameObject>(UiPrefabsPaths.UISELECTOR).New();
         _selector = selectorPrefab.transform;
+        _selector.gameObject.SetActive(false);
     }
 
     public void FixedRun()
@@ -33,13 +35,54 @@ public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
 
             if (!monoGrid.IsWithinGrid(targetGridPos))
             {
-                _selector.gameObject.SetActive(false);
+                if (_selector.gameObject.activeSelf) _selector.gameObject.SetActive(false);
                 continue;
+            }
+
+            if (monoGrid.IsEmpty)
+            {
+                _selector.gameObject.SetActive(true);
+                continue;
+            }
+
+            var isValidPosition = false;
+
+            if (entity.Has<IsGrabbingComponent>())
+            {
+                isValidPosition = true;
             }
             else
             {
-                _selector.gameObject.SetActive(true);
+
+
+                if (monoGrid.GetGameObject(targetGridPos) is DiceProvider)
+                {
+                    isValidPosition = true;
+                }
+                else
+                {
+                    foreach (var offset in _neighborOffsets)
+                    {
+                        var neighborPos = targetGridPos + offset;
+                        if (monoGrid.GetGameObject(neighborPos) is not DiceProvider)
+                        {
+                            continue;
+                        }
+
+                        isValidPosition = true;
+                        break;
+                    }
+                }
+            }
+
+            if (isValidPosition)
+            {
+                if (!_selector.gameObject.activeSelf) _selector.gameObject.SetActive(true);
                 _selector.position = monoGrid.ConvertingPosition(targetGridPos) + _offset;
+            }
+            else
+            {
+                if (_selector.gameObject.activeSelf) _selector.gameObject.SetActive(false);
             }
         }
     }

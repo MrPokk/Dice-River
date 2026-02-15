@@ -193,7 +193,6 @@ GameObject:
   - component: {fileID: 7628311494960285947}
   - component: {fileID: 6615424694905504370}
   - component: {fileID: -2395376832600923756}
-  - component: {fileID: 398648508334124632}
   m_Layer: 0
   m_Name: TreeVAR_3
   m_TagString: Untagged
@@ -230,7 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed9382c4e54b07b184708465bf6b5ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldElementProvider
-  spriteRipple: {fileID: 0}
 --- !u!114 &-2395376832600923756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,16 +249,3 @@ MonoBehaviour:
   maxRandomY: 60
   minRandomZ: 0
   maxRandomZ: 0
---- !u!114 &398648508334124632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4769043756280334439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cc5b0229181280be841de4b034bb64f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponent
-  ripplesObject: {fileID: 0}

@@ -15,7 +15,7 @@ public struct ComplicationGameplaySystem : IEcsRunSystem
         _riverScrolling = riverScrolling;
         _settings = settings;
 
-        var step = _settings != null ? _settings.distanceStep : 100f;
+        var step = _settings != null ? _settings.distanceStepToDifficulty : throw new("ComplicationSettings is null");
         _nextThreshold = (Mathf.Floor(_riverScrolling.TotalScrollDistance / step) + 1) * step;
     }
 
@@ -31,7 +31,7 @@ public struct ComplicationGameplaySystem : IEcsRunSystem
 
             while (_riverScrolling.TotalScrollDistance >= _nextThreshold)
             {
-                _nextThreshold += _settings.distanceStep;
+                _nextThreshold += _settings.distanceStepToDifficulty;
             }
         }
     }
@@ -45,5 +45,6 @@ public struct ComplicationGameplaySystem : IEcsRunSystem
         {
             StartupGameplay.GState.currentDifficulty = (DifficultyTier)(currentIdx + 1);
         }
+        Debug.Log($"Difficulty increased to: {StartupGameplay.GState.currentDifficulty}");
     }
 }

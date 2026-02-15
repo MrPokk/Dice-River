@@ -1,4 +1,5 @@
 ﻿using BitterECS.Core;
+using BitterECS.Integration;
 using UnityEngine;
 
 public class HazardRipplesRefreshSystem : IEcsRunSystem
@@ -6,7 +7,7 @@ public class HazardRipplesRefreshSystem : IEcsRunSystem
     public Priority Priority => Priority.Low;
 
     private EcsFilter _ecsEntities = new EcsFilter<EntitiesPresenter>()
-        .WhereProvider<HazardProvider>(e => e.spriteRipple != null && e.spriteRipple.ripplesObject != null);
+        .Include<SpriteRipplesComponent>(c => c.ripplesObject != null);
 
     public void Run()
     {
@@ -14,9 +15,10 @@ public class HazardRipplesRefreshSystem : IEcsRunSystem
 
         foreach (var entity in _ecsEntities)
         {
-            var environmentProvider = entity.GetProvider<HazardProvider>();
+            var environmentProvider = entity.GetProvider<ProviderEcs>();
+            var spriteRipplesComponent = entity.Get<SpriteRipplesComponent>();
 
-            var ripples = environmentProvider.spriteRipple.ripplesObject.transform;
+            var ripples = spriteRipplesComponent.ripplesObject.transform;
             var dicePos = environmentProvider.transform.position;
 
             var wavePhase = dicePos.x * 0.6f + dicePos.z * 0.7f;

@@ -27,8 +27,9 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem, IEcsRunSys
         foreach (var entity in _ecsFilter)
         {
             ref var input = ref entity.Get<InputComponent>();
+            var raw = _moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
 
-            input.currentInput = _moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
+            input.currentInput = raw.sqrMagnitude > 0.01f ? raw : Vector2.zero;
         }
     }
 
@@ -40,21 +41,26 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem, IEcsRunSys
             ref var moving = ref entity.Get<MovingComponent>();
             var input = entity.Get<InputComponent>();
             var gravity = entity.Get<GravityComponent>();
-            ref var facing = ref entity.Get<FacingComponent>();
+            var facing = entity.Get<FacingComponent>();
 
             var cc = provider.characterController;
             Vector3 horizontalVelocity;
 
+            var rawInput = input.currentInput;
+            var moveDirection = new Vector3(rawInput.x, 0f, rawInput.y);
+
             if (gravity.isGrounded)
             {
-                var rawInput = input.currentInput;
-                var moveDirection = new Vector3(rawInput.x, 0f, rawInput.y);
                 moveDirection = CheckToUpdateFacingDirection(entity, provider, moveDirection);
                 horizontalVelocity = moveDirection * moving.velocity;
             }
             else
             {
-                horizontalVelocity = facing.direction.normalized * moving.jumpVelocityX;
+                if (moveDirection.sqrMagnitude > SqrMagnitudeThreshold)
+                {
+                    moveDirection.Normalize();
+                }
+                horizontalVelocity = moveDirection * moving.jumpVelocityX;
             }
 
             cc.Move(horizontalVelocity * Time.fixedDeltaTime);
@@ -62,7 +68,6 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem, IEcsRunSys
             entity.AddOrRemove<IsMovingComponent, Vector3>(new(), horizontalVelocity, i => i.sqrMagnitude > SqrMagnitudeThreshold);
         }
     }
-
     private static Vector3 CheckToUpdateFacingDirection(EcsEntity entity, PlayerProvider provider, Vector3 moveDirection)
     {
         if (moveDirection.sqrMagnitude <= SqrMagnitudeThreshold)

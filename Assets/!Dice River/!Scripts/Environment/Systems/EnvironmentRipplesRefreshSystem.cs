@@ -1,4 +1,5 @@
 ﻿using BitterECS.Core;
+using BitterECS.Integration;
 using UnityEngine;
 
 public class EnvironmentRipplesRefreshSystem : IEcsRunSystem
@@ -6,7 +7,7 @@ public class EnvironmentRipplesRefreshSystem : IEcsRunSystem
     public Priority Priority => Priority.Low;
 
     private EcsFilter _ecsEntities = new EcsFilter<EnvironmentPresenter>()
-        .WhereProvider<EnvironmentProvider>(e => e.spriteRipple != null && e.spriteRipple.ripplesObject != null);
+         .Include<SpriteRipplesComponent>(c => c.ripplesObject != null);
 
     public void Run()
     {
@@ -14,8 +15,8 @@ public class EnvironmentRipplesRefreshSystem : IEcsRunSystem
 
         foreach (var entity in _ecsEntities)
         {
-            var environmentProvider = entity.GetProvider<EnvironmentProvider>();
-            var ripplesTransform = environmentProvider.spriteRipple.ripplesObject.transform;
+            var environmentProvider = entity.GetProvider<ProviderEcs>();
+            var spriteRipplesComponent = entity.Get<SpriteRipplesComponent>();
 
             var rootPos = environmentProvider.transform.position;
 
@@ -24,8 +25,7 @@ public class EnvironmentRipplesRefreshSystem : IEcsRunSystem
             var currentScale = 1.1f + pulsation * 0.1f;
 
             var baseScale = new Vector3(0.5f, 0.5f, 1f);
-            ripplesTransform.localScale = baseScale * currentScale;
-
+            spriteRipplesComponent.ripplesObject.transform.localScale = baseScale * currentScale;
         }
     }
 }

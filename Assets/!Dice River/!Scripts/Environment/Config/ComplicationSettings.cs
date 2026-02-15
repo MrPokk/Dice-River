@@ -4,8 +4,9 @@
 public class ComplicationSettings : ScriptableObject
 {
     [Header("Complication Settings")]
-    [Tooltip("How what distance to increase the speed")]
-    public float distanceStep = 100f;
+    [Tooltip("Distance to increase speed and difficulty")]
+    public float distanceStepToScroll = 100f;
+    public float distanceStepToDifficulty = 100f;
     public int startGenerationToLine = 10;
 
     [Tooltip("How much to increase the speed")]

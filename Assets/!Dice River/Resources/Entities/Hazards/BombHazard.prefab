@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742a7f133c847244f9bd312ece71920e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardProvider
-  spriteRipple: {fileID: 0}
 --- !u!65 &4417796489883080885
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -138,7 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc5b0229181280be841de4b034bb64f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponent
-  ripplesObject: {fileID: 3326483002535032834}
+  _value:
+    ripplesObject: {fileID: 3326483002535032834}
 --- !u!1 &4669240937691049697
 GameObject:
   m_ObjectHideFlags: 0

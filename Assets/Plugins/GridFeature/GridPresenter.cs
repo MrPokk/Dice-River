@@ -476,6 +476,6 @@ public class GridPresenter<T>
     }
 
     public int Count => _grid.GridDictionary.Count;
-
-    public bool IsEmpty => _grid.GridDictionary.Count == 0;
+    public bool HasAnyObjects => _grid.GridDictionary.Values.Any(v => v != null);
+    public bool IsEmpty => !HasAnyObjects;
 }

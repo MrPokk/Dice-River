@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 3199252909954570966}
   - component: {fileID: 6002320840822252825}
   - component: {fileID: 6453253308650765066}
-  - component: {fileID: 840118966450034322}
+  - component: {fileID: 8844360297006299774}
   m_Layer: 0
   m_Name: RockHazard
   m_TagString: Untagged
@@ -142,7 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742a7f133c847244f9bd312ece71920e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardProvider
-  spriteRipple: {fileID: 0}
 --- !u!65 &4417796489883080885
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -217,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageConstComponentProvider
   _value:
     damage: 1
---- !u!114 &840118966450034322
+--- !u!114 &8844360297006299774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,8 +227,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cc5b0229181280be841de4b034bb64f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponent
-  ripplesObject: {fileID: 5005083030681702391}
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponentProvider
+  _value:
+    ripplesObject: {fileID: 5005083030681702391}
 --- !u!1 &4669240937691049697
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using BitterECS.Core;
+﻿using System.Linq;
+using BitterECS.Core;
 using UnityEngine;
 
 public class TagPouchPickupSystem : IEcsAutoImplement
@@ -16,12 +17,20 @@ public class TagPouchPickupSystem : IEcsAutoImplement
     private static void OnPickup(EcsEntity entity)
     {
         var collision = entity.Get<IsTriggerColliderEnter>();
-        var variableDices = collision.entityHit.Get<DiceContainer>().groups;
-        var selectVariableDices = variableDices[Random.Range(0, variableDices.Count)];
+        var currentTier = StartupGameplay.GState.currentDifficulty;
 
-        foreach (var dice in selectVariableDices.dice)
+        var validGroups = collision.entityHit.Get<DiceContainer>().groups
+            .Where(group => group.level <= currentTier)
+            .ToList();
+
+        if (validGroups.Count > 0)
         {
-            Startup.HandStackControllerDice.Add(dice.NewEntity(), dice.spriteIcon.Prefab());
+            var selectedGroup = validGroups[Random.Range(0, validGroups.Count)];
+
+            foreach (var dice in selectedGroup.dice)
+            {
+                Startup.HandStackControllerDice.Add(dice.NewEntity(), dice.spriteIcon.Prefab());
+            }
         }
 
         collision.entityHit.Destroy();

@@ -1,12 +1,14 @@
-﻿using BitterECS.Integration;
-using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using BitterECS.Integration;
+using UnityEngine;
 
 public class DiceInteractionSystem
 {
     private static MonoGridPresenter GridDice => Startup.GridRaft.monoGrid;
     private static GameObject GridDiceGameObject => Startup.GridRaft.gridParent;
+
+    private static readonly List<Vector2Int> _cachedActiveIndices = new(32);
 
     private static readonly Dictionary<Vector2Int, Action<DiceProvider, DiceProvider, bool>> s_renderingActions = new()
     {
@@ -19,6 +21,23 @@ public class DiceInteractionSystem
         { Vector2Int.down, (curr, neigh, connect) =>
             curr.spriteSide.SetFrontActive(!connect) }
     };
+
+    public static List<Vector2Int> GetActiveDiceIndices()
+    {
+        _cachedActiveIndices.Clear();
+
+        var gridDict = GridDice.GetGridDictionary();
+
+        foreach (var kvp in gridDict)
+        {
+            if (kvp.Value is DiceProvider)
+            {
+                _cachedActiveIndices.Add(kvp.Key);
+            }
+        }
+
+        return _cachedActiveIndices;
+    }
 
     public static DiceProvider Extraction(Vector2Int index)
     {
