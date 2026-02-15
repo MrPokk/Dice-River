@@ -20,7 +20,7 @@ public class HazardWavingRefreshSystem : IEcsRunSystem
             var pos = hazardTransform.position;
 
             var wavePhase = pos.x * 0.6f + pos.z * 0.7f;
-            var bobbingY = Mathf.Sin(time * 2.5f + wavePhase) * 0.12f;
+            var bobbingY = Mathf.Sin(time * 2.5f + wavePhase) * 0.2f;
 
             hazardTransform.position = new Vector3(pos.x, bobbingY, pos.z);
         }

@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b95f738f069ca689ec9bea1d9c1437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RiverScroll
-  _scrollSpeed: 1.7
+  scrollSpeed: 1
+  _distanceMultiplier: 0.8

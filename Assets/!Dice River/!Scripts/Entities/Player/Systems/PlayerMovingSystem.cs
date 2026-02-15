@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
+public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem, IEcsRunSystem
 {
     public Priority Priority => Priority.High;
 
@@ -22,20 +22,25 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem
     {
         _moveAction = ControllableSystem.Inputs.Playable.Move;
     }
+    public void Run()
+    {
+        foreach (var entity in _ecsFilter)
+        {
+            ref var input = ref entity.Get<InputComponent>();
+
+            input.currentInput = _moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
+        }
+    }
 
     public void FixedRun()
     {
-        var currentDirection = _moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
-
         foreach (var entity in _ecsFilter)
         {
             var provider = entity.GetProvider<PlayerProvider>();
             ref var moving = ref entity.Get<MovingComponent>();
-            ref var input = ref entity.Get<InputComponent>();
-            ref var gravity = ref entity.Get<GravityComponent>();
+            var input = entity.Get<InputComponent>();
+            var gravity = entity.Get<GravityComponent>();
             ref var facing = ref entity.Get<FacingComponent>();
-
-            input.currentInput = currentDirection;
 
             var cc = provider.characterController;
             Vector3 horizontalVelocity;

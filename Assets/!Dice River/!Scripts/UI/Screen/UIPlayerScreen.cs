@@ -7,11 +7,14 @@ public class UIPlayerScreen : UIScreen
     public UIStackHandElement stackHandElement;
     public UIDistanceTraveledElement distanceTraveledElement;
 
+    private RiverScrollingSystem _riverScrollingSystem;
+
     public void Bind(HandControllerDice handController, HandStackControllerDice stackController, RiverScrollingSystem scrolling)
     {
         handElement.Bind(handController);
         stackHandElement.Bind(stackController);
-        scrolling.OnDistanceChanged += SetDistance;
+        _riverScrollingSystem = scrolling;
+        _riverScrollingSystem.OnDistanceChanged += SetDistance;
     }
 
     public override void Open()
@@ -39,6 +42,8 @@ public class UIPlayerScreen : UIScreen
         handElement.Close();
         stackHandElement.Close();
         distanceTraveledElement.Close();
+        if (_riverScrollingSystem != null)
+            _riverScrollingSystem.OnDistanceChanged -= SetDistance;
         base.Close();
     }
 }

@@ -63,7 +63,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 64
@@ -343,6 +343,50 @@ TextureImporter:
       bones: []
       spriteID: 6ca7ce959d2e114a6819e6d1bcc0ad8a
       internalID: 1554438210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props_atlas_10
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 636
+        width: 334
+        height: 329
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b22d57e68b95b7fbfb7e2709ce93403c
+      internalID: -798688197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: props_atlas_11
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 188
+        width: 328
+        height: 293
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26e2b1df371ff2372925b6dc6c31590b
+      internalID: 30687579
       vertices: []
       indices: 
       edges: []

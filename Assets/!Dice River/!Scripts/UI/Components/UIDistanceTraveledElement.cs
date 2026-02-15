@@ -9,11 +9,13 @@ public class UIDistanceTraveledElement : UIPopup
     public override void Open()
     {
         text.text = $"{Mathf.FloorToInt(0)} m";
-        base.Open();
+        gameObject.SetActive(false);
     }
 
     public void UpdateDistance(float distance)
     {
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
         text.text = $"{Mathf.FloorToInt(distance)} m";
     }
 
