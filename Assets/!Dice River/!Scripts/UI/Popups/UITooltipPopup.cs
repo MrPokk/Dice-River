@@ -30,9 +30,9 @@ public class UITooltipPopup : UIPopup
     {
         UIAnimationComponent
         .UsingAnimation(gameObject)
-        .ApplyPresetClose(UIAnimationPresets.CreateSlideFromRightPreset())
-        .PlayCloseAnimation();
-        Update();
+        .ApplyPresetOpen(UIAnimationPresets.CreateSlideFromRightPreset())
+        .PlayOpenAnimation();
+
         base.Open();
     }
 

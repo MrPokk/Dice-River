@@ -4,6 +4,7 @@
     {
         // Component pool settings
         public const ushort InitialPoolCapacity = 64;
+        public const ushort InitialEventPoolCapacity = 16;
         public const ushort PoolGrowthFactor = 2;
 
         // Filter settings

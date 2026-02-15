@@ -90,7 +90,7 @@ public class Startup : EcsUnityRoot
     {
         UIInit.Initialize();
         new Loader<EventSystem>(SettingsPaths.EVENT_SYSTEM).New();
-        UIController.OpenScreen<UIPlayerScreen>();
+        UIController.OpenScreen<UIToStartFloating>();
     }
 
     public static void StartGameplay()
@@ -102,10 +102,7 @@ public class Startup : EcsUnityRoot
         HandControllerDice.Initialize(HandStackControllerDice);
 
         RiverScroll.StartScrolling();
-
-        if (UIController.GetCurrentScreen is UIPlayerScreen playerScreen)
-        {
-            playerScreen.Bind(HandControllerDice, HandStackControllerDice, RiverScroll);
-        }
+        UIController.OpenScreen<UIPlayerScreen>()
+        .Bind(HandControllerDice, HandStackControllerDice, RiverScroll);
     }
 }
