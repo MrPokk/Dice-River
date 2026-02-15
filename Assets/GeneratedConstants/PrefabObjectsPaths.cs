@@ -13,4 +13,12 @@ public static class PrefabObjectsPaths
     public const string HAND_LOAD_STACK_PREFAB = "Entities/Prefabs/HandLoadStackPrefab";
     /// <summary> Component: HandStackControllerDice </summary>
     public const string HAND_STACK_CONTROLLER = "Entities/Prefabs/HandStackController";
+    public static readonly string[] AllPaths = new string[]
+    {
+        CAMERA_OBJECT,
+        HAND_CONTROLLER,
+        HAND_LOAD_STACK_PREFAB,
+        HAND_STACK_CONTROLLER,
+    };
+    public const int COUNT = 4;
 }

@@ -12,6 +12,7 @@ namespace UINotDependence.Core
         private bool _isInitialized;
 
         public static UIController Instance => _instance ??= FindOrCreateInstance();
+        public bool IsInitialized => _isInitialized;
 
         private static UIController FindOrCreateInstance()
         {

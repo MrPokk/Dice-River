@@ -14,7 +14,7 @@ public interface IHandFailRemove : IEcsAutoImplement
 
 public interface IHandSucceedAdd : IEcsAutoImplement
 {
-    public UniTask ResultSucceedAdd(HandControllerDice hand);
+    public UniTask ResultSucceedAdd(HandControllerDice handControllerDice, EcsEntity entity, UIProvider uiProvider);
 }
 
 public interface IHandFailAdd : IEcsAutoImplement

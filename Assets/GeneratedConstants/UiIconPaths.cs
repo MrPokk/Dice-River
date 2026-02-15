@@ -6,9 +6,16 @@
 public static class UiIconPaths
 {
     /// <summary> Provider: UIProvider </summary>
-    public const string ICON_BASE_DICE = "UI/Prefabs/Icon/IconBaseDice";
+    public const string VIEW_BASE_DICE = "UI/Prefabs/Icon/ViewBaseDice";
     /// <summary> Provider: UIProvider </summary>
-    public const string ICON_MINUS_FORWARD_DICE = "UI/Prefabs/Icon/IconMinusForwardDice";
+    public const string VIEW_MINUS_FORWARD_DICE = "UI/Prefabs/Icon/ViewMinusForwardDice";
     /// <summary> Provider: UIProvider </summary>
-    public const string ICON_PLUS_FORWARD_DICE = "UI/Prefabs/Icon/IconPlusForwardDice";
+    public const string VIEW_PLUS_FORWARD_DICE = "UI/Prefabs/Icon/ViewPlusForwardDice";
+    public static readonly string[] AllPaths = new string[]
+    {
+        VIEW_BASE_DICE,
+        VIEW_MINUS_FORWARD_DICE,
+        VIEW_PLUS_FORWARD_DICE,
+    };
+    public const int COUNT = 3;
 }

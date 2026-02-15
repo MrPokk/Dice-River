@@ -27,4 +27,19 @@ public static class DicesPaths
     public const string SPRITE_ROLLS = "Entities/Dices/SpriteRolls";
     /// <summary> Component: SpriteSideComponent </summary>
     public const string SPRITE_SIDES = "Entities/Dices/SpriteSides";
+    public static readonly string[] AllPaths = new string[]
+    {
+        BASE_DICE,
+        GUARDIAN_DICE,
+        HEALER_DICE,
+        MINUS_FORWARD_DICE,
+        MIRROR_COPY_DICE,
+        MULTI_AREA_DICE,
+        PLUS_FORWARD_DICE,
+        REROLLING_DICE,
+        SHOOTER_FRONT_DICE,
+        SPRITE_ROLLS,
+        SPRITE_SIDES,
+    };
+    public const int COUNT = 11;
 }

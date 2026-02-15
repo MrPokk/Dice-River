@@ -3,7 +3,6 @@ using BitterECS.Integration;
 using UnityEngine;
 
 [RequireComponent(typeof(RollComponentProvider), typeof(GridComponentProvider), typeof(WaveComponentProvider))]
-
 public class DiceProvider : ProviderEcs<DicePresenter>
 {
     private const int MaxExclusive = 7;

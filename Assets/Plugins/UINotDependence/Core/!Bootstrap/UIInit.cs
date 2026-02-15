@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace UINotDependence.Core
 {
     public class UIInit
     {
         public static void Initialize(string prefabPath = "UI")
         {
+            if (UIController.Instance.IsInitialized) return;
+
             var allBinders = new Dictionary<Type, WindowBinder>();
             var allPrefabs = Resources.LoadAll<GameObject>(prefabPath);
 

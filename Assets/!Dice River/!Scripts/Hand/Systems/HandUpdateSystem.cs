@@ -5,22 +5,22 @@ public class HandUpdateSystem : IHandSucceedRemove, IHandSucceedExtraction, IHan
 {
     public Priority Priority => Priority.High;
 
-    public async UniTask ResultStackSucceedAdd(HandStackControllerDice stack)
+    public UniTask ResultStackSucceedAdd(HandStackControllerDice stack)
     {
-        OnAddHand((HandControllerDice)stack.hand);
+        return OnAddHand((HandControllerDice)stack.hand);
     }
 
-    public async UniTask ResultSucceedExtraction(HandControllerDice hand)
+    public UniTask ResultSucceedExtraction(HandControllerDice hand)
     {
-        OnAddHand(hand);
+        return OnAddHand(hand);
     }
 
-    public async UniTask ResultSucceedRemove(HandControllerDice hand)
+    public UniTask ResultSucceedRemove(HandControllerDice hand)
     {
-        OnAddHand(hand);
+        return OnAddHand(hand);
     }
 
-    private static void OnAddHand(HandControllerDice hand)
+    private static UniTask OnAddHand(HandControllerDice hand)
     {
         var currentCount = hand.Items.Count;
         var max = hand.maxCountDice;
@@ -34,5 +34,6 @@ public class HandUpdateSystem : IHandSucceedRemove, IHandSucceedExtraction, IHan
                 break;
             }
         }
+        return UniTask.CompletedTask;
     }
 }

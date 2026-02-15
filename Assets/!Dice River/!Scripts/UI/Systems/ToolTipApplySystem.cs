@@ -14,7 +14,7 @@ public class ToolTipApplySystem : IEcsAutoImplement
     private static void OnPointerEnter(EcsEntity entity)
     {
         ref var name = ref entity.Get<NameComponent>();
-        ref var descriptor = ref entity.Get<DescriptorComponent>();
+        ref var descriptor = ref entity.Get<DescriptionComponent>();
         ref var abilityDescriptor = ref entity.Get<AbilityDescriptorComponent>();
 
         var popup = UIController.OpenPopup<UITooltipPopup>();

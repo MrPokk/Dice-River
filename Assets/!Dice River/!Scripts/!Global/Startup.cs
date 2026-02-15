@@ -33,6 +33,11 @@ public class Startup : EcsUnityRoot
         UIInitialize();
     }
 
+    public void Restart()
+    {
+        Bootstrap();
+    }
+
     private void LoadConfigs()
     {
         _complicationSettings = new Loader<ComplicationSettings>(RiverObjectsPaths.COMPLICATION_SETTINGS).Prefab();

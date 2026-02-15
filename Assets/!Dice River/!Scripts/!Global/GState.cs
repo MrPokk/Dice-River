@@ -1,4 +1,5 @@
-﻿using BitterECS.Core;
+﻿using System.Collections.Generic;
+using BitterECS.Core;
 
 public enum DifficultyTier
 {
@@ -9,14 +10,16 @@ public enum DifficultyTier
     Tier3_Base = 4
 }
 
-public struct GState
+public class GState
 {
     public bool isFirstStart;
     public DifficultyTier currentDifficulty;
+    public HashSet<UIProvider> collectedDiceTypes;
 
     public GState(DifficultyTier difficulty)
     {
         isFirstStart = false;
         currentDifficulty = difficulty;
+        collectedDiceTypes = new();
     }
 }

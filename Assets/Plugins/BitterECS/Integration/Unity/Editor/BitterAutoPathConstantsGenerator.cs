@@ -17,7 +17,6 @@ namespace BitterECS.Extra.Editor
         [MenuItem("BitterECS/Tools/Generate All Path Constants", priority = 0)]
         public static void GenerateAll()
         {
-            // Убедимся, что пути PathProject актуальны
             PathUtility.GenerationConstPath();
 
             var pathFields = typeof(PathProject)
@@ -195,7 +194,6 @@ namespace BitterECS.Extra.Editor
             sb.AppendLine($"public static class {className}");
             sb.AppendLine("{");
 
-            // Сортируем для красоты
             items = items.OrderBy(x => x.name).ToList();
 
             foreach (var item in items)
@@ -204,6 +202,14 @@ namespace BitterECS.Extra.Editor
                 sb.AppendLine($"    public const string {item.name} = \"{item.path}\";");
             }
 
+            sb.AppendLine("    public static readonly string[] AllPaths = new string[]");
+            sb.AppendLine("    {");
+            foreach (var item in items)
+            {
+                sb.AppendLine($"        {item.name},");
+            }
+            sb.AppendLine("    };");
+            sb.AppendLine($"    public const int COUNT = {items.Count};");
             sb.AppendLine("}");
 
             var filePath = Path.Combine(GENERATED_SCRIPTS_FOLDER, $"{className}.cs");

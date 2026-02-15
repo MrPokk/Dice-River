@@ -39,7 +39,7 @@ public class HandControllerDice : HandController<EcsEntity, UIProvider>
         }
 
         var result = base.Add(data, view);
-        if (result) EcsSystems.Run<IHandSucceedAdd>(s => s.ResultSucceedAdd(this));
+        if (result) EcsSystems.Run<IHandSucceedAdd>(s => s.ResultSucceedAdd(this, data, view));
         else EcsSystems.Run<IHandFailAdd>(s => s.ResultFailAdd(this));
         return result;
     }

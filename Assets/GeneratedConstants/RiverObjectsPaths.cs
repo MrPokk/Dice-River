@@ -9,14 +9,25 @@ public static class RiverObjectsPaths
     public const string COMPLICATION_SETTINGS = "World/River/Configs/ComplicationSettings";
     /// <summary> ScriptableObject: RiverDecorationSettings </summary>
     public const string RIVER_DECORATION_SETTINGS = "World/River/Configs/RiverDecorationSettings";
-    /// <summary> Component: RiverGenerator </summary>
+    /// <summary> Component: RiverGeneratorSystem </summary>
     public const string RIVER_GENERATOR = "World/River/RiverGenerator";
     /// <summary> ScriptableObject: RiverHazardSettings </summary>
     public const string RIVER_HAZARD_SETTINGS = "World/River/Configs/RiverHazardSettings";
     /// <summary> ScriptableObject: RiverPickupSettings </summary>
     public const string RIVER_PICKUP_SETTINGS = "World/River/Configs/RiverPickupSettings";
-    /// <summary> Component: RiverScrolling </summary>
+    /// <summary> Component: RiverScrollingSystem </summary>
     public const string RIVER_SCROLLER = "World/River/RiverScroller";
     /// <summary> ScriptableObject: RiverSettings </summary>
     public const string RIVER_SETTINGS = "World/River/Configs/RiverSettings";
+    public static readonly string[] AllPaths = new string[]
+    {
+        COMPLICATION_SETTINGS,
+        RIVER_DECORATION_SETTINGS,
+        RIVER_GENERATOR,
+        RIVER_HAZARD_SETTINGS,
+        RIVER_PICKUP_SETTINGS,
+        RIVER_SCROLLER,
+        RIVER_SETTINGS,
+    };
+    public const int COUNT = 7;
 }

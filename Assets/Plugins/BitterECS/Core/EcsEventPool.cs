@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace BitterECS.Core
@@ -15,7 +16,7 @@ namespace BitterECS.Core
         public override void Add(int entityId, in T component)
         {
             base.Add(entityId, in component);
-            foreach (var subscription in _subscriptions)
+            foreach (var subscription in _subscriptions.ToArray()) //ToArray for avoid collection modified
             {
                 subscription.Added?.Invoke(subscription.Presenter.Get(entityId));
             }
@@ -26,7 +27,7 @@ namespace BitterECS.Core
         public override void Remove(int entityId)
         {
             base.Remove(entityId);
-            foreach (var subscription in _subscriptions)
+            foreach (var subscription in _subscriptions.ToArray()) //ToArray for avoid collection modified
             {
                 subscription.Removed?.Invoke(subscription.Presenter.Get(entityId));
             }

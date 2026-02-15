@@ -9,4 +9,10 @@ public static class UiScreensPaths
     public const string UIDEFEAT_SCREEN = "UI/!Screens/UIDefeatScreen";
     /// <summary> Component: UIPlayerScreen </summary>
     public const string UIPLAYER_SCREEN = "UI/!Screens/UIPlayerScreen";
+    public static readonly string[] AllPaths = new string[]
+    {
+        UIDEFEAT_SCREEN,
+        UIPLAYER_SCREEN,
+    };
+    public const int COUNT = 2;
 }

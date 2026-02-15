@@ -13,7 +13,7 @@ public class UITooltipPopup : UIPopup
 
     public void Bind(
         NameComponent nameComponent,
-        DescriptorComponent descriptorComponent,
+        DescriptionComponent descriptorComponent,
         AbilityDescriptorComponent abilityDescriptorComponent)
     {
         if (_nameText) _nameText.text = nameComponent.value;
@@ -32,12 +32,13 @@ public class UITooltipPopup : UIPopup
         .UsingAnimation(gameObject)
         .ApplyPresetClose(UIAnimationPresets.CreateSlideFromRightPreset())
         .PlayCloseAnimation();
+        Update();
         base.Open();
     }
 
     private void Update()
     {
-        if (!gameObject.activeSelf)
+        if (!gameObject)
             return;
 
         Vector3 pointerPos = ControllableSystem.PointerPosition;

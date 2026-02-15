@@ -10,14 +10,16 @@ namespace UINotDependence.Core
     {
         public static UIController Create(Dictionary<Type, WindowBinder> binders)
         {
-            var rootManager = new GameObject("[UIRoot]").AddComponent<UIController>();
-            var canvas = CreateCanvas(rootManager.transform);
+            var rootManager = UIController.Instance;
 
+            if (rootManager.IsInitialized) return rootManager;
+
+            var canvas = CreateCanvas(rootManager.transform);
             var screens = CreateUIContainer("UIScreens", canvas);
             var popups = CreateUIContainer("UIPopups", canvas);
 
             rootManager.Initialize(new WindowsContainer(popups, screens, binders));
-            Object.DontDestroyOnLoad(rootManager);
+            Object.DontDestroyOnLoad(rootManager.gameObject);
 
             return rootManager;
         }
