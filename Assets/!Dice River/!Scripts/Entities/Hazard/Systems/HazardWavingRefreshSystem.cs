@@ -1,14 +1,14 @@
 ﻿using BitterECS.Core;
 using UnityEngine;
 
-public class HazardWavingRefreshSystem : IEcsRunSystem
+public class HazardWavingRefreshSystem : IEcsFixedRunSystem
 {
     public Priority Priority => Priority.Low;
 
     private EcsFilter _ecsEntities = new EcsFilter<EntitiesPresenter>()
         .WhereProvider<HazardProvider>();
 
-    public void Run()
+    public void FixedRun()
     {
         var time = Time.time;
 
