@@ -1,7 +1,7 @@
 ﻿using System;
 using BitterECS.Core;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using DG.Tweening;
 
 public class TagDiceMirrorSystem : IEcsAutoImplement
 {
@@ -30,7 +30,14 @@ public class TagDiceMirrorSystem : IEcsAutoImplement
         var isPast = gridDice.gridPresenter.TryGetValue(toPastIndex, out var pastProvider);
         if (isPast && pastProvider == null)
         {
-            DiceInteractionSystem.InstantiateObject(toPastIndex, diceCopy, out _);
+            DiceInteractionSystem.InstantiateObject(toPastIndex, diceCopy, out var instantiatedObject);
+
+            if (instantiatedObject != null)
+            {
+                var defaultScale = instantiatedObject.transform.localScale;
+                instantiatedObject.transform.localScale = Vector3.zero;
+                instantiatedObject.transform.DOScale(defaultScale, 0.3f).SetEase(Ease.OutBack).Play();
+            }
         }
     }
 }

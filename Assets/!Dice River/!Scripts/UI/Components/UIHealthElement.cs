@@ -1,6 +1,8 @@
 ﻿using System;
 using BitterECS.Core;
+using DG.Tweening;
 using UINotDependence.Core;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIHealthElement : UIPopup
@@ -11,7 +13,6 @@ public class UIHealthElement : UIPopup
         .Include<InputComponent>();
 
     private EcsEvent _ecsEvent;
-
 
     public override void Open()
     {
@@ -37,7 +38,8 @@ public class UIHealthElement : UIPopup
     {
         ref var healthComp = ref entity.Get<HealthComponent>();
         health.value = healthComp.currentHealth;
+        var defaultScale = transform.localScale;
+        transform.localScale = transform.localScale / 2;
+        transform.DOScale(defaultScale, 0.5f).SetEase(Ease.OutBack).Play();
     }
-
-
 }

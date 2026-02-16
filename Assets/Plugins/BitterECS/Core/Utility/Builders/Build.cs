@@ -15,9 +15,9 @@ namespace BitterECS.Core
 
         public EcsEvent Event(Priority priority = Priority.Medium) => new(_presenter, priority);
         public EcsFilter Filter() => new(_presenter);
-        public EntityBuilder Add() => new(_presenter);
+        public EcsBuilder Add() => new(_presenter);
         public EntityBuilderGeneric<T> Add<T>() where T : struct => new(_presenter);
-        public EntityDestroyer Remove(EcsEntity entity) => new(_presenter, entity);
-        public EntityDestroyer Remove<T>(T entity) where T : struct => entity is EcsEntity e ? new(_presenter, e) : throw new ArgumentException("Provided type is not an EcsEntity");
+        public EcsDestroyer Remove(EcsEntity entity) => new(_presenter, entity);
+        public EcsDestroyer Remove<T>(T entity) where T : struct => entity is EcsEntity e ? new(_presenter, e) : throw new ArgumentException("Provided type is not an EcsEntity");
     }
 }

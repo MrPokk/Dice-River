@@ -161,5 +161,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityDescriptorComponentProvider
   _value:
-    description: <color=#00FF00>INCREASES</color> the value of the die <color=#00FFFF>AHEAD</color>
-      by <color=#00FF00>+1</color>
+    description: <color=#00FF00>ADDS +1</color> to the die <color=#0099FF>AHEAD</color>

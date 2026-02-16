@@ -27,7 +27,7 @@ public class PlayerTweenMovingSystem : IEcsFixedRunSystem
 
         var transform = provider.transform;
         transform.DOKill();
-        transform.DOLocalRotate(Vector3.zero, 0.1f);
+        transform.DOLocalRotate(Vector3.zero, 0.1f).Play();
     }
 
     public void FixedRun()

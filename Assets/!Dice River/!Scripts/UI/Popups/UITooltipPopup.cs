@@ -11,6 +11,14 @@ public class UITooltipPopup : UIPopup
     [Header("Positioning")]
     [SerializeField] private Vector2 _offset = new(10f, -10f);
 
+    private Canvas _rootCanvas;
+
+    private void Awake()
+    {
+        // Кэшируем корневой канвас, чтобы знать текущий масштаб интерфейса
+        _rootCanvas = GetComponentInParent<Canvas>();
+    }
+
     public void Bind(
         NameComponent nameComponent,
         DescriptionComponent descriptorComponent,
@@ -38,16 +46,15 @@ public class UITooltipPopup : UIPopup
 
     private void Update()
     {
-        if (!gameObject)
+        if (!gameObject || _rootCanvas == null)
             return;
 
         Vector3 pointerPos = ControllableSystem.PointerPosition;
 
-        transform.position = new Vector3(
-            pointerPos.x + _offset.x,
-            pointerPos.y + _offset.y,
-            0f
-        );
+        float scaleFactor = _rootCanvas.scaleFactor;
+        Vector3 scaledOffset = (Vector3)_offset * scaleFactor;
+
+        transform.position = pointerPos + scaledOffset;
     }
 
     public override void Close()

@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61e6f6a22da9f7015ad3913d96a6bb23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceProvider
-  spriteIcon: {fileID: 420210878784677752, guid: 439c9d76e89d0872fb92b4d3e6a7f406, type: 3}
+  spriteIcon: {fileID: 420210878784677752, guid: b70808b8bed35b272bb41b0b2f021b15, type: 3}
   spriteRoll: {fileID: 2178102362946667264}
   spriteSide: {fileID: 6906592073352646893}
 --- !u!114 &4245180417535183791
@@ -169,22 +169,26 @@ PrefabInstance:
     - target: {fileID: 871464881254634839, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 10328787, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+      objectReference: {fileID: -237852144, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     - target: {fileID: 871596413274514201, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 10328787, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+      objectReference: {fileID: -237852144, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 872278677098938884, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1509379968, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     - target: {fileID: 872961112075393190, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 10328787, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+      objectReference: {fileID: -237852144, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     - target: {fileID: 1073623328595162782, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1073623328595162782, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 1073623328595162782, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -223,9 +227,33 @@ PrefabInstance:
       value: SpriteSides
       objectReference: {fileID: 0}
     - target: {fileID: 5850274259294550861, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: stateConfigs.Array.data[0].topSprite
+      value: 
+      objectReference: {fileID: -1509379968, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 5850274259294550861, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: stateConfigs.Array.data[1].topSprite
+      value: 
+      objectReference: {fileID: -1509379968, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 5850274259294550861, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: stateConfigs.Array.data[0].allSidesSprite
       value: 
-      objectReference: {fileID: 10328787, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+      objectReference: {fileID: -237852144, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 5850274259294550861, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: stateConfigs.Array.data[1].allSidesSprite
+      value: 
+      objectReference: {fileID: -645069202, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 8378255212188938900, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0884228
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378255212188938900, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0884228
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378255212188938900, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.0884228
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -265,15 +293,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3806969785503464016, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
       propertyPath: _topRollColor.b
-      value: 0.34393916
+      value: 0.5660378
       objectReference: {fileID: 0}
     - target: {fileID: 3806969785503464016, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
       propertyPath: _topRollColor.g
-      value: 0.42402986
+      value: 0.31772876
       objectReference: {fileID: 0}
     - target: {fileID: 3806969785503464016, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
       propertyPath: _topRollColor.r
-      value: 0.5566038
+      value: 0.4561971
       objectReference: {fileID: 0}
     - target: {fileID: 4570314226478748277, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
       propertyPath: m_Name
@@ -281,7 +309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4570314226478748277, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4711502270800126804, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
       propertyPath: m_LocalPosition.x
@@ -337,15 +365,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6913982532265499883, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
       propertyPath: m_Color.b
-      value: 0.34393916
+      value: 0.5660378
       objectReference: {fileID: 0}
     - target: {fileID: 6913982532265499883, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
       propertyPath: m_Color.g
-      value: 0.42402986
+      value: 0.31772876
       objectReference: {fileID: 0}
     - target: {fileID: 6913982532265499883, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
       propertyPath: m_Color.r
-      value: 0.5566038
+      value: 0.4561971
       objectReference: {fileID: 0}
     - target: {fileID: 9152470915023389737, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
       propertyPath: m_Color.a

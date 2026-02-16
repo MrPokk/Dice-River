@@ -49,10 +49,12 @@ namespace BitterECS.Integration
             get
             {
                 var entity = GetEntitySilently();
+#if UNITY_EDITOR
                 if (!entity.IsAlive && !_isDestroying)
                 {
                     throw new Exception($"[ProviderEcs<{typeof(T).Name}>] Entity is not linked on '{typeof(T).Name}'.");
                 }
+#endif
                 return entity;
             }
         }

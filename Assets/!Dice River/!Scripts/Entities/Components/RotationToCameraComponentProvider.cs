@@ -16,7 +16,7 @@ public class RotationToCameraComponentProvider : ProviderEcs<RotationToCameraCom
     protected override void Awake()
     {
         base.Awake();
-        var spriteRenderer = _value.spriteRenderer;
+        var spriteRenderer = Value.spriteRenderer;
 
         if (!spriteRenderer)
         {
@@ -25,24 +25,24 @@ public class RotationToCameraComponentProvider : ProviderEcs<RotationToCameraCom
 
         if (Camera.main != null)
         {
-            _value.cameraTransform = Camera.main.transform;
-            _value.lastCameraRotation = _value.cameraTransform.rotation;
+            Value.cameraTransform = Camera.main.transform;
+            Value.lastCameraRotation = Value.cameraTransform.rotation;
 
             if (spriteRenderer != null)
             {
-                spriteRenderer.transform.rotation = _value.lastCameraRotation;
+                spriteRenderer.transform.rotation = Value.lastCameraRotation;
             }
         }
     }
 
     private void LateUpdate()
     {
-        if (_value.cameraTransform == null || _value.spriteRenderer == null) return;
+        if (Value.cameraTransform == null || Value.spriteRenderer == null) return;
 
-        if (_value.cameraTransform.rotation != _value.lastCameraRotation)
+        if (Value.cameraTransform.rotation != Value.lastCameraRotation)
         {
-            _value.spriteRenderer.transform.rotation = _value.cameraTransform.rotation;
-            _value.lastCameraRotation = _value.cameraTransform.rotation;
+            Value.spriteRenderer.transform.rotation = Value.cameraTransform.rotation;
+            Value.lastCameraRotation = Value.cameraTransform.rotation;
         }
     }
 }

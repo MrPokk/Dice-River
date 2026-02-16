@@ -1,12 +1,21 @@
 ﻿using BitterECS.Core;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class DiceBuoyancySystem : IEcsFixedRunSystem
 {
     public Priority Priority => Priority.Low;
 
     private EcsFilter _diceFilter = new EcsFilter<DicePresenter>()
-        .WhereProvider<DiceProvider>()
+        .WhereProvider<DiceProvider>(p =>
+            p.gameObject.scene.IsValid()
+#if UNITY_EDITOR
+            && !EditorUtility.IsPersistent(p)
+#endif
+        )
         .Include<WaveComponent>();
 
     public void FixedRun()
@@ -17,6 +26,13 @@ public class DiceBuoyancySystem : IEcsFixedRunSystem
         foreach (var diceEntity in _diceFilter)
         {
             var diceProvider = diceEntity.GetProvider<DiceProvider>();
+
+#if UNITY_EDITOR
+            if (EditorUtility.IsPersistent(diceProvider) ||
+                UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage() != null)
+                continue;
+#endif
+
             ref var waveComp = ref diceEntity.Get<WaveComponent>();
 
             if (diceProvider.spriteRoll == null || diceProvider.spriteSide == null) continue;
