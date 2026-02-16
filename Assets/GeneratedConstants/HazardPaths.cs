@@ -9,6 +9,7 @@ public static class HazardPaths
     public const string BOMB_HAZARD = "Entities/Hazards/BombHazard";
     /// <summary> Provider: HazardProvider </summary>
     public const string ROCK_HAZARD = "Entities/Hazards/RockHazard";
+
     public static readonly string[] AllPaths = new string[]
     {
         BOMB_HAZARD,

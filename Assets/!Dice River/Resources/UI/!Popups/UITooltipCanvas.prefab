@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 723394559159204893}
   - component: {fileID: 6323673530640299937}
   - component: {fileID: 4582076915461165014}
+  - component: {fileID: 5924177064113123798}
   m_Layer: 5
   m_Name: UITooltipCanvas
   m_TagString: Untagged
@@ -84,7 +85,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4582076915461165014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +103,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5924177064113123798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873281670666201031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ce006ca29f9ccbf97d9ed306bab623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UITooltipCanvas
 --- !u!1001 &8225944435851369742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120,19 +133,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 186646837242583582, guid: 5efdd957438a9d5388fd26449cf11842, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 186646837242583582, guid: 5efdd957438a9d5388fd26449cf11842, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 186646837242583582, guid: 5efdd957438a9d5388fd26449cf11842, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 186646837242583582, guid: 5efdd957438a9d5388fd26449cf11842, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 186646837242583582, guid: 5efdd957438a9d5388fd26449cf11842, type: 3}
       propertyPath: m_SizeDelta.x
@@ -172,11 +185,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 186646837242583582, guid: 5efdd957438a9d5388fd26449cf11842, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -480.94147
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 186646837242583582, guid: 5efdd957438a9d5388fd26449cf11842, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -260
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 186646837242583582, guid: 5efdd957438a9d5388fd26449cf11842, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

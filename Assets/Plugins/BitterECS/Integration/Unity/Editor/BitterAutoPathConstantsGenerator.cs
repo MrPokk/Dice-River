@@ -194,22 +194,43 @@ namespace BitterECS.Extra.Editor
             sb.AppendLine($"public static class {className}");
             sb.AppendLine("{");
 
-            items = items.OrderBy(x => x.name).ToList();
+            items = items.OrderBy(x => x.name).ThenBy(x => x.path).ToList();
+
+            var nameCounts = new Dictionary<string, int>();
+            var processedItems = new List<(string uniqueName, string path, string summary)>();
 
             foreach (var item in items)
+            {
+                var finalName = item.name;
+
+                if (nameCounts.ContainsKey(item.name))
+                {
+                    nameCounts[item.name]++;
+                    finalName = $"{item.name}_{nameCounts[item.name]}";
+                }
+                else
+                {
+                    nameCounts[item.name] = 1;
+                }
+
+                processedItems.Add((finalName, item.path, item.summary));
+            }
+
+            foreach (var item in processedItems)
             {
                 sb.AppendLine($"    /// <summary> {item.summary} </summary>");
-                sb.AppendLine($"    public const string {item.name} = \"{item.path}\";");
+                sb.AppendLine($"    public const string {item.uniqueName} = \"{item.path}\";");
             }
 
+            sb.AppendLine();
             sb.AppendLine("    public static readonly string[] AllPaths = new string[]");
             sb.AppendLine("    {");
-            foreach (var item in items)
+            foreach (var item in processedItems)
             {
-                sb.AppendLine($"        {item.name},");
+                sb.AppendLine($"        {item.uniqueName},");
             }
             sb.AppendLine("    };");
-            sb.AppendLine($"    public const int COUNT = {items.Count};");
+            sb.AppendLine($"    public const int COUNT = {processedItems.Count};");
             sb.AppendLine("}");
 
             var filePath = Path.Combine(GENERATED_SCRIPTS_FOLDER, $"{className}.cs");

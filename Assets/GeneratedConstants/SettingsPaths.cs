@@ -17,6 +17,7 @@ public static class SettingsPaths
     public const string URPASSET = "!Settings/Rendering/URPAsset";
     /// <summary> ScriptableObject: UniversalRendererData </summary>
     public const string URPRENDERER = "!Settings/Rendering/URPRenderer";
+
     public static readonly string[] AllPaths = new string[]
     {
         CINEMACHINE_LENS_PALETTE,

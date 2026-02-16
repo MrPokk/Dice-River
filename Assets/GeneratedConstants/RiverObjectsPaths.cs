@@ -19,6 +19,7 @@ public static class RiverObjectsPaths
     public const string RIVER_SCROLLER = "World/River/RiverScroller";
     /// <summary> ScriptableObject: RiverSettings </summary>
     public const string RIVER_SETTINGS = "World/River/Configs/RiverSettings";
+
     public static readonly string[] AllPaths = new string[]
     {
         COMPLICATION_SETTINGS,

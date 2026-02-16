@@ -17,6 +17,7 @@ public static class WorldPaths
     public const string TREE_VAR_2 = "World/TreeVAR_2";
     /// <summary> Provider: EnvironmentProvider </summary>
     public const string TREE_VAR_3 = "World/TreeVAR_3";
+
     public static readonly string[] AllPaths = new string[]
     {
         SHADOW_VAR_1,

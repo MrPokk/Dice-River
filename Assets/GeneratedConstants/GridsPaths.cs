@@ -11,6 +11,7 @@ public static class GridsPaths
     public const string GRID_RAFT_INSTALLABLE = "Grids/GridRaftInstallable";
     /// <summary> ScriptableObject: GridConfig </summary>
     public const string GRID_WORLD = "Grids/GridWorld";
+
     public static readonly string[] AllPaths = new string[]
     {
         GRID_RAFT_GENERATION,

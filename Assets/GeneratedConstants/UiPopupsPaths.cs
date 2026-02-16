@@ -5,11 +5,15 @@
 
 public static class UiPopupsPaths
 {
+    /// <summary> Component: CanvasScaler </summary>
+    public const string UITOOLTIP_CANVAS = "UI/!Popups/UITooltipCanvas";
     /// <summary> Component: UITooltipPopup </summary>
     public const string UITOOLTIP_POPUP = "UI/!Popups/UITooltipPopup";
+
     public static readonly string[] AllPaths = new string[]
     {
+        UITOOLTIP_CANVAS,
         UITOOLTIP_POPUP,
     };
-    public const int COUNT = 1;
+    public const int COUNT = 2;
 }

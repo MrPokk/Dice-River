@@ -27,6 +27,7 @@ public static class DicesPaths
     public const string SPRITE_ROLLS = "Entities/Dices/SpriteRolls";
     /// <summary> Component: SpriteSideComponent </summary>
     public const string SPRITE_SIDES = "Entities/Dices/SpriteSides";
+
     public static readonly string[] AllPaths = new string[]
     {
         BASE_DICE,

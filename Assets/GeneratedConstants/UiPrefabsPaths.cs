@@ -15,6 +15,7 @@ public static class UiPrefabsPaths
     public const string UISELECTOR = "UI/Prefabs/UISelector";
     /// <summary> Component: UIStackHandElement </summary>
     public const string UISTACK_HAND_ELEMENT = "UI/Prefabs/UIStackHandElement";
+
     public static readonly string[] AllPaths = new string[]
     {
         UIDISTANCE_TRAVELED_ELEMENT,

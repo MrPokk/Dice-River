@@ -21,6 +21,7 @@ public static class UiPaths
     public const string LORA_REGULAR_SDF = "UI/Fonts/!Materials/Lora-Regular SDF";
     /// <summary> ScriptableObject: TMP_FontAsset </summary>
     public const string LORA_REGULAR_SDF_OUTLINE = "UI/Fonts/!Materials/Lora-Regular SDF_Outline";
+
     public static readonly string[] AllPaths = new string[]
     {
         BARLOW_BLACK_SDF,

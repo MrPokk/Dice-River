@@ -15,7 +15,6 @@ public class UITooltipPopup : UIPopup
 
     private void Awake()
     {
-        // Кэшируем корневой канвас, чтобы знать текущий масштаб интерфейса
         _rootCanvas = GetComponentInParent<Canvas>();
     }
 
@@ -51,8 +50,8 @@ public class UITooltipPopup : UIPopup
 
         Vector3 pointerPos = ControllableSystem.PointerPosition;
 
-        float scaleFactor = _rootCanvas.scaleFactor;
-        Vector3 scaledOffset = (Vector3)_offset * scaleFactor;
+        var scaleFactor = _rootCanvas.scaleFactor;
+        var scaledOffset = (Vector3)_offset * scaleFactor;
 
         transform.position = pointerPos + scaledOffset;
     }
