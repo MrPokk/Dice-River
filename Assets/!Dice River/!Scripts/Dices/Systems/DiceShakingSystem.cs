@@ -14,7 +14,7 @@ public class DiceShakingSystem : IEcsAutoImplement
 
     private static void OnShaking(EcsEntity entity)
     {
-        var providerEcs = entity.GetProvider<ProviderEcs>();
+        var providerEcs = entity.GetProvider<DiceProvider>();
         providerEcs.transform.DOShakePosition(0.5f, 0.03f, 10, 30, false, true)
             .SetEase(Ease.InOutSine)
             .Play();
