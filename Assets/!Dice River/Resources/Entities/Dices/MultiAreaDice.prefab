@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4245180417535183791}
   - component: {fileID: 870553833768372383}
   - component: {fileID: 4921517849277323310}
+  - component: {fileID: 1202107247898582100}
+  - component: {fileID: 5697867443467187016}
   m_Layer: 0
   m_Name: MultiAreaDice
   m_TagString: Untagged
@@ -142,6 +144,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5fa5830ee873bb8a1d8233d702f5b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveComponentProvider
+--- !u!114 &1202107247898582100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064394609975083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfccadd8ebeb7757da033c3f872dfce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NeighborsComponentProvider
+  _value:
+    neighbors:
+    - {x: 0, y: 1}
+    - {x: 0, y: -1}
+--- !u!114 &5697867443467187016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064394609975083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa3108c436e0928d8621cfcae3457fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TagMultiplierAreaProvider
+  _value:
+    minMultiplier: 2
+    maxMultiplier: 3
 --- !u!1001 &1074528063723301792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150,6 +183,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4560217403192184}
     m_Modifications:
+    - target: {fileID: 871464881254634839, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2481068211524993482, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 871596413274514201, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2481068211524993482, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 872961112075393190, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2481068211524993482, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     - target: {fileID: 1073623328595162782, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -194,6 +239,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpriteSides
       objectReference: {fileID: 0}
+    - target: {fileID: 5850274259294550861, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: stateConfigs.Array.data[0].allSidesSprite
+      value: 
+      objectReference: {fileID: 2481068211524993482, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

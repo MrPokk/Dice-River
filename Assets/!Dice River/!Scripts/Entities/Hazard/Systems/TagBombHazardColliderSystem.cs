@@ -96,5 +96,6 @@ public class TagBombHazardColliderSystem : IEcsAutoImplement
     private static void UpdateVisual(EcsEntity entity, int value)
     {
         entity.GetProvider<DiceProvider>().spriteRoll.Select(value);
+        entity.AddFrameToEvent<IsTargetingEvent>();
     }
 }

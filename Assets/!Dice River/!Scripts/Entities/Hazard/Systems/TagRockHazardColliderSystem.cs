@@ -21,7 +21,7 @@ public class TagRockHazardColliderSystem : IEcsAutoImplement
             entity.AddFrameToEvent<IsDestroy>(new());
             return;
         }
-
         entity.GetProvider<DiceProvider>().spriteRoll.Select(rollComponent.value);
+        entity.AddFrameToEvent<IsTargetingEvent>();
     }
 }

@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: HandLoadStackPrefab
   m_EditorClassIdentifier: Assembly-CSharp::HandLoadStackPrefab
   _diceProviders:
-  - {fileID: 453393326418446785, guid: 80a1d489460193a8599c0aec63ed520c, type: 3}
-  - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-  - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-  - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
+  - {fileID: 453393326418446785, guid: 32fdf1db3201fd9d881b75c2f5ab707c, type: 3}

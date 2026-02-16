@@ -6,12 +6,14 @@ using UnityEngine.UI;
 
 public class UIDefeatScreen : UIScreen
 {
-
     public GridLayoutGroup containerIcon;
+    public GameObject mainElement;
     public UIRestartButtonComponent restartButton;
+    public Image slideBackground;
 
     public override void Open()
     {
+        mainElement.SetActive(false);
         restartButton.AddListener(Restart);
         InstantiateAllUI();
         base.Open();

@@ -3,7 +3,10 @@ using BitterECS.Integration;
 using UnityEngine;
 
 [Serializable]
-public struct TagMirrorCopy { }
+public struct TagMirrorCopy
+{
+    public Vector2Int indexToCopy;
+    public Vector2Int indexToPast;
+}
 
-[RequireComponent(typeof(NeighborsComponentProvider))]
 public class TagMirrorCopyProvider : ProviderEcs<TagMirrorCopy> { }

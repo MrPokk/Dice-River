@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4245180417535183791}
   - component: {fileID: 870553833768372383}
   - component: {fileID: 6267505234513389166}
-  - component: {fileID: 2918682999196801772}
   - component: {fileID: 4921517849277323310}
   m_Layer: 0
   m_Name: MirrorCopyDice
@@ -144,22 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9c02dcf978212f498e408952e5c82b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TagMirrorCopyProvider
---- !u!114 &2918682999196801772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064394609975083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfccadd8ebeb7757da033c3f872dfce9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NeighborsComponentProvider
   _value:
-    neighbors:
-    - {x: 1, y: 0}
-    - {x: 0, y: 0}
+    indexToCopy: {x: 0, y: 1}
+    indexToPast: {x: 0, y: -1}
 --- !u!114 &4921517849277323310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +166,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4560217403192184}
     m_Modifications:
+    - target: {fileID: 871464881254634839, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10328787, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 871596413274514201, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10328787, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 872961112075393190, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10328787, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     - target: {fileID: 1073623328595162782, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -224,6 +222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpriteSides
       objectReference: {fileID: 0}
+    - target: {fileID: 5850274259294550861, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: stateConfigs.Array.data[0].allSidesSprite
+      value: 
+      objectReference: {fileID: 10328787, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
