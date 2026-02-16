@@ -1,21 +1,21 @@
-﻿using BitterECS.Core;
+﻿using System.Collections.Generic;
+using BitterECS.Core;
 
-public class HandStackControllerDice : HandStackController<EcsEntity, UIProvider>
+public class HandStackControllerDice : HandStackController<KeyValuePair<EcsEntity, DiceProvider>, UIProvider>
 {
-    public override void Initialize(HandController<EcsEntity, UIProvider> hand)
+    public override void Initialize(HandController<KeyValuePair<EcsEntity, DiceProvider>, UIProvider> hand)
     {
         base.Initialize(hand);
-
         var diceHands = new Loader<HandLoadStackPrefab>(PrefabObjectsPaths.HAND_LOAD_STACK_PREFAB).Prefab().DiceProviders;
         foreach (var dice in diceHands)
         {
-            Add(dice.NewEntity(), dice.spriteIcon.Prefab());
+            Add(new(dice.ToEntity(), dice), dice.spriteIcon.Prefab());
         }
     }
 
-    public override void Add(EcsEntity item, UIProvider prefab)
+    public override void Add(KeyValuePair<EcsEntity, DiceProvider> item, UIProvider prefab)
     {
-        if (item == null)
+        if (item.Value == null)
         {
             EcsSystems.Run<IHandStackFailAdd>(s => s.ResultStackFailAdd(this));
             return;

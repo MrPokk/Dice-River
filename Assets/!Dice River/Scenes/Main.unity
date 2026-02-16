@@ -4368,7 +4368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8750d438d411b436852be60f857c530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSpawnerPoint
-  tempPrefab: {fileID: 723394559159204893, guid: 8c68b3dc4ab1ae7d68cb1296721b406d, type: 3}
 --- !u!1 &1650494629
 GameObject:
   m_ObjectHideFlags: 0

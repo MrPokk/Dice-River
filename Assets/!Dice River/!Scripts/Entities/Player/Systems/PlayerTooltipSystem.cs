@@ -54,7 +54,7 @@ public class PlayerTooltipSystem : IEcsRunSystem
             var isGetDice = monoGrid.TryGetValue(targetGridPos, out var providerEcs);
             if (isGetDice && providerEcs is DiceProvider diceProvider)
             {
-                var infoDice = diceProvider.spriteIcon.Prefab().NewEntity();
+                var infoDice = diceProvider.spriteIcon.Prefab().ToEntity();
                 var nameComponent = infoDice.Get<NameComponent>();
                 var descriptorComponent = infoDice.Get<DescriptionComponent>();
                 var abilityDescriptorComponent = infoDice.Get<AbilityDescriptorComponent>();

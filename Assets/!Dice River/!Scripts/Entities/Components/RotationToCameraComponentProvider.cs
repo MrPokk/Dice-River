@@ -13,9 +13,8 @@ public class RotationToCameraComponent
 
 public class RotationToCameraComponentProvider : ProviderEcs<RotationToCameraComponent>
 {
-    protected override void Awake()
+    protected override void Registration()
     {
-        base.Awake();
         var spriteRenderer = Value.spriteRenderer;
 
         if (!spriteRenderer)

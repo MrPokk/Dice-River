@@ -1,14 +1,14 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using BitterECS.Core;
 using UnityEngine;
 
-public class HandControllerDice : HandController<EcsEntity, UIProvider>
+public class HandControllerDice : HandController<KeyValuePair<EcsEntity, DiceProvider>, UIProvider>
 {
     [Header("Setting Controller Dice")]
     public float timeRefreshSecond;
     public uint maxCountDice;
 
-    public override void Initialize(HandStackController<EcsEntity, UIProvider> handStackController)
+    public override void Initialize(HandStackController<KeyValuePair<EcsEntity, DiceProvider>, UIProvider> handStackController)
     {
         base.Initialize(handStackController);
         for (var i = 0; i < maxCountDice; i++)
@@ -17,7 +17,7 @@ public class HandControllerDice : HandController<EcsEntity, UIProvider>
         }
     }
 
-    public override bool ExtractToFirst(out EcsEntity val)
+    public override bool ExtractToFirst(out KeyValuePair<EcsEntity, DiceProvider> val)
     {
         var result = base.ExtractToFirst(out val);
         if (result)
@@ -30,7 +30,7 @@ public class HandControllerDice : HandController<EcsEntity, UIProvider>
         return result;
     }
 
-    public override bool Add(EcsEntity data, UIProvider view)
+    public override bool Add(KeyValuePair<EcsEntity, DiceProvider> data, UIProvider view)
     {
         if (Items.Count >= maxCountDice)
         {
@@ -44,7 +44,7 @@ public class HandControllerDice : HandController<EcsEntity, UIProvider>
         return result;
     }
 
-    public override bool Remove(EcsEntity data)
+    public override bool Remove(KeyValuePair<EcsEntity, DiceProvider> data)
     {
         var result = base.Remove(data);
         if (result)

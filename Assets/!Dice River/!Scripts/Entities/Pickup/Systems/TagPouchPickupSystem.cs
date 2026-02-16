@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using BitterECS.Core;
 using UnityEngine;
 
@@ -62,10 +63,10 @@ public class TagPouchPickupSystem : IEcsAutoImplement
                 {
                     if (diceProvider == null) continue;
 
-                    Startup.HandStackControllerDice.Add(
-                        diceProvider.NewEntity(),
-                        diceProvider.spriteIcon.Prefab()
-                    );
+                    var dicePair = new KeyValuePair<EcsEntity, DiceProvider>(diceProvider.ToEntity(), diceProvider);
+                    var uiPrefab = diceProvider.spriteIcon.Prefab();
+
+                    Startup.HandStackControllerDice.Add(dicePair, uiPrefab);
                 }
             }
             else

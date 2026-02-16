@@ -6,10 +6,10 @@ using UnityEngine;
 public class PlayerProvider : EntitiesProvider
 {
     public CharacterController characterController;
-    protected override void Awake()
+
+    protected override void Registration()
     {
         characterController = GetComponent<CharacterController>();
-        base.Awake();
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)

@@ -23,12 +23,12 @@ public struct DiceContainer
         }
 
         _allDiceTypes = settings
-            .Where(container => container != null && container.groups != null) // Проверяем контейнеры
-            .SelectMany(container => container.groups)                         // Берем все группы
-            .Where(group => group != null && group.dice != null)               // Проверяем группы
-            .SelectMany(group => group.dice)                                   // Берем все дайсы
-            .Where(dice => dice != null)                                       // Исключаем пустые ссылки
-            .Distinct()                                                        // Оставляем только уникальные
+            .Where(container => container != null && container.groups != null)
+            .SelectMany(container => container.groups)
+            .Where(group => group != null && group.dice != null)
+            .SelectMany(group => group.dice)
+            .Where(dice => dice != null)
+            .Distinct()
             .ToList();
     }
 #endif

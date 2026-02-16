@@ -10,11 +10,10 @@ public class DiceProvider : ProviderEcs<DicePresenter>
     public SpriteIconComponent spriteIcon;
     public SpriteRollComponent spriteRoll;
     public SpriteSideComponent spriteSide;
-    protected override void Awake()
+
+    protected override void Registration()
     {
         spriteRoll ??= GetComponentInChildren<SpriteRollComponent>();
-
-        base.Awake();
         Entity.AddFrameToEvent<IsRollingProcess>(() =>
         {
             ReRolling();

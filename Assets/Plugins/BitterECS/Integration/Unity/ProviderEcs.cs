@@ -70,7 +70,13 @@ namespace BitterECS.Integration
             return GetParentEntitySilently();
         }
 
-        public EcsEntity NewEntity() => CreateEntity();
+        public EcsEntity ToEntity()
+        {
+            return Build.For(typeof(T))
+                     .Add()
+                     .WithPost(e => ProcessComponents(e))
+                     .Create();
+        }
 
         protected virtual void Awake()
         {
@@ -86,7 +92,10 @@ namespace BitterECS.Integration
                     Debug.LogWarning($"[ProviderEcs<{typeof(T).Name}>] No Root Provider found on '{name}'. This component won't sync automatically.");
                 }
             }
+            Registration();
         }
+
+        protected virtual void Registration() { }
 
         private void OnDestroy() => Dispose();
 

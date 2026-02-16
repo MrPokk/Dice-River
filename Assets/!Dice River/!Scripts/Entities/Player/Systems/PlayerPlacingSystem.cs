@@ -1,6 +1,4 @@
-﻿using System;
-using BitterECS.Core;
-using UnityEngine;
+﻿using BitterECS.Core;
 using UnityEngine.InputSystem;
 
 public class PlayerPlacingSystem : IEcsInitSystem
@@ -38,14 +36,16 @@ public class PlayerPlacingSystem : IEcsInitSystem
                     return;
                 }
 
-                if (Startup.HandControllerDice.ExtractToFirst(out var entityToHand))
+                if (Startup.HandControllerDice.ExtractToFirst(out var diceItem))
                 {
-                    if (entityToHand != null)
+
+                    var diceProviderPrefab = diceItem.Value;
+
+                    if (diceProviderPrefab != null)
                     {
-                        var diceProviderPrefab = entityToHand.GetProvider<DiceProvider>();
                         DiceInteractionSystem.InstantiateObject(targetGridPos, diceProviderPrefab, out _);
 
-                        entityToHand.Destroy();
+                        diceItem.Key.Destroy();
                     }
                 }
             }

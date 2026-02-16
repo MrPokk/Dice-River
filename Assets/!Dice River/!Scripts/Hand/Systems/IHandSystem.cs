@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections.Generic;
 using BitterECS.Core;
 using Cysharp.Threading.Tasks;
 
@@ -14,7 +14,7 @@ public interface IHandFailRemove : IEcsAutoImplement
 
 public interface IHandSucceedAdd : IEcsAutoImplement
 {
-    public UniTask ResultSucceedAdd(HandControllerDice handControllerDice, EcsEntity entity, UIProvider uiProvider);
+    public UniTask ResultSucceedAdd(HandControllerDice handControllerDice, KeyValuePair<EcsEntity, DiceProvider> item, UIProvider uiProvider);
 }
 
 public interface IHandFailAdd : IEcsAutoImplement

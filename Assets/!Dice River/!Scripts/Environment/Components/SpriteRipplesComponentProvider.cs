@@ -11,9 +11,8 @@ public class SpriteRipplesComponent
 
 public class SpriteRipplesComponentProvider : ProviderEcs<SpriteRipplesComponent>
 {
-    protected override void Awake()
+    protected override void Registration()
     {
-        Value.baseScale = Value.ripplesObject.transform.localScale;
-        base.Awake();
+        Value.baseScale = _value.ripplesObject.transform.localScale;
     }
 }
