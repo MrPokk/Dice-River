@@ -202,42 +202,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceContainerProvider
   _value:
-    groups:
-    - level: 0
-      dice:
-      - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-      - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-      - {fileID: 453393326418446785, guid: 80a1d489460193a8599c0aec63ed520c, type: 3}
-    - level: 0
-      dice:
-      - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-      - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-      - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-    - level: 1
-      dice:
-      - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-      - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
-      - {fileID: 453393326418446785, guid: 80a1d489460193a8599c0aec63ed520c, type: 3}
-    - level: 2
-      dice:
-      - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-      - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
-      - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
-    - level: 2
-      dice:
-      - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-      - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
-      - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
-    - level: 2
-      dice:
-      - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-      - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
-      - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
-    - level: 2
-      dice:
-      - {fileID: 453393326418446785, guid: 61721c6ee4a6086dda2e696de3cfc37f, type: 3}
-      - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
-      - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
+    tierUnderChance: 0.2
+    tierOverChance: 0.8
+    settings:
+    - {fileID: 11400000, guid: 33346e300249b6500a59d45ba9f41f69, type: 2}
+    - {fileID: 11400000, guid: dfe6f61312856b6b0804ed9bd6541da7, type: 2}
+    - {fileID: 11400000, guid: 17d412307cc36b1299d6b3d12b6e6f31, type: 2}
+    - {fileID: 11400000, guid: ccf9df798cc306097a5d90e1d14ee08f, type: 2}
+    - {fileID: 11400000, guid: a25bd2ea77aa0de0abcfca2aef3e0c84, type: 2}
 --- !u!114 &7038312131274780195
 MonoBehaviour:
   m_ObjectHideFlags: 0

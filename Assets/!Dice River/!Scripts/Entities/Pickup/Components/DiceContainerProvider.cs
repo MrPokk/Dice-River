@@ -6,16 +6,9 @@ using UnityEngine;
 [Serializable]
 public struct DiceContainer
 {
-    public List<DiceGroup> groups;
-}
-
-[Serializable]
-public struct DiceGroup
-{
-    [Tooltip("Level at which this group of dice will be available")]
-    public DifficultyTier level;
-
-    public List<DiceProvider> dice;
+    [Range(0, 1f)] public float tierUnderChance;
+    [Range(0, 1f)] public float tierOverChance;
+    public List<DiceContainerSO> settings;
 }
 
 public class DiceContainerProvider : ProviderEcs<DiceContainer> { }
