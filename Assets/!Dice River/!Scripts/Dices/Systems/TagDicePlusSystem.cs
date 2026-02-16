@@ -9,7 +9,7 @@ public class TagDicePlusSystem : IEcsAutoImplement
 
     private readonly EcsEvent _ecsEventAdding =
     new EcsEvent<DicePresenter>()
-    .SubscribeWhereEntity<IsInstantiateEvent>(e =>
+    .SubscribeWhereEntity<IsActivatingEvent>(e =>
         EcsConditions.Has<TagPlusForward, NeighborsComponent>(e), removed: OnAdding);
 
     private static void OnAdding(EcsEntity entity)
@@ -27,8 +27,10 @@ public class TagDicePlusSystem : IEcsAutoImplement
             var newValue = roleComponent.value + modification;
             roleComponent.value = ((newValue - 1) % 6 + 6) % 6 + 1;
 
-            entityToGrid.AddFrameToEvent<IsInstantiateEvent>();
             providerEcs.spriteRoll.Select(roleComponent.value);
+
+            entityToGrid.AddFrameToEvent<IsActivatingEvent>();
+            entityToGrid.AddFrameToEvent<IsTargetingEvent>();
         }
     }
 }

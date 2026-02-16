@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61e6f6a22da9f7015ad3913d96a6bb23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceProvider
-  spriteIcon: {fileID: 420210878784677752, guid: 439c9d76e89d0872fb92b4d3e6a7f406, type: 3}
+  spriteIcon: {fileID: 420210878784677752, guid: 3badef18b08a8813e9aecc12a2ebd38d, type: 3}
   spriteRoll: {fileID: 2178102362946667264}
   spriteSide: {fileID: 6906592073352646893}
 --- !u!114 &4245180417535183791
@@ -157,7 +157,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NeighborsComponentProvider
   _value:
-    neighbors: []
+    neighbors:
+    - {x: 0, y: 1}
+    - {x: 0, y: -1}
+    - {x: 1, y: 0}
+    - {x: -1, y: 0}
 --- !u!114 &4921517849277323310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,13 +182,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4560217403192184}
     m_Modifications:
+    - target: {fileID: 871464881254634839, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -928688923, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 871596413274514201, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -928688923, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 872278677098938884, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 796441972, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 872961112075393190, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -928688923, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
     - target: {fileID: 1073623328595162782, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1073623328595162782, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 1073623328595162782, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -221,6 +241,34 @@ PrefabInstance:
     - target: {fileID: 1075666277973352428, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
       propertyPath: m_Name
       value: SpriteSides
+      objectReference: {fileID: 0}
+    - target: {fileID: 5850274259294550861, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: stateConfigs.Array.data[0].topSprite
+      value: 
+      objectReference: {fileID: 796441972, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 5850274259294550861, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: stateConfigs.Array.data[1].topSprite
+      value: 
+      objectReference: {fileID: 796441972, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 5850274259294550861, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: stateConfigs.Array.data[0].allSidesSprite
+      value: 
+      objectReference: {fileID: -928688923, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 5850274259294550861, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: stateConfigs.Array.data[1].allSidesSprite
+      value: 
+      objectReference: {fileID: -1259850176, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+    - target: {fileID: 8378255212188938900, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.104071
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378255212188938900, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.104071
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378255212188938900, guid: 6632608ba008d7e7a87775907e401b3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.104071
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -277,7 +325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4570314226478748277, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4711502270800126804, guid: af65018c71ed36f74a2b459de64e5b76, type: 3}
       propertyPath: m_LocalPosition.x

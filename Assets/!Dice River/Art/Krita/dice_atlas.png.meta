@@ -363,7 +363,7 @@ TextureImporter:
         width: 44
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -372,6 +372,72 @@ TextureImporter:
       bones: []
       spriteID: cd554a18775ef1cda9647c7c58728654
       internalID: -1153695804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dice_atlas_12
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 130
+        width: 88
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 584f63ce866ba2c9a9a4bdea7314eae2
+      internalID: 796441972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dice_atlas_13
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 19
+        width: 91
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bba0765798b673cbf896cc8c8de27349
+      internalID: -928688923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dice_atlas_14
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 18
+        width: 91
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73cd849d4bf842edea10b0579f0a7685
+      internalID: -1259850176
       vertices: []
       indices: 
       edges: []
@@ -396,6 +462,9 @@ TextureImporter:
       dice_atlas_1: 938655898
       dice_atlas_10: -749410804
       dice_atlas_11: -1153695804
+      dice_atlas_12: 796441972
+      dice_atlas_13: -928688923
+      dice_atlas_14: -1259850176
       dice_atlas_2: -1409523287
       dice_atlas_3: -1240215664
       dice_atlas_4: 95402345

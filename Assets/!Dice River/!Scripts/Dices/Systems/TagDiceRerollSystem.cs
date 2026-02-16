@@ -1,5 +1,4 @@
-﻿using System;
-using BitterECS.Core;
+﻿using BitterECS.Core;
 
 public class TagDiceRerollSystem : IEcsAutoImplement
 {
@@ -7,7 +6,7 @@ public class TagDiceRerollSystem : IEcsAutoImplement
 
     private readonly EcsEvent _ecsEventAdding =
     new EcsEvent<DicePresenter>()
-    .SubscribeWhereEntity<IsRollingProcess>(e =>
+    .SubscribeWhereEntity<IsActivatingEvent>(e =>
         EcsConditions.Has<TagRerollDice, NeighborsComponent>(e), OnReroll);
 
     private static void OnReroll(EcsEntity entity)
@@ -17,9 +16,14 @@ public class TagDiceRerollSystem : IEcsAutoImplement
 
         foreach (var entityIndex in neighbors)
         {
-            var providerEcs = gridDice.gridPresenter.GetByIndex(entityIndex);
-            var entityToGrid = providerEcs.Entity.GetProvider<DiceProvider>();
-            entityToGrid.ReRolling();
+            var providerEcs = (DiceProvider)gridDice.gridPresenter.GetByIndex(entityIndex);
+            var entityToGrid = providerEcs.Entity;
+
+            if (providerEcs != null)
+            {
+                entityToGrid.AddFrameToEvent<IsTargetingEvent>();
+                providerEcs.ReRolling();
+            }
         }
     }
 }

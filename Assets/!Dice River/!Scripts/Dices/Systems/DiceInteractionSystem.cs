@@ -102,7 +102,7 @@ public class DiceInteractionSystem
         {
             dice.spriteSide.ResetSides();
             UpdateNeighbors(index, dice, true);
-            instantiateObject.Entity.AddFrameToEvent<IsInstantiateEvent>();
+            instantiateObject.Entity.AddFrameToEvent<IsActivatingEvent>();
         }
     }
 

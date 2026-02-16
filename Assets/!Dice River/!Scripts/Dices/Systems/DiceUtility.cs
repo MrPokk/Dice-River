@@ -8,6 +8,7 @@ public static class DiceUtility
     {
         var gridDice = entity.Get<GridComponent>();
         ref var neighbors = ref entity.Get<NeighborsComponent>().neighbors;
+        if (neighbors == null) throw new("NeighborsComponent is neighbors is null");
         return gridDice.gridPresenter.GetNeighbors(gridDice.currentPosition, neighbors.ToArray(), e => e != null);
     }
 }
