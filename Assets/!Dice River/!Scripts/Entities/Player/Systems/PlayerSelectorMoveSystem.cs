@@ -15,6 +15,8 @@ public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
     private readonly Vector3 _offset = new(0, 0.55f, 0);
     private readonly Vector2Int[] _neighborOffsets = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
 
+    private readonly float _moveSpeed = 20f;
+
     public void Init()
     {
         var selectorPrefab = new Loader<GameObject>(UiPrefabsPaths.UISELECTOR).New();
@@ -53,8 +55,6 @@ public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
             }
             else
             {
-
-
                 if (monoGrid.GetGameObject(targetGridPos) is DiceProvider)
                 {
                     isValidPosition = true;
@@ -77,8 +77,18 @@ public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
 
             if (isValidPosition)
             {
-                if (!_selector.gameObject.activeSelf) _selector.gameObject.SetActive(true);
-                _selector.position = monoGrid.ConvertingPosition(targetGridPos) + _offset;
+                var targetWorldPos = monoGrid.ConvertingPosition(targetGridPos) + _offset;
+
+                if (!_selector.gameObject.activeSelf)
+                {
+
+                    _selector.gameObject.SetActive(true);
+                    _selector.position = targetWorldPos;
+                }
+                else
+                {
+                    _selector.position = Vector3.Lerp(_selector.position, targetWorldPos, _moveSpeed * Time.fixedDeltaTime);
+                }
             }
             else
             {

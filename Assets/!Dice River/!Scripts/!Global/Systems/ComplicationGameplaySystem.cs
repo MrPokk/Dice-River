@@ -44,7 +44,7 @@ public struct ComplicationGameplaySystem : IEcsRunSystem
         if (currentIdx < maxIdx)
         {
             StartupGameplay.GState.currentDifficulty = (DifficultyTier)(currentIdx + 1);
+            Debug.Log($"Difficulty increased to: {StartupGameplay.GState.currentDifficulty}");
         }
-        Debug.Log($"Difficulty increased to: {StartupGameplay.GState.currentDifficulty}");
     }
 }

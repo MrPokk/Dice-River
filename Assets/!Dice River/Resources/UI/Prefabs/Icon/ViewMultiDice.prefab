@@ -71,7 +71,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 796441972, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
+  m_Sprite: {fileID: 453145494, guid: f35fa448d64b95a80bdfcd78673cf819, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -162,4 +162,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AbilityDescriptorComponentProvider
   _value:
     description: <color=#00FF00>MULTIPLIES</color> <color=#0099FF>NEARBY</color>
-      dice by <color=#FFFF00>x1-x3</color>
+      dice by <color=#FAB409>x1-x3</color>

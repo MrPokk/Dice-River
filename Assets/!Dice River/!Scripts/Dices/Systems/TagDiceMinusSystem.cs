@@ -17,18 +17,13 @@ public class TagDiceMinusSystem : IEcsAutoImplement
         var modification = entity.Get<TagMinusForward>().amount;
         var gridDice = entity.Get<GridComponent>();
 
-        if (modification > 0)
-        {
-            modification *= -1;
-        }
-
         foreach (var entityIndex in neighbors)
         {
             var providerEcs = (DiceProvider)gridDice.gridPresenter.GetByIndex(entityIndex);
             var entityToGrid = providerEcs.Entity;
             ref var roleComponent = ref entityToGrid.Get<RollComponent>();
 
-            var rawValue = roleComponent.value + modification;
+            var rawValue = roleComponent.value + -Math.Abs(modification);
             roleComponent.value = ((rawValue - 1) % 6 + 6) % 6 + 1;
 
             providerEcs.spriteRoll.Select(roleComponent.value);

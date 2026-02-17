@@ -28,15 +28,10 @@ public class TagDiceMultiplierSystem : IEcsAutoImplement
             var entityToGrid = providerEcs.Entity;
             ref var roleComponent = ref entityToGrid.Get<RollComponent>();
 
-            var value = roleComponent.value * modification;
+            var baseValue = roleComponent.value == 1 ? roleComponent.value + 1 : roleComponent.value;
+            var value = baseValue * modification;
             var modificationValue = Math.Clamp(value, 1, 6);
-
-            if (modificationValue < 0)
-            {
-                modificationValue *= -1;
-            }
-
-            roleComponent.value = modificationValue;
+            roleComponent.value = Math.Abs(modificationValue);
 
             providerEcs.spriteRoll.Select(roleComponent.value);
 

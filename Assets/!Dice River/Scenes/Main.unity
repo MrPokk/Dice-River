@@ -1484,7 +1484,6 @@ GameObject:
   m_Component:
   - component: {fileID: 588926709}
   - component: {fileID: 588926708}
-  - component: {fileID: 588926710}
   m_Layer: 0
   m_Name: Smoke_0 (7)
   m_TagString: Untagged
@@ -1542,7 +1541,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2828077047651648745, guid: 30414ecd01ae00664afab7cbeb6eaa53, type: 3}
-  m_Color: {r: 0.43137255, g: 0.3254902, b: 0.6039216, a: 0.31764707}
+  m_Color: {r: 0.48615912, g: 0.3764706, b: 0.68235296, a: 0.31764707}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1566,18 +1565,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 211852472}
   m_LocalEulerAnglesHint: {x: 28.637, y: -7.963, z: -16.649}
---- !u!114 &588926710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588926705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19591f90015f831aeb9abccca14953c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteGpuInstancingEnabler
 --- !u!1 &597463196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,7 +1666,6 @@ GameObject:
   m_Component:
   - component: {fileID: 617061344}
   - component: {fileID: 617061343}
-  - component: {fileID: 617061345}
   m_Layer: 0
   m_Name: Smoke_0 (6)
   m_TagString: Untagged
@@ -1737,7 +1723,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2828077047651648745, guid: 30414ecd01ae00664afab7cbeb6eaa53, type: 3}
-  m_Color: {r: 0.43137255, g: 0.3254902, b: 0.6039216, a: 0.31764707}
+  m_Color: {r: 0.48615912, g: 0.3764706, b: 0.68235296, a: 0.31764707}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1761,18 +1747,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 211852472}
   m_LocalEulerAnglesHint: {x: 13.836, y: 24, z: 0}
---- !u!114 &617061345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617061340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19591f90015f831aeb9abccca14953c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteGpuInstancingEnabler
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2367,7 +2341,6 @@ GameObject:
   m_Component:
   - component: {fileID: 845677602}
   - component: {fileID: 845677601}
-  - component: {fileID: 845677603}
   m_Layer: 0
   m_Name: Smoke_0 (2)
   m_TagString: Untagged
@@ -2425,7 +2398,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2828077047651648745, guid: 30414ecd01ae00664afab7cbeb6eaa53, type: 3}
-  m_Color: {r: 0.43137255, g: 0.3254902, b: 0.6039216, a: 0.31764707}
+  m_Color: {r: 0.48615912, g: 0.3764706, b: 0.68235296, a: 0.31764707}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2449,18 +2422,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 211852472}
   m_LocalEulerAnglesHint: {x: 37.57, y: 15.974, z: 14.118}
---- !u!114 &845677603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845677600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19591f90015f831aeb9abccca14953c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteGpuInstancingEnabler
 --- !u!1 &851723357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2960,7 +2921,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1089821537}
   - component: {fileID: 1089821536}
-  - component: {fileID: 1089821538}
   m_Layer: 0
   m_Name: Smoke_0 (1)
   m_TagString: Untagged
@@ -3018,7 +2978,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2828077047651648745, guid: 30414ecd01ae00664afab7cbeb6eaa53, type: 3}
-  m_Color: {r: 0.43137255, g: 0.3254902, b: 0.6039216, a: 0.31764707}
+  m_Color: {r: 0.48615912, g: 0.3764706, b: 0.68235296, a: 0.31764707}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3042,18 +3002,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 211852472}
   m_LocalEulerAnglesHint: {x: 28.637, y: -42.44, z: -16.649}
---- !u!114 &1089821538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089821535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19591f90015f831aeb9abccca14953c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteGpuInstancingEnabler
 --- !u!1 &1133103639
 GameObject:
   m_ObjectHideFlags: 0
@@ -4072,7 +4020,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1554340037}
   - component: {fileID: 1554340036}
-  - component: {fileID: 1554340038}
   m_Layer: 0
   m_Name: Smoke_0 (8)
   m_TagString: Untagged
@@ -4130,7 +4077,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2828077047651648745, guid: 30414ecd01ae00664afab7cbeb6eaa53, type: 3}
-  m_Color: {r: 0.43137255, g: 0.3254902, b: 0.6039216, a: 0.31764707}
+  m_Color: {r: 0.48615912, g: 0.3764706, b: 0.68235296, a: 0.31764707}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4154,18 +4101,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 211852472}
   m_LocalEulerAnglesHint: {x: 37.57, y: 50.45, z: 14.118}
---- !u!114 &1554340038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554340033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19591f90015f831aeb9abccca14953c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteGpuInstancingEnabler
 --- !u!1 &1569999505
 GameObject:
   m_ObjectHideFlags: 0
@@ -4176,7 +4111,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1569999509}
   - component: {fileID: 1569999508}
-  - component: {fileID: 1569999510}
   m_Layer: 0
   m_Name: Smoke_0 (4)
   m_TagString: Untagged
@@ -4234,7 +4168,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2828077047651648745, guid: 30414ecd01ae00664afab7cbeb6eaa53, type: 3}
-  m_Color: {r: 0.43137255, g: 0.3254902, b: 0.6039216, a: 0.31764707}
+  m_Color: {r: 0.48615912, g: 0.3764706, b: 0.68235296, a: 0.31764707}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4258,18 +4192,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 211852472}
   m_LocalEulerAnglesHint: {x: 37.57, y: -37.75, z: 14.118}
---- !u!114 &1569999510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1569999505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19591f90015f831aeb9abccca14953c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteGpuInstancingEnabler
 --- !u!1 &1604899702
 GameObject:
   m_ObjectHideFlags: 0
@@ -4378,7 +4300,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1650494631}
   - component: {fileID: 1650494630}
-  - component: {fileID: 1650494632}
   m_Layer: 0
   m_Name: Smoke_0
   m_TagString: Untagged
@@ -4436,7 +4357,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2828077047651648745, guid: 30414ecd01ae00664afab7cbeb6eaa53, type: 3}
-  m_Color: {r: 0.43137255, g: 0.3254902, b: 0.6039216, a: 0.31764707}
+  m_Color: {r: 0.48615912, g: 0.3764706, b: 0.68235296, a: 0.31764707}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4460,18 +4381,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 211852472}
   m_LocalEulerAnglesHint: {x: 13.836, y: -10.477, z: 0}
---- !u!114 &1650494632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650494629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19591f90015f831aeb9abccca14953c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteGpuInstancingEnabler
 --- !u!1 &1672180582
 GameObject:
   m_ObjectHideFlags: 0
@@ -4599,7 +4508,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1705430971}
   - component: {fileID: 1705430970}
-  - component: {fileID: 1705430972}
   m_Layer: 0
   m_Name: Smoke_0 (3)
   m_TagString: Untagged
@@ -4657,7 +4565,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2828077047651648745, guid: 30414ecd01ae00664afab7cbeb6eaa53, type: 3}
-  m_Color: {r: 0.43137255, g: 0.3254902, b: 0.6039216, a: 0.31764707}
+  m_Color: {r: 0.48615912, g: 0.3764706, b: 0.68235296, a: 0.31764707}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4681,18 +4589,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 211852472}
   m_LocalEulerAnglesHint: {x: 13.836, y: -64.201, z: 0}
---- !u!114 &1705430972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1705430967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19591f90015f831aeb9abccca14953c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteGpuInstancingEnabler
 --- !u!1 &1721625227
 GameObject:
   m_ObjectHideFlags: 0
@@ -5308,7 +5204,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2038961752}
   - component: {fileID: 2038961751}
-  - component: {fileID: 2038961753}
   m_Layer: 0
   m_Name: Smoke_0 (5)
   m_TagString: Untagged
@@ -5366,7 +5261,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2828077047651648745, guid: 30414ecd01ae00664afab7cbeb6eaa53, type: 3}
-  m_Color: {r: 0.43137255, g: 0.3254902, b: 0.6039216, a: 0.31764707}
+  m_Color: {r: 0.48615912, g: 0.3764706, b: 0.68235296, a: 0.31764707}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5390,18 +5285,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 211852472}
   m_LocalEulerAnglesHint: {x: 28.637, y: -27.078, z: -16.649}
---- !u!114 &2038961753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2038961748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19591f90015f831aeb9abccca14953c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteGpuInstancingEnabler
 --- !u!1 &2107991707
 GameObject:
   m_ObjectHideFlags: 0

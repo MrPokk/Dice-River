@@ -451,7 +451,7 @@ TextureImporter:
         width: 92
         height: 91
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -473,7 +473,7 @@ TextureImporter:
         width: 91
         height: 92
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -495,7 +495,7 @@ TextureImporter:
         width: 91
         height: 91
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -504,6 +504,72 @@ TextureImporter:
       bones: []
       spriteID: 4b3143e2cbc8ae313ae4a0b01be7f444
       internalID: -645069202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dice_atlas_18
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 448
+        width: 91
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6404bd89217ed983cbe92d72ea5cbac7
+      internalID: -1547630658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dice_atlas_19
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 552
+        width: 91
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d03603e3ea6b249e480f4da5548c0787
+      internalID: 453145494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dice_atlas_20
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 448
+        width: 108
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d44e5e5c99dcee930be4744cd548b8a3
+      internalID: -1830508835
       vertices: []
       indices: 
       edges: []
@@ -534,7 +600,10 @@ TextureImporter:
       dice_atlas_15: -237852144
       dice_atlas_16: -1509379968
       dice_atlas_17: -645069202
+      dice_atlas_18: -1547630658
+      dice_atlas_19: 453145494
       dice_atlas_2: -1409523287
+      dice_atlas_20: -1830508835
       dice_atlas_3: -1240215664
       dice_atlas_4: 95402345
       dice_atlas_5: -223435966
