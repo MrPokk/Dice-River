@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 6002320840822252825}
   - component: {fileID: 6453253308650765066}
   - component: {fileID: 8844360297006299774}
+  - component: {fileID: 595499413772395247}
   m_Layer: 0
   m_Name: RockHazard
   m_TagString: Untagged
@@ -230,6 +231,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponentProvider
   _value:
     ripplesObject: {fileID: 5005083030681702391}
+    baseScale: {x: 0, y: 0, z: 0}
+--- !u!114 &595499413772395247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851880030500791345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5fa5830ee873bb8a1d8233d702f5b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveComponentProvider
 --- !u!1 &4669240937691049697
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,8 @@ public class HazardWavingRefreshSystem : IEcsFixedRunSystem
     public Priority Priority => Priority.Low;
 
     private EcsFilter _ecsEntities = new EcsFilter<EntitiesPresenter>()
-        .WhereProvider<HazardProvider>();
+        .WhereProvider<HazardProvider>()
+        .Include<WaveComponent>();
 
     public void FixedRun()
     {

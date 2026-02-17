@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9024840982215567600}
   - component: {fileID: 5005083030681702391}
   m_Layer: 0
-  m_Name: Sprite (1)
+  m_Name: Ripple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 6518271158593772481}
   - component: {fileID: 293049010045916999}
   - component: {fileID: 7038312131274780195}
+  - component: {fileID: 4005104556445190510}
   m_Layer: 0
   m_Name: PouchPickup
   m_TagString: Untagged
@@ -210,6 +211,13 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 17d412307cc36b1299d6b3d12b6e6f31, type: 2}
     - {fileID: 11400000, guid: ccf9df798cc306097a5d90e1d14ee08f, type: 2}
     - {fileID: 11400000, guid: a25bd2ea77aa0de0abcfca2aef3e0c84, type: 2}
+    _allDiceTypes:
+    - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
+    - {fileID: 453393326418446785, guid: 61721c6ee4a6086dda2e696de3cfc37f, type: 3}
+    - {fileID: 453393326418446785, guid: 80a1d489460193a8599c0aec63ed520c, type: 3}
+    - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
+    - {fileID: 453393326418446785, guid: 32fdf1db3201fd9d881b75c2f5ab707c, type: 3}
+    - {fileID: 453393326418446785, guid: 96067f4d37603d569a30469568a69dbf, type: 3}
 --- !u!114 &7038312131274780195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +230,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbe16b90cd1bc6068bc07c3173fb943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupProvider
+--- !u!114 &4005104556445190510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851880030500791345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc5b0229181280be841de4b034bb64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponentProvider
+  _value:
+    ripplesObject: {fileID: 5005083030681702391}
+    baseScale: {x: 0, y: 0, z: 0}
 --- !u!1 &4669240937691049697
 GameObject:
   m_ObjectHideFlags: 0

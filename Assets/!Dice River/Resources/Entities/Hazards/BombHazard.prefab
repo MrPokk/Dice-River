@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7786971189842199028}
   - component: {fileID: 5798259943263429427}
   - component: {fileID: 840118966450034322}
+  - component: {fileID: 4763281015018967181}
   m_Layer: 0
   m_Name: BombHazard
   m_TagString: Untagged
@@ -139,6 +140,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpriteRipplesComponent
   _value:
     ripplesObject: {fileID: 3326483002535032834}
+    baseScale: {x: 0, y: 0, z: 0}
+--- !u!114 &4763281015018967181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851880030500791345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5fa5830ee873bb8a1d8233d702f5b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveComponentProvider
 --- !u!1 &4669240937691049697
 GameObject:
   m_ObjectHideFlags: 0
