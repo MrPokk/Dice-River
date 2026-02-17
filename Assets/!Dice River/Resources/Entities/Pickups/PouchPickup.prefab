@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 293049010045916999}
   - component: {fileID: 7038312131274780195}
   - component: {fileID: 4005104556445190510}
+  - component: {fileID: 5151100149133639131}
   m_Layer: 0
   m_Name: PouchPickup
   m_TagString: Untagged
@@ -245,6 +246,18 @@ MonoBehaviour:
   _value:
     ripplesObject: {fileID: 5005083030681702391}
     baseScale: {x: 0, y: 0, z: 0}
+--- !u!114 &5151100149133639131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851880030500791345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5fa5830ee873bb8a1d8233d702f5b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveComponentProvider
 --- !u!1 &4669240937691049697
 GameObject:
   m_ObjectHideFlags: 0
