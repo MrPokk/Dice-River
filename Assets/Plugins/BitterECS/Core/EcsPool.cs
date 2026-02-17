@@ -11,6 +11,7 @@ namespace BitterECS.Core
         private int[] _dataIndexToEntity;
         private int _count;
         private readonly int _initialCapacity;
+        private static T s_dummy = new();
 
         public int Count => _count;
         public int Capacity => _components.Length;
@@ -75,13 +76,17 @@ namespace BitterECS.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ref T Get(int entityId)
         {
+            if (!Has(entityId))
+            {
+                return ref s_dummy;
+            }
             return ref _components[_entityToDataIndex[entityId]];
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Has(int entityId)
         {
-            return entityId < _entityToDataIndex.Length && _entityToDataIndex[entityId] != -1;
+            return entityId >= 0 && entityId < _entityToDataIndex.Length && _entityToDataIndex[entityId] != -1;
         }
 
         private void EnsureEntityCapacity(int entityId)
@@ -158,7 +163,11 @@ namespace BitterECS.Core
                 Array.Clear(_dataIndexToEntity, 0, _count);
             }
 
-            Array.Fill(_entityToDataIndex, -1);
+            if (_entityToDataIndex.Length > 0)
+            {
+                Array.Fill(_entityToDataIndex, -1);
+            }
+
             _count = 0;
         }
     }

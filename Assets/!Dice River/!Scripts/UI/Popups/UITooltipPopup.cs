@@ -36,9 +36,10 @@ public class UITooltipPopup : UIPopup
     public override void Open()
     {
         UIAnimationComponent
-        .UsingAnimation(gameObject)
-        .ApplyPresetOpen(UIAnimationPresets.CreateSlideFromRightPreset())
-        .PlayOpenAnimation();
+        .Using(gameObject)
+        .SetPresets(UIAnimationPresets.PopupOpen,
+                    UIAnimationPresets.PopupClose)
+        .PlayOpen();
 
         base.Open();
     }

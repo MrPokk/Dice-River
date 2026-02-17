@@ -1,41 +1,38 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Canvas))]
 public class UITooltipCanvas : MonoBehaviour
 {
-    private Canvas _canvas;
     public UITooltipPopup tooltipPopup;
 
     [Header("Settings")]
     [SerializeField] private float _scaleFactor = 0.01f;
     [SerializeField] private int _orderLayer = 10;
 
+    private Canvas _canvas;
+    private Camera _mainCamera;
+    private RectTransform _childRect;
+    private Transform _transform;
+
     private void Awake()
     {
+        _transform = transform;
         _canvas = GetComponent<Canvas>();
+        _mainCamera = Camera.main;
+
         SetupCanvas();
+        InitializePopup();
     }
 
-    private void LateUpdate()
+    private void InitializePopup()
     {
-        if (_canvas.worldCamera == null)
+        if (tooltipPopup == null)
+            tooltipPopup = GetComponentInChildren<UITooltipPopup>();
+
+        if (tooltipPopup != null)
         {
-            _canvas.worldCamera = Camera.main;
-        }
-
-        CenterChild();
-
-        RotationToCamera();
-    }
-
-    private void RotationToCamera()
-    {
-        if (_canvas.worldCamera != null)
-        {
-            var directionToCamera = _canvas.worldCamera.transform.position - transform.position;
-
-            transform.rotation = Quaternion.LookRotation(-directionToCamera);
+            _childRect = tooltipPopup.transform as RectTransform;
+            SetupChildRect();
         }
     }
 
@@ -43,44 +40,40 @@ public class UITooltipCanvas : MonoBehaviour
     {
         _canvas.renderMode = RenderMode.WorldSpace;
         _canvas.sortingOrder = _orderLayer;
-        ApplyScale();
+        _canvas.worldCamera = _mainCamera;
+        _transform.localScale = Vector3.one * _scaleFactor;
     }
 
-    private void ApplyScale()
+    private void LateUpdate()
     {
-        if (transform.localScale.x != _scaleFactor)
-        {
-            transform.localScale = new Vector3(_scaleFactor, _scaleFactor, _scaleFactor);
-        }
+        if (_mainCamera == null) _mainCamera = Camera.main;
+        if (_mainCamera == null) return;
+        SetupChildRect();
+        RotateToCamera();
     }
 
-    private void CenterChild()
+    private void RotateToCamera()
     {
-        if (transform.childCount > 0)
-        {
-            tooltipPopup = transform.GetComponentInChildren<UITooltipPopup>();
-            if (tooltipPopup == null)
-            {
-                throw new Exception("Tooltip NOT set");
-            }
+        Vector3 direction = _mainCamera.transform.position - _transform.position;
+        _transform.rotation = Quaternion.LookRotation(-direction);
+    }
 
-            var childRect = tooltipPopup.transform as RectTransform;
+    private void SetupChildRect()
+    {
+        if (_childRect == null) return;
 
-            if (childRect != null)
-            {
-                childRect.anchorMin = new Vector2(0.5f, 0.5f);
-                childRect.anchorMax = new Vector2(0.5f, 0.5f);
-                childRect.pivot = new Vector2(0.5f, 0.5f);
-
-                childRect.anchoredPosition3D = Vector3.zero;
-            }
-        }
+        _childRect.anchorMin = _childRect.anchorMax = _childRect.pivot = new Vector2(0.5f, 0.5f);
+        _childRect.anchoredPosition3D = Vector3.zero;
     }
 
     private void OnValidate()
     {
         if (_canvas == null) _canvas = GetComponent<Canvas>();
-        ApplyScale();
-        CenterChild();
+        transform.localScale = Vector3.one * _scaleFactor;
+
+        if (tooltipPopup == null) tooltipPopup = GetComponentInChildren<UITooltipPopup>();
+        if (tooltipPopup != null && _childRect == null) _childRect = tooltipPopup.transform as RectTransform;
+
+        SetupChildRect();
     }
 }
