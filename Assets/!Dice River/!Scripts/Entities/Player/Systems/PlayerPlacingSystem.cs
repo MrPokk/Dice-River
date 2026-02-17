@@ -31,14 +31,10 @@ public class PlayerPlacingSystem : IEcsInitSystem
 
             if (DiceInteractionSystem.IsPlacing(targetGridPos))
             {
-                if (Startup.HandControllerDice == null)
-                {
-                    return;
-                }
+                if (Startup.HandControllerDice == null) return;
 
                 if (Startup.HandControllerDice.ExtractToFirst(out var diceItem))
                 {
-
                     var diceProviderPrefab = diceItem.Value;
 
                     if (diceProviderPrefab != null)

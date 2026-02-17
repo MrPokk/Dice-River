@@ -18,6 +18,8 @@ public class TagPouchPickupSystem : IEcsAutoImplement
         var collision = entity.Get<IsTriggerColliderEnter>();
         var pouchEntity = collision.entityHit;
 
+        if (!pouchEntity.IsAlive) return;
+
         var currentTier = StartupGameplay.GState.currentDifficulty;
         var containerComponent = pouchEntity.Get<DiceContainer>();
 
