@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79775de34b5c96369ac9a2516b9e7a46, type: 3}
-  m_Name: DiceGroupVAR_2
+  m_Name: DiceGroupVAR_1
   m_EditorClassIdentifier: Assembly-CSharp::DiceGroupSO
-  level: 2
+  level: 0
   dice:
   - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
-  - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}
-  - {fileID: 453393326418446785, guid: 80a1d489460193a8599c0aec63ed520c, type: 3}
+  - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
+  - {fileID: 453393326418446785, guid: 61721c6ee4a6086dda2e696de3cfc37f, type: 3}

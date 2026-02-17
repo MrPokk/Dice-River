@@ -8,32 +8,58 @@ public struct ComplicationGameplaySystem : IEcsRunSystem
 
     private readonly RiverScrollingSystem _riverScrolling;
     private readonly ComplicationSettings _settings;
-    private float _nextThreshold;
+
+    private float _nextSpeedThreshold;
+    private float _nextDifficultyThreshold;
 
     public ComplicationGameplaySystem(RiverScrollingSystem riverScrolling, ComplicationSettings settings)
     {
         _riverScrolling = riverScrolling;
         _settings = settings;
 
-        var step = _settings != null ? _settings.distanceStepToDifficulty : throw new("ComplicationSettings is null");
-        _nextThreshold = (Mathf.Floor(_riverScrolling.TotalScrollDistance / step) + 1) * step;
+        if (_settings == null) throw new("ComplicationSettings is null");
+
+        float currentDist = _riverScrolling.TotalScrollDistance;
+
+        _nextSpeedThreshold = CalculateNextThreshold(currentDist, _settings.distanceStepToScroll);
+        _nextDifficultyThreshold = CalculateNextThreshold(currentDist, _settings.distanceStepToDifficulty);
     }
 
     public void Run()
     {
         if (_riverScrolling == null || _settings == null) return;
 
-        if (_riverScrolling.TotalScrollDistance >= _nextThreshold)
+        var currentDist = _riverScrolling.TotalScrollDistance;
+
+        if (currentDist >= _nextSpeedThreshold)
         {
-            _riverScrolling.scrollSpeed = Mathf.Clamp(_riverScrolling.scrollSpeed + _settings.speedStep, _settings.minSpeed, _settings.maxSpeed);
+            _riverScrolling.scrollSpeed = Mathf.Clamp(
+                _riverScrolling.scrollSpeed + _settings.speedStep,
+                _settings.minSpeed,
+                _settings.maxSpeed
+            );
 
-            IncreaseDifficulty();
-
-            while (_riverScrolling.TotalScrollDistance >= _nextThreshold)
+            while (currentDist >= _nextSpeedThreshold)
             {
-                _nextThreshold += _settings.distanceStepToDifficulty;
+                _nextSpeedThreshold += _settings.distanceStepToScroll;
             }
         }
+
+        if (currentDist >= _nextDifficultyThreshold)
+        {
+            IncreaseDifficulty();
+
+            while (currentDist >= _nextDifficultyThreshold)
+            {
+                _nextDifficultyThreshold += _settings.distanceStepToDifficulty;
+            }
+        }
+    }
+
+    private static float CalculateNextThreshold(float currentDistance, float step)
+    {
+        if (step <= 0) return float.MaxValue;
+        return (Mathf.Floor(currentDistance / step) + 1) * step;
     }
 
     private void IncreaseDifficulty()

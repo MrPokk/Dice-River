@@ -17,7 +17,7 @@ public class RiverScrollingSystem : MonoBehaviour
     private int _startBottomIndex;
     private float _cellSizeZ;
     private float _movedDistance;
-    private float _totalOffsetZ = 0f;
+    [SerializeField, ReadOnly] private float _totalOffsetZ = 0f;
 
     private int _minCol;
     private int _maxCol;

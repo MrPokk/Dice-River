@@ -16,10 +16,10 @@ public class TagDiceMirrorSystem : IEcsAutoImplement
     {
         var gridDice = entity.Get<GridComponent>();
         var targetingCopy = entity.Get<TagMirrorCopy>();
-        var toCopyIndex = targetingCopy.indexToCopy + gridDice.currentPosition;
-        var toPastIndex = targetingCopy.indexToPast + gridDice.currentPosition;
 
+        var toCopyIndex = targetingCopy.indexToCopy + gridDice.currentPosition;
         var isCopy = gridDice.gridPresenter.TryGetValue(toCopyIndex, out var copyProvider);
+
         if (!isCopy || copyProvider == null)
         {
             return;
@@ -27,16 +27,31 @@ public class TagDiceMirrorSystem : IEcsAutoImplement
 
         var diceCopy = (DiceProvider)copyProvider;
 
-        var isPast = gridDice.gridPresenter.TryGetValue(toPastIndex, out var pastProvider);
-        if (isPast && pastProvider == null)
+        Vector2Int[] offsetsToTry =
         {
-            DiceInteractionSystem.InstantiateObject(toPastIndex, diceCopy, out var instantiatedObject);
+            targetingCopy.indexToPast,
+            Vector2Int.left,
+            Vector2Int.right
+        };
 
-            if (instantiatedObject != null)
+        foreach (var offset in offsetsToTry)
+        {
+            var targetIndex = gridDice.currentPosition + offset;
+
+            var isIndexValid = gridDice.gridPresenter.TryGetValue(targetIndex, out var existingProvider);
+
+            if (isIndexValid && existingProvider == null)
             {
-                var defaultScale = instantiatedObject.transform.localScale;
-                instantiatedObject.transform.localScale = Vector3.zero;
-                instantiatedObject.transform.DOScale(defaultScale, 0.3f).SetEase(Ease.OutBack).Play();
+                DiceInteractionSystem.InstantiateObject(targetIndex, diceCopy, out var instantiatedObject);
+
+                if (instantiatedObject != null)
+                {
+                    var defaultScale = instantiatedObject.transform.localScale;
+                    instantiatedObject.transform.localScale = Vector3.zero;
+                    instantiatedObject.transform.DOScale(defaultScale, 0.3f).SetEase(Ease.OutBack).Play();
+                }
+
+                return;
             }
         }
     }

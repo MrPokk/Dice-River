@@ -40,7 +40,7 @@ public class SpriteSideComponent : MonoBehaviour
     [Tooltip("Select a state to preview the dice appearance.")]
     public DiceVisualState previewState;
     public List<StateSprites> stateConfigs;
-
+#if UNITY_EDITOR
     private void OnValidate()
     {
         if (stateConfigs != null && stateConfigs.Count > 0)
@@ -51,6 +51,7 @@ public class SpriteSideComponent : MonoBehaviour
             };
         }
     }
+#endif
 
     public void SetState(DiceVisualState newState)
     {
