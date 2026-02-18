@@ -39,7 +39,7 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem, IEcsRunSys
         {
             var provider = entity.GetProvider<PlayerProvider>();
             ref var moving = ref entity.Get<MovingComponent>();
-            var input = entity.Get<InputComponent>();
+            ref var input = ref entity.Get<InputComponent>();
             var gravity = entity.Get<GravityComponent>();
 
             var cc = provider.characterController;
@@ -85,12 +85,13 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem, IEcsRunSys
         return moveDirection;
     }
 
-    private static void FlipSprite(EntitiesProvider provider, float directionX)
+    private static void FlipSprite(PlayerProvider provider, float directionX)
     {
-        if (Mathf.Abs(directionX) < 0.01f) return;
-
-        var scale = provider.transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * Mathf.Sign(directionX);
-        provider.transform.localScale = scale;
+        if (directionX != 0)
+        {
+            var shouldFlip = directionX < 0;
+            provider.spritePlayer.flipX = shouldFlip;
+            provider.spriteShadow.flipX = shouldFlip;
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using UINotDependence.Core;
 using UnityEngine;
 
@@ -14,48 +14,65 @@ public class UIHandElement : UIPopup
     [SerializeField] private bool _rotateItemsToArc = true;
 
     private HandControllerDice _controller;
+    private readonly List<RectTransform> _rectCache = new();
 
     public void Bind(HandControllerDice handController)
     {
-        if (_controller != null) _controller.OnChanged -= UpdateLayout;
+        if (_controller != null) _controller.OnChanged -= RefreshCache;
+
         _controller = handController;
-        _controller.OnChanged += UpdateLayout;
+        _controller.OnChanged += RefreshCache;
         _controller.SetContainer(handContainer);
+
+        RefreshCache();
     }
 
     private void OnDestroy()
     {
-        if (_controller != null) _controller.OnChanged -= UpdateLayout;
+        if (_controller != null) _controller.OnChanged -= RefreshCache;
+    }
+
+    private void RefreshCache()
+    {
+        if (_controller == null) return;
+
+        _rectCache.Clear();
+        foreach (var view in _controller.GetViews())
+        {
+            if (view != null)
+            {
+                _rectCache.Add(view.GetComponent<RectTransform>());
+            }
+        }
+        UpdateLayout();
     }
 
     private void Update() => UpdateLayout();
 
     private void UpdateLayout()
     {
-        if (_controller == null) return;
-
-        var views = _controller.GetViews().ToList();
-        var count = views.Count;
+        var count = _rectCache.Count;
         if (count == 0) return;
 
-        var centerOffset = (count - 1) / 2.0f;
+        var centerOffset = (count - 1) * 0.5f;
+        var invParabola = 1f / _parabolaParameter;
 
         for (var i = 0; i < count; i++)
         {
-            var view = views[i];
-            if (view == null) continue;
+            RectTransform rect = _rectCache[i];
+            if (rect == null) continue;
 
-            var rect = view.transform as RectTransform;
             var linear = (i - centerOffset) * _space;
-            var curve = -(linear * linear) / _parabolaParameter;
+            var curve = -(linear * linear) * invParabola;
 
-            rect.anchoredPosition = _isVerticalLayout
-                ? new Vector2(curve, -linear)
-                : new Vector2(linear, curve);
+            if (_isVerticalLayout)
+                rect.anchoredPosition = new Vector2(curve, -linear);
+            else
+                rect.anchoredPosition = new Vector2(linear, curve);
 
             if (_rotateItemsToArc)
             {
-                var tangent = -2 * linear / _parabolaParameter;
+                var tangent = -2f * linear * invParabola;
                 var angle = Mathf.Atan(tangent) * Mathf.Rad2Deg;
                 rect.localRotation = Quaternion.Euler(0, 0, angle);
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using BitterECS.Core;
+using InGame.Script.Component_Sound;
 using UINotDependence.Core;
 
 public class DefeatApplySystem : IEcsAutoImplement
@@ -15,6 +16,7 @@ public class DefeatApplySystem : IEcsAutoImplement
         if (healthComp.currentHealth <= 0)
         {
             UIController.OpenScreen<UIDefeatScreen>();
+            SoundController.StopAllMusic();
             Startup.RiverScroll.scrollSpeed = 0;
             entity.Destroy();
         }

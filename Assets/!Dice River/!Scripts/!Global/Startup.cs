@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 public class Startup : EcsUnityRoot
 {
     [ReadOnly] public CameraObject mainCamera;
-    [ReadOnly] public SoundManager soundManager;
+    [ReadOnly] public SoundController soundManager;
 
     public SpawnerPoint playerSpawner;
     public List<EnvironmentToDestroy> environmentToDestroy;
@@ -55,9 +55,9 @@ public class Startup : EcsUnityRoot
 
     private void InitializeAudio()
     {
-        soundManager = new Loader<SoundManager>(PrefabObjectsPaths.AUDIO_OBJECT).New();
-        SoundManager.PlayMusicRandomPitch(SoundType.ForestMusicAmbience, volume: 0.1f, minPitch: 3, maxPitch: 5);
-        SoundManager.PlayMusic(SoundType.ForestMusic, true, 0.8f, 0.8f);
+        soundManager = new Loader<SoundController>(PrefabObjectsPaths.AUDIO_OBJECT).New();
+        SoundController.PlayMusicRandomPitch(SoundType.ForestMusicAmbience, volume: 0.1f, minPitch: 3, maxPitch: 5);
+        SoundController.PlayMusic(SoundType.ForestMusic, true, 0.8f, 0.8f);
 
     }
 

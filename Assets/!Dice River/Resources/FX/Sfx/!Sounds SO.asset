@@ -74,3 +74,11 @@ MonoBehaviour:
     mixer: {fileID: -5466305300834603150, guid: a372e41a415bfea32bdd14c5d3c2aa1e, type: 2}
     sounds:
     - {fileID: 8300000, guid: 7a84b26a5d6f87ab7be3b150c9e12a6a, type: 3}
+  - name: PlayerDamaging
+    volume: 1
+    mixer: {fileID: -5466305300834603150, guid: a372e41a415bfea32bdd14c5d3c2aa1e, type: 2}
+    sounds:
+    - {fileID: 8300000, guid: f4e908e1c2d3c43a18ce320a1618d200, type: 3}
+    - {fileID: 8300000, guid: dc5154a14fee228d59458d766c7f29b0, type: 3}
+    - {fileID: 8300000, guid: 4006b49379c71d6f4a0ea0354010abfc, type: 3}
+    - {fileID: 8300000, guid: 7b3139da657fbd0d9a426d4d65dab7bc, type: 3}

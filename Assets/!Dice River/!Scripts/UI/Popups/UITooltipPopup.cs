@@ -39,15 +39,24 @@ public class UITooltipPopup : UIPopup
         .Using(gameObject)
         .SetPresets(UIAnimationPresets.PopupOpen,
                     UIAnimationPresets.PopupClose)
-        .PlayOpen();
+        .PlayOpen(() => Refresh());
 
         base.Open();
     }
 
     private void Update()
     {
-        if (!gameObject || _rootCanvas == null)
+        var flowControl = Refresh();
+        if (!flowControl)
+        {
             return;
+        }
+    }
+
+    private bool Refresh()
+    {
+        if (!gameObject || _rootCanvas == null)
+            return false;
 
         Vector3 pointerPos = ControllableSystem.PointerPosition;
 
@@ -55,6 +64,7 @@ public class UITooltipPopup : UIPopup
         var scaledOffset = (Vector3)_offset * scaleFactor;
 
         transform.position = pointerPos + scaledOffset;
+        return true;
     }
 
     public override void Close()

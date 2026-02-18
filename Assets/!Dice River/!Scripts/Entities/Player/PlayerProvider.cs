@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerProvider : EntitiesProvider
 {
     public CharacterController characterController;
+    public SpriteRenderer spritePlayer;
+    public SpriteRenderer spriteShadow;
 
     protected override void Registration()
     {

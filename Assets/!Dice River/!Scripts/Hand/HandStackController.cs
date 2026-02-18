@@ -27,6 +27,8 @@ public class HandStackController<TData, TView> : MonoBehaviour where TView : Mon
         OnChanged?.Invoke();
     }
 
+    public TView GetView(TData data) => _views.TryGetValue(data, out var v) ? v : null;
+
     public virtual bool DrawToHand()
     {
         if (_stack.Count == 0 || hand == null) return false;

@@ -83,7 +83,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5198433327632205344, guid: fe019298a88d4f0cdbbfff9b02a99131, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.65, y: 0.86}
@@ -195,7 +195,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08aa04e29c6f5dd23b29e03cb8181a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerProvider
-  characterController: {fileID: 0}
+  characterController: {fileID: 7411409852435515135}
+  spritePlayer: {fileID: 6173590747896806433}
+  spriteShadow: {fileID: 1766337694651163325}
 --- !u!114 &3970930688320794487
 MonoBehaviour:
   m_ObjectHideFlags: 0

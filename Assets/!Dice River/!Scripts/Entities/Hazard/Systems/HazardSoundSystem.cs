@@ -17,12 +17,12 @@ public class HazardSoundSystem : IEcsAutoImplement
 
     private static void OnRockSound(EcsEntity entity)
     {
-        SoundManager.PlaySoundRandomPitch(SoundType.DamageInDice);
+        SoundController.PlaySoundRandomPitch(SoundType.DamageInDice);
     }
 
     private static void OnBombSound(EcsEntity entity)
     {
-        SoundManager.PlaySound(SoundType.DamageInDice);
-        SoundManager.PlaySoundRandomVolumeAndPitch(SoundType.Explosion, 0.7f, 1, 0.55f, 1.15f);
+        SoundController.PlaySound(SoundType.DamageInDice);
+        SoundController.PlaySoundRandomVolumeAndPitch(SoundType.Explosion, 0.7f, 1, 0.55f, 1.15f);
     }
 }

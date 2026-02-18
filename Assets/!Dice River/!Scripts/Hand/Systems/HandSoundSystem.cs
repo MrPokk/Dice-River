@@ -12,7 +12,7 @@ public class HandSoundSystem : IHandSucceedAdd
         KeyValuePair<EcsEntity, DiceProvider> item,
         UIProvider uiProvider)
     {
-        SoundManager.PlaySoundRandomPitch(SoundType.GiveOutDice, volume: 0.2f);
+        SoundController.PlaySoundRandomPitch(SoundType.GiveOutDice, volume: 0.2f);
         return UniTask.CompletedTask;
     }
 }

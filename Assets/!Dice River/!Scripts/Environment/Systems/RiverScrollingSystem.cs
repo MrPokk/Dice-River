@@ -23,6 +23,7 @@ public class RiverScrollingSystem : MonoBehaviour
     private int _maxCol;
 
     [ReadOnly] public float scrollSpeed = 0;
+    [ReadOnly] public float speedFactor = 1f;
     [SerializeField] private float _distanceMultiplier = 0.2f;
     public float TotalScrollDistance => _totalOffsetZ;
 
@@ -76,11 +77,10 @@ public class RiverScrollingSystem : MonoBehaviour
     {
         if (_presenter == null || _riverRoot == null) return;
 
-        var moveStep = scrollSpeed * Time.deltaTime;
+        var moveStep = scrollSpeed * speedFactor * Time.deltaTime;
         _totalOffsetZ += moveStep;
 
         OnDistanceChanged?.Invoke(_totalOffsetZ * _distanceMultiplier);
-
         _movedDistance += moveStep;
 
         foreach (var row in _rowLines)

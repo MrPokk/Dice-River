@@ -14,7 +14,7 @@ public class PlayerPlacingSystem : IEcsInitSystem
 
     public void Init()
     {
-        var set = ControllableSystem.Inputs.Playable.BasicAttack;
+        var set = ControllableSystem.Inputs.Playable.Interactable;
         ControllableSystem.SubscribePerformed(set, OnPlacing);
     }
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ComplicationSettings
   distanceStepToScroll: 50
   distanceStepToDifficulty: 100
-  startGenerationToLine: 0
+  startGenerationToLine: 10
   speedStep: 0.3
   difficultyStart: 0
   minSpeed: 2

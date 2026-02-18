@@ -51,3 +51,6 @@ MonoBehaviour:
   handStackController: {fileID: 1182434484712484373, guid: 43528470ca6d04c519dac4b5002950c5, type: 3}
   timeRefreshSecond: 1
   maxCountDice: 3
+  animDuration: 0.5
+  jumpPower: 100
+  arrowOffset: {x: 0, y: 80, z: 0}

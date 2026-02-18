@@ -6,11 +6,11 @@ using Random = UnityEngine.Random;
 
 namespace InGame.Script.Component_Sound
 {
-    public class SoundManager : MonoBehaviour
+    public class SoundController : MonoBehaviour
     {
         [SerializeField] private SoundsSO _setting;
 
-        private static SoundManager s_instance = null;
+        private static SoundController s_instance = null;
         private readonly List<AudioSource> _sfxPool = new();
 
         private readonly Dictionary<SoundType, AudioSource> _activeMusicSources = new();

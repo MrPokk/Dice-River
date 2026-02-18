@@ -8,4 +8,6 @@ public class EntitiesProvider : ProviderEcs<EntitiesPresenter>
 }
 
 public class EntitiesPresenter : EcsPresenter
-{ }
+{
+
+}

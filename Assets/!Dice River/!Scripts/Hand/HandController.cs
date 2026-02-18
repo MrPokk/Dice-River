@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(RectTransform))]
 public class HandController<TData, TView> : MonoBehaviour where TView : MonoBehaviour
@@ -35,19 +36,35 @@ public class HandController<TData, TView> : MonoBehaviour where TView : MonoBeha
             view?.transform.SetParent(_containerRect, false);
         }
         OnChanged?.Invoke();
+        OnChangedInternal();
     }
 
     public virtual bool Add(TData data, TView viewPrefab)
     {
         if (data == null || _viewMap.ContainsKey(data)) return false;
 
+        var startWorldPos = transform.position;
+        if (handStackController != null)
+        {
+            var stackView = handStackController.GetView(data);
+            if (stackView != null) startWorldPos = stackView.transform.position;
+        }
+
         var viewInstance = Instantiate(viewPrefab, _containerRect);
+
+        viewInstance.transform.position = startWorldPos;
+
         _dataItems.Add(data);
         _viewMap.Add(data, viewInstance);
 
+        AnimateEntry(viewInstance);
         OnChanged?.Invoke();
+        OnChangedInternal();
         return true;
     }
+
+    protected virtual void AnimateEntry(TView view) { }
+    protected virtual void OnChangedInternal() { }
 
     public virtual bool ExtractToFirst(out TData value)
     {
@@ -72,6 +89,7 @@ public class HandController<TData, TView> : MonoBehaviour where TView : MonoBeha
         _viewMap.Remove(data);
         _dataItems.Remove(data);
         OnChanged?.Invoke();
+        OnChangedInternal();
         return true;
     }
 

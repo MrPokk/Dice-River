@@ -20,7 +20,7 @@ public class DiceSoundSystem : IEcsAutoImplement
         if (!entity.IsProviding)
             return;
 
-        SoundManager.PlaySoundRandomPitch(SoundType.SplashInDice);
+        SoundController.PlaySoundRandomPitch(SoundType.SplashInDice);
     }
 
     private static void OnRollSound(EcsEntity entity)
@@ -28,7 +28,7 @@ public class DiceSoundSystem : IEcsAutoImplement
         if (!entity.IsProviding)
             return;
 
-        SoundManager.PlaySoundRandomPitch(SoundType.Roll);
+        SoundController.PlaySoundRandomPitch(SoundType.Roll);
     }
 
     private static void OnDiceDestroy(EcsEntity entity)

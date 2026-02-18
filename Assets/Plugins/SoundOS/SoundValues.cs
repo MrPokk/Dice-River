@@ -15,6 +15,7 @@
         Roll,
 
         WaterExit,
-        WaterSplash
+        WaterSplash,
+        PlayerDamaging,
     }
 }
