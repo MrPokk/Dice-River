@@ -137,6 +137,9 @@ namespace BitterECS.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Has(int id) => id >= 0 && id < _idToIndex.Length && _idToIndex[id] != -1;
 
+        public bool HasProvider(int id) =>
+            _linkedProviders.TryGetValue(id, out _);
+
         public ILinkableProvider GetProvider(EcsEntity entity)
             => _linkedProviders.TryGetValue(entity.Id, out var provider) ? provider : null;
 

@@ -27,6 +27,8 @@ public class TagDiceMirrorSystem : IEcsAutoImplement
 
         var diceCopy = (DiceProvider)copyProvider;
 
+        if (diceCopy.Entity.Has<TagMirrorCopy>()) return;
+
         Vector2Int[] offsetsToTry =
         {
             targetingCopy.indexToPast,
@@ -36,6 +38,7 @@ public class TagDiceMirrorSystem : IEcsAutoImplement
 
         foreach (var offset in offsetsToTry)
         {
+
             var targetIndex = gridDice.currentPosition + offset;
 
             var isIndexValid = gridDice.gridPresenter.TryGetValue(targetIndex, out var existingProvider);

@@ -161,4 +161,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityDescriptorComponentProvider
   _value:
-    description: <color=#00FF00>REROLLS</color> <color=#0099FF>NEARBY</color> dice
+    description: <color=#00FF00>REROLLS</color> the values of <color=#0099FF>NEARBY</color>
+      dice!

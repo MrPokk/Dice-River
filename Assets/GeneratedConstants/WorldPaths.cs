@@ -6,17 +6,17 @@
 public static class WorldPaths
 {
     /// <summary> Provider: EnvironmentProvider </summary>
-    public const string SHADOW_VAR_1 = "World/ShadowVAR_1";
+    public const string SHADOW_VAR_1 = "Entities/Prefabs/World/ShadowVAR_1";
     /// <summary> Provider: EnvironmentProvider </summary>
-    public const string SHADOW_VAR_2 = "World/ShadowVAR_2";
+    public const string SHADOW_VAR_2 = "Entities/Prefabs/World/ShadowVAR_2";
     /// <summary> Provider: EnvironmentProvider </summary>
-    public const string SHADOW_VAR_3 = "World/ShadowVAR_3";
+    public const string SHADOW_VAR_3 = "Entities/Prefabs/World/ShadowVAR_3";
     /// <summary> Provider: EnvironmentProvider </summary>
-    public const string TREE_VAR_1 = "World/TreeVAR_1";
+    public const string TREE_VAR_1 = "Entities/Prefabs/World/TreeVAR_1";
     /// <summary> Provider: EnvironmentProvider </summary>
-    public const string TREE_VAR_2 = "World/TreeVAR_2";
+    public const string TREE_VAR_2 = "Entities/Prefabs/World/TreeVAR_2";
     /// <summary> Provider: EnvironmentProvider </summary>
-    public const string TREE_VAR_3 = "World/TreeVAR_3";
+    public const string TREE_VAR_3 = "Entities/Prefabs/World/TreeVAR_3";
 
     public static readonly string[] AllPaths = new string[]
     {

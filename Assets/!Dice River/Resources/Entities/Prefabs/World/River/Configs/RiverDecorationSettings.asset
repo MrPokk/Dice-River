@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066730f534d288481b5331ce4aa6170c, type: 3}
+  m_Name: RiverDecorationSettings
+  m_EditorClassIdentifier: Assembly-CSharp::RiverDecorationSettings
+  trees:
+  - prefab: {fileID: 6615424694905504370, guid: 87b3c06e210c3b17fa9e5c55db63fd23, type: 3}
+    weight: 0.7
+  - prefab: {fileID: 6615424694905504370, guid: 1b89f30da27184eda90cd290de460dcf, type: 3}
+    weight: 0.3
+  - prefab: {fileID: 6615424694905504370, guid: 1675449263daa0d57bdcb2150d940360, type: 3}
+    weight: 0.6
+  rocks: []
+  shadows:
+  - prefab: {fileID: 307738466307993760, guid: d810c10ae8af76357bef57a710894eb0, type: 3}
+    weight: 0.5
+  - prefab: {fileID: 307738466307993760, guid: 6c80e033cb1086a3da8e0d926f192534, type: 3}
+    weight: 0.5
+  - prefab: {fileID: 307738466307993760, guid: 54586345b69a13ad68f090550dc1ea46, type: 3}
+    weight: 0.5
+  grass: []

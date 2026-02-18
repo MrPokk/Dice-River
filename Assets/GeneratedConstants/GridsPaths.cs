@@ -6,11 +6,11 @@
 public static class GridsPaths
 {
     /// <summary> ScriptableObject: GridConfig </summary>
-    public const string GRID_RAFT_GENERATION = "Grids/GridRaftGeneration";
+    public const string GRID_RAFT_GENERATION = "Entities/Prefabs/Grids/GridRaftGeneration";
     /// <summary> ScriptableObject: GridConfig </summary>
-    public const string GRID_RAFT_INSTALLABLE = "Grids/GridRaftInstallable";
+    public const string GRID_RAFT_INSTALLABLE = "Entities/Prefabs/Grids/GridRaftInstallable";
     /// <summary> ScriptableObject: GridConfig </summary>
-    public const string GRID_WORLD = "Grids/GridWorld";
+    public const string GRID_WORLD = "Entities/Prefabs/Grids/GridWorld";
 
     public static readonly string[] AllPaths = new string[]
     {

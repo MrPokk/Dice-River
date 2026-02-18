@@ -41,7 +41,6 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem, IEcsRunSys
             ref var moving = ref entity.Get<MovingComponent>();
             var input = entity.Get<InputComponent>();
             var gravity = entity.Get<GravityComponent>();
-            var facing = entity.Get<FacingComponent>();
 
             var cc = provider.characterController;
             Vector3 horizontalVelocity;

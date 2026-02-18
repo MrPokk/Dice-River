@@ -22,7 +22,6 @@ public class UIAnimationComponent : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private bool _disableOnClose = true;
-    [SerializeField] private bool _ignoreTimeScale = true;
 
     [Header("References")]
     [SerializeField] private CanvasGroup _canvasGroup;

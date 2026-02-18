@@ -6,7 +6,7 @@ public class HandStackControllerDice : HandStackController<KeyValuePair<EcsEntit
     public override void Initialize(HandController<KeyValuePair<EcsEntity, DiceProvider>, UIProvider> hand)
     {
         base.Initialize(hand);
-        var diceHands = new Loader<HandLoadStackPrefab>(PrefabObjectsPaths.HAND_LOAD_STACK_PREFAB).Prefab().DiceProviders;
+        var diceHands = new Loader<HandLoadStackPrefab>(HandPaths.HAND_LOAD_STACK_PREFAB).Prefab().DiceProviders;
         foreach (var dice in diceHands)
         {
             Add(new(dice.ToEntity(), dice), dice.spriteIcon.Prefab());

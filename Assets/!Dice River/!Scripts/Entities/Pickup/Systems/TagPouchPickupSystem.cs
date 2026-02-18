@@ -8,10 +8,12 @@ public class TagPouchPickupSystem : IEcsAutoImplement
     public Priority Priority => Priority.Medium;
 
     private EcsEvent _ecsEvent = new EcsEvent<DicePresenter>()
-        .SubscribeWhere<IsTriggerColliderEnter>(c => EcsConditions.Has<TagPouchPickup, DiceContainer>(c.entityHit), added: OnPickup);
+        .SubscribeWhere<IsTriggerColliderEnter>(c => EcsConditions.Has<TagPouchPickup, DiceContainer>(c.entityHit) &&
+         c.entityHit.IsProviding, added: OnPickup);
 
     private EcsEvent _ecsEventPlayer = new EcsEvent<EntitiesPresenter>()
-        .SubscribeWhere<IsTriggerColliderEnter>(c => EcsConditions.Has<TagPouchPickup, DiceContainer>(c.entityHit), added: OnPickup);
+        .SubscribeWhere<IsTriggerColliderEnter>(c => EcsConditions.Has<TagPouchPickup, DiceContainer>(c.entityHit) &&
+        c.entityHit.IsProviding, added: OnPickup);
 
     private static void OnPickup(EcsEntity entity)
     {

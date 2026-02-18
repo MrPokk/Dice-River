@@ -162,4 +162,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AbilityDescriptorComponentProvider
   _value:
     description: <color=#00FF00>MULTIPLIES</color> <color=#0099FF>NEARBY</color>
-      dice by <color=#FAB409>x1-x3</color>
+      dice by <color=#FAB409>x1 to x3</color>!

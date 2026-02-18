@@ -24,6 +24,7 @@ public class TagBombHazardColliderSystem : IEcsAutoImplement
     {
         var collision = entity.Get<IsTriggerColliderEnter>();
         var damage = collision.entityHit.Get<DamageConstComponent>().damage;
+        collision.entityHit.AddFrameToEvent<IsSoundPlay>();
 
         collision.entityHit.Destroy();
 

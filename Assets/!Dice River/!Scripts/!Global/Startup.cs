@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BitterECS.Core;
 using BitterECS.Integration;
+using InGame.Script.Component_Sound;
 using UINotDependence.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,8 +10,11 @@ using UnityEngine.EventSystems;
 public class Startup : EcsUnityRoot
 {
     [ReadOnly] public CameraObject mainCamera;
+    [ReadOnly] public SoundManager soundManager;
+
     public SpawnerPoint playerSpawner;
     public List<EnvironmentToDestroy> environmentToDestroy;
+    public List<EnvironmentToEnable> environmentToEnables;
 
     private ComplicationSettings _complicationSettings;
 
@@ -27,9 +31,10 @@ public class Startup : EcsUnityRoot
         InitializeCamera();
         InitializeGrids();
         InitializeRiver();
-        InitializeGameplaySystems();
         InitializeDiceSystem();
         InitializePlayer();
+        InitializeAudio();
+        InitializeGameplaySystems();
         UIInitialize();
     }
 
@@ -48,6 +53,14 @@ public class Startup : EcsUnityRoot
         mainCamera = new Loader<CameraObject>(PrefabObjectsPaths.CAMERA_OBJECT).New();
     }
 
+    private void InitializeAudio()
+    {
+        soundManager = new Loader<SoundManager>(PrefabObjectsPaths.AUDIO_OBJECT).New();
+        SoundManager.PlayMusicRandomPitch(SoundType.ForestMusicAmbience, volume: 0.1f, minPitch: 3, maxPitch: 5);
+        SoundManager.PlayMusic(SoundType.ForestMusic, true, 0.8f, 0.8f);
+
+    }
+
     private void InitializeGrids()
     {
         GridRaft.gridParent = new GameObject("GridRaftParent");
@@ -61,6 +74,10 @@ public class Startup : EcsUnityRoot
         RiverGenerator = new Loader<RiverGeneratorSystem>(RiverObjectsPaths.RIVER_GENERATOR).New();
         RiverScroll = new Loader<RiverScrollingSystem>(RiverObjectsPaths.RIVER_SCROLLER).New();
         RiverScroll.Initialize(RiverGenerator, _complicationSettings, GridWorld, environmentToDestroy);
+        foreach (var environment in environmentToEnables)
+        {
+            environment.Activate();
+        }
     }
 
     private void InitializeGameplaySystems()
@@ -95,8 +112,8 @@ public class Startup : EcsUnityRoot
 
     public static void StartGameplay()
     {
-        HandControllerDice = new Loader<HandControllerDice>(PrefabObjectsPaths.HAND_CONTROLLER).New();
-        HandStackControllerDice = new Loader<HandStackControllerDice>(PrefabObjectsPaths.HAND_STACK_CONTROLLER).New();
+        HandControllerDice = new Loader<HandControllerDice>(HandPaths.HAND_CONTROLLER).New();
+        HandStackControllerDice = new Loader<HandStackControllerDice>(HandPaths.HAND_STACK_CONTROLLER).New();
 
         HandStackControllerDice.Initialize(HandControllerDice);
         HandControllerDice.Initialize(HandStackControllerDice);

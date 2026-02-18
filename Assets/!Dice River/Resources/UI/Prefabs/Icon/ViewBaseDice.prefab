@@ -161,5 +161,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityDescriptorComponentProvider
   _value:
-    description: A <color=#333333>STANDARD</color> die with no additional effects.
-      Has only a base <color=#AA7700>VALUE</color>.
+    description: A <color=#807557>STANDARD</color> dice with no additional effects

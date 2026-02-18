@@ -161,4 +161,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AbilityDescriptorComponentProvider
   _value:
-    description: <color=#00FF00>ADDS +1</color> to the die <color=#0099FF>AHEAD</color>
+    description: <color=#00FF00>ADDS +1</color> to the dice in <color=#0099FF>FRONT</color>
+      of it! <color=#a95de8>STACKS FROM BEHIND!</color>

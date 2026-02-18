@@ -6,19 +6,19 @@
 public static class RiverObjectsPaths
 {
     /// <summary> ScriptableObject: ComplicationSettings </summary>
-    public const string COMPLICATION_SETTINGS = "World/River/Configs/ComplicationSettings";
+    public const string COMPLICATION_SETTINGS = "Entities/Prefabs/World/River/Configs/ComplicationSettings";
     /// <summary> ScriptableObject: RiverDecorationSettings </summary>
-    public const string RIVER_DECORATION_SETTINGS = "World/River/Configs/RiverDecorationSettings";
+    public const string RIVER_DECORATION_SETTINGS = "Entities/Prefabs/World/River/Configs/RiverDecorationSettings";
     /// <summary> Component: RiverGeneratorSystem </summary>
-    public const string RIVER_GENERATOR = "World/River/RiverGenerator";
+    public const string RIVER_GENERATOR = "Entities/Prefabs/World/River/RiverGenerator";
     /// <summary> ScriptableObject: RiverHazardSettings </summary>
-    public const string RIVER_HAZARD_SETTINGS = "World/River/Configs/RiverHazardSettings";
+    public const string RIVER_HAZARD_SETTINGS = "Entities/Prefabs/World/River/Configs/RiverHazardSettings";
     /// <summary> ScriptableObject: RiverPickupSettings </summary>
-    public const string RIVER_PICKUP_SETTINGS = "World/River/Configs/RiverPickupSettings";
+    public const string RIVER_PICKUP_SETTINGS = "Entities/Prefabs/World/River/Configs/RiverPickupSettings";
     /// <summary> Component: RiverScrollingSystem </summary>
-    public const string RIVER_SCROLLER = "World/River/RiverScroller";
+    public const string RIVER_SCROLLER = "Entities/Prefabs/World/River/RiverScroller";
     /// <summary> ScriptableObject: RiverSettings </summary>
-    public const string RIVER_SETTINGS = "World/River/Configs/RiverSettings";
+    public const string RIVER_SETTINGS = "Entities/Prefabs/World/River/Configs/RiverSettings";
 
     public static readonly string[] AllPaths = new string[]
     {

@@ -23,10 +23,10 @@ public class PlayerPlacingSystem : IEcsInitSystem
         foreach (var entity in _ecsFilter)
         {
             var transform = entity.GetProvider<EntitiesProvider>().transform;
-            var facingDir = entity.Get<FacingComponent>().direction;
+            var facingDir = entity.Get<FacingComponent>();
             var monoGrid = Startup.GridRaft.monoGrid;
 
-            var checkPosition = transform.position + (facingDir.normalized * 0.75f);
+            var checkPosition = transform.position + (facingDir.direction.normalized * 0.75f);
             var targetGridPos = monoGrid.ConvertingPosition(checkPosition);
 
             if (DiceInteractionSystem.IsPlacing(targetGridPos))

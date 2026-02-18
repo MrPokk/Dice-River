@@ -117,10 +117,10 @@ public class PlayerGrabbingSystem : IEcsInitSystem, IEcsFixedRunSystem
     private static Vector3 GetPositionTo(EcsEntity entity)
     {
         var transform = entity.GetProvider<EntitiesProvider>().transform;
-        var facingDir = entity.Get<FacingComponent>().direction;
+        var facingDir = entity.Get<FacingComponent>();
         var monoGrid = Startup.GridRaft.monoGrid;
 
-        var checkPosition = transform.position + (facingDir.normalized * 0.75f);
+        var checkPosition = transform.position + (facingDir.direction.normalized * 0.75f);
         var targetGridPos = monoGrid.ConvertingPosition(checkPosition);
         var entertainPos = monoGrid.ConvertingPosition(targetGridPos);
         return entertainPos;

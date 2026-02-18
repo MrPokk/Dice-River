@@ -56,9 +56,9 @@ public class PlayerTooltipSystem : IEcsRunSystem
 
     private Vector2Int GetLookAtGridPosition(EcsEntity entity, MonoGridPresenter grid)
     {
-        var facing = entity.Get<FacingComponent>().direction;
+        var facing = entity.Get<FacingComponent>();
         var pos = entity.GetProvider<PlayerProvider>().transform.position;
-        return grid.ConvertingPosition(pos + facing.normalized * 0.75f);
+        return grid.ConvertingPosition(pos + facing.direction.normalized * 0.75f);
     }
 
     private UITooltipCanvas CreateTooltip(DiceProvider dice, Vector3 position)
