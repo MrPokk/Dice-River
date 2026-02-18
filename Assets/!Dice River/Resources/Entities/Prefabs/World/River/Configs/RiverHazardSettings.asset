@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f466bb15d1f677c5184b877f19bfa73b, type: 3}
   m_Name: RiverHazardSettings
   m_EditorClassIdentifier: Assembly-CSharp::RiverHazardSettings
-  hazardChance: 0.1
+  hazardChance: 0.098
   hazard:
   - prefab: {fileID: 5835721969328694836, guid: bf770942b1d775a19813a5b0ba025856, type: 3}
     weight: 0.5
   - prefab: {fileID: 5835721969328694836, guid: c23534e071161a75597c8ca8eebcdaac, type: 3}
-    weight: 0.3
+    weight: 0.25
