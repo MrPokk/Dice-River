@@ -26,7 +26,11 @@ public class PlayerGravitySystem : IEcsFixedRunSystem
             if (pos.y <= gravityComp.groundCheckOffset && gravityComp.verticalVelocity <= 0)
             {
                 pos.y = gravityComp.groundCheckOffset;
+
+                cc.enabled = false;
                 provider.transform.position = pos;
+                cc.enabled = true;
+
                 gravityComp.verticalVelocity = 0f;
                 gravityComp.isGrounded = true;
             }

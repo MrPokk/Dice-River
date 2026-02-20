@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Random;
-using Random = UnityEngine.Random;
 
 public class RiverGeneratorSystem : MonoBehaviour
 {
@@ -14,7 +13,11 @@ public class RiverGeneratorSystem : MonoBehaviour
         public Vector2Int cLShore, cRShore;
     }
 
+    private const int MaxExclusive = 1000000;
+    private const int MinInclusive = 0;
+
     [Header("Settings")]
+    [SerializeField] private bool _useFixedSeed;
     [SerializeField] private int _seed;
     [SerializeField] private int _spawnDepth = 40;
     [SerializeField] private int _width = 6;
@@ -31,12 +34,23 @@ public class RiverGeneratorSystem : MonoBehaviour
 
     public int SpawnDepth => _spawnDepth;
 
+    private void Awake()
+    {
+        PrepareSeed();
+    }
+
+    public void PrepareSeed()
+    {
+        if (!_useFixedSeed)
+        {
+            _seed = Range(MinInclusive, MaxExclusive);
+        }
+    }
+
     public GameObject GenerateShoreOnly(MonoGridPresenter presenter, int row, Transform parent)
     {
         var rowData = InitRow(presenter, row, parent);
-
         SpawnDecoration(presenter, row, rowData.minCol, rowData.maxCol, rowData.rowLine, rowData.lBound, rowData.rBound, rowData.cLShore, rowData.cRShore);
-
         state = rowData.prevState;
         return rowData.rowLine;
     }
@@ -44,10 +58,8 @@ public class RiverGeneratorSystem : MonoBehaviour
     public GameObject GenerateHazardRow(MonoGridPresenter presenter, int row, Transform parent)
     {
         var rowData = InitRow(presenter, row, parent);
-
         SpawnDecoration(presenter, row, rowData.minCol, rowData.maxCol, rowData.rowLine, rowData.lBound, rowData.rBound, rowData.cLShore, rowData.cRShore);
         SpawnHazard(presenter, row, rowData.lBound, rowData.rBound, rowData.rowLine.transform);
-
         state = rowData.prevState;
         return rowData.rowLine;
     }
@@ -55,10 +67,8 @@ public class RiverGeneratorSystem : MonoBehaviour
     public GameObject GeneratePickupRow(MonoGridPresenter presenter, int row, Transform parent)
     {
         var rowData = InitRow(presenter, row, parent);
-
         SpawnDecoration(presenter, row, rowData.minCol, rowData.maxCol, rowData.rowLine, rowData.lBound, rowData.rBound, rowData.cLShore, rowData.cRShore);
         SpawnPickup(presenter, row, rowData.lBound, rowData.rBound, rowData.rowLine.transform);
-
         state = rowData.prevState;
         return rowData.rowLine;
     }
@@ -66,48 +76,24 @@ public class RiverGeneratorSystem : MonoBehaviour
     public GameObject GenerateFullRow(MonoGridPresenter presenter, int row, Transform parent)
     {
         var rowData = InitRow(presenter, row, parent);
-
         SpawnDecoration(presenter, row, rowData.minCol, rowData.maxCol, rowData.rowLine, rowData.lBound, rowData.rBound, rowData.cLShore, rowData.cRShore);
         SpawnHazard(presenter, row, rowData.lBound, rowData.rBound, rowData.rowLine.transform);
         SpawnPickup(presenter, row, rowData.lBound, rowData.rBound, rowData.rowLine.transform);
-
         state = rowData.prevState;
         return rowData.rowLine;
     }
 
     private RowData InitRow(MonoGridPresenter presenter, int row, Transform parent)
     {
-        GetRowParams(
-            presenter,
-            row,
-            parent,
-            out var ps,
-            out var min,
-            out var max,
-            out var line,
-            out var lb,
-            out var rb,
-            out var cls,
-            out var crs);
-
-        return new RowData
-        {
-            prevState = ps,
-            minCol = min,
-            maxCol = max,
-            rowLine = line,
-            lBound = lb,
-            rBound = rb,
-            cLShore = cls,
-            cRShore = crs
-        };
+        GetRowParams(presenter, row, parent, out var ps, out var min, out var max, out var line, out var lb, out var rb, out var cls, out var crs);
+        return new RowData { prevState = ps, minCol = min, maxCol = max, rowLine = line, lBound = lb, rBound = rb, cLShore = cls, cRShore = crs };
     }
 
     private void GetRowParams(
         MonoGridPresenter presenter,
         int row,
         Transform parent,
-        out Random.State previousState,
+        out State previousState,
         out int indexColumnMin,
         out int indexColumnMax,
         out GameObject rowLine,
@@ -140,7 +126,12 @@ public class RiverGeneratorSystem : MonoBehaviour
         centerRightShoreNode = new Vector2Int(Mathf.RoundToInt((rightBound + indexColumnMax) / 2f), row);
     }
 
-    private void SpawnHazard(MonoGridPresenter presenter, int row, float leftBound, float rightBound, Transform parent)
+    private void SpawnHazard(
+        MonoGridPresenter presenter,
+        int row,
+        float leftBound,
+        float rightBound,
+        Transform parent)
     {
         var waterStart = Mathf.CeilToInt(leftBound);
         var waterEnd = Mathf.FloorToInt(rightBound);
@@ -163,7 +154,12 @@ public class RiverGeneratorSystem : MonoBehaviour
         }
     }
 
-    private void SpawnPickup(MonoGridPresenter presenter, int row, float leftBound, float rightBound, Transform parent)
+    private void SpawnPickup(
+        MonoGridPresenter presenter,
+        int row,
+        float leftBound,
+        float rightBound,
+        Transform parent)
     {
         var waterStart = Mathf.CeilToInt(leftBound);
         var waterEnd = Mathf.FloorToInt(rightBound);
@@ -199,7 +195,6 @@ public class RiverGeneratorSystem : MonoBehaviour
     {
         SpawnDecorationShadow(presenter, centerLeftShoreNode, rowLine.transform);
         _usedXInRow.Add(centerLeftShoreNode.x);
-
         SpawnDecorationShadow(presenter, centerRightShoreNode, rowLine.transform);
         _usedXInRow.Add(centerRightShoreNode.x);
 
@@ -207,7 +202,6 @@ public class RiverGeneratorSystem : MonoBehaviour
         {
             if (x > leftBound && x < rightBound) continue;
             if (_usedXInRow.Contains(x)) continue;
-
             var prefab = _shoreSettings.decorationSettings.GetRandomTree();
             presenter.OneFrameInitializeGameObject(new Vector2Int(x, row), prefab, out _, rowLine.transform);
             _usedXInRow.Add(x);

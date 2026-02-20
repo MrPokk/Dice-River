@@ -29,10 +29,9 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem, IEcsRunSys
             ref var input = ref entity.Get<InputComponent>();
             var raw = _moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
 
-            input.currentInput = raw.sqrMagnitude > 0.01f ? raw : Vector2.zero;
+            input.currentInput = raw.sqrMagnitude > 0.04f ? raw : Vector2.zero;
         }
     }
-
     public void FixedRun()
     {
         foreach (var entity in _ecsFilter)
