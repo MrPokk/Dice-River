@@ -17,10 +17,11 @@ public class TagPouchPickupSystem : IEcsAutoImplement
 
     private static void OnPickup(EcsEntity entity)
     {
+
         var collision = entity.Get<IsTriggerColliderEnter>();
         var pouchEntity = collision.entityHit;
 
-        if (!pouchEntity.IsAlive) return;
+        if (!pouchEntity.IsAlive || !pouchEntity.IsProviding) return;
 
         var currentTier = StartupGameplay.GState.currentDifficulty;
         var containerComponent = pouchEntity.Get<DiceContainer>();

@@ -15,3 +15,4 @@ MonoBehaviour:
   level: 2
   dice:
   - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
+  - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}

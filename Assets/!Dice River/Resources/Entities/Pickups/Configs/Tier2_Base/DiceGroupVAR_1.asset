@@ -16,4 +16,4 @@ MonoBehaviour:
   dice:
   - {fileID: 453393326418446785, guid: a0ce293a71c0aa090ac4d2c5fcf54f5d, type: 3}
   - {fileID: 453393326418446785, guid: 61721c6ee4a6086dda2e696de3cfc37f, type: 3}
-  - {fileID: 453393326418446785, guid: 61721c6ee4a6086dda2e696de3cfc37f, type: 3}
+  - {fileID: 453393326418446785, guid: bfd52044e04e17e3ba18b5a84373cb94, type: 3}

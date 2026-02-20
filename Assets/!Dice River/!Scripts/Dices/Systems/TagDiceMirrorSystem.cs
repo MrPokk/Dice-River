@@ -56,6 +56,10 @@ public class TagDiceMirrorSystem : IEcsAutoImplement
 
                 return;
             }
+            else if (existingProvider != null)
+            {
+                return;
+            }
         }
     }
 }

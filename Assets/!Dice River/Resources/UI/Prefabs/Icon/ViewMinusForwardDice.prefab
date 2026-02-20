@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 3059930997887968220}
   - component: {fileID: 5211211576036220118}
   - component: {fileID: 7320577038028634666}
-  - component: {fileID: 7570355057749839947}
   - component: {fileID: 1923530893231394131}
   - component: {fileID: 420210878784677752}
   - component: {fileID: 5669927999035461925}
   - component: {fileID: 6203813361761136028}
   - component: {fileID: 3078263158623918222}
+  - component: {fileID: -5508370107031494979}
   m_Layer: 5
   m_Name: ViewMinusForwardDice
   m_TagString: Untagged
@@ -81,21 +81,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7570355057749839947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9002233875499726941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 7.14, y: -3.75}
-  m_UseGraphicAlpha: 1
 --- !u!114 &1923530893231394131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,3 +148,18 @@ MonoBehaviour:
   _value:
     description: <color=#FF0000>DECREASE -1</color> from the dice in <color=#0099FF>FRONT</color>
       of it! <color=#a95de8>STACKS FROM BEHIND!</color>
+--- !u!114 &-5508370107031494979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9002233875499726941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 4.16, y: -7.45}
+  m_UseGraphicAlpha: 1
