@@ -57,8 +57,6 @@ public class Startup : EcsUnityRoot
     {
         soundManager = new Loader<SoundController>(PrefabObjectsPaths.AUDIO_OBJECT).New();
         SoundController.PlayMusicRandomPitch(SoundType.ForestMusicAmbience, volume: 0.1f, minPitch: 3, maxPitch: 5);
-        SoundController.PlayMusic(SoundType.ForestMusic, true, 0.8f, 0.8f);
-
     }
 
     private void InitializeGrids()
@@ -119,6 +117,7 @@ public class Startup : EcsUnityRoot
         HandControllerDice.Initialize(HandStackControllerDice);
 
         RiverScroll.StartScrolling();
+        SoundController.PlayMusic(SoundType.ForestMusic, true, 0.8f, 0.8f);
         UIController.OpenScreen<UIPlayerScreen>()
         .Bind(HandControllerDice, HandStackControllerDice, RiverScroll);
     }

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RiverGenerator
   _useFixedSeed: 0
-  _seed: 3
+  _seed: 15
   _spawnDepth: 20
   _width: 6
   _zOffset: 6
