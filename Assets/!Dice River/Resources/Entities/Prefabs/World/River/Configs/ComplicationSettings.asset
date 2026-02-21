@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f29d189625527e4a1c077192f06a3c, type: 3}
   m_Name: ComplicationSettings
   m_EditorClassIdentifier: Assembly-CSharp::ComplicationSettings
-  distanceStepToScroll: 40
-  distanceStepToDifficulty: 180
+  settings: {fileID: 11400000, guid: 18f61fd1fa0c2644a9bab36be0f28c64, type: 2}
+  distanceStepToHazard: 75
+  hazardStep: 0.02
+  maxHazardChance: 0.2
   startGenerationToLine: 10
+  distanceStepToScroll: 40
   speedStep: 0.3
-  difficultyStart: 0
   minSpeed: 2
-  maxSpeed: 10
+  maxSpeed: 8
+  difficultyStart: 0
+  distanceStepToDifficulty: 180

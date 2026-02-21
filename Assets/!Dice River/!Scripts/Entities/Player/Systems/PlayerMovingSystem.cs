@@ -2,12 +2,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem, IEcsRunSystem
+public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsRunSystem
 {
     public Priority Priority => Priority.High;
 
     private const float SqrMagnitudeThreshold = 0.001f;
-    private InputAction _moveAction;
 
     private EcsFilter _ecsFilter =
     Build.For<EntitiesPresenter>()
@@ -18,20 +17,18 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem, IEcsRunSys
          .Include<GravityComponent>()
          .Include<FacingComponent>();
 
-    public void Init()
-    {
-        _moveAction = ControllableSystem.Inputs.Playable.Move;
-    }
     public void Run()
     {
         foreach (var entity in _ecsFilter)
         {
             ref var input = ref entity.Get<InputComponent>();
-            var raw = _moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
+            var moveAction = ControllableSystem.Inputs.Playable.Move;
+            var raw = moveAction?.ReadValue<Vector2>() ?? Vector2.zero;
 
             input.currentInput = raw.sqrMagnitude > 0.04f ? raw : Vector2.zero;
         }
     }
+
     public void FixedRun()
     {
         foreach (var entity in _ecsFilter)
@@ -66,6 +63,7 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsInitSystem, IEcsRunSys
             entity.AddOrRemove<IsMovingComponent, Vector3>(new(), horizontalVelocity, i => i.sqrMagnitude > SqrMagnitudeThreshold);
         }
     }
+
     private static Vector3 CheckToUpdateFacingDirection(EcsEntity entity, PlayerProvider provider, Vector3 moveDirection)
     {
         if (moveDirection.sqrMagnitude <= SqrMagnitudeThreshold)

@@ -136,7 +136,7 @@ public class RiverGeneratorSystem : MonoBehaviour
         var waterStart = Mathf.CeilToInt(leftBound);
         var waterEnd = Mathf.FloorToInt(rightBound);
         var hazardSettings = _shoreSettings.hazardSettings;
-        var hazardChance = _shoreSettings.hazardSettings.hazardChance;
+        var hazardChance = GFlow.GState.currentHazardChance;
 
         for (var x = waterStart; x <= waterEnd; x++)
         {

@@ -120,7 +120,8 @@ public class PlayerGrabbingSystem : IEcsInitSystem, IEcsFixedRunSystem
         var facingDir = entity.Get<FacingComponent>();
         var monoGrid = Startup.GridRaft.monoGrid;
 
-        var checkPosition = transform.position + (facingDir.direction.normalized * 0.75f);
+        var normalized = facingDir.direction.normalized;
+        var checkPosition = transform.position + normalized * 0.75f;
         var targetGridPos = monoGrid.ConvertingPosition(checkPosition);
         var entertainPos = monoGrid.ConvertingPosition(targetGridPos);
         return entertainPos;

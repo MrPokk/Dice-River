@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
 using BitterECS.Core;
+using BitterECS.Integration;
 
 public class UIDefeatScreen : UIScreen
 {
@@ -54,13 +55,13 @@ public class UIDefeatScreen : UIScreen
             .SetEase(Ease.OutQuad)
             .OnComplete(() =>
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Startup.Restart();
             }).Play();
     }
 
     private void InstantiateAllUI()
     {
-        var collected = StartupGameplay.GState.collectedDiceTypes;
+        var collected = GFlow.GState.collectedDiceTypes;
 
         var allPrefabs = UiIconPaths.AllPaths.Select(path => new Loader<UIProvider>(path).Prefab());
         var missing = allPrefabs.Except(collected);

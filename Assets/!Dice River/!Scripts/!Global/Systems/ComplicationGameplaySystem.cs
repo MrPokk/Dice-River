@@ -11,66 +11,70 @@ public struct ComplicationGameplaySystem : IEcsRunSystem
 
     private float _nextSpeedThreshold;
     private float _nextDifficultyThreshold;
+    private float _nextHazardThreshold;
 
     public ComplicationGameplaySystem(RiverScrollingSystem riverScrolling, ComplicationSettings settings)
     {
-        _riverScrolling = riverScrolling;
-        _settings = settings;
+        _riverScrolling = riverScrolling ?? throw new ArgumentNullException(nameof(riverScrolling));
+        _settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
-        if (_settings == null) throw new("ComplicationSettings is null");
-
-        float currentDist = _riverScrolling.TotalScrollDistance;
-
-        _nextSpeedThreshold = CalculateNextThreshold(currentDist, _settings.distanceStepToScroll);
-        _nextDifficultyThreshold = CalculateNextThreshold(currentDist, _settings.distanceStepToDifficulty);
+        var totalDistance = _riverScrolling.TotalScrollDistance;
+        _nextSpeedThreshold = CalcNext(totalDistance, _settings.distanceStepToScroll);
+        _nextDifficultyThreshold = CalcNext(totalDistance, _settings.distanceStepToDifficulty);
+        _nextHazardThreshold = CalcNext(totalDistance, _settings.distanceStepToHazard);
     }
 
     public void Run()
     {
-        if (_riverScrolling == null || _settings == null) return;
+        var riverSetting = _riverScrolling;
+        var totalDistance = riverSetting.TotalScrollDistance;
+        var complicationSettings = _settings;
 
-        var currentDist = _riverScrolling.TotalScrollDistance;
+        TryUpdate(totalDistance, ref _nextSpeedThreshold, complicationSettings.distanceStepToScroll, () =>
+            IncreaseScrollSpeed(riverSetting, complicationSettings));
 
-        if (currentDist >= _nextSpeedThreshold)
-        {
-            _riverScrolling.scrollSpeed = Mathf.Clamp(
-                _riverScrolling.scrollSpeed + _settings.speedStep,
-                _settings.minSpeed,
-                _settings.maxSpeed
-            );
+        TryUpdate(totalDistance, ref _nextDifficultyThreshold, complicationSettings.distanceStepToDifficulty, () =>
+            IncreaseDifficulty());
 
-            while (currentDist >= _nextSpeedThreshold)
-            {
-                _nextSpeedThreshold += _settings.distanceStepToScroll;
-            }
-        }
-
-        if (currentDist >= _nextDifficultyThreshold)
-        {
-            IncreaseDifficulty();
-
-            while (currentDist >= _nextDifficultyThreshold)
-            {
-                _nextDifficultyThreshold += _settings.distanceStepToDifficulty;
-            }
-        }
+        TryUpdate(totalDistance, ref _nextHazardThreshold, complicationSettings.distanceStepToHazard, () =>
+            IncreaseHazardChance(complicationSettings));
     }
 
-    private static float CalculateNextThreshold(float currentDistance, float step)
+    private static void IncreaseScrollSpeed(RiverScrollingSystem riverSetting, ComplicationSettings complicationSettings)
     {
-        if (step <= 0) return float.MaxValue;
-        return (Mathf.Floor(currentDistance / step) + 1) * step;
+        riverSetting.scrollSpeed = Mathf.Clamp(
+            riverSetting.scrollSpeed + complicationSettings.speedStep,
+            complicationSettings.minSpeed,
+            complicationSettings.maxSpeed);
+        Debug.Log($"[Complication] Speed updated: {riverSetting.scrollSpeed}");
     }
 
-    private void IncreaseDifficulty()
+    private static void IncreaseHazardChance(ComplicationSettings complicationSettings)
     {
-        var currentIdx = (int)StartupGameplay.GState.currentDifficulty;
-        var maxIdx = (int)DifficultyTier.Tier3_Base;
+        GFlow.GState.currentHazardChance = Mathf.Clamp(
+            GFlow.GState.currentHazardChance + complicationSettings.hazardStep,
+            0,
+            complicationSettings.maxHazardChance);
+        Debug.Log($"[Complication] Hazard chance updated: {GFlow.GState.currentHazardChance:F2}");
+    }
 
-        if (currentIdx < maxIdx)
+    private void TryUpdate(float currentDist, ref float threshold, float step, Action action)
+    {
+        if (step <= 0 || currentDist < threshold) return;
+
+        action();
+        while (currentDist >= threshold) threshold += step;
+    }
+
+    private static float CalcNext(float dist, float step) =>
+        step <= 0 ? float.MaxValue : (Mathf.Floor(dist / step) + 1) * step;
+
+    private static void IncreaseDifficulty()
+    {
+        if (GFlow.GState.currentDifficulty < DifficultyTier.Tier3_Base)
         {
-            StartupGameplay.GState.currentDifficulty = (DifficultyTier)(currentIdx + 1);
-            Debug.Log($"Difficulty increased to: {StartupGameplay.GState.currentDifficulty}");
+            GFlow.GState.currentDifficulty++;
+            Debug.Log($"[Complication] Difficulty increased to: {GFlow.GState.currentDifficulty}");
         }
     }
 }

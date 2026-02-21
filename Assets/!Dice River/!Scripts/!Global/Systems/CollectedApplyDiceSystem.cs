@@ -8,7 +8,7 @@ public class CollectedApplyDiceSystem : IHandSucceedAdd
 
     public UniTask ResultSucceedAdd(HandControllerDice handControllerDice, KeyValuePair<EcsEntity, DiceProvider> item, UIProvider uiProvider)
     {
-        StartupGameplay.GState.collectedDiceTypes.Add(uiProvider);
+        GFlow.GState.collectedDiceTypes.Add(uiProvider);
 
         return UniTask.CompletedTask;
     }

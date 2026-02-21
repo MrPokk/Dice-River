@@ -6,6 +6,7 @@ using InGame.Script.Component_Sound;
 using UINotDependence.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class Startup : EcsUnityRoot
 {
@@ -38,14 +39,15 @@ public class Startup : EcsUnityRoot
         UIInitialize();
     }
 
-    public void Restart()
+    public static void Restart()
     {
-        Bootstrap();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void LoadConfigs()
     {
         _complicationSettings = new Loader<ComplicationSettings>(RiverObjectsPaths.COMPLICATION_SETTINGS).Prefab();
+        GFlow.GState = new GState(_complicationSettings.difficultyStart, _complicationSettings.HazardSettings.hazardChance);
     }
 
     private void InitializeCamera()
@@ -62,7 +64,6 @@ public class Startup : EcsUnityRoot
     private void InitializeGrids()
     {
         GridRaft.gridParent = new GameObject("GridRaftParent");
-
         GridWorld = new MonoGridPresenter(new Loader<GridConfig>(GridsPaths.GRID_WORLD).Prefab());
         GridRaft.monoGrid = new MonoGridPresenter(new Loader<GridConfig>(GridsPaths.GRID_RAFT_INSTALLABLE).Prefab());
     }
@@ -80,9 +81,8 @@ public class Startup : EcsUnityRoot
 
     private void InitializeGameplaySystems()
     {
-        var flowSystem = new StartupGameplay();
-        flowSystem.Initialize(_complicationSettings);
-        EcsSystems.AddSystem(flowSystem);
+        var flowSystem = new GFlow();
+        flowSystem.Initialize();
 
         var complicationSystem = new ComplicationGameplaySystem(RiverScroll, _complicationSettings);
         EcsSystems.AddSystem(complicationSystem);
@@ -106,19 +106,11 @@ public class Startup : EcsUnityRoot
         UIInit.Initialize();
         new Loader<EventSystem>(SettingsPaths.EVENT_SYSTEM).New();
         UIController.OpenScreen<UIToStartFloating>();
+        UIFirstSwiping();
     }
 
-    public static void StartGameplay()
+    private static void UIFirstSwiping()
     {
-        HandControllerDice = new Loader<HandControllerDice>(HandPaths.HAND_CONTROLLER).New();
-        HandStackControllerDice = new Loader<HandStackControllerDice>(HandPaths.HAND_STACK_CONTROLLER).New();
-
-        HandStackControllerDice.Initialize(HandControllerDice);
-        HandControllerDice.Initialize(HandStackControllerDice);
-
-        RiverScroll.StartScrolling();
-        SoundController.PlayMusic(SoundType.ForestMusic, true, 0.8f, 0.8f);
-        UIController.OpenScreen<UIPlayerScreen>()
-        .Bind(HandControllerDice, HandStackControllerDice, RiverScroll);
+        UIController.OpenPopup<UISwipingPopup>();
     }
 }

@@ -23,7 +23,7 @@ public class TagPouchPickupSystem : IEcsAutoImplement
 
         if (!pouchEntity.IsAlive || !pouchEntity.IsProviding) return;
 
-        var currentTier = StartupGameplay.GState.currentDifficulty;
+        var currentTier = GFlow.GState.currentDifficulty;
         var containerComponent = pouchEntity.Get<DiceContainer>();
 
         if (containerComponent.settings == null || containerComponent.settings.Count == 0)

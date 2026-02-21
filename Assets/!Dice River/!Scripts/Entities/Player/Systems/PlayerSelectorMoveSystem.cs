@@ -1,99 +1,79 @@
-﻿using BitterECS.Core;
+﻿using System.Linq;
+using BitterECS.Core;
 using UnityEngine;
 
-public class PlayerSelectorMoveSystem : IEcsInitSystem, IEcsFixedRunSystem
+public class PlayerSelectorMoveSystem : IStartToGameplay, IEcsFixedRunSystem
 {
     public Priority Priority => Priority.Medium;
 
-    private EcsFilter _ecsFilter = Build.For<EntitiesPresenter>()
+    private readonly EcsFilter _ecsFilter = Build.For<EntitiesPresenter>()
          .Filter()
          .WhereProvider<EntitiesProvider>()
          .Include<InputComponent>()
          .Include<FacingComponent>();
 
-    private Transform _selector;
-    private readonly Vector3 _offset = new(0, 0.55f, 0);
-    private readonly Vector2Int[] _neighborOffsets = { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
+    private UISelectorElement _selector;
+    private Transform _selectorTransform;
 
+    private readonly Vector3 _visualOffset = new(0, 0.55f, 0);
     private readonly float _moveSpeed = 20f;
+    private const float LookDistance = 0.75f;
 
-    public void Init()
+    public void ToStart()
     {
-        var selectorPrefab = new Loader<GameObject>(UiPrefabsPaths.UISELECTOR).New();
-        _selector = selectorPrefab.transform;
-        _selector.gameObject.SetActive(false);
+        _selector = new Loader<UISelectorElement>(UiPrefabsPaths.UISELECTOR).New();
+        _selectorTransform = _selector.transform;
+        _selector.SetVisible(false);
     }
 
     public void FixedRun()
     {
         foreach (var entity in _ecsFilter)
         {
-            var transform = entity.GetProvider<EntitiesProvider>().transform;
-            var facingDir = entity.Get<FacingComponent>();
-            var monoGrid = Startup.GridRaft.monoGrid;
-
-            var checkPosition = transform.position + (facingDir.direction.normalized * 0.75f);
-            var targetGridPos = monoGrid.ConvertingPosition(checkPosition);
-
-            if (!monoGrid.IsWithinGrid(targetGridPos))
-            {
-                if (_selector.gameObject.activeSelf) _selector.gameObject.SetActive(false);
-                continue;
-            }
-
-            if (monoGrid.IsEmpty)
-            {
-                _selector.gameObject.SetActive(true);
-                continue;
-            }
-
-            var isValidPosition = false;
-
-            if (entity.Has<IsGrabbingComponent>())
-            {
-                isValidPosition = true;
-            }
-            else
-            {
-                if (monoGrid.GetGameObject(targetGridPos) is DiceProvider)
-                {
-                    isValidPosition = true;
-                }
-                else
-                {
-                    foreach (var offset in _neighborOffsets)
-                    {
-                        var neighborPos = targetGridPos + offset;
-                        if (monoGrid.GetGameObject(neighborPos) is not DiceProvider)
-                        {
-                            continue;
-                        }
-
-                        isValidPosition = true;
-                        break;
-                    }
-                }
-            }
-
-            if (isValidPosition)
-            {
-                var targetWorldPos = monoGrid.ConvertingPosition(targetGridPos) + _offset;
-
-                if (!_selector.gameObject.activeSelf)
-                {
-
-                    _selector.gameObject.SetActive(true);
-                    _selector.position = targetWorldPos;
-                }
-                else
-                {
-                    _selector.position = Vector3.Lerp(_selector.position, targetWorldPos, _moveSpeed * Time.fixedDeltaTime);
-                }
-            }
-            else
-            {
-                if (_selector.gameObject.activeSelf) _selector.gameObject.SetActive(false);
-            }
+            UpdateSelector(entity);
         }
+    }
+
+    private void UpdateSelector(EcsEntity entity)
+    {
+        if (_selector == null)
+            return;
+
+        var monoGrid = Startup.GridRaft.monoGrid;
+        var transform = entity.GetProvider<EntitiesProvider>().transform;
+        var direction = entity.Get<FacingComponent>().direction.normalized;
+
+        var checkPosition = transform.position + (direction * LookDistance);
+        var targetGridPos = monoGrid.ConvertingPosition(checkPosition);
+
+        if (!monoGrid.IsWithinGrid(targetGridPos))
+        {
+            _selector.SetVisible(false);
+            return;
+        }
+
+        var targetObject = monoGrid.GetGameObject(targetGridPos);
+        var isSlotEmpty = targetObject == null;
+        var isCarrying = entity.Has<IsGrabbingComponent>();
+        var isHandEmpty = Startup.HandControllerDice != null && !Startup.HandControllerDice.Items.Any();
+
+        var shouldShow = !isCarrying || isSlotEmpty;
+
+        var isMouseMode = !isCarrying && isSlotEmpty;
+
+        if (!shouldShow || (isMouseMode && isHandEmpty))
+        {
+            _selector.SetVisualAllIcon(false);
+        }
+        else
+        {
+            var showHandIcon = isCarrying || (targetObject is DiceProvider);
+
+            _selector.SetVisible(true);
+            _selector.SetVisualMode(showHandIcon);
+        }
+
+        var targetWorldPos = monoGrid.ConvertingPosition(targetGridPos) + _visualOffset;
+        _selectorTransform.position = Vector3.Lerp(_selectorTransform.position, targetWorldPos, _moveSpeed * Time.fixedDeltaTime);
     }
 }

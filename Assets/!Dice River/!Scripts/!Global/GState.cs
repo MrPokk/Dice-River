@@ -14,12 +14,14 @@ public class GState
 {
     public bool isFirstStart;
     public DifficultyTier currentDifficulty;
+    public float currentHazardChance;
     public HashSet<UIProvider> collectedDiceTypes;
 
-    public GState(DifficultyTier difficulty)
+    public GState(DifficultyTier difficulty, float initialHazard)
     {
         isFirstStart = false;
         currentDifficulty = difficulty;
+        currentHazardChance = initialHazard;
         collectedDiceTypes = new();
     }
 }
