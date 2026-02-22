@@ -1,14 +1,16 @@
-﻿using System.Linq; // Добавлено для LINQ
+﻿using System.Linq;
 using UINotDependence.Core;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using DG.Tweening;
 using BitterECS.Core;
 using BitterECS.Integration;
+using TMPro;
+using UnityEngine.UI;
 
 public class UIDefeatScreen : UIScreen
 {
+    [SerializeField] private GameObject scoreElement;
+    [SerializeField] private TMP_Text textScore;
     [SerializeField] private GridLayoutGroup containerIcon;
     [SerializeField] private GameObject mainElement;
     [SerializeField] private UIRestartButtonComponent restartButton;
@@ -16,12 +18,17 @@ public class UIDefeatScreen : UIScreen
 
     [Header("Settings")]
     [SerializeField] private float fadeDuration = 1.0f;
+    [SerializeField] private float scoreAppearDuration = 0.5f;
+    [SerializeField] private float scoreCountDuration = 1.5f;
 
     public override void Open()
     {
         UIController.CloseAllPopups();
         mainElement.SetActive(false);
         restartButton.AddListener(Restart);
+
+        textScore.text = "0";
+        scoreElement.transform.localScale = Vector3.zero;
 
         slideBackground.DOFade(0f, 0f).Play();
         slideBackground.gameObject.SetActive(true);
@@ -35,21 +42,41 @@ public class UIDefeatScreen : UIScreen
             {
                 mainElement.SetActive(true);
                 slideBackground.gameObject.SetActive(false);
+                AnimateScore();
             }).Play();
+    }
+
+    private void AnimateScore()
+    {
+        scoreElement.transform.DOScale(1f, scoreAppearDuration)
+            .SetEase(Ease.OutBack).Play();
+
+        int targetScore = GFlow.GState.totalScrollDistance;
+        var currentDisplayedScore = 0;
+
+        DOTween.To(() => currentDisplayedScore, x =>
+        {
+            currentDisplayedScore = x;
+            textScore.text = currentDisplayedScore.ToString();
+        }, targetScore, scoreCountDuration)
+        .SetEase(Ease.OutQuad).Play();
     }
 
     public override void Close()
     {
         slideBackground.DOKill();
+        scoreElement.transform.DOKill();
+        DOTween.Kill(textScore);
         restartButton.RemoveListener(Restart);
         base.Close();
     }
+
     private void Restart()
     {
         restartButton.RemoveListener(Restart);
 
         slideBackground.gameObject.SetActive(true);
-        slideBackground.DOFade(0f, 0f).Play();
+        slideBackground.DOFade(0f, 0f);
 
         slideBackground.DOFade(1f, fadeDuration)
             .SetEase(Ease.OutQuad)
@@ -62,7 +89,6 @@ public class UIDefeatScreen : UIScreen
     private void InstantiateAllUI()
     {
         var collected = GFlow.GState.collectedDiceTypes;
-
         var allPrefabs = UiIconPaths.AllPaths.Select(path => new Loader<UIProvider>(path).Prefab());
         var missing = allPrefabs.Except(collected);
 

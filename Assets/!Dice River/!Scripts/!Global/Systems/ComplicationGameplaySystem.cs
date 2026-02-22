@@ -30,6 +30,8 @@ public struct ComplicationGameplaySystem : IEcsRunSystem
         var totalDistance = riverSetting.TotalScrollDistance;
         var complicationSettings = _settings;
 
+        GFlow.GState.totalScrollDistance = (int)riverSetting.TotalScrollDistance;
+
         TryUpdate(totalDistance, ref _nextSpeedThreshold, complicationSettings.distanceStepToScroll, () =>
             IncreaseScrollSpeed(riverSetting, complicationSettings));
 

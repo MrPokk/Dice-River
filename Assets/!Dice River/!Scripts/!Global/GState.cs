@@ -15,6 +15,7 @@ public class GState
     public bool isFirstStart;
     public DifficultyTier currentDifficulty;
     public float currentHazardChance;
+    public int totalScrollDistance;
     public HashSet<UIProvider> collectedDiceTypes;
 
     public GState(DifficultyTier difficulty, float initialHazard)
@@ -23,5 +24,6 @@ public class GState
         currentDifficulty = difficulty;
         currentHazardChance = initialHazard;
         collectedDiceTypes = new();
+        totalScrollDistance = 0;
     }
 }
