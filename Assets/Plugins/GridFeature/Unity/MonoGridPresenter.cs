@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 using UnityEngine;
 
 public class MonoGridPresenter : GridPresenter<ProviderEcs>

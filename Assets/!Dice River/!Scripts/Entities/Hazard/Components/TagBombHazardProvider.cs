@@ -1,7 +1,7 @@
 ﻿
 
 using System;
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 
 [Serializable]
 public struct TagBombHazard

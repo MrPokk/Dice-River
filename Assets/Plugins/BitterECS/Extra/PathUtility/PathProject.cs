@@ -1,5 +1,4 @@
-using System;
-namespace BitterECS.Extra
+﻿namespace BitterECS.Extra
 {
     public static class PathProject
     {

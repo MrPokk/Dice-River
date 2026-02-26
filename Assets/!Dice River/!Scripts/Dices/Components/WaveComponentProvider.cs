@@ -1,6 +1,6 @@
 ﻿
 
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 using UnityEngine;
 
 public struct WaveComponent

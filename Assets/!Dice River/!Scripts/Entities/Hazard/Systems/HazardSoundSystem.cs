@@ -1,6 +1,6 @@
 ﻿using System;
 using BitterECS.Core;
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 using InGame.Script.Component_Sound;
 using UnityEngine;
 

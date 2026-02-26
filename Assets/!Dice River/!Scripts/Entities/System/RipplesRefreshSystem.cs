@@ -1,5 +1,5 @@
 ﻿using BitterECS.Core;
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 using UnityEngine;
 
 public class RipplesRefreshSystem : IEcsFixedRunSystem

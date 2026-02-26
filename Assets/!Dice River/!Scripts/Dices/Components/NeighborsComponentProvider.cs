@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 using UnityEngine;
 
 [Serializable]

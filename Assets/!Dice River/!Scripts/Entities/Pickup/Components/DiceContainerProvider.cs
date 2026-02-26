@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq; // Обязательно добавляем для LINQ
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 using UnityEngine;
 
 [Serializable]

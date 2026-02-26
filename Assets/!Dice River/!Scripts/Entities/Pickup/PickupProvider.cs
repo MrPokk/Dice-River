@@ -1,4 +1,4 @@
-﻿using BitterECS.Integration;
+﻿using BitterECS.Integration.Unity;
 
 public class PickupProvider : EntitiesProvider
 {

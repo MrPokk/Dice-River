@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System;
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 
 [Serializable]
 public struct DashComponent

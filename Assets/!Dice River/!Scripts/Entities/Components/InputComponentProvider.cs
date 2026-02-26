@@ -1,5 +1,5 @@
 ﻿using System;
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 using UnityEngine;
 
 [Serializable]

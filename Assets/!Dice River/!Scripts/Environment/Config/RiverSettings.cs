@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RiverSettings", menuName = "Settings/RiverGlobal")]

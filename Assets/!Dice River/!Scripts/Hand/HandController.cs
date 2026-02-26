@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using DG.Tweening;
+using BitterECS.Integration.Unity;
 
 [RequireComponent(typeof(RectTransform))]
 public class HandController<TData, TView> : MonoBehaviour where TView : MonoBehaviour

@@ -1,6 +1,6 @@
 ﻿using System;
 using BitterECS.Core;
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 
 public class TagDiceMinusSystem : IEcsAutoImplement
 {

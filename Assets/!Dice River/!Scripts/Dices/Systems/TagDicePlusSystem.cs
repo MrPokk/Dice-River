@@ -1,6 +1,6 @@
 ﻿using System;
 using BitterECS.Core;
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 using UnityEngine;
 
 public class TagDicePlusSystem : IEcsAutoImplement

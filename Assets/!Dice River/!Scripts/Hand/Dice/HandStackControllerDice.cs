@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BitterECS.Core;
+using BitterECS.Integration.Unity;
 
 public class HandStackControllerDice : HandStackController<KeyValuePair<EcsEntity, DiceProvider>, UIProvider>
 {

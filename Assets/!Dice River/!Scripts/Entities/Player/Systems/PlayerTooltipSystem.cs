@@ -1,4 +1,5 @@
 ﻿using BitterECS.Core;
+using BitterECS.Integration.Unity;
 using UnityEngine;
 
 public class PlayerTooltipSystem : IEcsRunSystem

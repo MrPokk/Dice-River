@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BitterECS.Integration.Unity;
 using UnityEngine;
 
 public class RiverScrollingSystem : MonoBehaviour

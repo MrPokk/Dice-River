@@ -3,7 +3,7 @@ using UINotDependence.Core;
 using UnityEngine;
 using DG.Tweening;
 using BitterECS.Core;
-using BitterECS.Integration;
+using BitterECS.Integration.Unity;
 using TMPro;
 using UnityEngine.UI;
 

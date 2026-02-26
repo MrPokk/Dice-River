@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BitterECS.Integration.Unity;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DiceContainerVAR", menuName = "Dice System/Dice Container")]
