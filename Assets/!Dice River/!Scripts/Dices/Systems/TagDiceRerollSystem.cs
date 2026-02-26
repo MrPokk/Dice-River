@@ -21,7 +21,7 @@ public class TagDiceRerollSystem : IEcsAutoImplement
 
             if (providerEcs != null)
             {
-                entityToGrid.AddFrameToEvent<IsTargetingEvent>();
+                entityToGrid.AddFrame<IsTargetingEvent>();
                 providerEcs.ReRolling();
             }
         }

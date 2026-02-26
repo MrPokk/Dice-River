@@ -37,6 +37,16 @@ public class Startup : EcsUnityRoot
         InitializeAudio();
         InitializeGameplaySystems();
         UIInitialize();
+
+        var entitiesPresenter = EcsWorld.Get<EntitiesPresenter>();
+        var ecsFilter = new EcsFilter<EntitiesPresenter>()
+        .WhereProvider<PlayerProvider>();
+        Debug.Log(ecsFilter.Count);
+        foreach (var index in ecsFilter)
+        {
+            Debug.Log(index.GetProvider<ILinkableProvider>().GetType().Name);
+        }
+
     }
 
     public static void Restart()

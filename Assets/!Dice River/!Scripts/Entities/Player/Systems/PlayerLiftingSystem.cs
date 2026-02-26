@@ -34,7 +34,7 @@ public class PlayerLiftingSystem : IEcsAutoImplement
             transform.position = newPosition;
             controller.enabled = true;
 
-            entity.AddFrameToEvent<IsOnLifting>();
+            entity.AddFrame<IsOnLifting>();
         }
     }
 }

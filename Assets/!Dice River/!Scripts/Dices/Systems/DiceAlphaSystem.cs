@@ -6,12 +6,10 @@ public class DiceAlphaSystem : IEcsRunSystem
 {
     public Priority Priority => Priority.Low;
 
-    private EcsFilter _playerFilter = Build.For<EntitiesPresenter>()
-         .Filter()
+    private EcsFilter _playerFilter = new EcsFilter<EntitiesPresenter>()
          .WhereProvider<PlayerProvider>();
 
-    private EcsFilter _diceFilter = Build.For<DicePresenter>()
-         .Filter()
+    private EcsFilter _diceFilter = new EcsFilter<DicePresenter>()
          .WhereProvider<DiceProvider>();
 
     private float _maxDistance = 8f;

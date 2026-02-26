@@ -28,8 +28,8 @@ public class TagDiceMinusSystem : IEcsAutoImplement
 
             providerEcs.spriteRoll.Select(roleComponent.value);
 
-            entityToGrid.AddFrameToEvent<IsActivatingEvent>();
-            entityToGrid.AddFrameToEvent<IsTargetingEvent>();
+            entityToGrid.AddFrame<IsActivatingEvent>();
+            entityToGrid.AddFrame<IsTargetingEvent>();
         }
     }
 }

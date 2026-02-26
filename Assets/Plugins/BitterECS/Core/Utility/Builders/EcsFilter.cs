@@ -6,35 +6,58 @@ namespace BitterECS.Core
     public struct EcsFilter
     {
         private readonly EcsPresenter _presenter;
-        private IHasPool[] _includePools;
-        private IHasPool[] _excludePools;
-        private Predicate<EcsEntity>[] _predicates;
-        private int _includeCount;
-        private int _excludeCount;
+        private EcsComponentMask _includeMask;
+        private EcsComponentMask _excludeMask;
+        private EcsComponentMask _orMask;
+        private int _smallestPoolId;
+
+        private Predicate<int>[] _predicates;
         private int _predicateCount;
 
         private RefWorldVersion _refWorld;
         private int[] _filteredCache;
         private int _filteredLength;
 
+        public int Count
+        {
+            get
+            {
+                ValidationCacheOnFilter();
+                return _filteredLength;
+            }
+        }
+
         public EcsFilter(EcsPresenter presenter)
         {
-            _presenter = presenter ?? throw new ArgumentNullException(nameof(presenter));
-            _includePools = new IHasPool[EcsConfig.FilterConditionInclude];
-            _excludePools = new IHasPool[EcsConfig.FilterConditionExclude];
-            _predicates = new Predicate<EcsEntity>[EcsConfig.FilterPredicate];
-            _includeCount = 0;
-            _excludeCount = 0;
+            _presenter = presenter;
+            _includeMask = new EcsComponentMask();
+            _excludeMask = new EcsComponentMask();
+            _orMask = new EcsComponentMask();
+            _smallestPoolId = -1;
+
+            _predicates = null;
             _predicateCount = 0;
-            _refWorld = new();
-            _filteredCache = new int[presenter.CountEntity + 32];
+
+            _refWorld = new RefWorldVersion(-1);
+            _filteredCache = Array.Empty<int>();
             _filteredLength = 0;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void AddPredicate(Predicate<int> predicate)
+        {
+            if (_predicates == null) _predicates = new Predicate<int>[4];
+            else if (_predicateCount == _predicates.Length) Array.Resize(ref _predicates, _predicateCount * 2);
+
+            _predicates[_predicateCount++] = predicate;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EcsFilter Include<T>() where T : new()
         {
-            AddPool(ref _includePools, ref _includeCount, _presenter.GetPool<T>());
+            var id = EcsComponentTypeId<T>.Id;
+            _includeMask.Set(id);
+            UpdateSmallestPool(id);
             return this;
         }
 
@@ -42,104 +65,125 @@ namespace BitterECS.Core
         public EcsFilter Include<T>(Predicate<T> predicate) where T : new()
         {
             Include<T>();
-            AddPredicate(e => predicate(e.Get<T>()));
+            var presenter = _presenter;
+            AddPredicate(entityId => predicate(presenter.GetPool<T>().Get(entityId)));
             return this;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EcsFilter Exclude<T>() where T : new()
         {
-            AddPool(ref _excludePools, ref _excludeCount, _presenter.GetPool<T>());
+            _excludeMask.Set(EcsComponentTypeId<T>.Id);
+            return this;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public EcsFilter Or<T>() where T : new()
+        {
+            _orMask.Set(EcsComponentTypeId<T>.Id);
             return this;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EcsFilter Where(Predicate<EcsEntity> predicate)
         {
-            AddPredicate(predicate);
+            var presenter = _presenter;
+            AddPredicate(entityId => predicate(new(presenter, entityId)));
             return this;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EcsFilter WhereProvider<T>(Predicate<T> predicate) where T : class, ILinkableProvider
         {
-            AddPredicate(e => e.TryGetProvider<T>(out var p) && predicate(p));
+            var presenter = _presenter;
+            AddPredicate(entityId =>
+            {
+                return new EcsEntity(presenter, entityId).TryGetProvider<T>(out var p) && predicate(p);
+            });
             return this;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public EcsFilter WhereProvider<T>() where T : class, ILinkableProvider
         {
-            AddPredicate(e => e.HasProvider<T>());
+            var presenter = _presenter;
+            AddPredicate(entityId => new EcsEntity(presenter, entityId).HasProvider<T>());
             return this;
         }
 
-        private void AddPool(ref IHasPool[] pools, ref int count, IHasPool pool)
+        private void UpdateSmallestPool(int componentId)
         {
-            if (count >= pools.Length) Array.Resize(ref pools, pools.Length * 2);
-            pools[count++] = pool;
-        }
-
-        private void AddPredicate(Predicate<EcsEntity> predicate)
-        {
-            if (_predicateCount >= _predicates.Length) Array.Resize(ref _predicates, _predicates.Length * 2);
-            _predicates[_predicateCount++] = predicate;
+            if (_smallestPoolId == -1)
+            {
+                _smallestPoolId = componentId;
+                return;
+            }
+            var currentPool = _presenter.GetPoolById(_smallestPoolId);
+            var newPool = _presenter.GetPoolById(componentId);
+            var count1 = currentPool?.Count ?? int.MaxValue;
+            var count2 = newPool?.Count ?? int.MaxValue;
+            if (count2 < count1) _smallestPoolId = componentId;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void RebuildCache()
+        private void ValidationCacheOnFilter()
         {
-            var aliveIds = _presenter.GetAliveIds();
-            if (aliveIds.Length > _filteredCache.Length) Array.Resize(ref _filteredCache, aliveIds.Length + 32);
-
-            _filteredLength = 0;
-            var inc = _includePools;
-            var exc = _excludePools;
-            var preds = _predicates;
-            var iCnt = _includeCount;
-            var eCnt = _excludeCount;
-            var pCnt = _predicateCount;
-            var pres = _presenter;
-
-            foreach (var id in aliveIds)
-            {
-                bool match = true;
-
-                for (int i = 0; i < iCnt; i++)
-                {
-                    if (!inc[i].Has(id)) { match = false; break; }
-                }
-                if (!match) continue;
-
-                for (int i = 0; i < eCnt; i++)
-                {
-                    if (exc[i].Has(id)) { match = false; break; }
-                }
-                if (!match) continue;
-
-                if (pCnt > 0)
-                {
-                    var entity = new EcsEntity(pres, id);
-                    for (int i = 0; i < pCnt; i++)
-                    {
-                        if (!preds[i](entity)) { match = false; break; }
-                    }
-                }
-                if (!match) continue;
-
-                _filteredCache[_filteredLength++] = id;
-            }
+            if (_refWorld == EcsWorld.GetRefWorld()) return;
+            RebuildCache();
             _refWorld = EcsWorld.GetRefWorld();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private Enumerator GetFastEnumerator()
+        private void RebuildCache()
         {
-            if (_refWorld != EcsWorld.GetRefWorld()) RebuildCache();
-            return new Enumerator(_presenter, _filteredCache, _filteredLength);
+            _filteredLength = 0;
+            ReadOnlySpan<int> candidates;
+
+            if (_smallestPoolId != -1)
+            {
+                var pool = _presenter.GetPoolById(_smallestPoolId);
+                candidates = pool != null ? pool.GetDenseEntities() : ReadOnlySpan<int>.Empty;
+            }
+            else
+            {
+                candidates = _presenter.GetAliveIds();
+            }
+
+            if (_filteredCache.Length < candidates.Length)
+                Array.Resize(ref _filteredCache, candidates.Length);
+
+            var checkOr = !_orMask.IsEmpty();
+
+            for (var i = 0; i < candidates.Length; i++)
+            {
+                var entityId = candidates[i];
+                ref var mask = ref _presenter.GetEntityMask(entityId);
+
+                if (!mask.HasAll(in _includeMask)) continue;
+                if (_excludeMask.HasAny(in mask)) continue;
+                if (checkOr && !mask.HasAny(in _orMask)) continue;
+
+                var passed = true;
+                for (var p = 0; p < _predicateCount; p++)
+                {
+                    if (!_predicates[p](entityId))
+                    {
+                        passed = false;
+                        break;
+                    }
+                }
+
+                if (passed)
+                {
+                    _filteredCache[_filteredLength++] = entityId;
+                }
+            }
         }
 
-        public Enumerator GetEnumerator() => GetFastEnumerator();
+        public Enumerator GetEnumerator()
+        {
+            ValidationCacheOnFilter();
+            return new Enumerator(_presenter, _filteredCache, _filteredLength);
+        }
 
         public ref struct Enumerator
         {
@@ -160,10 +204,10 @@ namespace BitterECS.Core
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public bool MoveNext() => ++_index < _count;
 
-            public EcsEntity Current
+            public readonly EcsEntity Current
             {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                get => new EcsEntity(_presenter, _entities[_index]);
+                get => new(_presenter, _entities[_index]);
             }
         }
     }

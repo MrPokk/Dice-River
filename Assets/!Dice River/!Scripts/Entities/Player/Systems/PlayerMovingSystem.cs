@@ -9,8 +9,8 @@ public class PlayerMovingSystem : IEcsFixedRunSystem, IEcsRunSystem
     private const float SqrMagnitudeThreshold = 0.001f;
 
     private EcsFilter _ecsFilter =
-    Build.For<EntitiesPresenter>()
-         .Filter()
+    new EcsFilter<EntitiesPresenter>()
+
          .WhereProvider<PlayerProvider>()
          .Include<InputComponent>()
          .Include<MovingComponent>()

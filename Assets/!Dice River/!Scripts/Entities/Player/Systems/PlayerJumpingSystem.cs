@@ -21,7 +21,7 @@ public class PlayerJumpingSystem : IEcsInitSystem
         {
             var gravityComponent = entity.Get<GravityComponent>();
             if (gravityComponent.verticalVelocity != 0)
-                entity.AddFrameToEvent(new JumpEvent());
+                entity.AddFrame(new JumpEvent());
         }
     }
 }

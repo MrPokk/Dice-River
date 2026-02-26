@@ -13,17 +13,17 @@ public class TagRockHazardColliderSystem : IEcsAutoImplement
         ref var rollComponent = ref entity.Get<RollComponent>();
         ref var collisionComponent = ref entity.Get<IsTriggerColliderEnter>();
         var damagingComponent = collisionComponent.entityHit.Get<DamageConstComponent>();
-        collisionComponent.entityHit.AddFrameToEvent<IsSoundPlay>();
+        collisionComponent.entityHit.AddFrame<IsSoundPlay>();
 
         collisionComponent.entityHit.Destroy();
         rollComponent.value -= damagingComponent.damage;
 
         if (rollComponent.value <= 0)
         {
-            entity.AddFrameToEvent<IsDestroy>(new());
+            entity.AddFrame<IsDestroy>(new());
             return;
         }
         entity.GetProvider<DiceProvider>().spriteRoll.Select(rollComponent.value);
-        entity.AddFrameToEvent<IsTargetingEvent>();
+        entity.AddFrame<IsTargetingEvent>();
     }
 }

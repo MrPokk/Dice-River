@@ -1,5 +1,5 @@
-﻿using System;
-
+﻿
+using System;
 // [AUTO-GENERATED] by BitterECS AutoPathConstantsGenerator
 // Defines paths for Prefabs (Providers/MonoBehaviours) and ScriptableObjects
 

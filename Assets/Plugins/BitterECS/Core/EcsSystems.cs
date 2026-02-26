@@ -8,9 +8,9 @@ namespace BitterECS.Core
         private static EcsSystems s_instance;
         public static EcsSystems Instance => s_instance ??= new EcsSystems();
 
-        private readonly List<IEcsSystem> _allSystems = new(EcsConfig.InitialSystemsCapacity);
-        private readonly Dictionary<Type, IEcsSystem> _systemsByType = new(EcsConfig.InitialSystemsCapacity);
-        private readonly Dictionary<Type, IEcsSystem[]> _cachedInstanceSystems = new(EcsConfig.InitialSystemsCapacity);
+        private readonly List<IEcsSystem> _allSystems = new(EcsDefinitions.InitialSystemsCapacity);
+        private readonly Dictionary<Type, IEcsSystem> _systemsByType = new(EcsDefinitions.InitialSystemsCapacity);
+        private readonly Dictionary<Type, IEcsSystem[]> _cachedInstanceSystems = new(EcsDefinitions.InitialSystemsCapacity);
 
         private EcsSystems() => LoadAllSystems();
 
@@ -67,9 +67,9 @@ namespace BitterECS.Core
         internal void RunInternal<T>(Action<T> action) where T : class, IEcsSystem
         {
             var systems = GetSystemsInternal<T>();
-            for (int i = 0; i < systems.Length; i++)
+            for (var i = 0; i < systems.Length; i++)
             {
-                action((T)systems[i]);
+                action(systems[i]);
             }
         }
 
@@ -81,7 +81,7 @@ namespace BitterECS.Core
                 return (T[])cached;
 
             var filteredList = new List<T>();
-            for (int i = 0; i < _allSystems.Count; i++)
+            for (var i = 0; i < _allSystems.Count; i++)
             {
                 if (_allSystems[i] is T typedSystem)
                 {
@@ -96,7 +96,7 @@ namespace BitterECS.Core
 
         public void Dispose()
         {
-            for (int i = 0; i < _allSystems.Count; i++)
+            for (var i = 0; i < _allSystems.Count; i++)
             {
                 if (_allSystems[i] is IDisposable disposableSystem)
                     disposableSystem.Dispose();

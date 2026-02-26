@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BitterECS.Core
 {
-    public readonly struct RefWorldVersion
+    public readonly struct RefWorldVersion : IEquatable<RefWorldVersion>
     {
         private readonly int _version;
         public int Version => _version;
@@ -14,14 +14,14 @@ namespace BitterECS.Core
         public override int GetHashCode() => _version;
         public static bool operator ==(RefWorldVersion left, RefWorldVersion right) => left.Equals(right);
         public static bool operator !=(RefWorldVersion left, RefWorldVersion right) => !left.Equals(right);
-        public static RefWorldVersion operator ++(RefWorldVersion world) => world.Increment();
     }
 
     public sealed class EcsWorld : IDisposable
     {
         private static EcsWorld s_instance;
         public static EcsWorld Instance => s_instance ??= new EcsWorld();
-        private readonly Dictionary<Type, EcsPresenter> _ecsPresenters = new(EcsConfig.InitialPresentersCapacity);
+
+        private readonly Dictionary<Type, EcsPresenter> _ecsPresenters = new(EcsDefinitions.InitialPresentersCapacity);
         private RefWorldVersion _world = new(0);
 
         private EcsWorld() => LoadAllPresenters();

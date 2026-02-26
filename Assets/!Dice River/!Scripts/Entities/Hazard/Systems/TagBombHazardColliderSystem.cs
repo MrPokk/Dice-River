@@ -24,7 +24,7 @@ public class TagBombHazardColliderSystem : IEcsAutoImplement
     {
         var collision = entity.Get<IsTriggerColliderEnter>();
         var damage = collision.entityHit.Get<DamageConstComponent>().damage;
-        collision.entityHit.AddFrameToEvent<IsSoundPlay>();
+        collision.entityHit.AddFrame<IsSoundPlay>();
 
         collision.entityHit.Destroy();
 
@@ -39,7 +39,7 @@ public class TagBombHazardColliderSystem : IEcsAutoImplement
         }
 
         var overflowDamage = Mathf.Abs(mainRoll.value);
-        entity.AddFrameToEvent<IsDestroy>(new());
+        entity.AddFrame<IsDestroy>(new());
 
         if (overflowDamage <= 0) return;
 
@@ -86,7 +86,7 @@ public class TagBombHazardColliderSystem : IEcsAutoImplement
 
         if (roll.value <= 0)
         {
-            neighbor.AddFrameToEvent<IsDestroy>(new());
+            neighbor.AddFrame<IsDestroy>(new());
         }
         else
         {
@@ -97,6 +97,6 @@ public class TagBombHazardColliderSystem : IEcsAutoImplement
     private static void UpdateVisual(EcsEntity entity, int value)
     {
         entity.GetProvider<DiceProvider>().spriteRoll.Select(value);
-        entity.AddFrameToEvent<IsTargetingEvent>();
+        entity.AddFrame<IsTargetingEvent>();
     }
 }

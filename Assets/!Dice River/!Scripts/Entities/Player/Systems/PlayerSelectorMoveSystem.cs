@@ -6,8 +6,7 @@ public class PlayerSelectorMoveSystem : IStartToGameplay, IEcsFixedRunSystem
 {
     public Priority Priority => Priority.Medium;
 
-    private readonly EcsFilter _ecsFilter = Build.For<EntitiesPresenter>()
-         .Filter()
+    private readonly EcsFilter _ecsFilter = new EcsFilter<EntitiesPresenter>()
          .WhereProvider<EntitiesProvider>()
          .Include<InputComponent>()
          .Include<FacingComponent>();

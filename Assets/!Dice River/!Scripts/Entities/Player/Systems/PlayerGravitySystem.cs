@@ -6,8 +6,7 @@ public class PlayerGravitySystem : IEcsFixedRunSystem
     public Priority Priority => Priority.Medium;
 
     private EcsFilter _ecsFilter =
-    Build.For<EntitiesPresenter>()
-         .Filter()
+    new EcsFilter<EntitiesPresenter>()
          .WhereProvider<PlayerProvider>()
          .Include<GravityComponent>();
 

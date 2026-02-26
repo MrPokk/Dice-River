@@ -6,8 +6,8 @@ public class PlayerPlacingSystem : IEcsInitSystem
     public Priority Priority => Priority.High;
 
     private EcsFilter _ecsFilter =
-    Build.For<EntitiesPresenter>()
-         .Filter()
+    new EcsFilter<EntitiesPresenter>()
+
          .WhereProvider<EntitiesProvider>()
          .Include<InputComponent>()
          .Include<FacingComponent>();

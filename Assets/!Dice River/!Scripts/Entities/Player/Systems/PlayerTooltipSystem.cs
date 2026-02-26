@@ -5,8 +5,8 @@ public class PlayerTooltipSystem : IEcsRunSystem
 {
     public Priority Priority => Priority.Low;
 
-    private readonly EcsFilter _playerFilter = Build.For<EntitiesPresenter>()
-        .Filter()
+    private readonly EcsFilter _playerFilter = new EcsFilter<EntitiesPresenter>()
+
         .WhereProvider<PlayerProvider>()
         .Include<FacingComponent>();
 

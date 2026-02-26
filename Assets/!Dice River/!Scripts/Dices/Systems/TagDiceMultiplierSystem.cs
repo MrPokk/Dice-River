@@ -35,7 +35,7 @@ public class TagDiceMultiplierSystem : IEcsAutoImplement
 
             providerEcs.spriteRoll.Select(roleComponent.value);
 
-            entityToGrid.AddFrameToEvent<IsTargetingEvent>();
+            entityToGrid.AddFrame<IsTargetingEvent>();
         }
     }
 }

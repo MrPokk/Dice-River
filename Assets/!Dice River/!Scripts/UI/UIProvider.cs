@@ -8,14 +8,14 @@ public class UIProvider : ProviderEcs<UIPresenter>, IPointerEnterHandler, IPoint
     {
         if (Entity.Has<IsNotRaycast>()) return;
 
-        Entity.AddFrameToEvent<IsPointerEnter>(new(eventData));
+        Entity.AddFrame<IsPointerEnter>(new(eventData));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (Entity.Has<IsNotRaycast>()) return;
 
-        Entity.AddFrameToEvent<IsPointerExit>(new(eventData));
+        Entity.AddFrame<IsPointerExit>(new(eventData));
     }
 }
 

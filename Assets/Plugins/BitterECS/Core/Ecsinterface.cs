@@ -12,13 +12,16 @@ namespace BitterECS.Core
     public interface IEcsDestroySystem : IEcsAutoImplement { void Destroy(); }
     public interface IEcsPostDestroySystem : IEcsAutoImplement { void PostDestroy(); }
 
-    internal interface IHasPool
+    internal interface IPool
     {
+        int Count { get; }
+        ReadOnlySpan<int> GetDenseEntities();
         bool Has(int entityId);
         void Remove(int entityId);
     }
 
     public interface IEcsPriority { Priority Priority { get; } }
+
     public interface IEcsEvent : IEcsPriority, IDisposable
     {
         EcsPresenter Presenter { get; }
@@ -26,8 +29,13 @@ namespace BitterECS.Core
         Action<EcsEntity> Removed { get; }
     }
 
-    public interface ILinkableProvider : IInitialize<EcsProperty>, IDisposable { EcsEntity Entity { get; } }
+    public interface ILinkableProvider : IInitialize<EcsProperty>, IDisposable
+    {
+        EcsEntity Entity { get; }
+    }
+
     public interface IInitializeProperty { }
+
     public interface IInitialize<T> where T : IInitializeProperty
     {
         T Properties { get; }
@@ -55,5 +63,4 @@ namespace BitterECS.Core
             Id = id;
         }
     }
-
 }

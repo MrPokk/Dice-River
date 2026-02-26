@@ -1,7 +1,7 @@
 ﻿using BitterECS.Core;
 using UnityEngine;
 
-public class PickupWavingRefreshSystem : IEcsFixedRunSystem
+public class PickupWavingRefreshSystem
 {
     public Priority Priority => Priority.Low;
 

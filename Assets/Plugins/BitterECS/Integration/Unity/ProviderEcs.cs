@@ -72,8 +72,7 @@ namespace BitterECS.Integration
 
         public EcsEntity ToEntity()
         {
-            return Build.For(typeof(T))
-                     .Add()
+            return new EcsBuilder(EcsWorld.Get(typeof(T)))
                      .WithPost(e => ProcessComponents(e))
                      .Create();
         }
@@ -137,8 +136,7 @@ namespace BitterECS.Integration
 
         private EcsEntity CreateEntity()
         {
-            return Build.For(typeof(T))
-                     .Add()
+            return new EcsBuilder(EcsWorld.Get(typeof(T)))
                      .WithPost(e => ProcessComponents(e))
                      .WithLink(this)
                      .Create();

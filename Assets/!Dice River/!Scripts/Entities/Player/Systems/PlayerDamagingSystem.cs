@@ -30,7 +30,7 @@ public class PlayerDamagingSystem : IEcsFixedRunSystem
                 health.lastDamage = damageComp.damage;
                 health.timeImmunity = damageComp.damageIntervalSecond;
 
-                entity.AddFrameToEvent<IsHealthChanging>();
+                entity.AddFrame<IsHealthChanging>();
             }
         }
     }

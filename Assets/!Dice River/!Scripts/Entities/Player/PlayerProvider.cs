@@ -16,13 +16,13 @@ public class PlayerProvider : EntitiesProvider
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        Entity.AddFrameToEvent<IsColliderHit>(new(hit));
+        Entity.AddFrame<IsColliderHit>(new(hit));
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<ProviderEcs>(out var providerEcs))
-            Entity.AddFrameToEvent<IsTriggerColliderEnter>(new(other, providerEcs.Entity));
+            Entity.AddFrame<IsTriggerColliderEnter>(new(other, providerEcs.Entity));
     }
 
     public static bool IsPlayerContact(
